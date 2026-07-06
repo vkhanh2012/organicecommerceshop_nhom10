@@ -1,13 +1,28 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/src/style.css" rel="stylesheet">
+  <title>Product</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="./src/css/style.css" rel="stylesheet">
 </head>
-<body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+<body class="font-['Poppins'] bg-white">
+  <main class="container mx-auto my-8">
+  <div class="grid grid-cols-4 gap-4">
+    
+    <div class="product-card">
+      <img src="https://picsum.photos/200" alt="Sản phẩm" class="w-full rounded-lg">
+      <h3 class="text-lg font-semibold mt-2">Táo hữu cơ</h3>
+      <p class="text-green-600 font-bold">90.000đ</p>
+      <button class="btn-primary mt-3 w-full">Thêm vào giỏ</button>
+    </div>
+
+  </div>
+</main>
 </body>
 </html>

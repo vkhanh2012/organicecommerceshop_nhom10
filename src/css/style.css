@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "./components.css";
+
+@theme {
+  --color-primary: #00b207; /*màu xanh lá thương hiệu*/
+  --color-primary-dark: #2c742f; /*màu xanh lá tối dùng cho hover*/
+  --color-error: #dc2626; /*màu xanh đỏ cho giá sale và hotline*/
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1320px;
+
+  --spacing-content: 1320px; /*khung nội dung chuẩn*/
+}
+  

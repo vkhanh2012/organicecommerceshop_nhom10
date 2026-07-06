@@ -1,0 +1,16 @@
+/* Đjnh nghĩa các component chạy bừa apply */
+
+  .main-header {
+    @apply bg-[--color-primary] text-white p-4 flex justify-between items-center shadow-md;
+  }
+
+  /* Định nghĩa cho khung sản phẩm (product-card) */
+  .product-card {
+    @apply border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow bg-white;
+  }
+
+  /* Định nghĩa cho nút bấm (btn-primary) - lấy màu từ @theme phía trên */
+  .btn-primary {
+   @apply bg-primary text-white px-4 py-2 rounded-lg font-medium w-full mt-3
+         hover:bg-primary-dark active:scale-95 transition-all duration-200;
+  }
