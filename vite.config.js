@@ -18,7 +18,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         product: resolve(__dirname, 'product.html'), 
         
-        /* Sau này nhóm 10 có thêm trang nào (ví dụ: cart.html, login.html) 
+        /* Sau này nhóm có thêm trang nào (ví dụ: cart.html, login.html) 
            thì bạn cứ copy thêm dòng bỏ vào đây giống như vậy nhé: */
         // cart: resolve(__dirname, 'cart.html'),
       }
