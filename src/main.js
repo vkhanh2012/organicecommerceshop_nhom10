@@ -1,10 +1,23 @@
 import './css/style.css'; 
 import { renderQuantityComponent } from './components/quantity.js';
+import { renderArrowButtonComponent } from './components/arrowbutton.js';
+import { renderTestimonialCardComponent } from './components/testimonialcard.js';
+  
 
-// Tìm cái hộp trống <div id="quantity"></div> bên file HTML
+const arrowButtonBox = document.getElementById('arrow-button');
+
 const quantityBox = document.getElementById('quantity');
 
+const testimonialCardBox = document.getElementById('testimonial-card');
+
+if (arrowButtonBox) {
+  arrowButtonBox.innerHTML = renderArrowButtonComponent();
+}
+
 if (quantityBox) {
-  // Đổ thẳng đoạn code HTML từ hàm render vào trong hộp
   quantityBox.innerHTML = renderQuantityComponent();
+}
+
+if(testimonialCardBox) {
+  testimonialCardBox.innerHTML = renderTestimonialCardComponent();
 }

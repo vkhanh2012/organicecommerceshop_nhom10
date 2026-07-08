@@ -1,13 +1,68 @@
+.text-title {
+  @apply text-5xl font-bold text-gray-950 mb-6;
+}
 
-  /* ĐỊnh nghĩa quantity stepper */
-  .quantity-stepper {
-    @apply inline-flex items-center justify-between w-[124px] h-[50px] p-2 bg-white rounded-full shadow-sm border border-gray-100 ;
-  }
+/* Định nghĩa quantity stepper */
+.quantity-stepper {
+  @apply inline-flex items-center justify-between w-[124px] h-[50px] p-2 bg-white rounded-full shadow-sm border border-gray-100 cursor-pointer;
+}
 
-  .quantity-stepper-btn {
-    @apply w-[34px] h-[34px] p-[10px] flex items-center justify-center bg-gray-50 rounded-full text-gray-600 hover:bg-gray-200;
-  }
+.quantity-stepper-btn {
+  @apply w-[34px] h-[34px] p-[10px] flex items-center justify-center bg-gray-50 rounded-full text-gray-600 hover:bg-gray-200 cursor-pointer;
+}
 
-  .quantity-stepper-input {
-    @apply text-gray-900 text-center w-[40px] h-[24px] border-none;
-  }
+.quantity-stepper-input {
+  @apply text-gray-900 text-center w-[40px] h-[24px] border-none;
+}
+
+/* Định nghĩa arrow buttons */
+/* Khung cho 2 button */
+.arrow-button {
+  @apply flex items-center gap-3;
+}
+.arrow-button-back {
+  @apply w-[45px] h-[45px] flex items-center justify-center bg-white text-black rounded-full shadow-sm cursor-pointer hover:bg-gray-200;
+}
+
+.arrow-button-next {
+  @apply w-[45px] h-[45px] flex items-center justify-center bg-primary text-white rounded-full shadow-sm cursor-pointer hover:bg-primary-dark;
+}
+
+/* Định nghĩa cho testimonial card */
+.testimonial-card {
+  @apply flex flex-col bg-white w-[424px] h-[254px] p-[16px] shadow-md border border-gray-100 rounded-lg;
+}
+
+/* Định nghĩa cho client trong testimonial card */
+.client-card {
+  @apply flex flex-row items-center justify-between w-[56px] items-start gap-3;
+}
+
+/* Dấu nháy kép (icon) trong testimonial */
+.testimonial-quote {
+  @apply w-[32px] h-[26px] flex items-center justify-center;
+}
+
+/* Văn bản bình luận */
+.testimonial-comment-text {
+  @apply font-['Poppins'] text-gray-700 text-base my-4;
+}
+
+/* Tên khách hàng */
+.client-name {
+  @apply font-bold text-gray-900;
+}
+
+/* Danh xưng khách hàng */
+.client-title {
+  @apply text-gray-400;
+}
+
+/* Avatar khách hàng */
+.client-avatar {
+  @apply flex w-[56px] h-[56px] rounded-full object-cover gap-3;
+}
+
+.client-info {
+  @apply flex flex-col items-center justify-center items-start w-auto;
+}
