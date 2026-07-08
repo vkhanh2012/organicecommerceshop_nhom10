@@ -66,3 +66,25 @@
 .client-info {
   @apply flex flex-col items-center justify-center items-start w-auto;
 }
+
+/* Testimonial wrapper */
+.testimonial-section-wrapper {
+  @apply flex flex-col items-center gap-9 w-full h-[489px] p-[60px] bg-gray-100;
+}
+
+/* Testimonial heading: để chứa heading small và large */
+.testimonial-heading {
+  @apply flex flex-col w-full h-[79px] items-center mb-6;
+}
+/* Tiêu đề nhỏ của testimonial */
+.testimonial-heading-small {
+  @apply flex items-center text-primary text-sm mb-6 w-full  justify-center gap-2;
+}
+/* Tiêu đề lớn của testimonial */
+.testimonial-heading-large {
+  @apply text-5xl font-bold text-gray-950 mb-6 h-[43px] items-center;
+}
+/* Testimonial list */
+.testimonial-list {
+  @apply grid grid-cols-3 w-[auto] h-[54px] gap-4;
+}
