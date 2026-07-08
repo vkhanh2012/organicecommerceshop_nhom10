@@ -1,5 +1,6 @@
 export function renderArrowButtonComponent() {
     return `
+    
        <div class="arrow-button">
         <button class="arrow-button-back"> <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.75 6.7749H15.75" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
