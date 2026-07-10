@@ -36,7 +36,7 @@ export function renderTestimonialComponent(){
     <!-- Khung ngoài của testimonial -->
         <div class="h-auto bg-gray-100 py-15 gap-9 mx-auto px-15 ">
             <!-- Tiêu đề và nút -->
-            <div class="flex flex-row w-full max-w-[1320px] mx-auto text-[32px] font-semibold text-gray-900 justify-between items-center pb-8">
+            <div class="flex flex-row text-[32px] font-semibold text-gray-900 justify-between pb-8">
                 <span class="text-[32px] font-semibold text-gray-900">Client Testimonials</span>
                  <!-- Nút back và nút next -->
                 <div class="flex flex-row gap-3">
@@ -63,17 +63,8 @@ export function renderTestimonialComponent(){
                 ${renderTestimonialCardComponent()}
                 ${renderTestimonialCardComponent()}
             </div>
-
-            
-
-
         </div>
-    
-    
     `
-
-
-
 }
 
 
