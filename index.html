@@ -3,49 +3,49 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Organicshop-Trang chủ</title>
+    <title>Organicshop - Trang chủ</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="navigation.css" />
+    <link rel="stylesheet" href="https://cloudflare.com" />
 </head>
 <body>
     <div class="container">
-        <!-- TOP BAR -->
-        <div class="top-bar">
+        <!-- SMALL ONE -->
+        <div class="small-one">
             <div class="store-address">
-                <i class="fas fa-map-pin"></i>
-                <span>Truong dai hoc mo - Nha be, Thanh pho HCM</span>
+                <i class="fas fa-location-dot"></i> 
+                <span>Trường Đại học Mở TP.HCM-Nhà Bè,Tp.HCM</span>
             </div>
-              <div class="language-currency">
-                    <select class="lang-select">
-                        <option value="en">Eng ▼</option>
-                        <option value="vi">Việt</option>
-                    </select>
-                    <select class="currency-select">
-                        <option value="usd">USD ▼</option>
-                        <option value="vnd">VND</option>
-                    </select>
-                    <a href="#" class="sign-link">Sign In / Sign Up</a>
-                </div>
+            <div class="small-right">
+                <select class="lang-select">
+                    <option value="en">Eng</option>
+                    <option value="vi">Việt</option>
+                </select>
+                <select class="currency-select">
+                    <option value="usd">USD</option>
+                    <option value="vnd">VND</option>
+                </select>
+                <a href="#" class="sign-link">Sign In / Sign Up</a>
             </div>
+        </div>
 
-        <!-- MAIN HEADER -->
+        <!-- MIDDLE -->
         <div class="main-header">
             <div class="logo">
-                <h1>Organicshop</h1>
+                <h1>Organic Shop</h1>
             </div>
             <div class="search-box">
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Search..." />
                 <button type="submit"><i class="fas fa-search"></i> Tìm</button>
             </div>
             <a href="#" class="cart-wrapper">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-text">Shopping cart</span>
-                <span class="cart-price"></span>
+                <i class="fas fa-shopping-bag"></i> 
+                <span class="cart-text">Shopping cart:</span>
+                <span class="cart-price">$0.00</span> 
             </a>
         </div>
 
-        <!-- NAVIGATION -->
+        <!-- NAV LINKS -->
         <nav class="nav-bar">
             <a href="#" class="active">Home</a>
             <a href="#">Shop</a>
@@ -55,8 +55,5 @@
             <a href="#">Contact Us</a>
         </nav>
     </div>
-
-    <!-- Có thể thêm JS sau -->
-    <script src="js/main.js"></script>
 </body>
 </html>
