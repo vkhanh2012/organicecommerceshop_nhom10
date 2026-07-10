@@ -1,4 +1,5 @@
-import './style.css'
+/*
+import './css/style.css'
 import javascriptLogo from './assets/javascript.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -58,3 +59,42 @@ document.querySelector('#app').innerHTML = `
 `
 
 setupCounter(document.querySelector('#counter'))
+
+*/
+
+// src/main.js
+import './css/style.css';
+
+import { renderNavigationComponent } from './components/navigation.js';
+import { renderFooterComponent } from './components/footer.js';
+import { renderButtonComponent } from './components/button.js';
+
+// 1. Navigation
+const navContainer = document.getElementById('navigation-container');
+if (navContainer) {
+  navContainer.innerHTML = renderNavigationComponent({
+    cartCount: 2,
+    cartTotal: '$57.00',
+  });
+}
+
+// 2. Button — demo đủ 3 size x 3 type
+const buttonContainer = document.getElementById('button-container');
+if (buttonContainer) {
+  const variants = [
+    { size: 'small', type: 'fill', label: 'Small Fill' },
+    { size: 'medium', type: 'fill', label: 'Medium Fill' },
+    { size: 'large', type: 'fill', label: 'Large Fill' },
+    { size: 'medium', type: 'border', label: 'Border' },
+    { size: 'medium', type: 'ghost', label: 'Ghost' },
+  ];
+  buttonContainer.innerHTML = variants
+    .map((v) => renderButtonComponent(v))
+    .join('');
+}
+
+// 3. Footer
+const footerContainer = document.getElementById('footer-container');
+if (footerContainer) {
+  footerContainer.innerHTML = renderFooterComponent();
+}
