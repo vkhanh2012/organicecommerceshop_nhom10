@@ -2,9 +2,8 @@ import './css/style.css';
 import { renderQuantityComponent } from './components/quantity.js';
 import { renderArrowButtonComponent } from './components/arrowbutton.js';
 import { renderTestimonialCardComponent } from './components/testimonialcard.js';
-import {renderTestimonialComponent} from './components/testimonial.js';
-import { renderLatestNews } from './components/latestnews.js';
-  
+import { renderTestimonialComponent } from './components/testimonial.js';
+import { renderLatestNewsWrapper } from './components/latestnewswrapper.js';
 import { renderBlogCardComponent } from './components/blogcard.js';
 
 const arrowButtonBox = document.getElementById('arrow-button');
@@ -17,7 +16,7 @@ const testimonialWrapper = document.getElementById('testimonial-section-wrapper'
 
 const blogCard = document.getElementById('renderBlogCardComponent');
 
-const lastestNewWrapper = document.getElementById('renderLatestNews');
+const lastestNewsWrapper = document.getElementById('renderLatestNewsWrapper');
 
 if (arrowButtonBox) {
   arrowButtonBox.innerHTML = renderArrowButtonComponent();
@@ -39,6 +38,6 @@ if(blogCard){
   blogCard.innerHTML  = renderBlogCardComponent();
 }
 
-if(lastestNewWrapper){
-  lastestNewWrapper.innerHTML = renderLatestNews();
+if(lastestNewsWrapper){
+  lastestNewsWrapper.innerHTML = renderLatestNewsWrapper();
 }

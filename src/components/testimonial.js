@@ -34,7 +34,7 @@ import { renderArrowButtonComponent } from './arrowbutton.js';
 export function renderTestimonialComponent(){
     return /*html*/`
     <!-- Khung ngoài của testimonial -->
-        <div class="h-auto bg-gray-100 py-15 gap-9 mx-auto px-15 ">
+        <div class="h-auto bg-gray-100 py-15 gap-9 mx-auto px-15 mx-auto">
             <!-- Tiêu đề và nút -->
             <div class="flex flex-row text-[32px] font-semibold text-gray-900 justify-between pb-8">
                 <span class="text-[32px] font-semibold text-gray-900">Client Testimonials</span>
