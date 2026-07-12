@@ -1,11 +1,10 @@
 // Định nghĩa Blog card của latest news
 
-
 export function renderBlogCardComponent () {
     return /*html*/ `
-            <div class="flex flex-col w-[424px] h-[494px] drop-shadow-sm bg-white">
-                <div class="w-[424px] h-[324px] rounded-t-[8px]">
-                    <svg width="424" height="324" viewBox="0 0 424 324" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <div class="flex flex-col w-full max-w-[424px] h-auto mx-auto drop-shadow-sm bg-white">
+                <div class="w-full h-auto rounded-t-[8px] aspect-[424/324] overflow-hidden">
+                    <svg class="w-full h-full" width="424" height="324" viewBox="0 0 424 324" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <path d="M0 8C0 3.58172 3.58172 0 8 0H416C420.418 0 424 3.58172 424 8V324H0V8Z" fill="url(#pattern0_5961_5116)"/>
                     <defs>
                     <pattern id="pattern0_5961_5116" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -16,8 +15,8 @@ export function renderBlogCardComponent () {
                     </svg>
                 </div>
 
-                <div class="flex flex-col w-[424px] h-[170px] p-6 gap-5 bg-white rounded-b-[8px]">
-                    <div class="flex flex-row w-auto h-[21px] gap-[16px] items-center text-gray-600"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="flex flex-col w-full h-auto p-4 sm:p-5 md:p-6 gap-3 sm:gap-4 gap-5 bg-white rounded-b-[8px]">
+                    <div class="flex flex-row flex-wrap w-auto h-auto gap-3 sm:gap-4 md:gap-[16px] items-center text-gray-600 text-sm sm:text-base"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.1583 11.1748L11.1833 17.1498C11.0285 17.3048 10.8447 17.4277 10.6424 17.5116C10.4401 17.5955 10.2232 17.6386 10.0042 17.6386C9.78513 17.6386 9.56825 17.5955 9.36592 17.5116C9.16359 17.4277 8.97978 17.3048 8.82499 17.1498L1.66666 9.99984V1.6665H9.99999L17.1583 8.82484C17.4687 9.13711 17.643 9.55953 17.643 9.99984C17.643 10.4401 17.4687 10.8626 17.1583 11.1748V11.1748Z" stroke="#B3B3B3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M5.83331 5.83301H5.84165" stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg> Food 
@@ -28,7 +27,7 @@ export function renderBlogCardComponent () {
                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.87382 10.9979L7.83207 12.7338C7.78209 12.8171 7.7114 12.886 7.62687 12.9339C7.54234 12.9817 7.44686 13.0069 7.34973 13.0069C7.25259 13.0069 7.15711 12.9817 7.07258 12.9339C6.98805 12.886 6.91736 12.8171 6.86738 12.7338L5.82676 10.9979C5.77672 10.9146 5.70597 10.8457 5.62139 10.7979C5.53681 10.7501 5.44129 10.725 5.34413 10.7251H1.16251C1.01332 10.7251 0.870248 10.6658 0.764759 10.5603C0.659269 10.4549 0.600006 10.3118 0.600006 10.1626V1.1626C0.600006 1.01341 0.659269 0.870339 0.764759 0.76485C0.870248 0.659361 1.01332 0.600098 1.16251 0.600098H13.5375C13.6867 0.600098 13.8298 0.659361 13.9353 0.76485C14.0407 0.870339 14.1 1.01341 14.1 1.1626V10.1626C14.1 10.3118 14.0407 10.4549 13.9353 10.5603C13.8298 10.6658 13.6867 10.7251 13.5375 10.7251H9.35588C9.25882 10.7251 9.16341 10.7502 9.07894 10.7981C8.99447 10.8459 8.9238 10.9147 8.87382 10.9979V10.9979Z" stroke="#B3B3B3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg> 65 Comment </div>
-                    <div class="w-[376px] h-[54px] text-primary-dark text-[18px] items-start">Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum.</div>
+                    <div class="w-full h-auto text-primary-dark text-base sm:text-lg text-[18px] items-start">Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum.</div>
                     <button class="flex flex-row items-center w-auto rounded-[43px] text-primary border-none cursor-pointer hover:text-primary-dark gap-3">Read More <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.75 6.7749H0.75" stroke="#00B307" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M9.70001 0.75L15.75 6.774L9.70001 12.799" stroke="#00B307" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
