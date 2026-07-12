@@ -1,100 +1,60 @@
-/*
-import './css/style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
-
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
-
-<div class="ticks"></div>
-
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
-
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
-
-setupCounter(document.querySelector('#counter'))
-
-*/
-
 // src/main.js
-import './css/style.css';
+import "./css/style.css";
 
-import { renderNavigationComponent } from './components/navigation.js';
-import { renderFooterComponent } from './components/footer.js';
-import { renderButtonComponent } from './components/button.js';
+import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
+import { renderFooterComponent } from "./components/footer.js";
+import { renderButtonComponent } from "./components/button.js";
+import { renderProductGrid } from "./components/productCard.js";
+import { renderInstagramComponent } from "./components/instagram.js";
 
 // 1. Navigation
-const navContainer = document.getElementById('navigation-container');
+const navContainer = document.getElementById("navigation-container");
 if (navContainer) {
   navContainer.innerHTML = renderNavigationComponent({
-    cartCount: 2,
-    cartTotal: '$57.00',
+    cartCount: 0,
+    cartTotal: "$0.00",
   });
+  bindNavigationEvents(navContainer);
 }
 
 // 2. Button — demo đủ 3 size x 3 type
-const buttonContainer = document.getElementById('button-container');
+const buttonContainer = document.getElementById("button-container");
 if (buttonContainer) {
   const variants = [
-    { size: 'small', type: 'fill', label: 'Small Fill' },
-    { size: 'medium', type: 'fill', label: 'Medium Fill' },
-    { size: 'large', type: 'fill', label: 'Large Fill' },
-    { size: 'medium', type: 'border', label: 'Border' },
-    { size: 'medium', type: 'ghost', label: 'Ghost' },
+    { size: "small", type: "fill", label: "Small Fill" },
+    { size: "medium", type: "fill", label: "Medium Fill" },
+    { size: "large", type: "fill", label: "Large Fill" },
+    { size: "medium", type: "border", label: "Border" },
+    { size: "medium", type: "ghost", label: "Ghost" },
   ];
   buttonContainer.innerHTML = variants
     .map((v) => renderButtonComponent(v))
-    .join('');
+    .join("");
 }
 
-// 3. Footer
-const footerContainer = document.getElementById('footer-container');
+
+// 4. Footer
+const footerContainer = document.getElementById("footer-container");
 if (footerContainer) {
   footerContainer.innerHTML = renderFooterComponent();
+}
+
+// 5. Product Card — demo với dữ liệu thật lấy từ bản demo Vercel
+const productGridContainer = document.getElementById("product-grid-container");
+if (productGridContainer) {
+  const products = [
+    { name: "Green Apple", price: 14.99, oldPrice: 20.0, rating: 4, saleTag: "Sale 50%", image: "https://picsum.photos/seed/apple/400" },
+    { name: "Fresh Indian Malta", price: 20.0, rating: 4, image: "https://picsum.photos/seed/malta/400" },
+    { name: "Chinese Cabbage", price: 12.0, rating: 5, image: "https://picsum.photos/seed/cabbage/400" },
+    { name: "Green Lettuce", price: 9.0, rating: 4, image: "https://picsum.photos/seed/lettuce/400" },
+    { name: "Eggplant", price: 34.0, rating: 4, image: "https://picsum.photos/seed/eggplant/400" },
+  ];
+  productGridContainer.innerHTML = renderProductGrid(products);
+}
+
+// 6. Follow us on Instagram
+const instagramContainer = document.getElementById("instagram-container");
+if (instagramContainer) {
+  const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/insta${i}/400`);
+  instagramContainer.innerHTML = renderInstagramComponent({ images });
 }
