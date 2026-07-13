@@ -1,5 +1,4 @@
 import { renderTestimonialCardComponent } from './testimonialcard.js';
-import { renderArrowButtonComponent } from './arrowbutton.js'; 
 
 
 export function renderTestimonialComponent(){
