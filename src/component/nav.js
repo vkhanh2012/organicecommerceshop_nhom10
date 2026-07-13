@@ -133,7 +133,6 @@ export function renderNavigationComponent() {
 </div>
         <div class="flex items-center gap-2 text-white font-medium text-sm hover:text-[#00B207] transition-colors shrink-0">
           <i class="fa-solid fa-phone-volume text-sm opacity-90"></i>
-          <!-- [SỬA SỐ HOTLINE LIÊN HỆ TẠI ĐÂY] -->
           <a href="tel:123456789" class="tracking-wider">(+84) 123456789</a>
         </div>
       </div>
