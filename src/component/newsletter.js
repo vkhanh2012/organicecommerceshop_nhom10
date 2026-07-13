@@ -1,5 +1,5 @@
 export function renderNewsletterComponent() {
-  return `
+  return /*html*/`
     <div class="bg-gray-100 min-h-screen flex flex-col justify-end font-sans">
   <!-- Main Container to showcase the footer similar to the image -->
   <div class="w-full bg-white shadow-lg">
