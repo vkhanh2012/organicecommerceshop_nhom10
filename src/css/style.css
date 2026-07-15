@@ -3,25 +3,25 @@
 
 /* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
-  --color-primary: #00B207;        /* Branding/Success */
-  --color-primary-dark: #2C742F;   /* Branding/Success Dark (hover) */
-  --color-primary-light: #84D187;  /* Branding/Success Bright */
+  --color-primary: #00b207; /* Branding/Success */
+  --color-primary-dark: #2c742f; /* Branding/Success Dark (hover) */
+  --color-primary-light: #84d187; /* Branding/Success Bright */
 
-  --color-warning: #FF8A00;
-  --color-error: #EA4B48;
+  --color-warning: #ff8a00;
+  --color-error: #ea4b48;
   --color-brand-wordmark: #002603; /* màu riêng chữ logo "Ecobazar" */
 
-  --color-neutral-white: #FFFFFF;
-  --color-neutral-50: #F2F2F2;
-  --color-neutral-100: #E5E5E5;
-  --color-neutral-200: #CCCCCC;
-  --color-neutral-300: #B3B3B3;
+  --color-neutral-white: #ffffff;
+  --color-neutral-50: #f2f2f2;
+  --color-neutral-100: #e5e5e5;
+  --color-neutral-200: #cccccc;
+  --color-neutral-300: #b3b3b3;
   --color-neutral-400: #999999;
   --color-neutral-500: #808080;
   --color-neutral-600: #666666;
-  --color-neutral-700: #4D4D4D;
+  --color-neutral-700: #4d4d4d;
   --color-neutral-800: #333333;
-  --color-neutral-900: #1A1A1A;
+  --color-neutral-900: #1a1a1a;
 
   --font-poppins: "Poppins", sans-serif;
   --radius-pill: 43px; /* radius nút Button */
