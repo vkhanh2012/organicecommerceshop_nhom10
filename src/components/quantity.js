@@ -1,0 +1,15 @@
+ export function renderQuantityComponent() {
+  return `
+  <div class="quantity-stepper">
+    <button class="quantity-stepper-btn" data-action="decrement"><svg width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.75 0.75H10.0833" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <input class="quantity-stepper-input" type="number" min="1" value="1">
+    <button class="quantity-stepper-btn" data-action="increment"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.75 5.41667H10.0833M5.41667 0.75V10.0833V0.75Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  `;
+}
