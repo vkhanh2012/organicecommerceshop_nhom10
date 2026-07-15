@@ -1,0 +1,93 @@
+.text-title {
+  @apply text-5xl font-bold text-gray-950 mb-6;
+}
+
+/* Định nghĩa quantity stepper */
+.quantity-stepper {
+  @apply inline-flex items-center justify-between w-[124px] h-[50px] p-2 bg-white rounded-full shadow-sm border border-gray-100 cursor-pointer;
+}
+
+.quantity-stepper-btn {
+  @apply w-[34px] h-[34px] p-[10px] flex items-center justify-center bg-gray-50 rounded-full text-gray-600 hover:bg-gray-200 cursor-pointer;
+}
+
+.quantity-stepper-input {
+  @apply text-gray-900 text-center w-[40px] h-[24px] border-none;
+}
+
+/* Định nghĩa arrow buttons */
+/* Khung cho 2 button */
+.arrow-button {
+  @apply flex items-center gap-3;
+}
+.arrow-button-back {
+  @apply w-[45px] h-[45px] flex items-center justify-center bg-white text-black rounded-full shadow-sm cursor-pointer hover:bg-gray-200;
+}
+
+.arrow-button-next {
+  @apply w-[45px] h-[45px] flex items-center justify-center bg-primary text-white rounded-full shadow-sm cursor-pointer hover:bg-primary-dark;
+}
+
+/* Định nghĩa cho testimonial card */
+.testimonial-card {
+  @apply flex flex-col bg-white w-[424px] h-[254px] p-[16px] shadow-md border border-gray-100 rounded-lg;
+}
+
+/* Dấu nháy kép (icon) trong testimonial */
+.testimonial-quote {
+  @apply w-[32px] h-[26px] flex items-center justify-center;
+}
+
+/* Testimonial wrapper */
+.testimonial-section-wrapper {
+  @apply flex flex-col gap-9 w-full h-[489px] p-[60px] bg-gray-100;
+}
+
+/* Testimonial list */
+.testimonial-list {
+  @apply grid grid-cols-3 w-[auto] h-[54px] gap-4;
+}
+
+/* Định nghĩa Blog card của latest news */
+/* Khung của blog card */
+.blog-card {
+  @apply flex flex-col w-[424px] h-[494px] drop-shadow-sm bg-white gap-[20px];
+}
+/* Ảnh trong blog card */
+.blog-card-images {
+  @apply w-[424px] h-[324px] rounded-t-[8px];
+}
+
+/*  Khung của Mô tả trong blog card (nằm ở dưới */
+.blog-card-description {
+  @apply flex flex-col w-[424px] h-[170px] p-6 gap-5 bg-white rounded-b-[8px];
+}
+
+/* Danh mục trong blog card (food, by, comment) */
+.blog-card-info {
+  @apply flex flex-row w-auto h-[21px] gap-[16px] items-center text-gray-600;
+}
+
+/* Tiêu đề của blogcard */
+.blog-card-title {
+  @apply w-[376px] h-[54px] text-primary-dark text-[18px] items-start;
+}
+/* Nút của blog card */
+.blog-card-button {
+  @apply flex flex-row items-center w-auto rounded-[43px] text-primary border-none cursor-pointer hover:text-primary-dark;
+}
+
+/* Khung của lastest news */
+.latest-new-wrapper {
+  @apply flex flex-col items-center w-[1320px] h-[564px];
+}
+
+/* Title của latest news */
+.latest-news-title {
+  @apply bg-white text-gray-900 font-semibold text-[32px] h-[38px] w-auto gap-6;
+}
+
+/* Khung của 3 cái blog card */
+.blog-card-list {
+  @apply grid grid-cols-3 w-auto gap-6;
+}

@@ -1,21 +1,37 @@
-import "./style.css";
+import './css/style.css'; 
+import { renderQuantityComponent } from './components/quantity.js';
+import { renderTestimonialCardComponent } from './components/testimonialcard.js';
+import { renderTestimonialComponent } from './components/testimonial.js';
+import { renderLatestNewsWrapper } from './components/latestnewswrapper.js';
+import { renderBlogCardComponent } from './components/blogcard.js';
 
-import { renderNavigationComponent } from "./component/nav.js";
-import { renderNewsletterComponent } from "./component/newsletter.js";
-import { renderFooterComponent } from "./component/footer.js";
 
-const navigationBox = document.getElementById("nav");
-const newsletterBox = document.getElementById("newsletter");
-const footerBox = document.getElementById("footer");
+const quantityBox = document.getElementById('quantity');
 
-if (navigationBox) {
-    navigationBox.innerHTML = renderNavigationComponent();
+const testimonialCardBox = document.getElementById('testimonial-card');
+
+const testimonialWrapper = document.getElementById('testimonial-section-wrapper');
+
+const blogCard = document.getElementById('renderBlogCardComponent');
+
+const lastestNewsWrapper = document.getElementById('renderLatestNewsWrapper');
+
+if (quantityBox) {
+  quantityBox.innerHTML = renderQuantityComponent();
 }
 
-if (newsletterBox) {
-    newsletterBox.innerHTML = renderNewsletterComponent();
+if(testimonialCardBox) {
+  testimonialCardBox.innerHTML = renderTestimonialCardComponent();
 }
 
-if (footerBox) {
-    footerBox.innerHTML = renderFooterComponent();
+if(testimonialWrapper) {
+  testimonialWrapper.innerHTML = renderTestimonialComponent();
+}
+
+if(blogCard){
+  blogCard.innerHTML  = renderBlogCardComponent();
+}
+
+if(lastestNewsWrapper){
+  lastestNewsWrapper.innerHTML = renderLatestNewsWrapper();
 }
