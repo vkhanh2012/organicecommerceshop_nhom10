@@ -1,11 +1,13 @@
 // src/main.js
 import "./css/style.css";
-
 import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
+
+
+
 
 // 1. Navigation
 const navContainer = document.getElementById("navigation-container");
@@ -58,3 +60,4 @@ if (instagramContainer) {
   const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/insta${i}/400`);
   instagramContainer.innerHTML = renderInstagramComponent({ images });
 }
+
