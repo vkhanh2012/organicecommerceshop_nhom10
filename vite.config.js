@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
+<<<<<<< HEAD
 import injectHTML from 'vite-plugin-html-inject'
 import { resolve } from 'path'
 
@@ -24,4 +25,11 @@ export default defineConfig({
       }
     }
   }
+=======
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+>>>>>>> main
 })
