@@ -1,36 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <title>Ecobazar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecobazar — Organic Shop</title>
+  <link href="./src/css/style.css" rel="stylesheet" />
 </head>
+<body class="font-poppins bg-white">
 
-<body>
+  <!-- 1. Navigation / Header -->
+  <div id="navigation-container"></div>
 
+  <main class="container-custom py-16 space-y-16">
+    <h1 class="text-3xl font-semibold text-neutral-900">Demo các component đã tách</h1>
 
-    <div id="nav"></div>
+    <!-- 2. Button — demo đủ Size x Type -->
+    <section>
+      <h2 class="text-xl font-semibold text-neutral-900 mb-4">Button</h2>
+      <div id="button-container" class="flex flex-wrap items-center gap-4"></div>
+    </section>
+    
+     <!-- 4. Product Card -->
+    <section>
+      <h2 class="text-xl font-semibold text-neutral-900 mb-4">Product Card</h2>
+      <div id="product-grid-container"></div>
+    </section>
+  </main>
 
-    <!-- Nội dung trang -->
-    <main>
+  <!-- 5. Follow us on Instagram -->
+  <div id="instagram-container"></div>
 
-    </main>
+  <!-- 3. Footer -->
+  <div id="footer-container"></div>
 
-    <div id="newsletter"></div>
-
-    <div id="footer"></div>
-
-    <script type="module" src="/src/main.js"></script>
-
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>

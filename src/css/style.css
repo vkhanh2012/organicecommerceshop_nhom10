@@ -1,11 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@import "./components.css";
 
+/* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
-  --color-primary: #00b207;
-  --color-primary-dark: #2c742f;
-  --color-error: #dc2626;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1320px;
+  --color-primary: #00b207; /* Branding/Success */
+  --color-primary-dark: #2c742f; /* Branding/Success Dark (hover) */
+  --color-primary-light: #84d187; /* Branding/Success Bright */
+
+  --color-warning: #ff8a00;
+  --color-error: #ea4b48;
+  --color-brand-wordmark: #002603; /* màu riêng chữ logo "Ecobazar" */
+
+  --color-neutral-white: #ffffff;
+  --color-neutral-50: #f2f2f2;
+  --color-neutral-100: #e5e5e5;
+  --color-neutral-200: #cccccc;
+  --color-neutral-300: #b3b3b3;
+  --color-neutral-400: #999999;
+  --color-neutral-500: #808080;
+  --color-neutral-600: #666666;
+  --color-neutral-700: #4d4d4d;
+  --color-neutral-800: #333333;
+  --color-neutral-900: #1a1a1a;
+
+  --font-poppins: "Poppins", sans-serif;
+  --radius-pill: 43px; /* radius nút Button */
 }
+
+/* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
+@utility container-custom {
+  @apply w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@import "./components.css";
