@@ -10,14 +10,23 @@ import { renderInstagramComponent } from "./components/instagram.js";
 
 
 // 1. Navigation
-const navContainer = document.getElementById("navigation-container");
-if (navContainer) {
-  navContainer.innerHTML = renderNavigationComponent({
-    cartCount: 0,
-    cartTotal: "$0.00",
-  });
-  bindNavigationEvents(navContainer);
+try{
+  const navContainer = document.getElementById("navigation-container");
+  if (navContainer) {
+    navContainer.innerHTML = renderNavigationComponent({
+      cartCount: 0,
+      cartTotal: "$0.00",
+    });
+    bindNavigationEvents(navContainer);
+  } 
+} catch(e){
+  console.error("Lỗi nav: ", e);
 }
+
+
+
+
+
 
 // 2. Button — demo đủ 3 size x 3 type
 const buttonContainer = document.getElementById("button-container");

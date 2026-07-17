@@ -7,7 +7,7 @@ import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } fro
 
 const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
-  { label: "Shop", href: "/shop" },
+  { label: "Shop", href: "/shop.html" },
   { label: "Pages", href: "/pages" },
   { label: "Blog", href: "/blog" },
   { label: "About Us", href: "/about" },
