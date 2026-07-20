@@ -2,7 +2,7 @@
 
 export function renderBlogCardComponent () {
     return /*html*/ `
-            <div class="flex flex-col w-full max-w-[424px] h-auto mx-auto drop-shadow-sm bg-white">
+            <div class="container-custom">
                 <div class="w-full h-auto rounded-t-[8px] aspect-[424/324] overflow-hidden">
                     <svg class="w-full h-full" width="424" height="324" viewBox="0 0 424 324" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <path d="M0 8C0 3.58172 3.58172 0 8 0H416C420.418 0 424 3.58172 424 8V324H0V8Z" fill="url(#pattern0_5961_5116)"/>

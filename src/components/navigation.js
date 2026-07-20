@@ -7,7 +7,7 @@ import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } fro
 
 const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
-  { label: "Shop", href: "/shop" },
+  { label: "Shop", href: "/shop.html" },
   { label: "Pages", href: "/pages" },
   { label: "Blog", href: "/blog" },
   { label: "About Us", href: "/about" },
@@ -18,12 +18,13 @@ const linkClass = "block md:inline text-sm font-medium font-poppins text-neutral
 const linkActiveClass = "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
 
 export function renderNavigationComponent({
-  cartCount = 2,
-  cartTotal = "$57.00",
+  cartCount = 0,
+  cartTotal = "$0.00",
   activeHref = "/",
 } = {}) {
   const linksHtml = NAV_LINKS.map((link) => {
-    const isActive = link.href === activeHref || link.active;
+    const normalized = activeHref === "/index.html" || activeHref === "/Homepage_01.html" ? "/" : activeHref;
+    const isActive = link.href === normalized;
     return `<a href="${link.href}" class="${isActive ? linkActiveClass : linkClass}">${link.label}</a>`;
   }).join("");
 
@@ -46,21 +47,21 @@ export function renderNavigationComponent({
 
     <!-- Middle: mobile = [hamburger] [logo] [wishlist/cart]; search xuống hàng riêng full-width -->
     <div class="w-full bg-white">
-      <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:py-5">
+      <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-5">
         <button type="button" class="flex items-center justify-center w-9 h-9 text-neutral-900 md:hidden" data-nav-toggle aria-label="Mở menu" aria-expanded="false">
           ${iconMenu}
         </button>
 
-        <a href="/" class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight">
+        <a href="/Homepage_01.html" class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight md:justify-self-start">
           <img src="/images/plant.jpg" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain" /> <span>Ecobazar</span>
         </a>
 
-        <form class="flex items-stretch w-full md:w-auto md:max-w-[400px] border border-neutral-100 rounded-md overflow-hidden order-3 md:order-none" role="search">
-          <input class="flex-1 min-w-0 px-4 py-2.5 md:py-3 text-sm md:text-[15px] text-neutral-500 outline-none font-poppins" type="text" placeholder="Search" />
-          <button class="px-4 md:px-6 py-2.5 md:py-3 bg-primary text-white text-sm font-semibold font-poppins hover:bg-primary-dark transition-colors whitespace-nowrap" type="submit">Search</button>
+        <form class="flex items-stretch w-full border border-neutral-100 rounded-md overflow-hidden order-3 md:order-none md:w-full md:max-w-[498px] md:justify-self-center" role="search">
+          <input class="flex-1 min-w-0 h-[45px] px-4 text-sm md:text-[15px] text-neutral-500 outline-none font-poppins" type="text" placeholder="Search" />
+          <button class="h-[45px] px-4 md:px-6 bg-primary text-white text-sm font-semibold font-poppins hover:bg-primary-dark transition-colors whitespace-nowrap" type="submit">Search</button>
         </form>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 md:justify-self-end">
           <button class="relative w-8 h-8 items-center justify-center text-neutral-800 hidden sm:flex" aria-label="Wishlist" type="button">
             ${iconHeart}
           </button>
@@ -80,7 +81,7 @@ export function renderNavigationComponent({
     <div class="w-full bg-neutral-800 hidden md:block" data-nav-panel>
       <div class="container-custom flex flex-col md:flex-row gap-2 md:gap-4 py-2 md:py-4 items-stretch md:items-center">
         <nav class="flex flex-col md:flex-row gap-0 md:gap-8 items-stretch md:items-center">${linksHtml}</nav>
-        <div class="flex items-center gap-2 text-sm font-medium font-poppins text-white py-2.5 md:py-0">
+        <div class="flex items-center gap-2 text-sm font-medium font-poppins text-white py-2.5 md:ml-auto md:py-0">
           ${iconPhone}
           <span>(219) 555-0114</span>
         </div>

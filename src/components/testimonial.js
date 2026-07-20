@@ -36,12 +36,3 @@ export function renderTestimonialComponent(){
         </div>
     `
 }
-
-
-
-
-
-
-        
-
-
