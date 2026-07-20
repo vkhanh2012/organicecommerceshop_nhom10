@@ -5,7 +5,8 @@ import { renderFooterComponent } from "./components/footer.js";
 import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
-
+import { renderSidebarComponent } from "./components/sidebar.js";
+import { rendercategoryFilter } from "./components/categoryfilter.js";
 
 
 
@@ -68,5 +69,18 @@ const instagramContainer = document.getElementById("instagram-container");
 if (instagramContainer) {
   const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/insta${i}/400`);
   instagramContainer.innerHTML = renderInstagramComponent({ images });
+}
+
+const sideBarContainer = document.getElementById("sidebar");
+if(sideBarContainer){
+  sideBarContainer.innerHTML = renderSidebarComponent();
+}
+
+const openBtn = document.getElementById("open-filter-btn");
+const filterDrawer = document.getElementById("mobile-filter-drawer");
+if (openBtn && filterDrawer) {
+  openBtn.addEventListener("click", () => {
+    filterDrawer.classList.toggle("hidden");
+  });
 }
 
