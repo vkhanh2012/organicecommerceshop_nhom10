@@ -9,13 +9,9 @@ const CATEGORIES_DATA = [
   { id: "cat-bread", label: "Bread & Bakery", count: 15, checked: false },
 ];
 
-
-
-
-
-export function rendercategoryFilter(){
-    const listItemsHtml = CATEGORIES_DATA.map((item) => {
-    return /*html*/`
+export function renderCategoryFilter() {
+  const listItemsHtml = CATEGORIES_DATA.map((item) => {
+    return /*html*/ `
       <li class="flex items-center justify-between text-sm text-neutral-600 hover:text-green-600 cursor-pointer group">
         <div class="flex items-center gap-2">
           <input 
@@ -36,9 +32,8 @@ export function rendercategoryFilter(){
         <span class="text-neutral-400 text-xs font-poppins">(${item.count})</span>
       </li>
     `;
-  }).join(""); 
+  }).join("");
 
- 
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
       <div class="flex items-center justify-between cursor-pointer mb-5">

@@ -3,19 +3,28 @@
 // (chỉ hiện trên mobile, dùng md:hidden), desktop hiện thanh ngang luôn (md:flex).
 // Toàn bộ style viết trực tiếp bằng Tailwind utility ngay trong file này
 // (không qua components.css) vì chỉ Navigation dùng, không component nào khác tái sử dụng.
-import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } from "./icons.js";
+import {
+  iconHeart,
+  iconCart,
+  iconPhone,
+  iconLocation,
+  iconMenu,
+  iconClose,
+} from "./icons.js";
 
 const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
   { label: "Shop", href: "/shop.html" },
-  { label: "Pages", href: "/pages" },
+  { label: "Pages", href: "/testing.html" },
   { label: "Blog", href: "/blog" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
 
-const linkClass = "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none";
-const linkActiveClass = "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
+const linkClass =
+  "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none";
+const linkActiveClass =
+  "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
 
 export function renderNavigationComponent({
   cartCount = 2,

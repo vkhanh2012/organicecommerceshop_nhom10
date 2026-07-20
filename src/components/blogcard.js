@@ -1,7 +1,7 @@
 // Định nghĩa Blog card của latest news
 
-export function renderBlogCardComponent () {
-    return /*html*/ `
+export function renderBlogCardComponent() {
+  return /*html*/ `
             <div class="flex flex-col w-full max-w-[424px] h-auto mx-auto drop-shadow-sm bg-white">
                 <div class="w-full h-auto rounded-t-[8px] aspect-[424/324] overflow-hidden">
                     <svg class="w-full h-full" width="424" height="324" viewBox="0 0 424 324" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,5 +35,5 @@ export function renderBlogCardComponent () {
                     </button>
                 </div>
             </div>
-    `
+    `;
 }
