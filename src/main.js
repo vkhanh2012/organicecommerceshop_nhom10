@@ -2,6 +2,8 @@
 import "./css/style.css";
 import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
 import { renderFooterComponent } from "./components/footer.js";
+import { renderBreadCrumb } from "./descriptions/breadcrumb.js";
+import { renderDescription } from "./descriptions/descriptions.js";
 import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
@@ -34,7 +36,6 @@ if (buttonContainer) {
     .join("");
 }
 
-
 // 4. Footer
 const footerContainer = document.getElementById("footer-container");
 if (footerContainer) {
@@ -59,5 +60,17 @@ const instagramContainer = document.getElementById("instagram-container");
 if (instagramContainer) {
   const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/seed/insta${i}/400`);
   instagramContainer.innerHTML = renderInstagramComponent({ images });
+}
+
+//7. Breadcumb
+const breadcrumbContainer = document.getElementById("breadcrumb-container");
+if (breadcrumbContainer) {
+  breadcrumbContainer.innerHTML = renderBreadCrumb();
+}
+
+//8.Description
+const descriptionContainer = document.getElementById("description-container");
+if (descriptionContainer) {
+  descriptionContainer.innerHTML = renderDescription();
 }
 

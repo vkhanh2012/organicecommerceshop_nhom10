@@ -9,13 +9,14 @@ const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
   { label: "Shop", href: "/shop" },
   { label: "Pages", href: "/pages" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/descriptions.html" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 const linkClass = "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none";
 const linkActiveClass = "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
+const currentPage = NAV_LINKS.find(link => link.active) || { label: "Home", href: "/" };
 
 export function renderNavigationComponent({
   cartCount = 2,
