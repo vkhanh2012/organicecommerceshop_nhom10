@@ -1,8 +1,9 @@
-import { renderCategoryFilter } from "./categoryFilter";
-import { renderPriceFilter } from "./priceFilter";
-import { renderRatingFilter } from "./ratingFilter";
-import { renderPopularTags } from "./popularTag";
-import { renderDiscountBanner } from "./discountBanner";
+import { renderCategoryFilter } from "./categoryFilter"
+import { renderPriceFilter } from "./priceFilter"
+import { renderRatingFilter } from "./ratingFilter"
+import { renderPopularTags } from "./popularTag"
+import { renderDiscountBanner } from "./discountBanner"
+import { renderSaleProducts } from "./saleProductCards"
 
 export function renderSidebarComponent() {
   return /*html*/ `
@@ -12,6 +13,7 @@ export function renderSidebarComponent() {
             ${renderRatingFilter()}
             ${renderPopularTags()}
             ${renderDiscountBanner()}
+            ${renderSaleProducts()}
         </aside>
-    `;
+    `
 }
