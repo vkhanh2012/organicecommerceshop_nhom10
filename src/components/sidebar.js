@@ -2,6 +2,7 @@ import { renderCategoryFilter } from "./categoryFilter";
 import { renderPriceFilter } from "./priceFilter";
 import { renderRatingFilter } from "./ratingFilter";
 import { renderPopularTags } from "./popularTag";
+import { renderDiscountBanner } from "./discountBanner";
 
 export function renderSidebarComponent() {
   return /*html*/ `
@@ -10,6 +11,7 @@ export function renderSidebarComponent() {
             ${renderPriceFilter()}
             ${renderRatingFilter()}
             ${renderPopularTags()}
+            ${renderDiscountBanner()}
         </aside>
     `;
 }
