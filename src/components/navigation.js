@@ -13,7 +13,7 @@ import {
 } from "./icons.js"
 
 const NAV_LINKS = [
-  { label: "Home", href: "/index.html", active: true },
+  { label: "Home", href: "/", active: true },
   { label: "Shop", href: "/shop" },
   { label: "Pages", href: "/pages" },
   { label: "Blog", href: "/descriptions.html" },
