@@ -1,14 +1,13 @@
 //Dữ liệu mẫu
 const PRICE_DATA = {
-    min: 0,
-    max: 2000,
-    currentMin: 50,
-    currentMax: 1500,
+  min: 0,
+  max: 2000,
+  currentMin: 50,
+  currentMax: 1500,
 }
 
-
-export function renderPriceFilter(){
-    return /*html*/`
+export function renderPriceFilter() {
+  return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
       <div class="flex items-center justify-between cursor-pointer mb-5">
         <h3 class="text-xl font-medium text-neutral-900">Price</h3>
@@ -29,5 +28,5 @@ export function renderPriceFilter(){
         Price: <span class="font-semibold text-neutral-900">${PRICE_DATA.currentMin} — ${PRICE_DATA.currentMax}</span>
       </div>
     </div>
-  `;
+  `
 }

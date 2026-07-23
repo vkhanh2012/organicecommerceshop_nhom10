@@ -7,7 +7,7 @@ const CATEGORIES_DATA = [
   { id: "cat-beverages", label: "Beverages", count: 43, checked: false },
   { id: "cat-health", label: "Beauty & Health", count: 38, checked: false },
   { id: "cat-bread", label: "Bread & Bakery", count: 15, checked: false },
-];
+]
 
 export function renderCategoryFilter() {
   const listItemsHtml = CATEGORIES_DATA.map((item) => {
@@ -31,8 +31,8 @@ export function renderCategoryFilter() {
         <!-- Số lượng sản phẩm -->
         <span class="text-neutral-400 text-xs font-poppins">(${item.count})</span>
       </li>
-    `;
-  }).join("");
+    `
+  }).join("")
 
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
@@ -46,5 +46,5 @@ export function renderCategoryFilter() {
         ${listItemsHtml}
       </ul>
     </div>
-  `;
+  `
 }
