@@ -26,15 +26,15 @@ export function renderBreadCrumb() {
 </div>
   
   <!-- Lớp phủ mờ  -->
-  <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/80 to-transparent"></div>
+  <div class="container-custom absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/80 to-transparent"></div>
 
   <!-- Thanh điều hướng Breadcrumb -->
   <nav class="relative z-10 flex items-center gap-2">
     
     <a href="#" class="hover:text-white transition">
       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.75 7.75L8.75 0.75L16.75 7.75V17.75H11.75V13.75C11.75 12.9544 11.4339 12.1913 10.8713 11.6287C10.3087 11.0661 9.54565 10.75 8.75 10.75C7.95435 10.75 7.19129 11.0661 6.62868 11.6287C6.06607 12.1913 5.75 12.9544 5.75 13.75V17.75H0.75V7.75Z" stroke="#999999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+      <path d="M0.75 7.75L8.75 0.75L16.75 7.75V17.75H11.75V13.75C11.75 12.9544 11.4339 12.1913 10.8713 11.6287C10.3087 11.0661 9.54565 10.75 8.75 10.75C7.95435 10.75 7.19129 11.0661 6.62868 11.6287C6.06607 12.1913 5.75 12.9544 5.75 13.75V17.75H0.75V7.75Z" stroke="#999999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
 
     </a>
     
