@@ -14,6 +14,8 @@ import { renderPopularTags } from "./components/popularTag.js"
 import { renderPagination } from "./components/pagination.js"
 import { renderNewsletterComponent } from "./components/newsletter.js"
 import { renderLatestNewsWrapper } from "./components/latestnewswrapper.js"
+import { renderTestimonialCardComponent } from "./components/testimonialcard.js"
+import { renderTestimonialComponent } from "./components/testimonial.js"
 
 // 1. Navigation
 try {
@@ -118,7 +120,12 @@ if (newSletter) {
   newSletter.innerHTML = renderNewsletterComponent()
 }
 
-const latestnews = document.getElementById("latest-news")
-if (latestnews) {
-  latestnews.innerHTML = renderLatestNewsWrapper()
+const latest = document.getElementById("latest-news")
+if (latest) {
+  latest.innerHTML = renderLatestNewsWrapper()
+
+  const testimonial = document.getElementById("client-testimonial")
+  if (testimonial) {
+    testimonial.innerHTML = renderTestimonialComponent()
+  }
 }
