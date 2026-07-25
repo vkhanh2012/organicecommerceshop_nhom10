@@ -5,29 +5,29 @@
 export const iconHeart = `
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
   <path d="M12 21s-7.5-4.9-10-9.6C.4 7.7 2.3 3.8 6 3.2c2.2-.4 4.3.7 6 2.8 1.7-2.1 3.8-3.2 6-2.8 3.7.6 5.6 4.5 4 8.2C19.5 16.1 12 21 12 21z"/>
-</svg>`;
+</svg>`
 
 export const iconEye = `
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
   <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
   <circle cx="12" cy="12" r="3"/>
-</svg>`;
+</svg>`
 
 export const iconCart = `
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
   <path d="M3 6h2l2.5 12h11L21 9H6"/>
   <circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/>
-</svg>`;
+</svg>`
 
 export const iconClose = `
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
   <path d="M6 6l12 12M18 6L6 18"/>
-</svg>`;
+</svg>`
 
 export const iconMenu = `
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
   <path d="M3 6h18M3 12h18M3 18h18"/>
-</svg>`;
+</svg>`
 
 export const iconBag = `
 <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
@@ -45,27 +45,27 @@ export const iconBag = `
     stroke-linecap="round"
     stroke-linejoin="round"
   />
-</svg>`;
+</svg>`
 
 export const iconInstagram = `
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
   <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" stroke="none"/>
-</svg>`;
+</svg>`
 
 export const iconStar = (filled = true) => `
 <svg width="12" height="12" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.5">
   <path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8l-6.3 3.3L7 14.2l-5-4.9 7-1L12 2z"/>
-</svg>`;
+</svg>`
 
 export const iconPhone = `
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
   <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/>
-</svg>`;
+</svg>`
 
 export const iconLocation = `
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
   <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>
-</svg>`;
+</svg>`
 
 // Social — component "Social Media" trong Figma: Normal (viền, icon xám) / Hover (nền xanh, icon trắng)
 export const SOCIAL_ICONS = {
@@ -74,16 +74,16 @@ export const SOCIAL_ICONS = {
   pinterest: `<svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor"><path d="M7 0a7 7 0 0 0-2.5 13.5c0-.6-.1-1.5 0-2.1l1-4.4s-.3-.5-.3-1.3c0-1.2.7-2.1 1.6-2.1.7 0 1.1.6 1.1 1.3 0 .8-.5 1.9-.7 3-.2.9.5 1.6 1.4 1.6 1.6 0 2.8-1.7 2.8-4.2 0-2.2-1.6-3.7-3.9-3.7-2.6 0-4.2 2-4.2 4 0 .8.3 1.6.7 2.1.1.1.1.2 0 .3l-.3 1c0 .2-.2.2-.3.1-1.1-.5-1.8-2.1-1.8-3.4C2.6 3 5 0.7 8.4.7c2.8 0 5 2 5 4.6 0 2.7-1.7 4.9-4.1 4.9-.8 0-1.6-.4-1.8-.9l-.5 1.9c-.2.7-.7 1.6-1 2.1A7 7 0 1 0 7 0z"/></svg>`,
   instagram: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" stroke="none"/></svg>`,
   link: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.6 1.6"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.6-1.6"/></svg>`,
-};
+}
 
 /**
  * Render 1 icon social — 2 trạng thái Normal (viền xám, icon xám) / Hover (nền xanh, icon trắng)
  * đúng theo component "Social Media" trong Main Components.
  */
 export function renderSocialIcon(name, href = "#") {
-  const svg = SOCIAL_ICONS[name] || "";
+  const svg = SOCIAL_ICONS[name] || ""
   return `
   <a href="${href}" aria-label="${name}" class="social-icon">
     ${svg}
-  </a>`;
+  </a>`
 }

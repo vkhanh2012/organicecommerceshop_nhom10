@@ -1,34 +1,32 @@
 import { iconStar } from "./icons.js"
 const SALE_PRODUCTS_DATA = [
-  // {
-  //   id: "sale-1",
-  //   name: "Red Capsicum",
-  //   price: 20.99,
-  //   originalPrice: 32.0,
-  //   stars: 5,
-  //   image: "./src/assets/images/redCapsicum.png",
-  //   active: false,
-  // },
-  // {
-  //   id: "sale-2",
-  //   name: "Mango Cabbage",
-  //   price: 20.99,
-  //   originalPrice: 24.0,
-  //   stars: 5,
-  //   image: "./src/assets/images/mango.png",
-  //   active: false,
-  // },
-  // {
-  //   id: "sale-3",
-  //   name: "Green Capsicum",
-  //   price: 20.99,
-  //   originalPrice: 30.2,
-  //   stars: 5,
-  //   image: "./src/assets/images/greenCapsicum.png",
-  //   active: false,
-  // },
-
   {
+    id: "sale-1",
+    name: "Red Capsicum",
+    price: 20.99,
+    originalPrice: 32.0,
+    stars: 5,
+    image: "./src/assets/images/redCapsicum.png",
+    active: false,
+  },
+  {
+    id: "sale-2",
+    name: "Mango Cabbage",
+    price: 20.99,
+    originalPrice: 24.0,
+    stars: 5,
+    image: "./src/assets/images/mango.png",
+    active: false,
+  },
+  {
+    id: "sale-3",
+    name: "Green Capsicum",
+    price: 20.99,
+    originalPrice: 30.2,
+    stars: 5,
+    image: "./src/assets/images/greenCapsicum.png",
+    active: false,
+
     id: "sale-4",
     name: "Yellow Capsicum",
     price: 18.5,
@@ -55,6 +53,10 @@ const SALE_PRODUCTS_DATA = [
     image: "./src/assets/images/greenCapsicum.png",
     active: false,
   },
+
+  // {
+
+  // },
 ]
 
 //Hàm render stars
@@ -103,7 +105,7 @@ export function renderSaleProducts(productsData = SALE_PRODUCTS_DATA) {
     )
     .join("")
 
-  // Khung của số sản phẩm
+  // Khung của tất cả sản phẩm
   return /*html*/ `
     <div class="pt-5 gap-3">
         <h3 class="text-[20px] font-medium text-gray-900 mb-4">Sale Products</h3>

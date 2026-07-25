@@ -12,6 +12,8 @@ import { renderSidebarComponent } from "./components/sidebar.js"
 import { renderCategoryFilter } from "./components/categoryFilter.js"
 import { renderPopularTags } from "./components/popularTag.js"
 import { renderPagination } from "./components/pagination.js"
+import { renderNewsletterComponent } from "./components/newsletter.js"
+import { renderLatestNewsWrapper } from "./components/latestnewswrapper.js"
 
 // 1. Navigation
 try {
@@ -109,4 +111,14 @@ if (openBtn && filterDrawer) {
   openBtn.addEventListener("click", () => {
     filterDrawer.classList.toggle("hidden")
   })
+}
+
+const newSletter = document.getElementById("newSletter")
+if (newSletter) {
+  newSletter.innerHTML = renderNewsletterComponent()
+}
+
+const latestnews = document.getElementById("latest-news")
+if (latestnews) {
+  latestnews.innerHTML = renderLatestNewsWrapper()
 }
