@@ -1,4 +1,4 @@
-import { iconStar } from "./icons.js"
+import { iconStar } from "../components/icons.js"
 const SALE_PRODUCTS_DATA = [
   {
     id: "sale-1",

@@ -3,7 +3,7 @@
 // Mobile-first: mặc định luôn hiện nút wishlist/quick-view/add-to-cart
 // (mobile không có hover), từ md: trở lên mới ẩn và chỉ hiện khi hover
 
-import { iconHeart, iconEye, iconBag, iconStar } from "./icons.js"
+import { iconHeart, iconEye, iconBag, iconStar } from "../components/icons.js"
 import { renderPagination } from "./pagination.js"
 
 const CLASS = {

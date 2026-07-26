@@ -10,10 +10,10 @@ export function renderTestimonialComponent() {
                 <h1 class="text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-gray-900">Client Testimonials</h1>
                  <!-- Nút back và nút next -->
                 <div class="flex flex-row gap-2 sm:gap-3">
-                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-white text-black hover:bg-gray-200 justify-center items-center">
+                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-white text-black hover:bg-gray-200 justify-center items-center cursor-pointer">
                         ${backArrow}
                     </button>
-                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-primary text-black hover:bg-primary-dark justify-center items-center">
+                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-primary text-black hover:bg-primary-dark justify-center items-center cursor-pointer">
                        ${nextArrow}
                     </button>
                     <!-- Xong -->

@@ -6,12 +6,12 @@ import {
 } from "./components/navigation.js"
 import { renderFooterComponent } from "./components/footer.js"
 import { renderButtonComponent } from "./components/button.js"
-import { renderProductGrid } from "./components/productCard.js"
+import { renderProductGrid } from "./shop/productcard.js"
 import { renderInstagramComponent } from "./components/instagram.js"
-import { renderSidebarComponent } from "./components/sidebar.js"
-import { renderCategoryFilter } from "./components/categoryFilter.js"
-import { renderPopularTags } from "./components/popularTag.js"
-import { renderPagination } from "./components/pagination.js"
+import { renderSidebarComponent } from "./shop/sidebar.js"
+import { renderCategoryFilter } from "./shop/categoryfilter.js"
+import { renderPopularTags } from "./shop/popularTag.js"
+import { renderPagination } from "./shop/pagination.js"
 import { renderNewsletterComponent } from "./components/newsletter.js"
 import { renderLatestNewsWrapper } from "./components/latestnewswrapper.js"
 import { renderTestimonialCardComponent } from "./components/testimonialcard.js"
@@ -102,30 +102,3 @@ if (instagramContainer) {
   instagramContainer.innerHTML = renderInstagramComponent({ images })
 }
 
-const sideBarContainer = document.getElementById("sidebar")
-if (sideBarContainer) {
-  sideBarContainer.innerHTML = renderSidebarComponent()
-}
-
-const openBtn = document.getElementById("open-filter-btn")
-const filterDrawer = document.getElementById("mobile-filter-drawer")
-if (openBtn && filterDrawer) {
-  openBtn.addEventListener("click", () => {
-    filterDrawer.classList.toggle("hidden")
-  })
-}
-
-const newSletter = document.getElementById("newSletter")
-if (newSletter) {
-  newSletter.innerHTML = renderNewsletterComponent()
-}
-
-const latest = document.getElementById("latest-news")
-if (latest) {
-  latest.innerHTML = renderLatestNewsWrapper()
-
-  const testimonial = document.getElementById("client-testimonial")
-  if (testimonial) {
-    testimonial.innerHTML = renderTestimonialComponent()
-  }
-}
