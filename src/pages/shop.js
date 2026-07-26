@@ -5,6 +5,7 @@ import { renderPopularTags } from "../shop/popularTag.js"
 import { renderPagination } from "../shop/pagination.js"
 import { renderNewsletterComponent } from "../components/newsletter.js"
 import { renderTopBar } from "../shop/topBar.js"
+import { initSaleProducts } from "../shop/saleProductCards.js"
 
 
 const topBar = document.getElementById("top-Bar")
@@ -16,6 +17,12 @@ if (topBar) {
 const sideBarContainer = document.getElementById("sidebar")
 if (sideBarContainer) {
   sideBarContainer.innerHTML = renderSidebarComponent()
+  
+  const saleProductsContainer = document.getElementById("sale-products-wrapper")
+
+  if(saleProductsContainer){
+    initSaleProducts(saleProductsContainer)
+  }
 }
 
 

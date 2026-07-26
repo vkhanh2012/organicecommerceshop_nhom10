@@ -14,7 +14,8 @@ export function renderSidebarComponent() {
             ${renderRatingFilter()}
             ${renderPopularTags()}
             ${renderDiscountBanner()}
-            ${renderSaleProducts()}
+            <!-- ${renderSaleProducts()} -->
+            <div id="sale-products-wrapper"></div>
         </aside>
     `
 }

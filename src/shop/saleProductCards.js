@@ -1,63 +1,59 @@
 import { iconStar } from "../components/icons.js"
-const SALE_PRODUCTS_DATA = [
-  {
-    id: "sale-1",
-    name: "Red Capsicum",
-    price: 20.99,
-    originalPrice: 32.0,
-    stars: 5,
-    image: "./src/assets/images/redCapsicum.png",
-    active: false,
-  },
-  {
-    id: "sale-2",
-    name: "Mango Cabbage",
-    price: 20.99,
-    originalPrice: 24.0,
-    stars: 5,
-    image: "./src/assets/images/mango.png",
-    active: false,
-  },
-  {
-    id: "sale-3",
-    name: "Green Capsicum",
-    price: 20.99,
-    originalPrice: 30.2,
-    stars: 5,
-    image: "./src/assets/images/greenCapsicum.png",
-    active: false,
+// const SALE_PRODUCTS_DATA = [
+//   {
+//     id: "sale-1",
+//     name: "Red Capsicum",
+//     price: 20.99,
+//     originalPrice: 32.0,
+//     stars: 5,
+//     image: "./src/assets/images/redCapsicum.png",
+//     active: false,
+//   },
+//   {
+//     id: "sale-2",
+//     name: "Mango Cabbage",
+//     price: 20.99,
+//     originalPrice: 24.0,
+//     stars: 5,
+//     image: "./src/assets/images/mango.png",
+//     active: false,
+//   },
+//   {
+//     id: "sale-3",
+//     name: "Green Capsicum",
+//     price: 20.99,
+//     originalPrice: 30.2,
+//     stars: 5,
+//     image: "./src/assets/images/greenCapsicum.png",
+//     active: false,
 
-    id: "sale-4",
-    name: "Yellow Capsicum",
-    price: 18.5,
-    originalPrice: 25.0,
-    stars: 4,
-    image: "./src/assets/images/redCapsicum.png",
-    active: false,
-  },
-  {
-    id: "sale-5",
-    name: "Purple Cabbage",
-    price: 22.99,
-    originalPrice: 28.0,
-    stars: 5,
-    image: "./src/assets/images/mango.png",
-    active: false,
-  },
-  {
-    id: "sale-6",
-    name: "Orange Capsicum",
-    price: 19.99,
-    originalPrice: 27.5,
-    stars: 4,
-    image: "./src/assets/images/greenCapsicum.png",
-    active: false,
-  },
-
-  // {
-
-  // },
-]
+//     id: "sale-4",
+//     name: "Yellow Capsicum",
+//     price: 18.5,
+//     originalPrice: 25.0,
+//     stars: 4,
+//     image: "./src/assets/images/redCapsicum.png",
+//     active: false,
+//   },
+//   {
+//     id: "sale-5",
+//     name: "Purple Cabbage",
+//     price: 22.99,
+//     originalPrice: 28.0,
+//     stars: 5,
+//     image: "./src/assets/images/mango.png",
+//     active: false,
+//   },
+//   {
+//     id: "sale-6",
+//     name: "Orange Capsicum",
+//     price: 19.99,
+//     originalPrice: 27.5,
+//     stars: 4,
+//     image: "./src/assets/images/greenCapsicum.png",
+//     active: false,
+//   },
+// ]
 
 //Hàm render stars
 function renderMiniStars(rating = 5) {
@@ -69,7 +65,7 @@ function renderMiniStars(rating = 5) {
     .join("")
 }
 
-export function renderSaleProducts(productsData = SALE_PRODUCTS_DATA) {
+export function renderSaleProducts(productsData = []) {
   const productsHtml = productsData
     .map(
       (items) => /*html*/ `
@@ -114,4 +110,20 @@ export function renderSaleProducts(productsData = SALE_PRODUCTS_DATA) {
         </div>
     </div>
   `
+}
+
+// Hàm fetch dữ liệu từ file saleProducts.json
+export async function initSaleProducts(containerEl) {
+  try {
+    const response = await fetch("./src/data/saleProducts.json")
+    if(!response.ok) throw new Error("Lỗi đọc file JSON")
+
+      const productsData = await response.json()
+
+      if(containerEl){
+        containerEl.innerHTML = renderSaleProducts(productsData)
+      }
+  } catch (error){
+      console.error("Lỗi tải Sale Products: ", error)
+  }
 }
