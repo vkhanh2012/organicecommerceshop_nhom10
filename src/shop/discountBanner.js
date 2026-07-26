@@ -1,3 +1,5 @@
+import { nextArrow } from "../components/icons";
+
 const BANNER_DATA = {
   discountPercentage: 79,
   description: "on your first order",
@@ -18,12 +20,10 @@ export function renderDiscountBanner(data = BANNER_DATA) {
         <a href="${data.link || "./shop.html"}"
             class="inline-flex items-center justify-center gap-3 text-primary hover:text-primary-dark text-sm mb-4 group">
             <span>${data.buttonText || "Shop Now"}</span>
-            <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.75 6.77502H0.75" stroke="#00B307" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M9.7002 0.75L15.7502 6.774L9.7002 12.799" stroke="#00B307" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <!-- [&_path]:stroke-current dùng để đổi màu icon trong trang này -->
+           <span class="[&_path]:stroke-current transition-transform group-hover:translate-x-1">
+                ${nextArrow}
+            </span>
         </a>
         <!-- Hình ảnh banner -->
         <div class="flex mt-2 gap-3 justify-center">

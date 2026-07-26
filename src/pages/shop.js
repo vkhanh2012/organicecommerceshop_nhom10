@@ -6,14 +6,18 @@ import { renderPagination } from "../shop/pagination.js"
 import { renderNewsletterComponent } from "../components/newsletter.js"
 import { renderTopBar } from "../shop/topBar.js"
 
-const sideBarContainer = document.getElementById("sidebar")
-if (sideBarContainer) {
-  sideBarContainer.innerHTML = renderSidebarComponent()
-}
+
 const topBar = document.getElementById("top-Bar")
 if (topBar) {
   topBar.innerHTML = renderTopBar()
 }
+
+
+const sideBarContainer = document.getElementById("sidebar")
+if (sideBarContainer) {
+  sideBarContainer.innerHTML = renderSidebarComponent()
+}
+
 
 const openBtn = document.getElementById("open-filter-btn")
 const filterDrawer = document.getElementById("mobile-filter-drawer")
@@ -37,5 +41,7 @@ if (latest) {
     testimonial.innerHTML = renderTestimonialComponent()
   }
 }
+
+
 
 

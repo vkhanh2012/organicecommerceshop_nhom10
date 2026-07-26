@@ -1,3 +1,4 @@
+
 import { renderCategoryFilter } from "./categoryFilter"
 import { renderPriceFilter } from "./priceFilter"
 import { renderRatingFilter } from "./ratingFilter"
