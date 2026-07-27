@@ -15,7 +15,6 @@ export function renderBreadCrumb(breadcrumbsData = BREADCRUMB_DATA) {
   const breadcrumbsHtml = breadcrumbsData
     .map(
       (items) => /*html*/ `
-        <!-- Sử dụng biến ảnh tĩnh đã import để chèn tự động vào thuộc tính src -->
         <img src="${items.backgroundImage}" alt="${items.title}" class="w-full h-full object-cover" />
       `
     )

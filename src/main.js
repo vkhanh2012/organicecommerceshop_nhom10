@@ -1,9 +1,8 @@
 // src/main.js
 import "./css/style.css";
 import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
+import{renderNewsletterComponent} from "./components/newsletter.js";
 import { renderFooterComponent } from "./components/footer.js";
-import { renderBreadCrumb } from "./descriptions/breadcrumb.js";
-import { renderDescription } from "./descriptions/descriptions.js";
 import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
@@ -36,11 +35,16 @@ if (buttonContainer) {
     .join("");
 }
 
-// 4. Footer
-const footerContainer = document.getElementById("footer-container");
-if (footerContainer) {
-  footerContainer.innerHTML = renderFooterComponent();
+  // 4. Footer
+  const footerContainer = document.getElementById("footer-container");
+  if (footerContainer) {
+    footerContainer.innerHTML = renderFooterComponent();
 }
+
+ const newsletterContainer = document.getElementById("newsletter-container");
+  if (newsletterContainer) {
+    newsletterContainer.innerHTML = renderNewsletterComponent();
+  }
 
 // 5. Product Card — demo với dữ liệu thật lấy từ bản demo Vercel
 const productGridContainer = document.getElementById("product-grid-container");
@@ -62,15 +66,4 @@ if (instagramContainer) {
   instagramContainer.innerHTML = renderInstagramComponent({ images });
 }
 
-//7. Breadcumb
-const breadcrumbContainer = document.getElementById("breadcrumb-container");
-if (breadcrumbContainer) {
-  breadcrumbContainer.innerHTML = renderBreadCrumb();
-}
-
-//8.Description
-const descriptionContainer = document.getElementById("description-container");
-if (descriptionContainer) {
-  descriptionContainer.innerHTML = renderDescription();
-}
 
