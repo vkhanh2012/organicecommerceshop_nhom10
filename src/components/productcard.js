@@ -88,3 +88,18 @@ export function renderProductGrid(products = []) {
   const itemsHtml = products.map(renderProductCard).join("");
   return `<div class="${CLASS.grid}">${itemsHtml}</div>`;
 }
+
+export async function getProducts() {
+  try {
+    const response = await fetch("/data/products.json");
+
+    if (!response.ok) {
+      throw new Error("Không thể tải dữ liệu sản phẩm");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}

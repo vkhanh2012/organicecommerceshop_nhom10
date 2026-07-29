@@ -11,11 +11,13 @@ function initNavigation() {
   bindNavigationEvents(el);
 }
 
-function initHomepage() {
-  const el = document.getElementById('homepage-container');
-  if (!el) return;
-  el.innerHTML = renderHomepageComponent();
-  bindHeroEvents(el);
+async function initHomepage() {
+  const element = document.getElementById("homepage-container");
+
+  if (!element) return;
+
+  element.innerHTML = await renderHomepageComponent();
+  bindHeroEvents(element);
 }
 
 function initFooter() {

@@ -1,5 +1,5 @@
 import { renderHeroComponent } from './hero.js';
-import { renderProductGrid } from './productCard.js';
+import { getProducts, renderProductCard, renderProductGrid } from "./productCard.js";
 import { renderInstagramComponent } from './instagram.js';
 import { renderLatestNewsWrapper } from './latestnewswrapper.js';
 import { renderTestimonialComponent } from './testimonial.js';
@@ -18,22 +18,6 @@ const categories = [
   ['Diabetic Food','https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=500&q=80'],
   ['Dish Detergents','https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?auto=format&fit=crop&w=500&q=80'],
   ['Oil','https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=500&q=80'],
-];
-
-const products = [
-  { name:'Green Apple', price:14.99, oldPrice:20, rating:4, saleTag:'Sale 25%', image:'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80' },
-  { name:'Fresh Indian Malta', price:20, rating:4, image:'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=600&q=80' },
-  { name:'Chinese Cabbage', price:12, rating:5, image:'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=600&q=80' },
-  { name:'Green Lettuce', price:9, rating:4, image:'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=600&q=80' },
-  { name:'Eggplant', price:34, rating:4, image:'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&w=600&q=80' },
-  { name:'Big Potatoes', price:20, rating:4, image:'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80' },
-  { name:'Corn', price:20, rating:5, image:'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80' },
-  { name:'Fresh Cauliflower', price:12, rating:4, image:'https://images.unsplash.com/photo-1568584711271-8402474f5bb3?auto=format&fit=crop&w=600&q=80' },
-  { name:'Green Capsicum', price:9, oldPrice:20.99, rating:4, saleTag:'Sale 50%', image:'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=600&q=80' },
-  { name:'Green Chili', price:34, rating:4, image:'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=600&q=80' },
-  { name:'Red Chili', price:18, rating:5, image:'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=600&q=80' },
-  { name:'Fresh Tomato', price:16, rating:5, image:'https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=600&q=80' },
-  { name:'Yellow Mango', price:24, rating:4, image:'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80' },
 ];
 
 function sectionTitle(title, id='') {
@@ -63,38 +47,42 @@ function renderPromoBanners() {
   return `<section class="container-custom pb-12 md:pb-16"><div class="grid grid-cols-1 gap-5 md:grid-cols-3">${banners.map(([eyebrow,title,image,color])=>`<article class="relative min-h-[420px] overflow-hidden rounded-lg bg-cover bg-center p-8 text-center ${color}" style="background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url('${image}')"><p class="relative text-xs uppercase">${eyebrow}</p><h3 class="relative mt-2 text-3xl font-semibold">${title}</h3><a href="#" class="relative mt-6 inline-flex rounded-full border border-primary bg-white px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white">Shop Now →</a></article>`).join('')}</div></section>`;
 }
 
-function renderHotDeals() {
-  // Figma desktop: deal lớn chiếm 2 cột × 2 hàng; 6 card nằm bên phải;
-  // hàng cuối có đủ 5 card. Ba card cuối chỉ bổ sung từ desktop.
-  const rightProducts = products.slice(2, 8);
-  const bottomProducts = [products[8], products[9], ...products.slice(10, 13)];
+function renderHotDeals(products = []) {
+  if (products.length < 13) return "";
 
-  const renderDealCard = (product, extraClass = '') => `
-    <div class="min-w-0 ${extraClass}">
-      ${renderProductGrid([product]).replace(
-        'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-0',
-        'grid grid-cols-1 h-full'
-      )}
-    </div>`;
+  const mainProduct = products[0];
+  const rightProducts = products.slice(2, 8);
+  const bottomProducts = products.slice(8, 13);
+
+  const renderDealCard = (product, extraClass = "") => `
+  <div class="min-w-0 h-full ${extraClass}">
+      ${renderProductCard(product)}
+    </div>
+  `;
 
   return `<section class="bg-neutral-50 py-12 md:py-16">
     <div class="container-custom">
       ${sectionTitle('Hot Deals','hot-deals')}
-      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-0 lg:border-l lg:border-t lg:border-neutral-200">
-        <article class="col-span-2 flex h-full flex-col border border-primary bg-white p-5 text-center sm:col-span-3 lg:col-span-2 lg:row-span-2 lg:border-l-0 lg:border-t-0 lg:p-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0">
+        <article class="col-span-2 flex h-full flex-col border border-primary bg-white p-5 text-center sm:col-span-3 lg:col-span-2 lg:row-span-2 lg:p-6">
           <div class="relative mx-auto aspect-[1.18/1] w-full max-w-[500px] overflow-hidden rounded-md">
             <span class="absolute left-0 top-0 z-10 rounded bg-error px-2.5 py-1 text-xs font-medium text-white">Sale 50%</span>
-            <img src="${products[0].image}" alt="Green Apple deal" class="h-full w-full object-cover" />
+            <img src="${mainProduct.image}" alt="${mainProduct.name}" class="h-full w-full object-contain"/>
           </div>
           <button class="mt-5 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">Add to Cart</button>
-          <h3 class="mt-4 text-sm font-medium text-primary">Green Apple</h3>
-          <p class="mt-1"><strong>$12.00</strong> <span class="text-neutral-400 line-through">$24.00</span></p>
-          <p class="mt-2 text-warning">★★★★★</p>
+          <h3 class="mt-4 text-sm font-medium text-primary">${mainProduct.name}</h3>
+
+          <p class="mt-1"><strong>$${mainProduct.price.toFixed(2)}</strong>${mainProduct.oldPrice? `<span class="text-neutral-400 line-through">
+           $${mainProduct.oldPrice.toFixed(2)}
+         </span>`
+      : ""
+  }
+</p>
           <p class="mt-4 text-xs text-neutral-400">Hurry up! Offer ends soon.</p>
         </article>
 
-        ${rightProducts.map(product => renderDealCard(product, 'lg:border-b lg:border-r lg:border-neutral-200')).join('')}
-        ${bottomProducts.map((product, index) => renderDealCard(product, `${index >= 2 ? 'hidden lg:block ' : ''}lg:border-b lg:border-r lg:border-neutral-200`)).join('')}
+        ${rightProducts.map(product =>renderDealCard(product, "border-b border-r border-neutral-200")).join("")}
+        ${bottomProducts.map(product =>renderDealCard( product, "border-b border-r border-neutral-200")).join("")}
       </div>
     </div>
   </section>`;
@@ -121,14 +109,50 @@ function renderBrandStrip() {
   return `<section class="container-custom py-8"><div class="grid grid-cols-3 items-center gap-5 text-center text-lg font-semibold text-neutral-300 sm:grid-cols-6">${['steps','MANGO','food','FOOD','BOOK-OFF','G Series'].map(x=>`<span>${x}</span>`).join('')}</div></section>`;
 }
 
-export function renderHomepageComponent() {
+export async function renderHomepageComponent() {
+  const products = await getProducts();
+
   const instagram = [
-    'https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1561136594-7f68413baa99',
+    'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
+    'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2',
+    'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83',
+    'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea',
+    'https://images.unsplash.com/photo-1547592180-85f173990554',
   ];
-  return `${renderHeroComponent()}${renderFeatures()}${renderCategories()}<section id="popular-products" class="container-custom pb-12 md:pb-16">${sectionTitle('Popular Products')}${renderProductGrid(products.slice(0,10))}</section>${renderPromoBanners()}${renderHotDeals()}${renderWideBanner()}<section class="container-custom pb-12 md:pb-16">${sectionTitle('Featured Products')}${renderProductGrid(products.slice(0,5))}</section>${renderLatestNewsWrapper()}${renderTestimonialComponent()}${renderBrandStrip()}${renderInstagramComponent({images:instagram,handle:''})}${renderNewsletterComponent()}`;
+
+  return `
+    ${renderHeroComponent()}
+    ${renderFeatures()}
+    ${renderCategories()}
+
+    <section
+      id="popular-products"
+      class="container-custom pb-12 md:pb-16"
+    >
+      ${sectionTitle("Popular Products")}
+      ${renderProductGrid(products.slice(0, 10))}
+    </section>
+
+    ${renderPromoBanners()}
+    ${renderHotDeals(products)}
+    ${renderWideBanner()}
+
+    <section class="container-custom pb-12 md:pb-16">
+      ${sectionTitle("Featured Products")}
+      ${renderProductGrid(products.slice(0, 5))}
+    </section>
+
+    ${renderLatestNewsWrapper()}
+    ${renderTestimonialComponent()}
+    ${renderBrandStrip()}
+
+    ${renderInstagramComponent({
+      images: instagram,
+      handle: "",
+    })}
+
+    ${renderNewsletterComponent()}
+  `;
 }
+ 
