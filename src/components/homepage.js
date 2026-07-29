@@ -1,9 +1,29 @@
 import { renderHeroComponent } from './hero.js';
-import { getProducts, renderProductCard, renderProductGrid } from "./productCard.js";
+import { getProducts, renderProductCard, renderProductGrid } from "./productcard.js";
 import { renderInstagramComponent } from './instagram.js';
 import { renderLatestNewsWrapper } from './latestnewswrapper.js';
 import { renderTestimonialComponent } from './testimonial.js';
 import { renderNewsletterComponent } from './newsletter.js';
+
+async function getBannerData() {
+  try {
+    const response = await fetch("/data/banners.json");
+
+    if (!response.ok) {
+      throw new Error("Không thể tải dữ liệu banner");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+
+    return {
+      hero: null,
+      promoBanners: [],
+      wideBanner: null
+    };
+  }
+}
 
 function sectionTitle(title, id='') {
   return `<div class="mb-6 flex items-center justify-between gap-4 md:mb-8"><h2 ${id?`id="${id}"`:''} class="text-2xl font-semibold text-neutral-900 md:text-[32px]">${title}</h2><a href="#" class="text-sm font-medium text-primary">View All →</a></div>`;
@@ -11,12 +31,57 @@ function sectionTitle(title, id='') {
 
 function renderFeatures() {
   const items = [
-    ['🚚','Free Shipping','Free shipping on all your order'],
-    ['🎧','Customer Support 24/7','Instant access to Support'],
-    ['▣','100% Secure Payment','We ensure your money is safe'],
-    ['□','Money-Back Guarantee','30 Days Money-Back Guarantee'],
+    [
+      "/images/itemsFeatures/Vector.png",
+      "Free Shipping",
+      "Free shipping on all your order"
+    ],
+    [
+      "/images/itemsFeatures/headphones.png",
+      "Customer Support 24/7",
+      "Instant access to Support"
+    ],
+    [
+      "/images/itemsFeatures/shopping-bag.png",
+      "100% Secure Payment",
+      "We ensure your money is safe"
+    ],
+    [
+      "/images/itemsFeatures/package.png",
+      "Money-Back Guarantee",
+      "30 Days Money-Back Guarantee"
+    ]
   ];
-  return `<section class="container-custom relative z-10 mt-5 md:mt-6"><div class="grid grid-cols-1 overflow-hidden rounded-md border border-neutral-100 bg-white shadow-[0_8px_30px_rgba(0,0,0,.08)] sm:grid-cols-2 lg:grid-cols-4">${items.map(([icon,title,text])=>`<div class="flex items-center gap-4 border-b border-neutral-100 p-5 last:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 md:p-6"><span class="flex h-10 w-10 items-center justify-center text-2xl text-primary">${icon}</span><div><h3 class="text-sm font-semibold">${title}</h3><p class="mt-1 text-xs text-neutral-400">${text}</p></div></div>`).join('')}</div></section>`;
+
+  return `
+    <section class="container-custom relative z-10 mt-5 md:mt-6">
+      <div class="grid grid-cols-1 overflow-hidden rounded-md bg-white shadow-[0_8px_40px_rgba(0,0,0,.05)] sm:grid-cols-2 lg:grid-cols-4">
+
+
+        ${items.map(([icon, title, description]) => `
+          <div class="flex items-center gap-4 p-5 md:p-6">
+
+            <img
+              src="${icon}"
+              alt="${title}"
+              class="h-10 w-10 shrink-0 object-contain"
+            >
+
+            <div>
+              <h3 class="text-sm font-semibold text-neutral-900">
+                ${title}
+              </h3>
+
+              <p class="mt-1 text-xs text-neutral-400">
+                ${description}
+              </p>
+            </div>
+          </div>
+        `).join("")}
+
+      </div>
+    </section>
+  `;
 }
 
 async function getCategories() {
@@ -63,15 +128,41 @@ function renderCategories(categories = []) {
   `;
 }
 
-function renderPromoBanners() {
-  const banners = [
-    ['Best Deals','Sale of the Month','https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80','text-white'],
-    ['85% Fat Free','Low-Fat Meat','https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80','text-white'],
-    ['Summer Sale','100% Fresh Fruit','https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=900&q=80','text-neutral-900'],
-  ];
-  return `<section class="container-custom pb-12 md:pb-16"><div class="grid grid-cols-1 gap-5 md:grid-cols-3">${banners.map(([eyebrow,title,image,color])=>`<article class="relative min-h-[420px] overflow-hidden rounded-lg bg-cover bg-center p-8 text-center ${color}" style="background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url('${image}')"><p class="relative text-xs uppercase">${eyebrow}</p><h3 class="relative mt-2 text-3xl font-semibold">${title}</h3><a href="#" class="relative mt-6 inline-flex rounded-full border border-primary bg-white px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white">Shop Now →</a></article>`).join('')}</div></section>`;
-}
+function renderPromoBanners(banners = []) {
+  if (banners.length === 0) return "";
 
+  return `
+    <section class="container-custom pb-12 md:pb-16">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+
+        ${banners.map(banner => `
+          <article
+            class="relative min-h-[420px] overflow-hidden rounded-lg
+                   bg-cover bg-center p-8 text-center ${banner.textColor}"
+            style="background-image: url('${banner.image}')"
+          >
+            <p class="relative text-xs uppercase">
+              ${banner.subTitle}
+            </p>
+
+            <h3 class="relative mt-2 text-3xl font-semibold">
+              ${banner.title}
+            </h3>
+
+            <a
+              href="#"
+              class="relative mt-6 inline-flex rounded-full bg-white
+                     px-5 py-3 text-sm font-semibold text-primary"
+            >
+              ${banner.buttonText} →
+            </a>
+          </article>
+        `).join("")}
+
+      </div>
+    </section>
+  `;
+}
 function renderHotDeals(products = []) {
   if (products.length < 13) return "";
 
@@ -113,41 +204,72 @@ function renderHotDeals(products = []) {
   </section>`;
 }
 
-function renderWideBanner() {
-  return `<section class="container-custom py-12 lg:py-[60px]">
-    <article class="relative min-h-[260px] overflow-hidden rounded-[10px] bg-[#1b2520] text-white lg:h-[358px]"><img 
-    src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1400&q=85" alt="Summer sale" class="absolute inset-0 h-full w-full object-cover opacity-45">
-      <div class="relative ml-auto flex min-h-[260px] max-w-[550px] flex-col justify-center p-8 sm:p-12 lg:h-[358px]">
-        <p class="text-sm font-medium uppercase">Summer Sale</p>
+function renderWideBanner(banner) {
+  if (!banner) return "";
+
+  return `
+    <section class="container-custom py-12 lg:py-[60px]">
+      <article
+        class="relative min-h-[260px] overflow-hidden rounded-[10px]
+               bg-cover bg-center text-white lg:h-[358px]"
+        style="background-image: url('${banner.image}')"
+      >
+        <div class="relative ml-auto flex min-h-[260px] max-w-[550px]
+                    flex-col justify-center p-8 sm:p-12 lg:h-[358px]">
+
+          <p class="text-sm font-medium uppercase">
+            ${banner.subTitle}
+          </p>
+
           <h2 class="mt-2 text-4xl font-semibold">
-            <span class="text-warning">37%
-            </span> OFF
+            <span class="text-warning">${banner.discount}</span>
+            ${banner.title}
           </h2>
-        <p class="mt-3 text-sm text-white/70">Free on all your online order.</p>
-        <a href="#" class="mt-5 inline-flex w-fit rounded-full bg-white px-7 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white">Shop Now →</a>
-      </div>
-    </article>
-  </section>`;
+
+          <p class="mt-3 text-sm text-white/70">
+            ${banner.description}
+          </p>
+
+          <a
+            href="#"
+            class="mt-5 inline-flex w-fit rounded-full bg-white
+                   px-7 py-3 text-sm font-semibold text-primary"
+          >
+            ${banner.buttonText} →
+          </a>
+        </div>
+      </article>
+    </section>
+  `;
 }
 
 function renderBrandStrip() {
   return `<section class="container-custom py-8"><div class="grid grid-cols-3 items-center gap-5 text-center text-lg font-semibold text-neutral-300 sm:grid-cols-6">${['steps','MANGO','food','FOOD','BOOK-OFF','G Series'].map(x=>`<span>${x}</span>`).join('')}</div></section>`;
 }
 
+async function getInstagramImages() {
+  try {
+    const response = await fetch("/data/instagram.json");
+
+    if (!response.ok) {
+      throw new Error("Không thể tải ảnh Instagram");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 export async function renderHomepageComponent() {
   const products = await getProducts();
   const categories = await getCategories();
-  const instagram = [
-    'https://images.unsplash.com/photo-1561136594-7f68413baa99',
-    'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
-    'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2',
-    'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83',
-    'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea',
-    'https://images.unsplash.com/photo-1547592180-85f173990554',
-  ];
+  const instagramImages = await getInstagramImages();
+  const bannerData = await getBannerData();
 
   return `
-    ${renderHeroComponent()}
+    ${renderHeroComponent(bannerData.hero)}
     ${renderFeatures()}
     ${renderCategories(categories)}
 
@@ -159,9 +281,9 @@ export async function renderHomepageComponent() {
       ${renderProductGrid(products.slice(0, 10))}
     </section>
 
-    ${renderPromoBanners()}
+    ${renderPromoBanners(bannerData.promoBanners)}
     ${renderHotDeals(products)}
-    ${renderWideBanner()}
+    ${renderWideBanner(bannerData.wideBanner)}
 
     <section class="container-custom pb-12 md:pb-16">
       ${sectionTitle("Featured Products")}
@@ -173,8 +295,8 @@ export async function renderHomepageComponent() {
     ${renderBrandStrip()}
 
     ${renderInstagramComponent({
-      images: instagram,
-      handle: "",
+      images: instagramImages,
+      handle: ""
     })}
 
     ${renderNewsletterComponent()}

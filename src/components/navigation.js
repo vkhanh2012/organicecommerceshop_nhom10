@@ -1,8 +1,4 @@
 // src/components/navigation.js
-// Mobile-first: mặc định layout mobile — menu 6 link ẩn sau nút hamburger
-// (chỉ hiện trên mobile, dùng md:hidden), desktop hiện thanh ngang luôn (md:flex).
-// Toàn bộ style viết trực tiếp bằng Tailwind utility ngay trong file này
-// (không qua components.css) vì chỉ Navigation dùng, không component nào khác tái sử dụng.
 import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } from "./icons.js";
 
 const NAV_LINKS = [
@@ -14,23 +10,36 @@ const NAV_LINKS = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const linkClass = "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none";
-const linkActiveClass = "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
+const LINK_BASE_CLASS = "block md:inline text-sm font-medium font-poppins py-2.5 md:py-0 border-b border-white/10 md:border-none";
+const LINK_NORMAL_CLASS = `${LINK_BASE_CLASS} text-neutral-400 hover:text-white transition-colors`;
+const LINK_ACTIVE_CLASS = `${LINK_BASE_CLASS} text-white`;
+
+function checkIsActive(linkHref, currentHref) {
+  let currentPath = currentHref;
+  if (currentHref === "/index.html" || currentHref === "/Homepage_01.html") {
+    currentPath = "/";
+  }
+  return linkHref === currentPath;
+}
 
 export function renderNavigationComponent({
   cartCount = 0,
   cartTotal = "$0.00",
   activeHref = "/",
 } = {}) {
+  
   const linksHtml = NAV_LINKS.map((link) => {
-    const normalized = activeHref === "/index.html" || activeHref === "/Homepage_01.html" ? "/" : activeHref;
-    const isActive = link.href === normalized;
-    return `<a href="${link.href}" class="${isActive ? linkActiveClass : linkClass}">${link.label}</a>`;
+    const isActive = checkIsActive(link.href, activeHref);
+    
+    if (isActive) {
+      return `<a href="${link.href}" class="${LINK_ACTIVE_CLASS}">${link.label}</a>`;
+    } else {
+      return `<a href="${link.href}" class="${LINK_NORMAL_CLASS}">${link.label}</a>`;
+    }
   }).join("");
 
   return `
   <header data-nav-root>
-    <!-- Small-one: thanh trên cùng — mobile: chỉ hiện Sign In/Sign Up, ẩn địa chỉ dài -->
     <div class="w-full bg-white border-b border-neutral-100">
       <div class="container-custom flex items-center justify-between py-2 md:py-3 font-poppins text-xs text-neutral-600 gap-3">
         <div class="items-center gap-2 hidden md:flex">
@@ -40,14 +49,18 @@ export function renderNavigationComponent({
         <div class="flex items-center gap-3 md:gap-4">
           <span class="hidden sm:inline">Eng</span>
           <span class="hidden sm:inline">USD</span>
-          <span>Sign In / Sign Up</span>
+          <div class="flex items-center gap-1">
+            <a href="#" class="hover:text-primary transition-colors">Sign In</a>
+            <span class="text-neutral-300">/</span>
+            <a href="#" class="hover:text-primary transition-colors">Sign Up</a>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Middle: mobile = [hamburger] [logo] [wishlist/cart]; search xuống hàng riêng full-width -->
     <div class="w-full bg-white">
       <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-5">
+        
         <button type="button" class="flex items-center justify-center w-9 h-9 text-neutral-900 md:hidden" data-nav-toggle aria-label="Mở menu" aria-expanded="false">
           ${iconMenu}
         </button>
@@ -65,22 +78,26 @@ export function renderNavigationComponent({
           <button class="relative w-8 h-8 items-center justify-center text-neutral-800 hidden sm:flex" aria-label="Wishlist" type="button">
             ${iconHeart}
           </button>
+          
           <button class="relative w-8 h-8 flex items-center justify-center text-neutral-800" aria-label="Giỏ hàng" type="button" id="nav-cart-btn">
             ${iconCart}
             <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary-dark text-white text-[10px] flex items-center justify-center border-2 border-white">${cartCount}</span>
           </button>
+          
           <div class="leading-tight hidden sm:block">
             <div class="text-[11px] text-neutral-700 font-poppins">Shopping cart:</div>
             <div class="text-sm font-medium text-neutral-900 font-poppins">${cartTotal}</div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- Nav Links: mobile = ẩn mặc định, xổ ra khi bấm hamburger; desktop (md:) = luôn hiện, nút hamburger biến mất -->
     <div class="w-full bg-neutral-800 hidden md:block" data-nav-panel>
       <div class="container-custom flex flex-col md:flex-row gap-2 md:gap-4 py-2 md:py-4 items-stretch md:items-center">
-        <nav class="flex flex-col md:flex-row gap-0 md:gap-8 items-stretch md:items-center">${linksHtml}</nav>
+        <nav class="flex flex-col md:flex-row gap-0 md:gap-8 items-stretch md:items-center">
+          ${linksHtml}
+        </nav>
         <div class="flex items-center gap-2 text-sm font-medium font-poppins text-white py-2.5 md:ml-auto md:py-0">
           ${iconPhone}
           <span>(219) 555-0114</span>
@@ -91,20 +108,24 @@ export function renderNavigationComponent({
   `;
 }
 
-/**
- * Gắn sự kiện đóng/mở menu mobile (hamburger). Nút hamburger chỉ tồn tại/hiện
- * trên mobile (class md:hidden) — từ md: trở lên menu luôn hiện sẵn, không cần bấm.
- */
 export function bindNavigationEvents(rootEl) {
   const root = rootEl.querySelector("[data-nav-root]") || rootEl;
-  const toggle = root.querySelector("[data-nav-toggle]");
-  const panel = root.querySelector("[data-nav-panel]");
-  if (!toggle || !panel) return;
+  
+  const toggleBtn = root.querySelector("[data-nav-toggle]");
+  const navPanel = root.querySelector("[data-nav-panel]");
+  
+  if (!toggleBtn || !navPanel) return;
 
-  toggle.addEventListener("click", () => {
-    const isOpen = !panel.classList.contains("hidden");
-    panel.classList.toggle("hidden");
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.innerHTML = isOpen ? iconMenu : iconClose;
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = !navPanel.classList.contains("hidden");
+    
+    navPanel.classList.toggle("hidden");
+    toggleBtn.setAttribute("aria-expanded", String(!isOpen));
+    
+    if (isOpen) {
+      toggleBtn.innerHTML = iconMenu;
+    } else {
+      toggleBtn.innerHTML = iconClose;
+    }
   });
 }
