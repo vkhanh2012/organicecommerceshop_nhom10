@@ -1,15 +1,15 @@
 // src/main.js
-import "./css/style.css"
-import {
-  renderNavigationComponent,
-  bindNavigationEvents,
-} from "./components/navigation.js"
-import { renderFooterComponent } from "./components/footer.js"
-import { renderBreadCrumb } from "./descriptions/breadcrumb.js"
-import { renderDescription } from "./descriptions/descriptions.js"
-import { renderButtonComponent } from "./components/button.js"
-import { renderProductGrid } from "./components/productCard.js"
-import { renderInstagramComponent } from "./components/instagram.js"
+import "./css/style.css";
+import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
+import { renderFooterComponent } from "./components/footer.js";
+import { renderBreadCrumb } from "./descriptions/breadcrumb.js";
+import { renderDescription } from "./descriptions/descriptions.js";
+import { renderButtonComponent } from "./components/button.js";
+import { renderProductGrid } from "./components/productCard.js";
+import { renderInstagramComponent } from "./components/instagram.js";
+
+
+
 
 // 1. Navigation
 const navContainer = document.getElementById("navigation-container")
@@ -37,9 +37,9 @@ if (buttonContainer) {
 }
 
 // 4. Footer
-const footerContainer = document.getElementById("footer-container")
+const footerContainer = document.getElementById("footer-container");
 if (footerContainer) {
-  footerContainer.innerHTML = renderFooterComponent()
+  footerContainer.innerHTML = renderFooterComponent();
 }
 
 // 5. Product Card — demo với dữ liệu thật lấy từ bản demo Vercel
@@ -93,13 +93,14 @@ if (instagramContainer) {
 }
 
 //7. Breadcumb
-const breadcrumbContainer = document.getElementById("breadcrumb-container")
+const breadcrumbContainer = document.getElementById("breadcrumb-container");
 if (breadcrumbContainer) {
-  breadcrumbContainer.innerHTML = renderBreadCrumb()
+  breadcrumbContainer.innerHTML = renderBreadCrumb();
 }
 
 //8.Description
-const descriptionContainer = document.getElementById("description-container")
+const descriptionContainer = document.getElementById("description-container");
 if (descriptionContainer) {
-  descriptionContainer.innerHTML = renderDescription()
+  descriptionContainer.innerHTML = renderDescription();
 }
+
