@@ -79,10 +79,17 @@ export function renderNavigationComponent({
             ${iconHeart}
           </button>
           
-          <button class="relative w-8 h-8 flex items-center justify-center text-neutral-800" aria-label="Giỏ hàng" type="button" id="nav-cart-btn">
-            ${iconCart}
-            <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary-dark text-white text-[10px] flex items-center justify-center border-2 border-white">${cartCount}</span>
-          </button>
+          <a
+  href="./cart.html"
+  class="relative w-8 h-8 flex items-center justify-center text-neutral-800"
+  aria-label="Giỏ hàng"
+  id="nav-cart-btn"
+>
+  ${iconCart}
+  <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary-dark text-white text-[10px] flex items-center justify-center border-2 border-white">
+    ${cartCount}
+  </span>
+</a>
           
           <div class="leading-tight hidden sm:block">
             <div class="text-[11px] text-neutral-700 font-poppins">Shopping cart:</div>
