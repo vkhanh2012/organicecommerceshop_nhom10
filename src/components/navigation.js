@@ -16,9 +16,9 @@ const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
   { label: "Shop", href: "/shop.html" },
   { label: "Pages", href: "/testing.html" },
-  { label: "Blog", href: "/blog" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Blog", href: "/blog.html" },
+  { label: "About Us", href: "/about.html" },
+  { label: "Contact Us", href: "/contact.html" },
 ];
 
 const linkClass =

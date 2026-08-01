@@ -6,6 +6,7 @@ import { renderPagination } from "../shop/pagination.js"
 import { renderNewsletterComponent } from "../components/newsletter.js"
 import { renderTopBar } from "../shop/topBar.js"
 import { initSaleProducts } from "../shop/saleProductCards.js"
+import {renderBreadcrumbsComponent} from "../components/breadcrumbs.js"
 
 
 const topBar = document.getElementById("top-Bar")
@@ -49,6 +50,16 @@ if (latest) {
   }
 }
 
+const breadcrumnbs = document.getElementById("breadcrumbs-container"); 
+if(breadcrumnbs) {
+  breadcrumnbs.innerHTML = renderBreadcrumbsComponent({
+    breadcrumbs: [
+      { label: "Shop", url: "./shop.html" },
+      { label: "Vegetables", url: "./shop.html" },
+      { label: "Fresh Organic Tomato", url: "./product-detail.html" } 
+    ]
+  });
+}
 
 
 
