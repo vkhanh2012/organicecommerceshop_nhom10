@@ -3,7 +3,14 @@
 // (chỉ hiện trên mobile, dùng md:hidden), desktop hiện thanh ngang luôn (md:flex).
 // Toàn bộ style viết trực tiếp bằng Tailwind utility ngay trong file này
 // (không qua components.css) vì chỉ Navigation dùng, không component nào khác tái sử dụng.
-import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } from "./icons.js";
+import {
+  iconHeart,
+  iconCart,
+  iconPhone,
+  iconLocation,
+  iconMenu,
+  iconClose,
+} from "./icons.js"
 
 const NAV_LINKS = [
   { label: "Home", href: "/", active: true },
@@ -12,11 +19,16 @@ const NAV_LINKS = [
   { label: "Blog", href: "/descriptions.html" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
-];
+]
 
-const linkClass = "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none";
-const linkActiveClass = "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none";
-const currentPage = NAV_LINKS.find(link => link.active) || { label: "Home", href: "/" };
+const linkClass =
+  "block md:inline text-sm font-medium font-poppins text-neutral-400 hover:text-white transition-colors py-2.5 md:py-0 border-b border-white/10 md:border-none"
+const linkActiveClass =
+  "block md:inline text-sm font-medium font-poppins text-white py-2.5 md:py-0 border-b border-white/10 md:border-none"
+const currentPage = NAV_LINKS.find((link) => link.active) || {
+  label: "Home",
+  href: "/",
+}
 
 export function renderNavigationComponent({
   cartCount = 2,
@@ -24,9 +36,9 @@ export function renderNavigationComponent({
   activeHref = "/",
 } = {}) {
   const linksHtml = NAV_LINKS.map((link) => {
-    const isActive = link.href === activeHref || link.active;
-    return `<a href="${link.href}" class="${isActive ? linkActiveClass : linkClass}">${link.label}</a>`;
-  }).join("");
+    const isActive = link.href === activeHref || link.active
+    return `<a href="${link.href}" class="${isActive ? linkActiveClass : linkClass}">${link.label}</a>`
+  }).join("")
 
   return `
   <header data-nav-root>
@@ -88,7 +100,7 @@ export function renderNavigationComponent({
       </div>
     </div>
   </header>
-  `;
+  `
 }
 
 /**
@@ -96,15 +108,15 @@ export function renderNavigationComponent({
  * trên mobile (class md:hidden) — từ md: trở lên menu luôn hiện sẵn, không cần bấm.
  */
 export function bindNavigationEvents(rootEl) {
-  const root = rootEl.querySelector("[data-nav-root]") || rootEl;
-  const toggle = root.querySelector("[data-nav-toggle]");
-  const panel = root.querySelector("[data-nav-panel]");
-  if (!toggle || !panel) return;
+  const root = rootEl.querySelector("[data-nav-root]") || rootEl
+  const toggle = root.querySelector("[data-nav-toggle]")
+  const panel = root.querySelector("[data-nav-panel]")
+  if (!toggle || !panel) return
 
   toggle.addEventListener("click", () => {
-    const isOpen = !panel.classList.contains("hidden");
-    panel.classList.toggle("hidden");
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.innerHTML = isOpen ? iconMenu : iconClose;
-  });
+    const isOpen = !panel.classList.contains("hidden")
+    panel.classList.toggle("hidden")
+    toggle.setAttribute("aria-expanded", String(!isOpen))
+    toggle.innerHTML = isOpen ? iconMenu : iconClose
+  })
 }
