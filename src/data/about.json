@@ -52,5 +52,31 @@
       "title": "100% Organic Food",
       "description": "100% healthy & Fresh food."
     }
-  ]
+  ],
+
+  "delivered": {
+    "title": "We Deliver, You Enjoy Fresh Organic Food",
+    "description": "Ut imperdiet augue non tellus congue, quis feugiat enim feugiat. Vivamus dui eros, sodales ac ac, imperdiet ac sem.",
+    "buttonText": "Shop Now",
+    "buttonLink": "./src/shop.html",
+    "image": {
+      "src": "./src/assets/images/delivered-about.svg",
+      "alt": "We Deliver Fresh Food"
+    }
+  },
+"deliveryFeatures": [
+  {
+    "id": 1,
+    "text": "Sed in metus pellentesque."
+  },
+  {
+    "id": 2,
+    "text": "Fusce et ex commodo, aliquam nulla efficitur, tempus lorem."
+  },
+  {
+    "id": 3,
+    "text": "Maecenas ut nunc fringilla erat varius."
+  }
+]
+  
 }

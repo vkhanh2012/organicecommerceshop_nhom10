@@ -1,6 +1,6 @@
 export function renderFeatureCard(feature) {
     return /*html*/ `
-    <div class="w-full flex justify-start justify-center items-center">
+    <div class="w-full flex justify-start items-center">
         <div class="flex justify-center rounded-lg bg-white gap-1 md:gap-2 lg:gap-4 items-center py-0.5 md:py-1 lg:py-2">
             <!-- Icon bên trái -->
             <div class="shrink-0 w-12 md:w-14 md:h-14">
