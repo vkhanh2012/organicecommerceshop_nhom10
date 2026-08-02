@@ -2,7 +2,7 @@ import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
 
 export function renderNewsletterComponent() {
   return /*html*/`
-    <div class="w-full bg-white shadow-lg">
+    <div class="w-full py-4 bg-white shadow-lg">
       
       <!-- NEWSLETTER SECTION -->
       <div class="bg-gray-50 border-b border-gray-100">
