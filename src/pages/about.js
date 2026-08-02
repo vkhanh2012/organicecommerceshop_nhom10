@@ -1,6 +1,7 @@
 import {renderBreadcrumbsComponent} from "../components/breadcrumbs.js"
-import {renderAboutUsSection} from "../components/aboutus.js"
+import {renderAboutUsSection} from "../about/aboutus.js"
 
+import {renderAboutMeSection} from "../about/aboutme.js"
 const breadcrumnbs = document.getElementById("breadcrumbs-container"); 
 if(breadcrumnbs) {
   breadcrumnbs.innerHTML = renderBreadcrumbsComponent({
@@ -10,7 +11,12 @@ if(breadcrumnbs) {
   });
 }
 
-const aboutUsSection = document.getElementById("aboutus-section");
-if(aboutUsSection) {
-  aboutUsSection.innerHTML = renderAboutUsSection();
+const aboutUs = document.getElementById("aboutus-section")
+if(aboutUs) {
+  aboutUs.innerHTML = renderAboutUsSection();
+}
+
+const aboutMeSection = document.getElementById("aboutme-section");
+if(aboutMeSection) {
+  aboutMeSection.innerHTML = renderAboutMeSection();
 }

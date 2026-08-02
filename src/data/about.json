@@ -1,0 +1,56 @@
+{
+  "aboutUs": {
+    "title": "100% Trusted Organic Food Store",
+    "description": "Morbi porttitor ligula in nunc varius sagittis. Proin dui nisi, laoreet ut tempor ac, cursus vitae eros. Cras quis ultricies elit. Proin ac lectus arcu. Maecenas aliquet vel tellus at accumsan. Donec a eros non massa vulputate ornare. Vivamus ornare commodo ante, at commodo felis congue vitae.",
+    "image": {
+      "src": "./src/assets/images/aboutus1.svg",
+      "alt": "100% Trusted Organic Food Store"
+    }
+  },
+  "aboutMe": {
+    "title": "100% Trusted Organic Food Store",
+    "description": "Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi. Nulla eu eros consequat tortor tincidunt feugiat.",
+    "image": {
+      "src": "./src/assets/images/aboutme.svg",
+      "alt": "About Me Image"
+    }
+  },
+  "features": [
+    {
+      "id": 1,
+      "icon": "./src/assets/images/leaf-about.svg",
+      "title": "100% Organic food",
+      "description": "100% healthy & Fresh food."
+    },
+    {
+      "id": 2,
+      "icon": "./src/assets/images/headphone-about.svg",
+      "title": "Great Support 24/7",
+      "description": "Instant access to Contact"
+    },
+    {
+      "id": 3,
+      "icon": "./src/assets/images/star-about.svg",
+      "title": "Customer Feedback",
+      "description": "Our happy customer"
+    },
+    {
+      "id": 4,
+      "icon": "./src/assets/images/bag-about.svg",
+      "title": "100% Secure Payment",
+      "description": "We ensure your money is save"
+    },
+    {
+      "id": 5,
+      "icon": "./src/assets/images/car-about.svg",
+      "title": "Free Shipping",
+      "description": "Free shipping with discount"
+    },
+    {
+      "id": 6,
+      "icon": "./src/assets/images/box-about.svg",
+      "title": "100% Organic Food",
+      "description": "100% healthy & Fresh food."
+    }
+  ]
+}

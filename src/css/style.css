@@ -26,8 +26,9 @@
   --font-poppins: "Poppins", sans-serif;
   --radius-pill: 43px; /* radius nút Button */
 
-  --color-title: #1A1A1A;
-  --color-content: #666666;
+  --color-title-900: #1A1A1A;
+  --color-content-600: #666666;
+  --color-content-500: #808080;
 
 }
 
