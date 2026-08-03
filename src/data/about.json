@@ -77,6 +77,73 @@
     "id": 3,
     "text": "Maecenas ut nunc fringilla erat varius."
   }
-]
+],
+
+"teamSection": {
+    "title": "Our Awesome Team",
+    "description": "Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.",
+    "members": [
+      {
+        "id": 1,
+        "name": "Jenny Wilson",
+        "role": "Ceo & Founder",
+        "image": {
+          "src": "./src/assets/images/teamcard1.svg",
+          "alt": "Jenny Wilson"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Jane Cooper",
+        "role": "Worker",
+        "image": {
+          "src": "./src/assets/images/teamcard2.svg",
+          "alt": "Jane Cooper"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Cody Fisher",
+        "role": "Security Guard",
+        "image": {
+          "src": "./src/assets/images/teamcard3.svg",
+          "alt": "Cody Fisher"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 4,
+        "name": "Robert Fox",
+        "role": "Senior Farmer Manager",
+        "image": {
+          "src": "./src/assets/images/teamcard4.svg",
+          "alt": "Robert Fox"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      }
+    ]
+  }
   
 }
