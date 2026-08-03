@@ -2,11 +2,11 @@
 import "./css/style.css";
 import { renderNavigationComponent, bindNavigationEvents } from "./components/navigation.js";
 import { renderFooterComponent } from "./components/footer.js";
-import { renderBreadCrumb } from "./descriptions/breadcrumb.js";
-import { renderDescription } from "./descriptions/descriptions.js";
+import "./pages/details.js";
 import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
+import { renderNewsletterComponent } from "./components/newsletter.js";
 
 
 
@@ -92,15 +92,7 @@ if (instagramContainer) {
   instagramContainer.innerHTML = renderInstagramComponent({ images })
 }
 
-//7. Breadcumb
-const breadcrumbContainer = document.getElementById("breadcrumb-container");
-if (breadcrumbContainer) {
-  breadcrumbContainer.innerHTML = renderBreadCrumb();
+const newsletterContainer = document.getElementById("newsletter-container")
+if (newsletterContainer) {
+  newsletterContainer.innerHTML = renderNewsletterComponent()
 }
-
-//8.Description
-const descriptionContainer = document.getElementById("description-container");
-if (descriptionContainer) {
-  descriptionContainer.innerHTML = renderDescription();
-}
-

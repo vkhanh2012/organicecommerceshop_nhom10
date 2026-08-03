@@ -7,6 +7,7 @@ import cabbage4Svg from "../assets/images/cabbage4.svg";
 import largecabageSvg from "../assets/images/largecabage.svg";
 import videoSvg from "../assets/images/video.svg";
 import avatarSvg from "../assets/images/avatar.svg";
+import brandLogoSvg from "../assets/images/brand.svg";
 
 // 1. DATA ĐỘNG MẶC ĐỊNH CHO SẢN PHẨM
 export const defaultProductData = {
@@ -19,6 +20,7 @@ export const defaultProductData = {
   currentPrice: 17.28,
   discountLabel: "64% Off",
   brand: "FarmFresh", 
+  brandLogo: brandLogoSvg,
   description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
   category: { name: "Vegetables", link: "#" },
   tags: [
@@ -78,5 +80,5 @@ export const defaultProductData = {
   ],
   mainImage: largecabageSvg,
   thumbnails: [cabbage1Svg, cabbage2Svg, cabbage3Svg, cabbage4Svg],
-  videoImage: videoSvg
+  videoImage: videoSvg,
 };

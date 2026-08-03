@@ -11,6 +11,7 @@ function renderDescriptionSection(container) {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const selectedTab = link.getAttribute("data-tab");
+      console.log(selectedTab);
       if (selectedTab && selectedTab !== currentTab) {
         currentTab = selectedTab;
         renderDescriptionSection(container);
@@ -18,6 +19,7 @@ function renderDescriptionSection(container) {
     });
   });
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   // 7. Breadcrumb
   const breadcrumbContainer = document.getElementById("breadcrumb-container");
