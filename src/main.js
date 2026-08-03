@@ -102,3 +102,8 @@ if (instagramContainer) {
   instagramContainer.innerHTML = renderInstagramComponent({ images })
 }
 
+const testi = document.getElementById("testiSection");
+if(testi) {
+  testi.innerHTML = renderTestimonialComponent();
+}
+
