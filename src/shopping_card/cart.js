@@ -1,4 +1,11 @@
-import { getCart, getCartSummary, saveCart } from "./cartData.js";
+import {
+  changeQuantity,
+  getCart,
+  getCartSummary,
+  removeProduct,
+  saveCart,
+} from "./cartData.js";
+import { getImageUrl } from "../utils/assets.js";
 
 function money(value) {
   return `$${value.toFixed(2)}`;
@@ -69,7 +76,7 @@ function cartTotal(cart) {
 
 export function renderCartPage(cart = getCart()) {
   return `
-    <section class="relative flex h-[120px] items-center bg-[url('/images/plant.jpg')] bg-cover bg-center">
+    <section class="relative flex h-[120px] items-center bg-cover bg-center" style="background-image: url('${getImageUrl('/images/plant.jpg')}')">
       <div class="absolute inset-0 bg-neutral-900/80"></div>
       <nav class="container-custom relative z-10 flex items-center gap-2 text-sm" aria-label="Breadcrumb">
         <a class="text-neutral-300 hover:text-white" href="./index.html" aria-label="Home">⌂</a>
@@ -106,18 +113,14 @@ export function bindCartEvents(root, onCartChange) {
     const id = Number(button.dataset.id);
     const cart = getCart();
 
-    if (action === "increase" || action === "decrease") {
-      const item = cart.find((product) => product.id === id);
-      if (item) item.quantity = Math.max(1, item.quantity + (action === "increase" ? 1 : -1));
-    }
+    let updatedCart = cart;
 
-    if (action === "remove") {
-      const itemIndex = cart.findIndex((product) => product.id === id);
-      if (itemIndex !== -1) cart.splice(itemIndex, 1);
-    }
+    if (action === "increase") updatedCart = changeQuantity(cart, id, 1);
+    if (action === "decrease") updatedCart = changeQuantity(cart, id, -1);
+    if (action === "remove") updatedCart = removeProduct(cart, id);
 
-    saveCart(cart);
-    onCartChange(cart, action === "update" ? "Cart updated successfully." : "");
+    saveCart(updatedCart);
+    onCartChange(updatedCart, action === "update" ? "Cart updated successfully." : "");
   });
 
   root.querySelector("[data-coupon-form]")?.addEventListener("submit", (event) => {

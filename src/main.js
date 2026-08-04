@@ -5,9 +5,9 @@ import {
   bindNavigationEvents
 } from "./components/navigation.js";
 
-import { renderHomepageComponent } from "./components/homepage.js";
+import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
-import { bindHeroEvents } from "./components/hero.js";
+import { bindHeroEvents } from "./home/hero.js";
 
 function initNavigation() {
   const navigation = document.getElementById("navigation-container");
@@ -43,3 +43,5 @@ function initFooter() {
 initNavigation();
 initHomepage();
 initFooter();
+
+

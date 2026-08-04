@@ -2,7 +2,7 @@
 // Section "Follow us on Instagram" — Figma: 1320x270px, 6 ảnh 1 hàng ngang.
 // Mobile-first: 2 cột trên mobile -> 3 cột (sm) -> 6 cột (lg), khớp layout gốc.
 
-import { iconInstagram } from "./icons.js";
+import { iconInstagram } from "../components/icons.js";
 
 const CLASS = {
   section: "w-full bg-white py-10 md:py-14",

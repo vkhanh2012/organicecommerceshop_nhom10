@@ -1,28 +1,25 @@
-import { renderHeroComponent } from './hero.js';
-import { getProducts, renderProductCard, renderProductGrid } from "./productcard.js";
-import { renderInstagramComponent } from './instagram.js';
-import { renderLatestNewsWrapper } from './latestnewswrapper.js';
-import { renderTestimonialComponent } from './testimonial.js';
-import { renderNewsletterComponent } from './newsletter.js';
+import { renderHeroComponent } from '../home/hero.js';
+import { getProducts, renderProductCard, renderProductGrid } from "../components/productcard.js";
+import { renderInstagramComponent } from '../home/instagram.js';
+import { renderLatestNewsWrapper } from '../home/latestnewswrapper.js';
+import { renderTestimonialComponent } from '../home/testimonial.js';
+import { renderNewsletterComponent } from '../components/newsletter.js';
+import bannerData from "../data/banners.json";
+import categoriesData from "../data/categories.json";
+import instagramData from "../data/instagram.json";
+import companyLogosData from "../data/companyLogo.json";
+import { attachImageUrls, getImageUrl } from "../utils/assets.js";
 
 async function getBannerData() {
-  try {
-    const response = await fetch("/data/banners.json");
-
-    if (!response.ok) {
-      throw new Error("Không thể tải dữ liệu banner");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-
-    return {
-      hero: null,
-      promoBanners: [],
-      wideBanner: null
-    };
-  }
+  return {
+    hero: {
+      ...bannerData.hero,
+      main: { ...bannerData.hero.main, image: getImageUrl(bannerData.hero.main.image) },
+      smallBanners: attachImageUrls(bannerData.hero.smallBanners),
+    },
+    promoBanners: attachImageUrls(bannerData.promoBanners),
+    wideBanner: { ...bannerData.wideBanner, image: getImageUrl(bannerData.wideBanner.image) },
+  };
 }
 
 function sectionTitle(title, id='') {
@@ -32,22 +29,22 @@ function sectionTitle(title, id='') {
 function renderFeatures() {
   const items = [
     [
-      "/images/itemsFeatures/Vector.png",
+      getImageUrl("/images/itemsFeatures/Vector.png"),
       "Free Shipping",
       "Free shipping on all your order"
     ],
     [
-      "/images/itemsFeatures/headphones.png",
+      getImageUrl("/images/itemsFeatures/headphones.png"),
       "Customer Support 24/7",
       "Instant access to Support"
     ],
     [
-      "/images/itemsFeatures/shopping-bag.png",
+      getImageUrl("/images/itemsFeatures/shopping-bag.png"),
       "100% Secure Payment",
       "We ensure your money is safe"
     ],
     [
-      "/images/itemsFeatures/package.png",
+      getImageUrl("/images/itemsFeatures/package.png"),
       "Money-Back Guarantee",
       "30 Days Money-Back Guarantee"
     ]
@@ -85,18 +82,7 @@ function renderFeatures() {
 }
 
 async function getCategories() {
-  try {
-    const response = await fetch("/data/categories.json");
-
-    if (!response.ok) {
-      throw new Error("Không thể tải danh mục");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+  return attachImageUrls(categoriesData);
 }
 
 function renderCategories(categories = []) {
@@ -244,22 +230,19 @@ function renderWideBanner(banner) {
 }
 
 function renderBrandStrip() {
-  return `<section class="container-custom py-8"><div class="grid grid-cols-3 items-center gap-5 text-center text-lg font-semibold text-neutral-300 sm:grid-cols-6">${['steps','MANGO','food','FOOD','BOOK-OFF','G Series'].map(x=>`<span>${x}</span>`).join('')}</div></section>`;
+  const logos = attachImageUrls(companyLogosData);
+  return `<section class="container-custom py-8 md:py-12">
+    <div class="grid grid-cols-3 items-center gap-6 sm:grid-cols-6">
+      ${logos.map((logo, index) => `
+        <div class="flex h-12 items-center justify-center ${index ? 'border-l border-neutral-100' : ''}">
+          <img class="max-h-9 max-w-[120px] object-contain opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0" src="${logo.image}" alt="${logo.name}">
+        </div>`).join('')}
+    </div>
+  </section>`;
 }
 
 async function getInstagramImages() {
-  try {
-    const response = await fetch("/data/instagram.json");
-
-    if (!response.ok) {
-      throw new Error("Không thể tải ảnh Instagram");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+  return instagramData.map(getImageUrl);
 }
 
 export async function renderHomepageComponent() {
