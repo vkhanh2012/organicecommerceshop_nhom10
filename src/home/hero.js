@@ -42,7 +42,7 @@ export function renderHeroComponent(hero) {
                transition-colors hover:text-primary-dark"
       >
         ${hero2.buttonText}
-        <span>→</span>
+        <span>➜</span>
       </a>
     </div>
   </article>
@@ -80,7 +80,7 @@ export function renderHeroComponent(hero) {
                transition-colors hover:text-primary-light"
       >
         ${hero3.buttonText}
-        <span>→</span>
+        <span>➜</span>
       </a>
     </div>
   </article>
@@ -102,7 +102,7 @@ export function renderHeroComponent(hero) {
               <p class="text-base">${mainBanner.saleLabel} <span class="rounded bg-warning px-2 py-1 font-semibold">${mainBanner.saleValue}</span></p>
               <p class="mt-2 text-sm text-white/75">${mainBanner.description}</p>
             </div>
-            <a href="#popular-products" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>→</span></a>
+            <a href="#popular-products" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>➜</span></a>
           </div>
         </article>
 

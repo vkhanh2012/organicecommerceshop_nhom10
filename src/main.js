@@ -9,6 +9,7 @@ import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { bindHeroEvents } from "./home/hero.js";
 import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
+import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
 import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
 
 function initNavigation() {
@@ -49,7 +50,7 @@ function initFooter() {
 initNavigation();
 
 if (document.getElementById("homepage-container")) {
-  initHomepage();
+  initHomepage().then(() => initNewsletterPopupPage());
   initFooter();
 }
 
