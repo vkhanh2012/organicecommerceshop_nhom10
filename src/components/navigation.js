@@ -1,9 +1,12 @@
 // src/components/navigation.js
 import { iconHeart, iconCart, iconPhone, iconLocation, iconMenu, iconClose } from "./icons.js";
+import { renderCartPopup } from "../pages/cartPopup.js";
+import { getImageUrl } from "../utils/assets.js";
+import { removeProduct, saveCart } from "../shopping_cart/cartData.js";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/", active: true },
-  { label: "Shop", href: "/shop.html" },
+  { label: "Home", href: "./index.html", active: true },
+  { label: "Shop", href: "./shop.html" },
   { label: "Pages", href: "/pages" },
   { label: "Blog", href: "/blog" },
   { label: "About Us", href: "/about" },
@@ -15,16 +18,14 @@ const LINK_NORMAL_CLASS = `${LINK_BASE_CLASS} text-neutral-400 hover:text-white 
 const LINK_ACTIVE_CLASS = `${LINK_BASE_CLASS} text-white`;
 
 function checkIsActive(linkHref, currentHref) {
-  let currentPath = currentHref;
-  if (currentHref === "/index.html" || currentHref === "/Homepage_01.html") {
-    currentPath = "/";
-  }
-  return linkHref === currentPath;
+  const currentPage = currentHref.split("/").pop() || "index.html";
+  return linkHref.replace("./", "") === currentPage;
 }
 
 export function renderNavigationComponent({
   cartCount = 0,
   cartTotal = "$0.00",
+  cartItems = [],
   activeHref = "/",
 } = {}) {
   
@@ -65,8 +66,8 @@ export function renderNavigationComponent({
           ${iconMenu}
         </button>
 
-        <a href="/Homepage_01.html" class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight md:justify-self-start">
-          <img src="/images/plant.jpg" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain" /> <span>Ecobazar</span>
+        <a href="./index.html" class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight md:justify-self-start">
+          <img src="${getImageUrl('/images/plant.jpg')}" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain" /> <span>Ecobazar</span>
         </a>
 
         <form class="flex items-stretch w-full border border-neutral-100 rounded-md overflow-hidden order-3 md:order-none md:w-full md:max-w-[498px] md:justify-self-center" role="search">
@@ -79,17 +80,10 @@ export function renderNavigationComponent({
             ${iconHeart}
           </button>
           
-          <a
-  href="./cart.html"
-  class="relative w-8 h-8 flex items-center justify-center text-neutral-800"
-  aria-label="Giỏ hàng"
-  id="nav-cart-btn"
->
-  ${iconCart}
-  <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary-dark text-white text-[10px] flex items-center justify-center border-2 border-white">
-    ${cartCount}
-  </span>
-</a>
+          <button class="relative flex h-8 w-8 cursor-pointer items-center justify-center text-neutral-800" aria-label="Mở giỏ hàng" type="button" data-cart-open>
+            ${iconCart}
+            <span class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-[10px] text-white">${cartCount}</span>
+          </button>
           
           <div class="leading-tight hidden sm:block">
             <div class="text-[11px] text-neutral-700 font-poppins">Shopping cart:</div>
@@ -111,6 +105,7 @@ export function renderNavigationComponent({
         </div>
       </div>
     </div>
+    ${renderCartPopup(cartItems)}
   </header>
   `;
 }
@@ -121,9 +116,7 @@ export function bindNavigationEvents(rootEl) {
   const toggleBtn = root.querySelector("[data-nav-toggle]");
   const navPanel = root.querySelector("[data-nav-panel]");
   
-  if (!toggleBtn || !navPanel) return;
-
-  toggleBtn.addEventListener("click", () => {
+  if (toggleBtn && navPanel) toggleBtn.addEventListener("click", () => {
     const isOpen = !navPanel.classList.contains("hidden");
     
     navPanel.classList.toggle("hidden");
@@ -134,5 +127,31 @@ export function bindNavigationEvents(rootEl) {
     } else {
       toggleBtn.innerHTML = iconClose;
     }
+  });
+
+  const overlay = root.querySelector("[data-cart-overlay]");
+  const popup = root.querySelector("[data-cart-popup]");
+
+  root.querySelector("[data-cart-open]")?.addEventListener("click", () => {
+    overlay?.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+  });
+
+  function closePopup() {
+    overlay?.classList.add("hidden");
+    document.body.classList.remove("overflow-hidden");
+  }
+
+  root.querySelector("[data-cart-close]")?.addEventListener("click", closePopup);
+  overlay?.addEventListener("click", (event) => {
+    if (!popup?.contains(event.target)) closePopup();
+  });
+
+  root.querySelectorAll("[data-popup-remove]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const updatedCart = removeProduct(cartItems, Number(button.dataset.popupRemove));
+      saveCart(updatedCart);
+      location.reload();
+    });
   });
 }

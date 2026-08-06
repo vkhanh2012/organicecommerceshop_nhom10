@@ -8,15 +8,21 @@ import {
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { bindHeroEvents } from "./home/hero.js";
+import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
+import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
 
 function initNavigation() {
   const navigation = document.getElementById("navigation-container");
 
   if (!navigation) return;
 
+  const cart = getCart();
+  const summary = getCartSummary(cart);
+
   navigation.innerHTML = renderNavigationComponent({
-    cartCount: 0,
-    cartTotal: "$0.00",
+    cartCount: summary.count,
+    cartTotal: `$${summary.total.toFixed(2)}`,
+    cartItems: cart,
     activeHref: location.pathname
   });
 
@@ -41,7 +47,12 @@ function initFooter() {
 }
 
 initNavigation();
-initHomepage();
-initFooter();
 
+if (document.getElementById("homepage-container")) {
+  initHomepage();
+  initFooter();
+}
 
+if (document.getElementById("cart-container")) {
+  initShoppingCartPage();
+}

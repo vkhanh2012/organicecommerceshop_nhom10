@@ -1,12 +1,13 @@
 import { renderNavigationComponent, bindNavigationEvents } from "../components/navigation.js";
 import { renderNewsletterComponent } from "../components/newsletter.js";
 import { renderFooterComponent } from "../components/footer.js";
-import { bindCartEvents, renderCartPage } from "../shopping_card/cart.js";
-import { getCart, getCartSummary } from "../shopping_card/cartData.js";
+import { bindCartEvents, renderCartPage } from "../shopping_cart/cart.js";
+import { getCart, getCartSummary } from "../shopping_cart/cartData.js";
 
 export function initShoppingCartPage() {
   const navigation = document.getElementById("navigation-container");
   const cartContainer = document.getElementById("cart-container");
+  if (!navigation || !cartContainer) return;
 
   function renderNavigation(cart) {
     const summary = getCartSummary(cart);
@@ -22,7 +23,6 @@ export function initShoppingCartPage() {
   function renderCart(cart, message = "") {
     cartContainer.innerHTML = renderCartPage(cart);
     bindCartEvents(cartContainer, refreshPage);
-
     if (message) {
       const messageElement = cartContainer.querySelector("[data-cart-message]");
       messageElement.textContent = message;
@@ -36,6 +36,8 @@ export function initShoppingCartPage() {
   }
 
   refreshPage(getCart());
-  document.getElementById("newsletter-container").innerHTML = renderNewsletterComponent();
-  document.getElementById("footer-container").innerHTML = renderFooterComponent();
+  const newsletter = document.getElementById("newsletter-container");
+  const footer = document.getElementById("footer-container");
+  if (newsletter) newsletter.innerHTML = renderNewsletterComponent();
+  if (footer) footer.innerHTML = renderFooterComponent();
 }

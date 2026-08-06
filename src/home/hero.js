@@ -37,7 +37,7 @@ export function renderHeroComponent(hero) {
 
       <a
         href="#popular-products"
-        class="mt-4 inline-flex w-fit items-center gap-2
+        class="mt-4 inline-flex cursor-pointer w-fit items-center gap-2
                text-sm font-semibold text-primary
                transition-colors hover:text-primary-dark"
       >
@@ -58,7 +58,7 @@ export function renderHeroComponent(hero) {
       class="absolute inset-0 h-full w-full object-cover"
     >
 
-    <div class="absolute inset-0 bg-[#002603]/55"></div>
+    <div class="absolute inset-0 bg-[#002603]/80"></div>
 
     <div class="relative z-10 flex h-full min-h-[240px]
                 flex-col items-center justify-center p-7
@@ -75,7 +75,7 @@ export function renderHeroComponent(hero) {
 
       <a
         href="#popular-products"
-        class="mt-6 inline-flex items-center gap-2
+        class="mt-6 inline-flex cursor-pointer items-center gap-2
                text-sm font-semibold text-primary
                transition-colors hover:text-primary-light"
       >
@@ -90,19 +90,19 @@ export function renderHeroComponent(hero) {
   <section class="bg-white pt-4 md:pt-6" data-hero-root>
     <div class="container-custom">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
-        <article class="relative min-h-[360px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[430px] lg:h-[600px]">
+        <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
           <img src="${mainBanner.image}" alt="${mainBanner.title}" class="absolute inset-0 h-full w-full object-cover"/>
           
           <!-- Thay đổi: Tăng độ đậm và vùng phủ của gradient tối từ trái sang để chữ trắng nổi bật lên rõ ràng -->
           <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-black/5"></div>
           
-          <div class="relative z-10 flex min-h-[360px] max-w-[660px] flex-col justify-center p-7 text-white sm:min-h-[430px] sm:p-12 lg:h-[600px] lg:p-[60px]">
+          <div class="relative z-10 flex min-h-[440px] max-w-[660px] flex-col justify-center p-6 text-white sm:min-h-[520px] sm:p-10 lg:h-[600px] lg:p-[60px]">
             <h1 class="text-3xl font-semibold leading-[1.2] sm:text-5xl lg:text-[48px]">${mainBanner.title}</h1>
             <div class="mt-5 border-l-2 border-primary-light pl-4">
               <p class="text-base">${mainBanner.saleLabel} <span class="rounded bg-warning px-2 py-1 font-semibold">${mainBanner.saleValue}</span></p>
               <p class="mt-2 text-sm text-white/75">${mainBanner.description}</p>
             </div>
-            <a href="#popular-products" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-white px-10 text-base font-semibold text-primary transition-all duration-300 shadow-md hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>→</span></a>
+            <a href="#popular-products" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>→</span></a>
           </div>
         </article>
 

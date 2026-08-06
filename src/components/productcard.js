@@ -4,6 +4,8 @@
 // (mobile không có hover), từ md: trở lên mới ẩn và chỉ hiện khi hover
 
 import { iconHeart, iconEye, iconBag, iconStar } from "./icons.js";
+import productsData from "../data/products.json";
+import { attachImageUrls } from "../utils/assets.js";
 
 const CLASS = {
   card: "product-card group relative bg-white border border-neutral-200 rounded-none p-4 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.25)]",
@@ -19,7 +21,7 @@ const CLASS = {
   priceRow: "flex items-center justify-between mb-1",
   price: "font-poppins text-sm md:text-base font-medium text-neutral-900",
   priceOld: "font-poppins text-xs md:text-sm text-neutral-400 line-through ml-1",
-  cartBtn: "w-11 h-11 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white",
+  cartBtn: "w-11 h-11 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center cursor-pointer transition-colors hover:bg-primary hover:text-white",
   rating: "flex items-center gap-0.5",
   grid: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-0",
 };
@@ -90,16 +92,5 @@ export function renderProductGrid(products = []) {
 }
 
 export async function getProducts() {
-  try {
-    const response = await fetch("/data/products.json");
-
-    if (!response.ok) {
-      throw new Error("Không thể tải dữ liệu sản phẩm");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+  return attachImageUrls(productsData);
 }
