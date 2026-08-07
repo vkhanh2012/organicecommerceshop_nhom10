@@ -1,36 +1,73 @@
-import categoriesData from "../data/categories.json";
-import { attachImageUrls } from "../utils/assets.js";
-import { sectionTitle } from "./sectiontitle.js";
+import categoriesData
+  from "../data/categories.json";
+
+import { attachImageUrls }
+  from "../utils/assets.js";
+
+import { sectionTitle }
+  from "./sectiontitle.js";
 
 export async function getCategories() {
   return attachImageUrls(categoriesData);
 }
 
-export function renderCategories(categories = []) {
+export function renderCategories(
+  categories = []
+) {
+
   return `
-    <section class="container-custom py-12 md:py-16">
-      ${sectionTitle("Popular Categories")}
+    <section class="container-custom py-10 md:py-14">
 
-      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        ${categories.map(category => `
-          <a
-            href="#"
-            class="group overflow-hidden rounded-md border border-neutral-200 bg-white text-center transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,.20)]"
-          >
-            <div class="aspect-[1.3/1] overflow-hidden p-3">
-              <img
-                src="${category.image}"
-                alt="${category.name}"
-                class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+      ${sectionTitle(
+        "Popular Categories"
+      )}
+
+      <div
+        class="grid grid-cols-2 gap-3
+               sm:grid-cols-3
+               md:grid-cols-4
+               lg:grid-cols-6"
+      >
+
+        ${categories
+          .map(
+            (category) => `
+              <a
+                href="#"
+                class="group overflow-hidden rounded-md border
+                       border-neutral-200 bg-white text-center
+                       transition-all duration-300
+                       hover:border-primary
+                       hover:shadow-[0_0_12px_rgba(0,178,7,.20)]"
               >
-            </div>
 
-            <p class="px-2 py-3 text-sm font-medium group-hover:text-primary">
-              ${category.name}
-            </p>
-          </a>
-        `).join("")}
+                <div
+                  class="aspect-[1.3/1] overflow-hidden p-3"
+                >
+
+                  <img
+                    src="${category.image}"
+                    alt="${category.name}"
+                    class="h-full w-full object-contain transition
+                           duration-300 group-hover:scale-105"
+                  />
+
+                </div>
+
+                <p
+                  class="px-2 py-3 text-sm font-medium
+                         group-hover:text-primary"
+                >
+                  ${category.name}
+                </p>
+
+              </a>
+            `
+          )
+          .join("")}
+
       </div>
+
     </section>
   `;
 }

@@ -50,6 +50,7 @@ function initFooter() {
 initNavigation();
 
 if (document.getElementById("homepage-container")) {
+  initNavigation();
   initHomepage().then(() => initNewsletterPopupPage());
   initFooter();
 }

@@ -1,12 +1,31 @@
-import { renderBlogCardComponent } from "./blogcard"
+import { renderBlogCardComponent }
+  from "./blogcard.js";
 
 export function renderLatestNewsWrapper() {
-  return /*html*/ `
-        <div class="container-custom flex flex-col mx-auto w-full py-15 gap-9 px-4 justify-between">
-            <span class="bg-white text-gray-900 font-semibold w-full max-w-[1320px] mx-auto text-[32px] h-[38px] w-full text-center">Latest News</span>
-            <div class="w-full max-w-[1320px] mx-auto">
-                ${renderBlogCardComponent()}
-            </div>
+
+  return /* html */ `
+    <section class="container-custom py-15">
+
+      <div
+        class="mx-auto flex w-full max-w-[1320px]
+               flex-col gap-9 px-4"
+      >
+
+        <h2
+          class="w-full text-center text-[32px]
+                 font-semibold text-gray-900"
+        >
+          Latest News
+        </h2>
+
+        <div class="mx-auto w-full max-w-[1320px]">
+
+          ${renderBlogCardComponent()}
+
         </div>
-    `
+
+      </div>
+
+    </section>
+  `;
 }
