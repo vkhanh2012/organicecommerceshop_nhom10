@@ -1,0 +1,56 @@
+{
+  "wishlist": {
+    "title": "My Wishlist",
+    "shareText": "Share:",
+    "socials": {
+      "facebook": "https://facebook.com",
+      "twitter": "https://twitter.com",
+      "pinterest": "https://pinterest.com",
+      "instagram": "https://instagram.com"
+    },
+    "tableHeaders": [
+      { "id": "product", "label": "PRODUCT" },
+      { "id": "price", "label": "PRICE" },
+      { "id": "stock", "label": "STOCK STATUS" },
+      { "id": "action", "label": "" }
+    ],
+    "items": [
+      {
+        "id": 1,
+        "name": "Green Capsicum",
+        "image": {
+          "src": "./src/assets/images/wishlist1.svg",
+          "alt": "Green Capsicum"
+        },
+        "price": 14.99,
+        "originalPrice": 20.99,
+        "inStock": true,
+        "stockStatusText": "In Stock"
+      },
+      {
+        "id": 2,
+        "name": "Chinese Cabbage",
+        "image": {
+          "src": "./src/assets/images/wishlist2.svg",
+          "alt": "Chinese Cabbage"
+        },
+        "price": 45.00,
+        "originalPrice": null,
+        "inStock": true,
+        "stockStatusText": "In Stock"
+      },
+      {
+        "id": 3,
+        "name": "Fresh Mango",
+        "image": {
+          "src": "./src/assets/images/wishlist3.svg",
+          "alt": "Fresh Mango"
+        },
+        "price": 0.00,
+        "originalPrice": 35.00,
+        "inStock": false,
+        "stockStatusText": "Out of Stock"
+      }
+    ]
+  }
+}

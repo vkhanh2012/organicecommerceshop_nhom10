@@ -107,3 +107,7 @@ if(testi) {
   testi.innerHTML = renderTestimonialComponent();
 }
 
+const newSletter = document.getElementById("newSletter")
+if(newSletter) {
+  newSletter.innerHTML = renderNewsletterComponent();
+}
