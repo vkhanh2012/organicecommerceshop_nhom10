@@ -2,8 +2,10 @@
 // Section "Follow us on Instagram" — Figma: 1320x270px, 6 ảnh 1 hàng ngang.
 // Mobile-first: 2 cột trên mobile -> 3 cột (sm) -> 6 cột (lg), khớp layout gốc.
 
-import { iconInstagram } from "./icons.js";
-
+import { iconInstagram } from "../components/icons.js";
+import instagramData from "../data/instagram.json";
+import { getImageUrl } from "../utils/assets.js";
+ 
 const CLASS = {
   section: "w-full bg-white py-10 md:py-14",
   inner: "container-custom",
@@ -13,6 +15,10 @@ const CLASS = {
   img: "w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-105",
   overlay: "absolute inset-0 flex items-center justify-center bg-black/0 text-white opacity-0 transition-all md:group-hover:bg-black/30 md:group-hover:opacity-100",
 };
+
+export async function getInstagramImages() {
+  return instagramData.map(getImageUrl);
+}
 
 export function renderInstagramComponent({ images = [], handle = "@ecobazar" } = {}) {
   const itemsHtml = images
