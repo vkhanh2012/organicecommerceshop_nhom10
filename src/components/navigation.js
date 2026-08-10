@@ -93,7 +93,7 @@ export function renderNavigationComponent({
             <div class="flex items-center gap-1">
               <a href="#" class="hover:text-primary transition-colors">Sign In</a>
               <span class="text-neutral-300">/</span>
-              <a href="#" class="hover:text-primary transition-colors">Sign Up</a>
+              <a href="./signup.html" class="hover:text-primary transition-colors">Sign Up</a>
             </div>
           </div>
         </div>

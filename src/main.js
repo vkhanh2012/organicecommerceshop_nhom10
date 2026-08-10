@@ -7,9 +7,11 @@ import {
 
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
+import { renderNewsletterComponent } from "./components/newsletter.js";
 import { bindHeroEvents } from "./home/hero.js";
 import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
 import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
+import { initSignupPage } from "./pages/signuppage.js";
 import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
 
 function initNavigation() {
@@ -47,7 +49,11 @@ function initFooter() {
   footer.innerHTML = renderFooterComponent();
 }
 
-initNavigation();
+function initNewsletter() {
+  const newsletter = document.getElementById("newsletter-container");
+  if (!newsletter) return;
+  newsletter.innerHTML = renderNewsletterComponent();
+}
 
 if (document.getElementById("homepage-container")) {
   initNavigation();
@@ -57,4 +63,11 @@ if (document.getElementById("homepage-container")) {
 
 if (document.getElementById("cart-container")) {
   initShoppingCartPage();
+}
+
+if (document.getElementById("signup-container")) {
+  initNavigation();
+  initSignupPage();
+  initNewsletter();
+  initFooter();
 }
