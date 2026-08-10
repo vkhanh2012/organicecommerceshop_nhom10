@@ -7,8 +7,7 @@ import { renderButtonComponent } from "./components/button.js";
 import { renderProductGrid } from "./components/productCard.js";
 import { renderInstagramComponent } from "./components/instagram.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
-
-
+import { renderCheckout } from "./checkout/checkout.js";
 
 
 // 1. Navigation
@@ -95,4 +94,9 @@ if (instagramContainer) {
 const newsletterContainer = document.getElementById("newsletter-container")
 if (newsletterContainer) {
   newsletterContainer.innerHTML = renderNewsletterComponent()
+}
+
+const checkoutContainer = document.getElementById("checkout-container")
+if (checkoutContainer) {
+  checkoutContainer.innerHTML = renderCheckout()
 }

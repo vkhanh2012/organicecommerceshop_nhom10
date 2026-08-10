@@ -72,7 +72,7 @@ export const defaultProductData = {
     {
       id: 4,
       name: "Ralph Edwards",
-     avatar: avatarSvg,
+      avatar: avatarSvg,
       rating: 5,
       time: "2 min ago",
       comment: "200+ Canton Pak Choi Bok Choy Chinese Cabbage Seeds Heirloom Non-GMO Productive Brassica rapa VAR. chinensis, a.k.a. Canton's Choice, Bok Choy, from USA."
