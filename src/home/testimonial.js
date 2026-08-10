@@ -1,140 +1,38 @@
-import { renderTestimonialCardComponent }
-  from "./testimonialcard.js";
+import { renderTestimonialCardComponent } from './testimonialcard.js';
 
-export function renderTestimonialComponent() {
 
-  return /* html */ `
-    <section
-      class="w-full bg-neutral-50 py-10 sm:py-12 md:py-14"
-    >
+export function renderTestimonialComponent(){
+    return /*html*/`
+    <!-- Khung ngoài của testimonial -->
+        <div class="w-full h-auto bg-gray-100 py-8 sm:py-10 md:py-12 lg:py-16 flex flex-col gap-5 sm:gap-6 md:gap-8 lg:gap-9 mx-auto">
+            <!-- Tiêu đề và nút -->
+              <div class="flex flex-col sm:flex-row w-full max-w-[1320px] px-4 sm:px-6 lg:px-8 text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-gray-900 justify-between pb-6 sm:pb-7 md:pb-8 mx-auto">
+                <h1 class="text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-gray-900">Client Testimonials</h1>
+                 <!-- Nút back và nút next -->
+                <div class="flex flex-row gap-2 sm:gap-3">
+                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-white text-black hover:bg-gray-200 justify-center items-center">
+                        <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.75 6.7749H15.75" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.80005 0.75L0.750049 6.774L6.80005 12.799" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
 
-      <div
-        class="mx-auto flex w-full max-w-[1320px]
-               flex-col gap-6 px-4 sm:px-6 lg:px-8"
-      >
+                    <button class="flex size-[38px] sm:size-[42px] md:size-[45px] rounded-full bg-primary text-black hover:bg-primary-dark justify-center items-center">
+                        <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 6.7749H0.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.69995 0.75L15.75 6.774L9.69995 12.799" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
 
-        <!-- Header -->
-        <div
-          class="flex flex-col gap-4
-                 sm:flex-row sm:items-center sm:justify-between"
-        >
-
-          <div>
-
-            <p
-              class="text-sm font-semibold uppercase tracking-[0.2em]
-                     text-primary"
-            >
-              Testimonial
-            </p>
-
-            <h2
-              class="mt-2 text-3xl font-semibold text-neutral-900
-                     sm:text-4xl md:text-[40px]"
-            >
-              Client Testimonials
-            </h2>
-
-          </div>
-
-          <!-- Navigation buttons -->
-          <div class="flex items-center gap-3">
-
-            <button
-              class="flex size-[38px] items-center justify-center
-                     rounded-full border border-primary bg-white
-                     text-primary transition-colors
-                     hover:bg-primary hover:text-white
-                     sm:size-[42px] md:size-[45px]"
-              type="button"
-              aria-label="Previous testimonials"
-            >
-
-              <svg
-                width="17"
-                height="14"
-                viewBox="0 0 17 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M15.75 6.7749H0.75"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-                <path
-                  d="M6.80005 0.75L0.750047 6.774L6.80005 12.799"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-            </button>
-
-            <button
-              class="flex size-[38px] items-center justify-center
-                     rounded-full bg-primary text-white
-                     transition-colors hover:bg-primary-dark
-                     sm:size-[42px] md:size-[45px]"
-              type="button"
-              aria-label="Next testimonials"
-            >
-
-              <svg
-                width="17"
-                height="14"
-                viewBox="0 0 17 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M1.25 6.7749H16.25"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-                <path
-                  d="M10.2 0.75L16.25 6.774L10.2 12.799"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-            </button>
-
-          </div>
-
+                    </button>
+                    <!-- Xong -->
+                </div>  
+            </div>
+            <!-- Testimonial cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 w-full max-w-[1320px] px-4 sm:px-6 lg:px-8 gap-4 sm:gap-5 md:gap-6 mx-auto">
+                ${renderTestimonialCardComponent()}
+                ${renderTestimonialCardComponent()}
+                ${renderTestimonialCardComponent()}
+            </div>
         </div>
-
-        <!-- Testimonial cards -->
-        <div
-          class="mx-auto grid w-full max-w-[1320px]
-                 grid-cols-1 gap-4
-                 sm:grid-cols-2 sm:gap-5
-                 lg:grid-cols-3 lg:gap-6"
-        >
-
-          ${renderTestimonialCardComponent()}
-          ${renderTestimonialCardComponent()}
-          ${renderTestimonialCardComponent()}
-
-        </div>
-
-      </div>
-
-    </section>
-  `;
+    `
 }
