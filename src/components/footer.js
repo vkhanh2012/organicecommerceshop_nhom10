@@ -1,5 +1,5 @@
 export function renderFooterComponent() {
-    return /*html*/ `
+  return /*html*/ `
     <footer class="bg-[#1A1A1A] text-gray-400 pt-16 pb-6">
       <div class="container-custom">
         
