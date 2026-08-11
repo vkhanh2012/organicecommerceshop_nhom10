@@ -15,10 +15,10 @@ const NAV_LINKS = [
   { label: "Home", href: "./index.html", active: true },
   { label: "Shop", href: "./shop.html" },
   { label: "Pages", href: "/pages" },
-  { label: "Blog", href: "/blog" },
-  { label: "About Us", href: "/about" },
+  { label: "Blog", href: "/descriptions.html" },
+  { label: "About Us", href: "/checkout.html" },
   { label: "Contact Us", href: "/contact" },
-];
+]
 
 const LINK_BASE_CLASS = [
   "block",

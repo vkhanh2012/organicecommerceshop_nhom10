@@ -1,0 +1,61 @@
+import { defaultProductData } from "./productdata.js";
+
+import { renderImage } from "./Image.js";
+import { renderProductInfo } from "./ProductInfo.js";
+import { renderDescriptionsTab } from "./descriptiontab.js";
+import { renderAdditionalInfoTab } from "./additionalInfo.js";
+import { renderCustomerFeedbackTab } from "./feedback.js";
+
+// MẢNG CẤU TRÚC LINK TABS
+export const TAB_LINKS = [
+  { label: "Descriptions", key: "descriptions", href: "#descriptions" },
+  { label: "Additional Information", key: "information", href: "#information" },
+  { label: "Customer Feedback", key: "feedback", href: "#feedback" }
+];
+
+export function renderDescription(product = defaultProductData, activeTabKey = "descriptions") {
+  // Duyệt mảng TAB_LINKS để render danh sách Tab
+  const tabsHtml = TAB_LINKS.map(tab => {
+    const isActive = tab.key === activeTabKey;
+    return `
+      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-[#00B207] font-semibold' : 'text-gray-500 hover:text-gray-900'}">
+        ${tab.label}
+      </a>
+    `;
+  }).join("");
+
+  // Gọi hàm render của Tab tương ứng
+  let tabContentHtml = "";
+  if (activeTabKey === "information") {
+    tabContentHtml = renderAdditionalInfoTab(product);
+  } else if (activeTabKey === "feedback") {
+    tabContentHtml = renderCustomerFeedbackTab(product);
+  } else {
+    tabContentHtml = renderDescriptionsTab(product);
+  }
+
+  return /*html*/ `
+    <div class="container-custom mx-auto px-4 md:px-8 pt-12">
+    
+    <!--  THÔNG TIN SẢN PHẨM PHÍA TRÊN  -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
+      <!-- CỘT TRÁI: KHU VỰC HÌNH ẢNH -->
+      ${renderImage(product)}
+      
+      <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
+      ${renderProductInfo(product)}
+    </div>
+    
+    <!--  THANH TABS CHUYỂN ĐỔI  -->
+    <div class="border-b border-gray-200 flex justify-center gap-10">
+      ${tabsHtml}
+    </div>
+
+    <!--  VÙNG ĐỔ NỘI DUNG TƯƠNG ỨNG  -->
+    <div id="tab-content-container">
+      ${tabContentHtml}
+    </div>
+
+  </div>
+  `;
+}
