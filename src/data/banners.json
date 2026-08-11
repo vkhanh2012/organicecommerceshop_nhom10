@@ -1,0 +1,64 @@
+{
+  "hero": {
+    "main": {
+      "image": "/images/hero/Big hero.png",
+      "title": "Fresh & Healthy Organic Food",
+      "saleLabel": "Sale up to",
+      "saleValue": "30% OFF",
+      "description": "Free shipping on all your order.",
+      "buttonText": "Shop now"
+    },
+    "smallBanners": [
+      {
+        "image": "/images/hero/hero - 2.png",
+        "subTitle": "Summer Sale",
+        "title": "75% OFF",
+        "description": "Only Fruit & Vegetable",
+        "buttonText": "Shop Now"
+      },
+      {
+        "image": "/images/hero/hero - 3.png",
+        "subTitle": "Best Deal",
+        "title": "Special Products",
+        "description": "Deal of the Month",
+        "buttonText": "Shop Now"
+      }
+    ]
+  },
+
+  "promoBanners": [
+    {
+      "id": 1,
+      "image": "/images/promoBanners/Bannar - 1.png",
+      "subTitle": "Best Deals",
+      "title": "Sale of the Month",
+      "buttonText": "Shop Now",
+      "textColor": "text-white"
+    },
+    {
+      "id": 2,
+      "image": "/images/promoBanners/Bannar - 2.png",
+      "subTitle": "85% Fat Free",
+      "title": "Low-Fat Meat",
+      "buttonText": "Shop Now",
+      "textColor": "text-white"
+    },
+    {
+      "id": 3,
+      "image": "/images/promoBanners/Bannar - 3.png",
+      "subTitle": "Summer Sale",
+      "title": "100% Fresh Fruit",
+      "buttonText": "Shop Now",
+      "textColor": "text-neutral-900"
+    }
+  ],
+
+  "wideBanner": {
+    "image": "/images/Discount Bannar.png",
+    "subTitle": "Summer Sale",
+    "discount": "37%",
+    "title": "OFF",
+    "description": "Free on all your online order.",
+    "buttonText": "Shop Now"
+  }
+}

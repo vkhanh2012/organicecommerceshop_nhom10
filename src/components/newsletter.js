@@ -1,12 +1,12 @@
 export function renderNewsletterComponent() {
-  return /*html*/ `
-    <div class="bg-gray-100 min-h-screen flex flex-col justify-end font-sans">
+  return /*html*/`
+    <section class="w-full bg-gray-50 border-b border-gray-100">
   <!-- Main Container to showcase the footer similar to the image -->
   <div class="w-full bg-white shadow-lg">
     
     <!-- NEWSLETTER SECTION -->
     <div class="bg-gray-50 border-b border-gray-100">
-      <div class="container-custom mx-auto px-4 md:px-8 py-9 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div class="container-custom py-9 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
         
         <!--  Heading & Paragraph -->
         <div class="max-w-[448px]">

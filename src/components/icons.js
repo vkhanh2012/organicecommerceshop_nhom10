@@ -1,6 +1,6 @@
 // src/components/icons.js
-// Tập hợp icon SVG dùng chung, lấy theo bộ "Main Components" trong Figma
-// (kích thước icon 40x40 cho heart/eye/social, 20x20 cho checkbox/radio)
+// Tập hợp icon SVG dùng chung, lấy theo bộ "Main Components" trong Figma.
+// 40x40 cho heart / eye / social, 20x20 cho checkbox / radio.
 
 export const iconHeart = `
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -67,7 +67,7 @@ export const iconLocation = `
   <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>
 </svg>`
 
-// Social — component "Social Media" trong Figma: Normal (viền, icon xám) / Hover (nền xanh, icon trắng)
+// Social icons
 export const SOCIAL_ICONS = {
   facebook: `<svg width="9" height="18" viewBox="0 0 9 18" fill="currentColor"><path d="M8.5 0H6.2C4 0 2.5 1.5 2.5 3.9V6H.5v2.8h2v9.2h3V8.8h2.3L8.2 6H5.5V4.2c0-.7.3-1.2 1.3-1.2h1.7V0z"/></svg>`,
   twitter: `<svg width="16" height="13" viewBox="0 0 16 13" fill="currentColor"><path d="M16 1.5a6.7 6.7 0 0 1-1.9.5A3.3 3.3 0 0 0 15.5.2a6.6 6.6 0 0 1-2.1.8A3.3 3.3 0 0 0 7.7 4a9.3 9.3 0 0 1-6.8-3.4A3.3 3.3 0 0 0 2 4.9 3.3 3.3 0 0 1 .5 4.5v.1a3.3 3.3 0 0 0 2.6 3.2 3.3 3.3 0 0 1-1.5.1 3.3 3.3 0 0 0 3.1 2.3A6.6 6.6 0 0 1 0 11.6 9.3 9.3 0 0 0 5 13c6 0 9.3-5 9.3-9.3v-.4A6.7 6.7 0 0 0 16 1.5z"/></svg>`,
@@ -87,15 +87,21 @@ export const SOCIAL_ICONS = {
 }
 
 /**
- * Render 1 icon social — 2 trạng thái Normal (viền xám, icon xám) / Hover (nền xanh, icon trắng)
- * đúng theo component "Social Media" trong Main Components.
+ * Render 1 icon social — Normal / Hover
  */
 export function renderSocialIcon(name, href = "#") {
   const svg = SOCIAL_ICONS[name] || ""
   return `
-  <a href="${href}" aria-label="${name}" class="social-icon">
-    ${svg}
-  </a>`
+    <a
+      href="${href}"
+      class="flex h-10 w-10 items-center justify-center rounded-full
+             border border-neutral-200 text-neutral-500 transition-colors
+             hover:border-primary hover:bg-primary hover:text-white"
+      aria-label="${name}"
+    >
+      ${svg}
+    </a>
+  `
 }
 
 //mũi tên back
