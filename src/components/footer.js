@@ -1,7 +1,7 @@
 export function renderFooterComponent() {
   return /*html*/ `
     <footer class="bg-[#1A1A1A] text-gray-400 pt-16 pb-6">
-      <div class="container-custom mx-auto px-4 md:px-8">
+      <div class="container-custom">
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
           
@@ -137,5 +137,5 @@ export function renderFooterComponent() {
         </div>
       </div>
     </footer>
-    `
-}
+    `;
+  }

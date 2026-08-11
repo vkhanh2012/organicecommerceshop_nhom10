@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Steps", "image": "/images/companyLogo/steps - 1.png" },
+  { "id": 2, "name": "Mango", "image": "/images/companyLogo/mango - 2.png" },
+  { "id": 3, "name": "Food Network", "image": "/images/companyLogo/foodNetwork - 3.png" },
+  { "id": 4, "name": "Food Co UK", "image": "/images/companyLogo/foodCoUK - 4.png" },
+  { "id": 5, "name": "Book Off", "image": "/images/companyLogo/bookOff - 5.png" },
+  { "id": 6, "name": "G Series", "image": "/images/companyLogo/series - 6.png" }
+]
