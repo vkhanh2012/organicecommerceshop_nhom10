@@ -18,7 +18,7 @@ const NAV_LINKS = [
   { label: "Pages", href: "/testing.html" },
   { label: "Blog", href: "/blog.html" },
   { label: "About Us", href: "/about.html" },
-  { label: "Contact Us", href: "/wishlist.html" },
+  { label: "Contact Us", href: "/signin.html" },
 ];
 
 const linkClass =
