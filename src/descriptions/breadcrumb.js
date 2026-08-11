@@ -30,7 +30,7 @@ export function renderBreadCrumb(items = DEFAULT_LINKS) {
    </div>
   
   <!-- Lớp phủ mờ -->
-  <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/80 to-transparent"></div>
+  <div class="absolute inset-0 bg-linear-to-r from-zinc-950 via-zinc-900/80 to-transparent"></div>
 
   <!-- Thanh điều hướng Breadcrumb -->
   <div class="container-custom py-4">

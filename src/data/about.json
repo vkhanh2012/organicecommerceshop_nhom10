@@ -1,0 +1,149 @@
+{
+  "aboutUs": {
+    "title": "100% Trusted Organic Food Store",
+    "description": "Morbi porttitor ligula in nunc varius sagittis. Proin dui nisi, laoreet ut tempor ac, cursus vitae eros. Cras quis ultricies elit. Proin ac lectus arcu. Maecenas aliquet vel tellus at accumsan. Donec a eros non massa vulputate ornare. Vivamus ornare commodo ante, at commodo felis congue vitae.",
+    "image": {
+      "src": "./src/assets/images/aboutus1.svg",
+      "alt": "100% Trusted Organic Food Store"
+    }
+  },
+  "aboutMe": {
+    "title": "100% Trusted Organic Food Store",
+    "description": "Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi. Nulla eu eros consequat tortor tincidunt feugiat.",
+    "image": {
+      "src": "./src/assets/images/aboutme.svg",
+      "alt": "About Me Image"
+    }
+  },
+  "features": [
+    {
+      "id": 1,
+      "icon": "./src/assets/images/leaf-about.svg",
+      "title": "100% Organic food",
+      "description": "100% healthy & Fresh food."
+    },
+    {
+      "id": 2,
+      "icon": "./src/assets/images/headphone-about.svg",
+      "title": "Great Support 24/7",
+      "description": "Instant access to Contact"
+    },
+    {
+      "id": 3,
+      "icon": "./src/assets/images/star-about.svg",
+      "title": "Customer Feedback",
+      "description": "Our happy customer"
+    },
+    {
+      "id": 4,
+      "icon": "./src/assets/images/bag-about.svg",
+      "title": "100% Secure Payment",
+      "description": "We ensure your money is save"
+    },
+    {
+      "id": 5,
+      "icon": "./src/assets/images/car-about.svg",
+      "title": "Free Shipping",
+      "description": "Free shipping with discount"
+    },
+    {
+      "id": 6,
+      "icon": "./src/assets/images/box-about.svg",
+      "title": "100% Organic Food",
+      "description": "100% healthy & Fresh food."
+    }
+  ],
+
+  "delivered": {
+    "title": "We Deliver, You Enjoy Fresh Organic Food",
+    "description": "Ut imperdiet augue non tellus congue, quis feugiat enim feugiat. Vivamus dui eros, sodales ac ac, imperdiet ac sem.",
+    "buttonText": "Shop Now",
+    "buttonLink": "./src/shop.html",
+    "image": {
+      "src": "./src/assets/images/delivered-about.svg",
+      "alt": "We Deliver Fresh Food"
+    }
+  },
+"deliveryFeatures": [
+  {
+    "id": 1,
+    "text": "Sed in metus pellentesque."
+  },
+  {
+    "id": 2,
+    "text": "Fusce et ex commodo, aliquam nulla efficitur, tempus lorem."
+  },
+  {
+    "id": 3,
+    "text": "Maecenas ut nunc fringilla erat varius."
+  }
+],
+
+"teamSection": {
+    "title": "Our Awesome Team",
+    "description": "Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.",
+    "members": [
+      {
+        "id": 1,
+        "name": "Jenny Wilson",
+        "role": "Ceo & Founder",
+        "image": {
+          "src": "./src/assets/images/teamcard1.svg",
+          "alt": "Jenny Wilson"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Jane Cooper",
+        "role": "Worker",
+        "image": {
+          "src": "./src/assets/images/teamcard2.svg",
+          "alt": "Jane Cooper"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 3,
+        "name": "Cody Fisher",
+        "role": "Security Guard",
+        "image": {
+          "src": "./src/assets/images/teamcard3.svg",
+          "alt": "Cody Fisher"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      },
+      {
+        "id": 4,
+        "name": "Robert Fox",
+        "role": "Senior Farmer Manager",
+        "image": {
+          "src": "./src/assets/images/teamcard4.svg",
+          "alt": "Robert Fox"
+        },
+        "socials": {
+          "facebook": "#",
+          "twitter": "#",
+          "pinterest": "#",
+          "instagram": "#"
+        }
+      }
+    ]
+  }
+  
+}

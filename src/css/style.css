@@ -25,6 +25,11 @@
 
   --font-poppins: "Poppins", sans-serif;
   --radius-pill: 43px; /* radius nút Button */
+
+  --color-title-900: #1A1A1A;
+  --color-content-600: #666666;
+  --color-content-500: #808080;
+
 }
 
 /* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
