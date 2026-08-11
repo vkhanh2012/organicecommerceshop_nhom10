@@ -21,20 +21,10 @@ function togglePassword (passwordInput, toggleBtn){
         if(container) {
             container.innerHTML = renderSignInForm();
 
-            const passwordInput = document.getElementById(" document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("signin-form-container");
-
-        if(container) {
-            container.innerHTML = renderSignInForm();
-
             const passwordInput = document.getElementById("signin-password");
             const toggleBtn = document.getElementById("toggle-password");
 
             handleTogglePassword(passwordInput, toggleBtn);
         }
-    })");
-            const toggleBtn = document.getElementById("toggle-password");
+});
 
-            handleTogglePassword(passwordInput, toggleBtn);
-        }
-    })
