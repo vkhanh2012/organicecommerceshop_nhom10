@@ -1,6 +1,15 @@
 import { renderBreadCrumb } from "../descriptions/breadcrumb.js";
 import { renderDescription } from "../descriptions/descriptions.js";
 import { defaultProductData } from "../descriptions/productdata.js";
+import { bindImageEvents } from "../descriptions/Image.js";
+
+const descriptionContainer = document.getElementById("description-container");
+if (descriptionContainer) {
+  descriptionContainer.innerHTML = renderDescription();
+  
+  // 📌 Gọi hàm này để kích hoạt bấm đổi ảnh lớn
+  bindImageEvents(descriptionContainer);
+}
 // Biến lưu trạng thái Tab hiện tại
 let currentTab = "descriptions";
 function renderDescriptionSection(container) {

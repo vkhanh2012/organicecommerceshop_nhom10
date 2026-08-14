@@ -13,6 +13,7 @@ export function renderDescriptionsTab(product = {}) {
         </p>
         
         <div class="space-y-3.5 pt-2">
+
           <!-- Các gạch đầu dòng tĩnh, nếu bạn muốn động thì cũng có thể thêm 1 mảng vào productData -->
           <div class="flex items-start gap-3">
             <div class="w-5 h-5 bg-[#00B207] text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
@@ -59,7 +60,7 @@ export function renderDescriptionsTab(product = {}) {
     
       <div class="lg:col-span-5 space-y-6">
         
-        <!-- Video / Ảnh bên dưới -->
+        <!-- Video / Ảnh -->
         <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-gray-100">
              <img src="${product.videoImage}" alt="video" class="w-full h-full object-contain" />
         </div>

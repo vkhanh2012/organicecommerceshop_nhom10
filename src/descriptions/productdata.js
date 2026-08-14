@@ -1,5 +1,6 @@
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
 
+
 import cabbage1Svg from "../assets/images/cabbage1.svg";
 import cabbage2Svg from "../assets/images/cabbage2.svg";
 import cabbage3Svg from "../assets/images/cabbage3.svg";
