@@ -16,6 +16,10 @@ const NAV_LINKS = [
   { label: "Shop", href: "./shop.html" },
   { label: "Product", href: "./descriptions.html" },
   { label: "About Us", href: "./about.html" },
+  { label: "Pages", href: "/" },
+  { label: "Blog", href: "/" },
+  { label: "About Us", href: "/" },
+  { label: "Contact Us", href: "" },
 ]
 
 const LINK_BASE_CLASS = [
@@ -89,6 +93,7 @@ export function renderNavigationComponent({
             <span class="hidden sm:inline">Eng</span>
             <span class="hidden sm:inline">USD</span>
             <div class="flex items-center gap-1">
+              <a href="./signin.html" class="hover:text-primary transition-colors">Sign In</a>
               <a href="./signin.html" class="hover:text-primary transition-colors">Sign In</a>
               <span class="text-neutral-300">/</span>
               <a href="./signup.html" class="hover:text-primary transition-colors">Sign Up</a>

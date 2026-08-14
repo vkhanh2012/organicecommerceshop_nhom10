@@ -4,16 +4,13 @@ import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 function togglePassword(passwordInput, toggleBtn) {
     if(!passwordInput || !toggleBtn) return;
 
+  if (!passwordInput || !toggleBtn) return;
 
-    toggleBtn.addEventListener("click", () => {
+  toggleBtn.addEventListener("click", () => {
     const isPassword = passwordInput.getAttribute("type") === "password";
-
     passwordInput.setAttribute("type", isPassword ? "text" : "password");
-
-    });
-
-   
-
+    toggleBtn.classList.toggle("opacity-40", !isPassword);
+  });
 }
 
 export function initSigninPage() {
