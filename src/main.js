@@ -5,6 +5,7 @@ import {
   bindNavigationEvents
 } from "./components/navigation.js";
 
+
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
@@ -13,6 +14,8 @@ import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
 import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
 import { initSignupPage } from "./pages/signuppage.js";
 import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
+import {initSignInPage} from "./pages/signin.js"
+
 
 function initNavigation() {
   const navigation = document.getElementById("navigation-container");
@@ -71,3 +74,12 @@ if (document.getElementById("signup-container")) {
   initNewsletter();
   initFooter();
 }
+
+if(document.getElementById("signin-container")){
+  initNavigation();
+  initSignInPage();
+  initNewsletter();
+  initFooter();
+}
+
+
