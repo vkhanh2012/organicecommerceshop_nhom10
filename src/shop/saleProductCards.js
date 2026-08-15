@@ -115,7 +115,7 @@ export function renderSaleProducts(productsData = []) {
 // Hàm fetch dữ liệu từ file saleProducts.json
 export async function initSaleProducts(containerEl) {
   try {
-    const response = await fetch("./src/data/saleProducts.json")
+    const response = await fetch("/src/data/saleProducts.json");
     if(!response.ok) throw new Error("Lỗi đọc file JSON")
 
       const productsData = await response.json()

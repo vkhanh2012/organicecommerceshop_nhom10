@@ -1,70 +1,79 @@
-import { renderProductGrid } from "../shop/productcard.js"
+import { getProducts, renderProductGrid } from "../components/productcard.js"
 import { renderSidebarComponent } from "../shop/sidebar.js"
-import { renderCategoryFilter } from "../shop/categoryFilter.js"
-import { renderPopularTags } from "../shop/popularTag.js"
-import { renderPagination } from "../shop/pagination.js"
-import { renderNewsletterComponent } from "../components/newsletter.js"
 import { renderTopBar } from "../shop/topBar.js"
 import { initSaleProducts } from "../shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js"
-import { renderNavigationComponent } from "../components/navigation.js"
-import PRODUCT_DATA from "../data/products.json"
-import SALE_PRODUCTS_DATA from "../data/saleProducts.json"
+import { renderPagination } from "../shop/pagination.js"
 
-export function initShopPage() {
-  const breadcrumnbs = document.getElementById("breadcrumbs-container")
-  if (breadcrumnbs) {
-    breadcrumnbs.innerHTML = renderBreadcrumbsComponent({
-      breadcrumbs: [
-        { label: "Home", url: "./index.html" },
-        { label: "Vegetables", url: "./shop.html" },
-        { label: "Fresh Organic Tomato", url: "./product-detail.html" },
-      ],
-    })
-  }
-  const topBar = document.getElementById("top-Bar")
-  if (topBar) {
-    topBar.innerHTML = renderTopBar()
-  }
 
-  //side bar
-  const sideBarContainer = document.getElementById("sidebar")
-  if (sideBarContainer) {
-    sideBarContainer.innerHTML = renderSidebarComponent()
+export async function initShopPage() {
+const productGrid = document.getElementById("product-grid-container")
+if (productGrid) {
+  const products = await getProducts()
+  const productsPerPage = 6
+  const totalPages = Math.ceil(products.length / productsPerPage)
+  let currentPage = 1
 
-    const saleProductsContainer = document.getElementById(
-      "sale-products-wrapper",
-    )
+  function renderShopProducts() {
+    const start = (currentPage - 1) * productsPerPage
+    const visibleProducts = products.slice(start, start + productsPerPage)
 
-    if (saleProductsContainer) {
-      initSaleProducts(saleProductsContainer)
-    }
+    productGrid.innerHTML = `
+      ${renderProductGrid(visibleProducts, "shop")}
+      <div data-shop-pagination>
+        ${renderPagination({ currentPage, totalPages })}
+      </div>
+    `
   }
 
-  const categoryFilter = document.getElementById("category-filter")
-  if (categoryFilter) {
-    categoryFilter.innerHTML = renderCategoryFilter()
-  }
+  productGrid.addEventListener("click", (event) => {
+    const pageButton = event.target.closest("[data-page]")
+    if (!pageButton || pageButton.disabled) return
 
-  const productGridContainer = document.getElementById("product-grid-container")
-  if (productGridContainer) {
-    productGridContainer.innerHTML = renderProductGrid(PRODUCT_DATA)
-  } else {
-    console.error(
-      "Không tìm thấy thẻ có id 'product-grid-container' trong HTML!",
-    )
-  }
+    currentPage = Number(pageButton.dataset.page)
+    renderShopProducts()
+    productGrid.scrollIntoView({ behavior: "smooth", block: "start" })
+  })
 
-  const openBtn = document.getElementById("open-filter-btn")
-  const filterDrawer = document.getElementById("mobile-filter-drawer")
-  if (openBtn && filterDrawer) {
-    openBtn.addEventListener("click", () => {
-      filterDrawer.classList.toggle("hidden")
-    })
-  }
+  renderShopProducts()
+}
+const topBar = document.getElementById("top-Bar")
+if (topBar) {
+  topBar.innerHTML = renderTopBar()
+}
 
-  const pagination = document.getElementById("pagination")
-  if (pagination) {
-    pagination.innerHTML = renderPagination()
+
+const sideBarContainer = document.getElementById("sidebar")
+if (sideBarContainer) {
+  sideBarContainer.innerHTML = renderSidebarComponent()
+  
+  const saleProductsContainer = document.getElementById("sale-products-wrapper")
+
+  if(saleProductsContainer){
+    initSaleProducts(saleProductsContainer)
   }
 }
+
+
+const openBtn = document.getElementById("open-filter-btn")
+const filterDrawer = document.getElementById("mobile-filter-drawer")
+if (openBtn && filterDrawer) {
+  openBtn.addEventListener("click", () => {
+    filterDrawer.classList.toggle("hidden")
+  })
+}
+
+const breadcrumnbs = document.getElementById("breadcrumbs-container"); 
+if(breadcrumnbs) {
+  breadcrumnbs.innerHTML = renderBreadcrumbsComponent({
+    breadcrumbs: [
+      { label: "Shop", url: "./shop.html" },
+      { label: "Vegetables", url: "./shop.html" },
+    ]
+  });
+}
+
+}
+
+
+

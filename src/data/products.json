@@ -1,119 +1,110 @@
 [
   {
     "id": 1,
-    "name": "Green Apple",
+    "name": "Big Potatos",
     "price": 14.99,
-    "oldPrice": 20,
+    "oldPrice": null,
     "rating": 4,
-    "saleTag": "Sale 25%",
-    "image": "/images/product/green-apple.png.png"
+    "saleTag": null,
+    "image": "/src/assets/images/product/big-potatoes.png.png"
   },
   {
     "id": 2,
-    "name": "Fresh Indian Malta",
-    "price": 20,
+    "name": "Chanise Cabbage",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/fresh-indian-malta.png.png"
+    "image": "/src/assets/images/product/chinese-cabbage.png.png"
   },
   {
     "id": 3,
-    "name": "Chinese Cabbage",
-    "price": 12,
-    "oldPrice": null,
-    "rating": 5,
-    "saleTag": null,
-    "image": "/images/product/chinese-cabbage.png.png"
+    "name": "Ladies Finger",
+    "price": 14.99,
+    "oldPrice": 20.99,
+    "rating": 4,
+    "saleTag": "Out of Stock",
+    "image": "/src/assets/images/product/corn.png.png"
   },
   {
     "id": 4,
-    "name": "Green Lettuce",
-    "price": 9,
+    "name": "Eggplant",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/green-lecctuce.png.png"
+    "image": "/src/assets/images/product/eggplant.png.png"
   },
   {
     "id": 5,
-    "name": "Eggplant",
-    "price": 34,
+    "name": "Fresh Cauliflower",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/eggplant.png.png"
+    "image": "/src/assets/images/product/fresh-cauliflower.png.png"
   },
   {
     "id": 6,
-    "name": "Big Potatoes",
-    "price": 20,
+    "name": "Green Apple",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/big-potatoes.png.png"
+    "image": "/src/assets/images/product/green-apple.png.png"
   },
   {
     "id": 7,
-    "name": "Corn",
-    "price": 20,
+    "name": "Green Capsicum",
+    "price": 14.99,
     "oldPrice": null,
-    "rating": 5,
+    "rating": 4,
     "saleTag": null,
-    "image": "/images/product/corn.png.png"
+    "image": "/src/assets/images/product/green-capsicum.png.png"
   },
   {
     "id": 8,
-    "name": "Fresh Cauliflower",
-    "price": 12,
+    "name": "Green Chilli",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/fresh-cauliflower.png.png"
+    "image": "/src/assets/images/product/green-chilli.png.png"
   },
   {
     "id": 9,
-    "name": "Green Capsicum",
-    "price": 9,
+    "name": "Red Capsicum",
+    "price": 14.99,
     "oldPrice": 20.99,
     "rating": 4,
     "saleTag": "Sale 50%",
-    "image": "/images/product/green-capsicum.png.png"
+    "image": "/src/assets/images/product/red-capsicum.png.png"
   },
   {
     "id": 10,
-    "name": "Green Chilli",
-    "price": 34,
+    "name": "Red Tomatos",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/green-chilli.png.png"
+    "image": "/src/assets/images/product/red-tomatos.png.png"
   },
   {
     "id": 11,
-    "name": "Red Capsicum",
-    "price": 18,
-    "oldPrice": null,
-    "rating": 5,
-    "saleTag": null,
-    "image": "/images/product/red-capsicum.png.png"
-  },
-  {
-    "id": 12,
-    "name": "Fresh Tomato",
-    "price": 16,
-    "oldPrice": null,
-    "rating": 5,
-    "saleTag": "Sale 50%",
-    "image": "/images/product/red-tomatos.png.png"
-  },
-  {
-    "id": 13,
-    "name": "Surjapur Mango",
-    "price": 24,
+    "name": "Fresh Mango",
+    "price": 14.99,
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
-    "image": "/images/product/surjapur-mango.png.png"
+    "image": "/src/assets/images/product/surjapur-mango.png.png"
+  },
+  {
+    "id": 12,
+    "name": "Green Lettuce",
+    "price": 14.99,
+    "oldPrice": null,
+    "rating": 4,
+    "saleTag": null,
+    "image": "/src/assets/images/product/green-lecctuce.png.png"
   }
 ]

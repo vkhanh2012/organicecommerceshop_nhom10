@@ -1,4 +1,4 @@
-import { filter, dropDown } from "../components/icons"
+import { filter, dropDown } from "../components/icons.js"
 
 export const SHOP_TOPBAR_DATA = {
   totalResults: 20,

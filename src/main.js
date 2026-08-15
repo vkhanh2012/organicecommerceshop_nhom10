@@ -70,7 +70,7 @@ if (document.getElementById("cart-container")) {
   initShoppingCartPage();
 }
 
-if(document.getElementById("shop-container")){
+if(document.getElementById("product-grid-container")){
   initNavigation();
   initShopPage();
   initNewsletter();
@@ -90,5 +90,4 @@ if(document.getElementById("signin-container")){
   initNewsletter();
   initFooter();
 }
-
 
