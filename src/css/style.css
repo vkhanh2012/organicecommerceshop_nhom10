@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@import "./components.css";
 
 /* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
@@ -37,4 +38,9 @@
   @apply w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
 }
 
-@import "./components.css";
+
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none !important;
+}

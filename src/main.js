@@ -44,6 +44,14 @@ async function initHomepage() {
   bindHeroEvents(homepage);
 }
 
+function initShopPage(){
+  const shopPage = document.getElementById("shop-container");
+
+  if(shopPage){
+    shopPage.innerHTML = initShopPage();
+  }
+}
+
 function initFooter() {
   const footer = document.getElementById("footer-container");
 
