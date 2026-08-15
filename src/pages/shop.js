@@ -8,7 +8,8 @@ import { renderTopBar } from "../shop/topBar.js"
 import { initSaleProducts } from "../shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js"
 import { renderNavigationComponent } from "../components/navigation.js"
-import {PRODUCT_DATA} from "../data/products.json"
+import PRODUCT_DATA from "../data/products.json"
+import SALE_PRODUCTS_DATA from "../data/saleProducts.json"
 
 export function initShopPage() {
   const breadcrumnbs = document.getElementById("breadcrumbs-container")
@@ -26,6 +27,7 @@ export function initShopPage() {
     topBar.innerHTML = renderTopBar()
   }
 
+  //side bar
   const sideBarContainer = document.getElementById("sidebar")
   if (sideBarContainer) {
     sideBarContainer.innerHTML = renderSidebarComponent()
@@ -37,19 +39,20 @@ export function initShopPage() {
     if (saleProductsContainer) {
       initSaleProducts(saleProductsContainer)
     }
+  }
 
-    // const productGridContainer = document.getElementById("product-grid-container");
-    //   if (productGridContainer) {
-    //     productGridContainer.innerHTML = renderProductGrid();
-    //   }
-    // }
-    const openBtn = document.getElementById("open-filter-btn")
-    const filterDrawer = document.getElementById("mobile-filter-drawer")
-    if (openBtn && filterDrawer) {
-      openBtn.addEventListener("click", () => {
-        filterDrawer.classList.toggle("hidden")
-      })
-    }
+  const categoryFilter = document.getElementById("category-filter")
+  if (categoryFilter) {
+    categoryFilter.innerHTML = renderCategoryFilter()
+  }
+
+  const productGridContainer = document.getElementById("product-grid-container")
+  if (productGridContainer) {
+    productGridContainer.innerHTML = renderProductGrid(PRODUCT_DATA)
+  } else {
+    console.error(
+      "Không tìm thấy thẻ có id 'product-grid-container' trong HTML!",
+    )
   }
 
   const openBtn = document.getElementById("open-filter-btn")
@@ -60,29 +63,8 @@ export function initShopPage() {
     })
   }
 
-
-  const productGridContainer = document.getElementById("product-grid-container");
-  if(productGridContainer){
-    productGridContainer.innerHTML = renderProductGrid(PRODUCT_DATA);
+  const pagination = document.getElementById("pagination")
+  if (pagination) {
+    pagination.innerHTML = renderPagination()
   }
-
-  // const navBar = document.getElementById("navigation-container")
-  // if (navBar) {
-  //   navBar.innerHTML = renderNavigationComponent()
-  // }
-
-  // const newSletter = document.getElementById("newSletter")
-  // if (newSletter) {
-  //   newSletter.innerHTML = renderNewsletterComponent()
-  // }
-
-  // const latest = document.getElementById("latest-news")
-  // if (latest) {
-  //   latest.innerHTML = renderLatestNewsWrapper()
-
-  //   const testimonial = document.getElementById("client-testimonial")
-  //   if (testimonial) {
-  //     testimonial.innerHTML = renderTestimonialComponent()
-  //   }
-  // }
 }

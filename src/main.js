@@ -15,6 +15,7 @@ import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
 import { initSignupPage } from "./pages/signuppage.js";
 import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
 import {initSignInPage} from "./pages/signin.js"
+import { initShopPage } from "./pages/shop.js";
 
 
 function initNavigation() {
@@ -44,13 +45,6 @@ async function initHomepage() {
   bindHeroEvents(homepage);
 }
 
-function initShopPage(){
-  const shopPage = document.getElementById("shop-container");
-
-  if(shopPage){
-    shopPage.innerHTML = initShopPage();
-  }
-}
 
 function initFooter() {
   const footer = document.getElementById("footer-container");
@@ -74,6 +68,13 @@ if (document.getElementById("homepage-container")) {
 
 if (document.getElementById("cart-container")) {
   initShoppingCartPage();
+}
+
+if(document.getElementById("shop-container")){
+  initNavigation();
+  initShopPage();
+  initNewsletter();
+  initFooter();
 }
 
 if (document.getElementById("signup-container")) {
