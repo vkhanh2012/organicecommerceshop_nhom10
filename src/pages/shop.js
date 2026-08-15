@@ -54,6 +54,7 @@ export async function initShopPage() {
     })
   }
 
+  //side bar
   const sideBarContainer = document.getElementById("sidebar")
 
   if (sideBarContainer) {
