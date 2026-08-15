@@ -33,12 +33,23 @@ export function renderCartPage(cart = getCart()) {
     </section>`;
 }
 
-export function bindCartEvents(root, onCartChange) {
+export function bindCartEvents(root, onCartChange, onNavigate) {
   root.addEventListener("click", (event) => {
     const button = event.target.closest("[data-action]");
     if (!button) return;
 
     const action = button.dataset.action;
+
+    // 📌 Khi bấm nút Proceed to checkout -> Chuyển sang trang Checkout
+    if (action === "checkout") {
+      if (typeof onNavigate === "function") {
+        onNavigate("checkout");
+      } else {
+        window.location.href = "./checkout.html";
+      }
+      return;
+    }
+
     const id = Number(button.dataset.id);
     const cart = getCart();
     let updatedCart = cart;

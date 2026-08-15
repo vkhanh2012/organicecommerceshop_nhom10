@@ -1,19 +1,15 @@
 import { renderBreadCrumb } from "../descriptions/breadcrumb.js";
-import greencapsicumSvg from "./greencapsicum.svg";
-import redcapsicumSvg from "./redcapsicumSvg.svg";
+import { renderCountryOptions, renderStateOptions } from "./Location.js";
+import { getCart, getCartSummary } from "../shopping_cart/cartData.js";
 
-export const defaultCheckoutData = {
-  cartItems: [
-    { id: "cart-1", name: "Green Capsicum", quantity: 5, price: 70.00, image: greencapsicumSvg},
-    { id: "cart-2", name: "Red Capsicum", quantity: 1, price: 14.00, image: redcapsicumSvg }
-  ],
-  subtotal: 84.00,
-  shipping: 0.00,
-  total: 84.00
-};
+//AI làm
+export function renderCheckout(cart = getCart()) {
+  const { total } = getCartSummary(cart);
+  const shipping = 0.00;
+  const grandTotal = total + shipping;
 
-export function renderCheckout(data = defaultCheckoutData) {
-  const cartItemsHtml = data.cartItems.map(item => `
+  // Render động danh sách sản phẩm từ giỏ hàng thật
+  const cartItemsHtml = cart.map(item => `
     <div class="flex items-center justify-between py-2.5">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-lg border border-gray-100 bg-gray-50 flex items-center justify-center p-1 overflow-hidden shrink-0">
@@ -21,15 +17,15 @@ export function renderCheckout(data = defaultCheckoutData) {
         </div>
         <span class="text-sm text-gray-700 font-medium">${item.name} <span class="text-gray-400 text-xs font-normal">x${item.quantity}</span></span>
       </div>
-      <span class="text-sm font-semibold text-gray-900">$${item.price.toFixed(2)}</span>
+      <span class="text-sm font-semibold text-gray-900">$${(item.price * item.quantity).toFixed(2)}</span>
     </div>
   `).join("");
 
   return /*html*/ `
     <div class="w-full bg-white">
-      <!-- 1. BREADCRUMB BANNER NỀN TỐI (KHUNG TÍM TRONG ẢNH) -->
+      <!-- 1. BREADCRUMB BANNER -->
       ${renderBreadCrumb([
-        { label: "Shopping Cart", link: "#" },
+        { label: "Shopping Cart", link: "./cart.html" },
         { label: "Checkout", link: "#", active: true }
       ])}
 
@@ -66,14 +62,13 @@ export function renderCheckout(data = defaultCheckoutData) {
                   <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1.5">Country / Region</label>
                     <select class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-                      <option value="">Select</option>
-                      <option value="US">United States</option>
+                      ${renderCountryOptions()}
                     </select>
                   </div>
                   <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1.5">States</label>
                     <select class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-                      <option value="">Selects</option>
+                      ${renderStateOptions()}
                     </select>
                   </div>
                   <div>
@@ -109,11 +104,12 @@ export function renderCheckout(data = defaultCheckoutData) {
             </div>
           </div>
 
-          <!-- CỘT PHẢI: ORDER SUMMARY -->
+          <!-- CỘT PHẢI: ORDER SUMMARY (CÁC MÓN THANH TOÁN TỪ GIỎ HÀNG THỰC TẾ) -->
           <div class="lg:col-span-5">
             <div class="p-6 md:p-8 rounded-2xl border border-gray-200 bg-white shadow-xs space-y-6">
-              <h3 class="text-lg font-semibold text-gray-900">Order Summery</h3>
+              <h3 class="text-lg font-semibold text-gray-900">Order Summary</h3>
 
+              <!-- Danh sách món ăn trong giỏ hàng -->
               <div class="divide-y divide-gray-100">
                 ${cartItemsHtml}
               </div>
@@ -121,15 +117,15 @@ export function renderCheckout(data = defaultCheckoutData) {
               <div class="space-y-3 pt-4 border-t border-gray-100 text-sm">
                 <div class="flex items-center justify-between text-gray-600">
                   <span>Subtotal:</span>
-                  <span class="font-semibold text-gray-900">$${data.subtotal.toFixed(2)}</span>
+                  <span class="font-semibold text-gray-900">$${total.toFixed(2)}</span>
                 </div>
                 <div class="flex items-center justify-between text-gray-600">
                   <span>Shipping:</span>
-                  <span class="font-semibold text-gray-900">${data.shipping === 0 ? 'Free' : '$' + data.shipping.toFixed(2)}</span>
+                  <span class="font-semibold text-gray-900">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
                 </div>
                 <div class="flex items-center justify-between text-base font-semibold text-gray-900 pt-2 border-t border-gray-100">
                   <span>Total:</span>
-                  <span class="text-lg font-bold text-gray-900">$${data.total.toFixed(2)}</span>
+                  <span class="text-lg font-bold text-gray-900">$${grandTotal.toFixed(2)}</span>
                 </div>
               </div>
 
