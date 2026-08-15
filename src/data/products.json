@@ -6,6 +6,7 @@
     "oldPrice": 20,
     "rating": 4,
     "saleTag": "Sale 25%",
+    "category": "Fresh Fruit",
     "image": "/images/product/green-apple.webp"
   },
   {
@@ -13,8 +14,9 @@
     "name": "Fresh Indian Malta",
     "price": 20,
     "oldPrice": null,
-    "rating": 4,
+    "rating": 1,
     "saleTag": null,
+    "category": "Fresh Fruit",
     "image": "/images/product/fresh-indian-malta.webp"
   },
   {
@@ -22,8 +24,9 @@
     "name": "Chinese Cabbage",
     "price": 12,
     "oldPrice": null,
-    "rating": 5,
+    "rating": 2,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/chinese-cabbage.webp"
   },
   {
@@ -31,8 +34,9 @@
     "name": "Green Lettuce",
     "price": 9,
     "oldPrice": null,
-    "rating": 4,
+    "rating": 3,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/green-lecctuce.webp"
   },
   {
@@ -42,6 +46,7 @@
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/eggplant.webp"
   },
   {
@@ -51,6 +56,7 @@
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/big-potatoes.webp"
   },
   {
@@ -60,6 +66,7 @@
     "oldPrice": null,
     "rating": 5,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/corn.webp"
   },
   {
@@ -69,6 +76,7 @@
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/fresh-cauliflower.webp"
   },
   {
@@ -78,6 +86,7 @@
     "oldPrice": 20.99,
     "rating": 4,
     "saleTag": "Sale 50%",
+    "category": "Vegetables",
     "image": "/images/product/green-capsicum.webp"
   },
   {
@@ -87,6 +96,7 @@
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/green-chilli.webp"
   },
   {
@@ -96,6 +106,7 @@
     "oldPrice": null,
     "rating": 5,
     "saleTag": null,
+    "category": "Vegetables",
     "image": "/images/product/red-capsicum.webp"
   },
   {
@@ -105,6 +116,7 @@
     "oldPrice": null,
     "rating": 5,
     "saleTag": "Sale 50%",
+    "category": "Vegetables",
     "image": "/images/product/red-tomatos.webp"
   },
   {
@@ -114,6 +126,7 @@
     "oldPrice": null,
     "rating": 4,
     "saleTag": null,
+    "category": "Fresh Fruit",
     "image": "/images/product/surjapur-mango.webp"
   }
 ]
