@@ -14,11 +14,30 @@
 <body class="font-['Poppins'] bg-white">
   <div id="navigation-container"></div>
 
-  <div id="shop-container"></div>
+  <div id="breadcrumbs-container"></div>
   
 
-
-  
+  <!-- Products -->
+  <section class="py-16 bg-white">
+    <div class="container-custom mx-auto px-4 md:px-6 lg:px-8">
+      <!-- Lưới filter và sản phẩm -->
+      <div id="top-Bar" class="flex justify-between w-full mb-6"></div>
+        <!-- Sidebar và danh sách sản phẩm -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start relative w-full">
+          <!-- Cột trái -->
+          <div class="w-full lg:col-span-1">
+            <div id="mobile-filter-drawer"
+              class="hidden absolute w-full top-0 left-0 bg-white border border-neutral-100 shadow-xl rounded-2xl p-6 z-40 lg:relative lg:shadow-none lg:border-none lg:p-0 lg:block">
+              <div id="sidebar" class="w-full"></div>
+            </div>
+          </div>
+          <!-- Cột phải -->
+          <div class="w-full lg:col-span-3">
+            <div id="product-grid-container" class="w-full"></div>
+          </div>
+        </div>
+    </div>
+  </section>
   
   <div id="newsletter-container"></div>
   <div id="footer-container"></div>
@@ -26,4 +45,5 @@
 </body>
 
 </html>
+
 
