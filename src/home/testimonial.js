@@ -1,5 +1,5 @@
 import { renderTestimonialCardComponent } from "./testimonialcard.js"
-import { backArrow, nextArrow  } from "./icons.js"
+import { backArrow, nextArrow  } from "../components/icons.js"
 
 export function renderTestimonialComponent() {
   return /*html*/ `
