@@ -57,26 +57,26 @@ export function renderCheckout(cart = getCart()) {
                   <label class="block text-xs font-medium text-gray-700 mb-1.5">Street Address</label>
                   <input type="text" placeholder="Email or address" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
                 </div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <div>
+    <label class="block text-xs font-medium text-gray-700 mb-1.5">Country / Region</label>
+    <select id="country-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
+      ${renderCountryOptions()}
+    </select>
+  </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Country / Region</label>
-                    <select class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-                      ${renderCountryOptions()}
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">States</label>
-                    <select class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-                      ${renderStateOptions()}
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Zip Code</label>
-                    <input type="text" placeholder="Zip Code" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
-                  </div>
-                </div>
+  <div>
+    <label class="block text-xs font-medium text-gray-700 mb-1.5">States</label>
+    <select id="state-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
+      ${renderStateOptions()}
+    </select>
+  </div>
 
+  <div>
+    <label class="block text-xs font-medium text-gray-700 mb-1.5">Zip Code</label>
+    <input type="text" placeholder="Zip Code" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+  </div>
+</div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1.5">Email</label>

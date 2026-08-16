@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { label: "Pages", href: "/pages" },
   { label: "Blog", href: "/blog.html" },
   { label: "About Us", href: "/about.html" },
-  { label: "Contact Us", href: "/contact.html" },
+  { label: "Contact Us", href: "/descriptions.html" },
 ]
 
 const LINK_BASE_CLASS = [

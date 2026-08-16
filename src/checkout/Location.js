@@ -1,3 +1,5 @@
+// src/checkout/Location.js
+
 export const locations = {
   US: {
     name: "United States",
@@ -56,6 +58,9 @@ export const locations = {
 };
 
 
+// ================================
+// COUNTRY OPTIONS
+// ================================
 export function renderCountryOptions() {
   return `
     <option value="">Select</option>
@@ -73,6 +78,9 @@ export function renderCountryOptions() {
 }
 
 
+// ================================
+// STATE OPTIONS
+// ================================
 export function renderStateOptions(countryCode) {
   if (!countryCode || !locations[countryCode]) {
     return `<option value="">Select country first</option>`;
@@ -91,4 +99,24 @@ export function renderStateOptions(countryCode) {
       )
       .join("")}
   `;
+}
+
+
+// ================================
+// COUNTRY → STATE EVENT
+// ================================
+export function bindLocationEvents(container = document) {
+  const countrySelect = container.querySelector("#country-select");
+  const stateSelect = container.querySelector("#state-select");
+
+  if (!countrySelect || !stateSelect) {
+    console.warn("Không tìm thấy #country-select hoặc #state-select");
+    return;
+  }
+
+  countrySelect.addEventListener("change", (e) => {
+    const selectedCountryCode = e.target.value;
+
+    stateSelect.innerHTML = renderStateOptions(selectedCountryCode);
+  });
 }
