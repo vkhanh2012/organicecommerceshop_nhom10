@@ -2,7 +2,7 @@ export function renderPromoBanners(banners = []) {
   if (banners.length === 0) return "";
 
   return `
-    <section class="container-custom pb-12 md:pb-16">
+    <section class="section-container">
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 
         ${banners.map(banner => `

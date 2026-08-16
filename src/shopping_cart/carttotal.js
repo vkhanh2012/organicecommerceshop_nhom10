@@ -5,7 +5,7 @@ export function cartTotal(cart) {
   const { total } = getCartSummary(cart);
   return `
     <aside class="h-fit rounded-lg border border-neutral-100 bg-white p-6">
-      <h2 class="text-xl font-medium text-neutral-900">Cart Total</h2>
+      <h2 class="section-heading">Cart Total</h2>
       <div class="mt-2 divide-y divide-neutral-100">
         <div class="flex justify-between py-3 text-sm"><span class="text-neutral-700">Subtotal:</span><span class="font-medium">${money(total)}</span></div>
         <div class="flex justify-between py-3 text-sm"><span class="text-neutral-700">Shipping:</span><span class="font-medium">Free</span></div>

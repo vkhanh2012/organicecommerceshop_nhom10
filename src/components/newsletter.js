@@ -15,9 +15,9 @@ export function renderNewsletterComponent() {
           </form>
           <div class="flex items-center justify-center gap-2.5">
             <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white" aria-label="Facebook">${SOCIAL_ICONS.facebook}</a>
-            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Twitter">${SOCIAL_ICONS.twitter}</a>
-            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Pinterest">${SOCIAL_ICONS.pinterest}</a>
-            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Instagram">${SOCIAL_ICONS.instagram}</a>
+            <a href="#" class="icon-button" aria-label="Twitter">${SOCIAL_ICONS.twitter}</a>
+            <a href="#" class="icon-button" aria-label="Pinterest">${SOCIAL_ICONS.pinterest}</a>
+            <a href="#" class="icon-button" aria-label="Instagram">${SOCIAL_ICONS.instagram}</a>
           </div>
         </div>
       </div>

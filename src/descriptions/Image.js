@@ -1,7 +1,7 @@
   export function renderImage(product) {
   const thumbnailsHtml = product.thumbnails.map((thumb, index) => `
     <div class="w-[80px] h-[90px] border border-white/20 hover:border-[#00B207] rounded-lg overflow-hidden p-1 bg-white cursor-pointer transition-all flex items-center justify-center">
-      <img src="${thumb}" alt="${product.name} Thumbnail ${index + 1}" class="w-full h-full object-contain" />
+      <img src="${thumb}" alt="${product.name} Thumbnail ${index + 1}" class="image-contain" />
     </div>
   `).join("");
   return /*html*/ `
@@ -22,7 +22,7 @@
       
       <!-- Hình ảnh sản phẩm lớn -->
       <div class="w-full aspect-square bg-white border border-gray-100 rounded-2xl flex items-center justify-center p-6 order-1 sm:order-2">
-        <img src="${product.mainImage}" alt="${product.name} img main" class="w-full h-full object-contain" />
+        <img src="${product.mainImage}" alt="${product.name} img main" class="image-contain" />
       </div>
     </div>
   `;

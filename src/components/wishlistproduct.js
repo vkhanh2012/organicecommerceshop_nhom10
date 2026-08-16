@@ -17,7 +17,7 @@ export function renderWistlistRow(item) {
       <td class="py-4 px-4 md:px-6">
         <div class="flex items-center gap-3 md:gap-4">
           <div class="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-gray-100 p-1 flex items-center justify-center bg-white">
-            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain" />
+            <img src="${item.image}" alt="${item.name}" class="image-contain" />
           </div>
           <span class="font-normal text-gray-900 text-sm md:text-base line-clamp-2">
             ${item.name}

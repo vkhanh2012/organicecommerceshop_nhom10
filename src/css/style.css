@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-@import "tailwindcss";
 
+@import "tailwindcss";
 /* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
   --color-primary: #00b207; /* Branding/Success */
@@ -34,7 +34,7 @@
 
 /* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
 @utility container-custom {
-  @apply w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 @import "./components.css";

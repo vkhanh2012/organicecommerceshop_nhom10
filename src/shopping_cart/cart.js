@@ -18,7 +18,7 @@ export function renderCartPage(cart = getCart()) {
             <h2 class="mb-3 shrink-0 text-xl font-medium sm:mb-0">Coupon Code</h2>
             <form class="flex min-w-0 flex-1" data-coupon-form>
               <input class="min-w-0 flex-1 rounded-l-full border border-r-0 border-neutral-100 px-5 py-3 text-sm outline-none focus:border-primary" name="coupon" placeholder="Enter code">
-              <button class="cursor-pointer rounded-full bg-neutral-50 px-6 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-800 hover:text-white">Apply Coupon</button>
+              <button class="action-button">Apply Coupon</button>
             </form>
           </div>
           <p class="mt-2 hidden text-sm text-primary" data-cart-message></p>

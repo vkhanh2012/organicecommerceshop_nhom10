@@ -25,7 +25,7 @@ export async function renderHomepageComponent() {
 
     <section
       id="popular-products"
-      class="container-custom pb-12 md:pb-16"
+      class="section-container"
     >
       ${sectionTitle("Popular Products")}
       ${renderProductGrid(products.slice(0, 10))}
@@ -35,7 +35,7 @@ export async function renderHomepageComponent() {
     ${renderHotDeals(products)}
     ${renderWideBanner(bannerData.wideBanner)}
 
-    <section class="container-custom pb-12 md:pb-16">
+    <section class="section-container">
       ${sectionTitle("Featured Products")}
       ${renderProductGrid(products.slice(0, 5))}
     </section>
