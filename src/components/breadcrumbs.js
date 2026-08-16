@@ -55,7 +55,7 @@ export function renderBreadcrumbsComponent({ breadcrumbs = [] } = {}) {
       ${separator}`;
   }).join("");
     return `
-      <a href="${item.url || "#"}" class="text-neutral-400 transition-colors hover:text-white">${item.label}</a>
+      <a href="${item.url || "#"}" class="footer-link">${item.label}</a>
       ${separator}`;
   }).join("");
 
@@ -74,7 +74,7 @@ export function renderBreadcrumbsComponent({ breadcrumbs = [] } = {}) {
       <div class="absolute inset-0 bg-gradient-to-r from-neutral-900 via-neutral-900/85 to-transparent"></div>
       <div class="container-custom relative z-10">
         <nav class="flex flex-wrap items-center gap-2 text-sm" aria-label="Breadcrumb">
-          <a href="./index.html" class="text-neutral-400 transition-colors hover:text-white" aria-label="Home">${homeIcon}</a>
+          <a href="./index.html" class="footer-link" aria-label="Home">${homeIcon}</a>
           ${breadcrumbs.length ? separator : ""}
           ${itemsHtml}
         </nav>
