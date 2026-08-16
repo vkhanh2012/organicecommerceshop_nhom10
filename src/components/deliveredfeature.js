@@ -1,5 +1,5 @@
 import aboutData from "../data/about.json"
-import {tickIcon } from "./icons"
+import { tickIcon } from "./icons.js"
 export function renderDeliveredFeatureComponent(item) {
   return /*html*/ `
     <div class="flex flex-row gap-2 md:gap-4 items-center">

@@ -1,70 +1,25 @@
-import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
+import { SOCIAL_ICONS } from "./icons.js";
 
 export function renderNewsletterComponent() {
-  return /*html*/`
-    <section class="w-full bg-gray-50 border-b border-gray-100">
-  <!-- Main Container to showcase the footer similar to the image -->
-  <div class="w-full bg-white shadow-lg">
-    
-    <!-- NEWSLETTER SECTION -->
-    <div class="bg-gray-50 border-b border-gray-100">
-      <div class="container-custom py-9 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        
-        <!--  Heading & Paragraph -->
+  return `
+    <section class="w-full border-b border-gray-100 bg-gray-50">
+      <div class="container-custom flex flex-col items-start justify-between gap-6 py-9 lg:flex-row lg:items-center">
         <div class="max-w-[448px]">
-          <h2 class="text-2xl font-semibold text-gray-900 leading-tight tracking-tight">Subcribe our Newsletter</h2>
-          <p class="text-sm text-gray-400 mt-2 leading-relaxed font-light">
-            Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna.
-          </p>
+          <h2 class="text-2xl font-semibold leading-tight text-gray-900">Subscribe our Newsletter</h2>
+          <p class="mt-2 text-sm leading-relaxed text-gray-400">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna.</p>
         </div>
-        <!--  Form & Social Links -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 w-full lg:w-auto">
-          <!-- Subscription Form -->
-          <div class="relative flex items-center bg-white border border-gray-200 rounded-full p-1 pl-6 shadow-sm focus-within:border-[#00B207] focus-within:ring-2 focus-within:ring-[#00B207]/10 transition-all duration-300 w-full sm:w-[450px]">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              class="w-full bg-transparent py-3 text-sm text-gray-800 placeholder-gray-400 outline-none pr-4"
-            />
-            <button class="bg-[#00B207] hover:bg-[#009e06] text-white text-sm font-semibold py-3 px-8 rounded-full transition-all duration-200 cursor-pointer shrink-0">
-              Subscribe
-            </button>
-          </div>
-          <!--  Form & Social Links -->
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 w-full lg:w-auto">
-            <!-- Subscription Form -->
-            <div class="relative flex items-center bg-white border border-gray-200 rounded-full p-1 pl-6 shadow-sm focus-within:border-[#00B207] focus-within:ring-2 focus-within:ring-[#00B207]/10 transition-all duration-300 w-full sm:w-[450px]">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                class="w-full bg-transparent py-3 text-sm text-gray-800 placeholder-gray-400 outline-none pr-4"
-              />
-              <button class="bg-[#00B207] hover:bg-[#009e06] text-white text-sm font-semibold py-3 px-8 rounded-full transition-all duration-200 cursor-pointer shrink-0">
-                Subscribe
-              </button>
-            </div>
-            <!-- Social Icons -->
-            <div class="flex items-center gap-2.5 self-center">
-              <!-- Facebook -->
-              <a href="#" class="w-10 h-10 rounded-full bg-[#00B207] hover:bg-[#009e06] text-white flex items-center justify-center transition-all duration-200 shadow-sm" aria-label="Facebook">
-                ${SOCIAL_ICONS.facebook}
-              </a>
-              <!-- Twitter -->
-              <a href="#" class="w-10 h-10 text-gray-700 hover:text-[#00B207] hover:bg-gray-100 rounded-full flex items-center justify-center transition-all duration-200" aria-label="Twitter">
-                ${SOCIAL_ICONS.twitter}
-              </a>
-              <!-- Pinterest -->
-              <a href="#" class="w-10 h-10 text-gray-700 hover:text-[#00B207] hover:bg-gray-100 rounded-full flex items-center justify-center transition-all duration-200" aria-label="Pinterest">
-                ${SOCIAL_ICONS.pinterest}
-              </a>
-              <!-- Instagram -->
-              <a href="#" class="w-10 h-10 text-gray-700 hover:text-[#00B207] hover:bg-gray-100 rounded-full flex items-center justify-center transition-all duration-200" aria-label="Instagram">
-                ${SOCIAL_ICONS.instagram}
-              </a>
-            </div>
+        <div class="flex w-full flex-col items-stretch gap-6 sm:flex-row sm:items-center lg:w-auto">
+          <form class="relative flex w-full items-center rounded-full border border-gray-200 bg-white p-1 pl-6 shadow-sm sm:w-[450px]">
+            <input type="email" placeholder="Your email address" class="w-full bg-transparent py-3 pr-4 text-sm outline-none">
+            <button type="button" class="shrink-0 cursor-pointer rounded-full bg-primary px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">Subscribe</button>
+          </form>
+          <div class="flex items-center justify-center gap-2.5">
+            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white" aria-label="Facebook">${SOCIAL_ICONS.facebook}</a>
+            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Twitter">${SOCIAL_ICONS.twitter}</a>
+            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Pinterest">${SOCIAL_ICONS.pinterest}</a>
+            <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-primary hover:text-white" aria-label="Instagram">${SOCIAL_ICONS.instagram}</a>
           </div>
         </div>
       </div>
-    </div>
-  `;
+    </section>`;
 }
