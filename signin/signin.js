@@ -51,7 +51,7 @@ export function renderSignInForm() {
                 <!-- register -->
                 <p class="text-center text-sm text-neutral-600 pt-6 pb-8 ">
                     Don’t have account?
-                    <a href="/index.html" class=" font-semibold text-neutral-900 text-sm hover:text-primary transition-colors">
+                    <a href="./signup.html" class=" font-semibold text-neutral-900 text-sm hover:text-primary transition-colors">
                         Register
                     </a>
                 </p>

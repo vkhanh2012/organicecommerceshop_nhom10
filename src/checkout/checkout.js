@@ -1,4 +1,4 @@
-import { renderBreadCrumb } from "../descriptions/breadcrumb.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 import greencapsicumSvg from "./greencapsicum.svg";
 import redcapsicumSvg from "./redcapsicumSvg.svg";
 
@@ -13,6 +13,19 @@ export const defaultCheckoutData = {
 };
 
 export function renderCheckout(data = defaultCheckoutData) {
+  if (!data.cartItems.length) {
+    return `
+      ${renderBreadcrumbsComponent({ breadcrumbs: [
+        { label: "Shopping Cart", url: "./cart.html" },
+        { label: "Checkout", url: "./checkout.html" }
+      ] })}
+      <section class="container-custom py-16 text-center">
+        <h1 class="text-2xl font-semibold text-neutral-900">Your cart is empty</h1>
+        <p class="mt-2 text-neutral-500">Add products before continuing to checkout.</p>
+        <a href="./shop.html" class="mt-6 inline-flex rounded-full bg-primary px-8 py-3 font-semibold text-white hover:bg-primary-dark">Return to shop</a>
+      </section>`;
+  }
+
   const cartItemsHtml = data.cartItems.map(item => `
     <div class="flex items-center justify-between py-2.5">
       <div class="flex items-center gap-3">
@@ -28,10 +41,10 @@ export function renderCheckout(data = defaultCheckoutData) {
   return /*html*/ `
     <div class="w-full bg-white">
       <!-- 1. BREADCRUMB BANNER NỀN TỐI (KHUNG TÍM TRONG ẢNH) -->
-      ${renderBreadCrumb([
-        { label: "Shopping Cart", link: "#" },
-        { label: "Checkout", link: "#", active: true }
-      ])}
+      ${renderBreadcrumbsComponent({ breadcrumbs: [
+        { label: "Shopping Cart", url: "./cart.html" },
+        { label: "Checkout", url: "./checkout.html" }
+      ] })}
 
       <!-- 2. FORM BILLING & ORDER SUMMARY -->
       <div class="container-custom mx-auto px-4 md:px-8 py-12">
