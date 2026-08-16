@@ -85,7 +85,16 @@ export function renderProductInfo(product) {
             ${renderQuantityComponent()}
           </div>
           <!-- Add to Cart -->
-          <button class="w-full max-w-[447px] h-[51px] bg-[#00B307] hover:bg-[#00B207] text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none">
+          <button
+            type="button"
+            class="w-full max-w-[447px] h-[51px] bg-[#00B307] hover:bg-[#00B207] text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none"
+            data-add-cart
+            data-cart-id="${product.id}"
+            data-cart-name="${product.name}"
+            data-cart-image="${product.mainImage}"
+            data-cart-price="${product.currentPrice}"
+            data-cart-use-stepper
+          >
             <span class="text-[15px] tracking-wide font-medium">Add to Cart</span>
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.81706 6.48336H2.31706L0.650391 15.65H15.6504L13.9837 6.48336H11.4837M4.81706 6.48336V3.98336C4.81706 2.14241 6.30944 0.650024 8.15039 0.650024C9.99134 0.650024 11.4837 2.14241 11.4837 3.98336V6.48336M4.81706 6.48336H11.4837M4.81706 6.48336V8.98336M11.4837 6.48336V8.98336" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>

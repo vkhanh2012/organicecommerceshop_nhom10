@@ -1,5 +1,5 @@
 
-import { renderCategoryFilter } from "./categoryFilter"
+import { renderCategoryFilter } from "./categoryfilter.js"
 import { renderPriceFilter } from "./priceFilter"
 import { renderRatingFilter } from "./ratingFilter"
 import { renderPopularTags } from "./popularTag"
