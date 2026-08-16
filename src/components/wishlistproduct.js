@@ -17,7 +17,7 @@ export function renderWistlistRow(item) {
       <td class="py-4 px-4 md:px-6">
         <div class="flex items-center gap-3 md:gap-4">
           <div class="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-gray-100 p-1 flex items-center justify-center bg-white">
-            <img src="${item.image.src}" alt="${item.image.alt || item.name}" class="w-full h-full object-contain" />
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain" />
           </div>
           <span class="font-normal text-gray-900 text-sm md:text-base line-clamp-2">
             ${item.name}
@@ -50,13 +50,19 @@ export function renderWistlistRow(item) {
       <td class="py-4 px-4 md:px-6 text-right whitespace-nowrap">
         <div class="flex items-center justify-end gap-3 md:gap-4">
           <button type="button" ${!item.inStock ? "disabled" : ""}
-            class="px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-colors duration-200 ${buttonClass}">
+            class="px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-colors duration-200 ${buttonClass}"
+            data-add-cart
+            data-cart-id="${item.id}"
+            data-cart-name="${item.name}"
+            data-cart-image="${item.image}"
+            data-cart-price="${item.price}">
             Add to Cart
           </button>
           
           <button type="button"
             class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-900 hover:border-gray-400 transition-colors cursor-pointer shrink-0"
-            title="Remove item">
+            title="Remove item"
+            data-remove-wishlist="${item.id}">
             ${closeIcon}
           </button>
         </div>

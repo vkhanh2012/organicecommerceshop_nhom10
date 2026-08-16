@@ -1,31 +1,30 @@
-import wishListData from "../data/wishlist.json"
 import { renderWistlistRow } from "../components/wishlistproduct.js"
 import { SOCIAL_ICONS } from "../components/icons.js"
 
-export function renderWishlistSection() {
-    const wishlist = wishListData.wishlist || {};
-    const socials = wishlist.socials || {};
+export function renderWishlistSection(items = []) {
+    const socials = {};
     
   // Tiêu đề của bảng
-  const tableHeadersHtml = (wishListData.wishlist?.tableHeaders || [])
+  const tableHeaders = ["PRODUCT", "PRICE", "STOCK STATUS", ""];
+  const tableHeadersHtml = tableHeaders
     .map(
-      (header) => `
-      <th scope="col" class="py-4 px-4 md:px-6 font-medium text-gray-400 text-xs tracking-wider uppercase ${header.id === "action" ? "text-right" : ""}">
-        ${header.label}
+      (header, index) => `
+      <th scope="col" class="py-4 px-4 md:px-6 font-medium text-gray-400 text-xs tracking-wider uppercase ${index === 3 ? "text-right" : ""}">
+        ${header}
       </th>
     `,
     )
     .join("")
 
-  const rowsHtml = (wishListData.wishlist?.items || [])
+  const rowsHtml = items
     .map((item) => renderWistlistRow(item))
-    .join("");
+    .join("") || `<tr><td colspan="4" class="px-6 py-12 text-center text-neutral-500">Your wishlist is empty.</td></tr>`;
 
   return /*html*/ `
     <section class="w-full bg-white py-8 md:py-14">
         <div class="container-custom">
             <h1 class="text-center text-title-900 font-semibold text-2xl sm:text-[32px]">
-                ${wishListData.wishlist?.title}
+                My Wishlist
             </h1>
             <!-- Khung của các sản phẩm -->
             <div class="w-full border border-gray-200 bg-white shadow-sm rounded-xl overflow-hidden mt-6">
@@ -46,7 +45,7 @@ export function renderWishlistSection() {
                 <!-- Share Footer -->
                 <div class="flex border-t border-gray-100 px-4 md:px-6 py-4 items-center gap-3 bg-white">
                     <span class="text-gray-900 text-sm font-normal">
-                        ${wishListData.wishlist?.shareText || "Share:"}
+                        Share:
                     </span>
                     <div class="flex items-center gap-2">
                         <a href="${socials.facebook || "#"}"
