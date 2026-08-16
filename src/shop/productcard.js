@@ -4,7 +4,7 @@
 // (mobile không có hover), từ md: trở lên mới ẩn và chỉ hiện khi hover
 
 import { iconHeart, iconEye, iconBag, iconStar } from "../components/icons.js"
-import { renderPagination } from "./pagination.js"
+// import { renderPagination } from "./pagination.js"
 
 const CLASS = {
   card: "product-card max-w-78 mx-auto group relative bg-white border border-neutral-200 rounded-lg p-1.25 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.25)]",
@@ -96,14 +96,27 @@ export function renderProductCard({
 /**
  * Render 1 lưới sản phẩm — mobile-first: 2 cột -> sm:3 -> lg:5
  */
+// export function renderProductGrid(products = []) {
+//   const itemsHtml = products.map(renderProductCard).join("")
+//   return `
+//     <div class="w-full">
+//       <div class="${CLASS.grid}">${itemsHtml}</div>
+//       <div id="pagination">
+//         ${renderPagination()}
+//       </div>
+//     </div>  
+//       `
+// }
 export function renderProductGrid(products = []) {
-  const itemsHtml = products.map(renderProductCard).join("")
+  const itemsHtml = products
+    .map(renderProductCard)
+    .join("");
+
   return `
     <div class="w-full">
-      <div class="${CLASS.grid}">${itemsHtml}</div>
-      <div id="pagination">
-        ${renderPagination()}
+      <div class="${CLASS.grid}">
+        ${itemsHtml}
       </div>
-    </div>  
-      `
+    </div>
+  `;
 }
