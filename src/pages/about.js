@@ -5,9 +5,10 @@ import {renderDeliveredFeature} from "../about/delivered.js"
 import { renderTeamSection } from "../about/team.js"
 
 
-const breadcrumnbs = document.getElementById("breadcrumbs-container"); 
-if(breadcrumnbs) {
-  breadcrumnbs.innerHTML = renderBreadcrumbsComponent({
+export function initAboutPage() {
+const breadcrumbs = document.getElementById("breadcrumbs-container"); 
+if(breadcrumbs) {
+  breadcrumbs.innerHTML = renderBreadcrumbsComponent({
     breadcrumbs: [
       { label: "About", url: "./about.html" },
     ]
@@ -32,4 +33,5 @@ if(deliveredSection){
 const teamSection = document.getElementById("team-section");
 if(teamSection) {
   teamSection.innerHTML = renderTeamSection();
+}
 }

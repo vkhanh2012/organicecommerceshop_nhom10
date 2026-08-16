@@ -3,7 +3,6 @@ import { getProducts, renderProductGrid } from "../components/productcard.js";
 import { getInstagramImages, renderInstagramComponent } from '../home/instagram.js';
 import { renderLatestNewsWrapper } from '../home/latestnewswrapper.js';
 import { renderTestimonialComponent } from '../home/testimonial.js';
-import { renderNewsletterComponent } from '../components/newsletter.js';
 import { getBannerData } from '../home/banners.js';
 import { renderFeatures } from '../home/features.js';
 import { getCategories, renderCategories } from '../home/categories.js';
@@ -50,6 +49,5 @@ export async function renderHomepageComponent() {
       handle: ""
     })}
 
-    ${renderNewsletterComponent()}
   `;
 }

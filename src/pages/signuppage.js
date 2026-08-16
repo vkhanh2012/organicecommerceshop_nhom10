@@ -1,5 +1,5 @@
 import { iconEye } from "../components/icons.js";
-import { getImageUrl } from "../utils/assets.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 function passwordField({ name, placeholder }) {
   return `
@@ -24,20 +24,8 @@ function passwordField({ name, placeholder }) {
 }
 
 export function renderSignupPage() {
-  const breadcrumbImage = getImageUrl("/images/plant.jpg");
 
   return `
-    <section class="relative flex h-24 items-center bg-cover bg-center sm:h-[120px]" style="background-image: url('${breadcrumbImage}')">
-      <div class="absolute inset-0 bg-neutral-900/65"></div>
-      <nav class="container-custom relative z-10 flex items-center gap-3 text-sm sm:text-base" aria-label="Breadcrumb">
-        <a href="./index.html" class="text-neutral-300 transition-colors hover:text-white" aria-label="Home">⌂</a>
-        <span class="text-neutral-400">›</span>
-        <span class="text-neutral-300">Account</span>
-        <span class="text-neutral-400">›</span>
-        <span class="text-primary">Create Account</span>
-      </nav>
-    </section>
-
     <section class="container-custom flex min-h-[500px] items-center justify-center py-10 sm:min-h-[590px] sm:py-16">
       <div class="w-full max-w-[520px] rounded-lg border border-neutral-50 bg-white p-5 shadow-[0_0_56px_rgba(0,38,3,.08)] sm:p-6">
         <h1 class="text-center text-[28px] font-semibold leading-[1.2] text-neutral-900 sm:text-[32px]">Create Account</h1>
@@ -71,7 +59,7 @@ export function renderSignupPage() {
 
         <p class="mt-4 text-center text-sm text-neutral-600">
           Already have account
-          <a href="#" class="font-medium text-neutral-900 transition-colors hover:text-primary">Login</a>
+        <a href="./signin.html" class="font-medium text-neutral-900 transition-colors hover:text-primary">Login</a>
         </p>
       </div>
     </section>`;
@@ -113,10 +101,32 @@ export function bindSignupEvents(root) {
     message.className = `text-sm ${success ? "text-primary" : "text-error"}`;
   });
 }
-
 export function initSignupPage() {
-  const root = document.getElementById("signup-container");
-  if (!root) return;
-  root.innerHTML = renderSignupPage();
-  bindSignupEvents(root);
+  const breadcrumbContainer = document.getElementById(
+    "breadcrumbs-container"
+  );
+
+  const signupContainer = document.getElementById(
+    "signup-container"
+  );
+
+  if (breadcrumbContainer) {
+    breadcrumbContainer.innerHTML = renderBreadcrumbsComponent({
+      breadcrumbs: [
+        {
+          label: "Account",
+          url: "./signin.html",
+        },
+        {
+          label: "Create Account",
+          url: "./signup.html",
+        },
+      ],
+    });
+  }
+
+  if (!signupContainer) return;
+
+  signupContainer.innerHTML = renderSignupPage();
+  bindSignupEvents(signupContainer);
 }

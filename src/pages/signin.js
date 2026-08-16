@@ -1,6 +1,7 @@
 import { renderSignInForm } from "../../signin/signin.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
-function togglePassword (passwordInput, toggleBtn){
+function togglePassword(passwordInput, toggleBtn) {
     if(!passwordInput || !toggleBtn) return;
 
 
@@ -15,16 +16,23 @@ function togglePassword (passwordInput, toggleBtn){
 
 }
 
- document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("signin-form-container");
+export function initSigninPage() {
+  const breadcrumbContainer = document.getElementById("breadcrumbs-container");
+  const container = document.getElementById("signin-form-container");
 
-        if(container) {
-            container.innerHTML = renderSignInForm();
+  if (breadcrumbContainer) {
+    breadcrumbContainer.innerHTML = renderBreadcrumbsComponent({
+      breadcrumbs: [{ label: "Sign In", url: "./signin.html" }],
+    });
+  }
 
-            const passwordInput = document.getElementById("signin-password");
-            const toggleBtn = document.getElementById("toggle-password");
+  if (container) {
+    container.innerHTML = renderSignInForm();
 
-            handleTogglePassword(passwordInput, toggleBtn);
-        }
-});
+    const passwordInput = document.getElementById("signin-password");
+    const toggleBtn = document.getElementById("toggle-password");
+
+    togglePassword(passwordInput, toggleBtn);
+  }
+}
 

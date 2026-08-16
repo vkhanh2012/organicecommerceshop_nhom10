@@ -1,18 +1,13 @@
 import { changeQuantity, getCart, removeProduct, saveCart } from "./cartData.js";
 import { cartTable } from "./carttable.js";
 import { cartTotal } from "./carttotal.js";
-import { getImageUrl } from "../utils/assets.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 export function renderCartPage(cart = getCart()) {
   return `
-    <section class="relative flex h-[120px] items-center bg-cover bg-center" style="background-image: url('${getImageUrl('/images/plant.jpg')}')">
-      <div class="absolute inset-0 bg-neutral-900/80"></div>
-      <nav class="container-custom relative z-10 flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-        <a class="text-neutral-300 hover:text-white" href="./index.html" aria-label="Home">⌂</a>
-        <span class="text-neutral-400">›</span>
-        <span class="text-primary-light">Shopping Cart</span>
-      </nav>
-    </section>
+    ${renderBreadcrumbsComponent({
+      breadcrumbs: [{ label: "Shopping Cart", url: "./cart.html" }],
+    })}
 
     <section class="container-custom py-10 md:py-14">
       <h1 class="mb-8 text-center text-[32px] font-semibold">My Shopping Cart</h1>
@@ -39,7 +34,7 @@ export function bindCartEvents(root, onCartChange) {
     if (!button) return;
 
     const action = button.dataset.action;
-    const id = Number(button.dataset.id);
+    const id = button.dataset.id;
     const cart = getCart();
     let updatedCart = cart;
 
@@ -48,10 +43,11 @@ export function bindCartEvents(root, onCartChange) {
     if (action === "remove") updatedCart = removeProduct(cart, id);
 
     saveCart(updatedCart);
-    onCartChange(updatedCart, action === "update" ? "Cart updated successfully." : "");
+    onCartChange(updatedCart);
   });
 
-  root.querySelector("[data-coupon-form]")?.addEventListener("submit", (event) => {
+  root.addEventListener("submit", (event) => {
+    if (!event.target.matches("[data-coupon-form]")) return;
     event.preventDefault();
     const message = root.querySelector("[data-cart-message]");
     message.textContent = "Coupon code has been received.";
