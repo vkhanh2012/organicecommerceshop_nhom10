@@ -15,6 +15,7 @@
     "price": 20,
     "oldPrice": null,
     "rating": 1,
+    "rating": 1,
     "saleTag": null,
     "category": "Fresh Fruit",
     "image": "/images/product/fresh-indian-malta.webp"
@@ -25,6 +26,7 @@
     "price": 12,
     "oldPrice": null,
     "rating": 2,
+    "rating": 2,
     "saleTag": null,
     "category": "Vegetables",
     "image": "/images/product/chinese-cabbage.webp"
@@ -34,6 +36,7 @@
     "name": "Green Lettuce",
     "price": 9,
     "oldPrice": null,
+    "rating": 3,
     "rating": 3,
     "saleTag": null,
     "category": "Vegetables",

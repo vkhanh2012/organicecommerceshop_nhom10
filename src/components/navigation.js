@@ -18,6 +18,10 @@ const NAV_LINKS = [
   { label: "Blog", href: "/" },
   { label: "About Us", href: "/" },
   { label: "Contact Us", href: "" },
+  { label: "Pages", href: "/" },
+  { label: "Blog", href: "/" },
+  { label: "About Us", href: "/" },
+  { label: "Contact Us", href: "" },
 ]
 
 const LINK_BASE_CLASS = [

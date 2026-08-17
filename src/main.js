@@ -6,6 +6,7 @@ import {
 } from "./components/navigation.js";
 
 
+
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
