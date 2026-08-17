@@ -32,7 +32,7 @@ export function renderImage(product) {
   `;
 }
 
-// 📌 Hàm lắng nghe sự kiện bấm ảnh nhỏ đổi ảnh lớn
+//  Hàm lắng nghe sự kiện bấm ảnh nhỏ đổi ảnh lớn
 export function bindImageEvents(container = document) {
   const gallery = container.querySelector("#product-gallery") || container;
   if (!gallery) return;

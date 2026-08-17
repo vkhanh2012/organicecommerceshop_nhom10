@@ -5,10 +5,14 @@ export function renderCustomerFeedbackTab(product) {
   const feedbacksHtml = (product.feedbacks || [])
     .map((item) => {
 
-      const feedbackStars = Array.from(
-        { length: 5 },
-        (_, i) => iconStar(i < item.rating)
-      ).join("");
+      const feedbackStars = Array.from({ length: 5 }, (_, i) => {
+  // Nếu vị trí i nhỏ hơn số rating của khách thì là sao vàng, ngược lại là sao xám/trống
+  const isFilled = i < item.rating;
+  const starColor = isFilled ? "#FFB800" : "#E4E7E9"; 
+  
+  return `<span style="color: ${starColor}; display: inline-flex;">${iconStar(isFilled)}</span>`;
+}).join("");
+
 
       const avatarHtml = item.avatar
         ? `

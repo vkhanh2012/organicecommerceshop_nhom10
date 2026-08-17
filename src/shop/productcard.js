@@ -7,14 +7,17 @@ import {
   iconStar
 } from "../components/icons.js";
 
+
 const CLASS = {
+
   card:
     "product-card max-w-78 mx-auto group relative bg-white border border-neutral-200 rounded-lg p-1.25 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.25)]",
 
   imageWrap:
     "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-3 block cursor-pointer",
 
-  image: "w-full h-full object-cover",
+  image:
+    "w-full h-full object-cover",
 
   tags:
     "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
@@ -31,7 +34,8 @@ const CLASS = {
   actionBtn:
     "w-8 h-8 md:w-9 md:h-9 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
-  body: "px-1",
+  body:
+    "px-1",
 
   name:
     "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer",
@@ -56,9 +60,9 @@ const CLASS = {
 };
 
 
-// ========================================
+// =====================================================
 // PRODUCT CARD
-// ========================================
+// =====================================================
 
 export function renderProductCard(p = {}) {
 
@@ -70,32 +74,41 @@ export function renderProductCard(p = {}) {
     image = "",
     rating = 4,
     saleTag = null,
-    bestTag = null,
+    bestTag = null
   } = p;
 
 
-  // ========================================
+  // ===================================================
+  // URL TRANG DETAILS
+  // ===================================================
+
+  const detailUrl =
+    `/descriptions.html?id=${id}`;
+
+
+  // ===================================================
   // RATING
-  // ========================================
+  // ===================================================
 
-  const starsHtml = Array.from({ length: 5 })
-    .map(
-      (_, i) => `
-        <span class="${
-          i < rating
-            ? "text-warning"
-            : "text-neutral-200"
-        }">
-          ${iconStar(i < rating)}
-        </span>
-      `
-    )
-    .join("");
+  const starsHtml =
+    Array.from({ length: 5 })
+      .map(
+        (_, i) => `
+          <span class="${
+            i < rating
+              ? "text-warning"
+              : "text-neutral-200"
+          }">
+            ${iconStar(i < rating)}
+          </span>
+        `
+      )
+      .join("");
 
 
-  // ========================================
+  // ===================================================
   // TAG
-  // ========================================
+  // ===================================================
 
   const tagsHtml =
     saleTag || bestTag
@@ -127,23 +140,25 @@ export function renderProductCard(p = {}) {
       : "";
 
 
-  // ========================================
-  // PRODUCT CARD
-  // ========================================
+  // ===================================================
+  // PRODUCT CARD HTML
+  // ===================================================
 
   return `
+
     <article
       class="${CLASS.card}"
       data-id="${id}"
     >
 
-      <!-- ================================= -->
+
+      <!-- ========================================= -->
       <!-- PRODUCT IMAGE -->
-      <!-- Bấm ảnh -> DETAILS -->
-      <!-- ================================= -->
+      <!-- BẤM ẢNH -> TRANG DESCRIPTION -->
+      <!-- ========================================= -->
 
       <a
-        href="/descriptions.html?id=${id}"
+        href="${detailUrl}"
         class="${CLASS.imageWrap}"
         aria-label="Xem chi tiết ${name}"
       >
@@ -160,11 +175,12 @@ export function renderProductCard(p = {}) {
       </a>
 
 
-      <!-- ================================= -->
+      <!-- ========================================= -->
       <!-- ACTION BUTTONS -->
-      <!-- ================================= -->
+      <!-- ========================================= -->
 
       <div class="${CLASS.actions}">
+
 
         <!-- Wishlist -->
 
@@ -194,29 +210,29 @@ export function renderProductCard(p = {}) {
       </div>
 
 
-      <!-- ================================= -->
+      <!-- ========================================= -->
       <!-- PRODUCT BODY -->
-      <!-- ================================= -->
+      <!-- ========================================= -->
 
       <div class="${CLASS.body}">
 
 
-        <!-- ================================= -->
+        <!-- ========================================= -->
         <!-- PRODUCT NAME -->
-        <!-- Bấm tên -> DETAILS -->
-        <!-- ================================= -->
+        <!-- BẤM TÊN -> TRANG DESCRIPTION -->
+        <!-- ========================================= -->
 
         <a
-          href="/descriptions.html?id=${id}"
+          href="${detailUrl}"
           class="${CLASS.name}"
         >
           ${name}
         </a>
 
 
-        <!-- ================================= -->
+        <!-- ========================================= -->
         <!-- PRICE + CART -->
-        <!-- ================================= -->
+        <!-- ========================================= -->
 
         <div class="${CLASS.priceRow}">
 
@@ -226,8 +242,11 @@ export function renderProductCard(p = {}) {
               $${Number(price).toFixed(2)}
             </span>
 
+
             ${
-              oldPrice
+              oldPrice !== null &&
+              oldPrice !== undefined &&
+              oldPrice !== ""
                 ? `
                   <span class="${CLASS.priceOld}">
                     $${Number(oldPrice).toFixed(2)}
@@ -254,13 +273,14 @@ export function renderProductCard(p = {}) {
         </div>
 
 
-        <!-- ================================= -->
+        <!-- ========================================= -->
         <!-- RATING -->
-        <!-- ================================= -->
+        <!-- ========================================= -->
 
         <div class="${CLASS.rating}">
           ${starsHtml}
         </div>
+
 
       </div>
 
@@ -269,18 +289,20 @@ export function renderProductCard(p = {}) {
 }
 
 
-// ========================================
+// =====================================================
 // RENDER PRODUCT GRID
-// ========================================
+// =====================================================
 
 export function renderProductGrid(products = []) {
 
-  const itemsHtml = products
-    .map(renderProductCard)
-    .join("");
+  const itemsHtml =
+    products
+      .map(renderProductCard)
+      .join("");
 
 
   return `
+
     <div class="w-full">
 
       <div class="${CLASS.grid}">
@@ -288,5 +310,6 @@ export function renderProductGrid(products = []) {
       </div>
 
     </div>
+
   `;
 }

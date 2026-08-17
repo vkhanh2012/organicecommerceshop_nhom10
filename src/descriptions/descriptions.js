@@ -2,7 +2,7 @@ import { defaultProductData } from "./productdata.js";
 
 import { renderImage } from "./Image.js";
 import { renderProductInfo } from "./ProductInfo.js";
-import { renderDescriptionsTab } from "./descriptiontab.js";
+import { renderDescriptionTab } from "./descriptiontab.js";
 import { renderAdditionalInfoTab } from "./additionalInfo.js";
 import { renderCustomerFeedbackTab } from "./feedback.js";
 
@@ -31,7 +31,7 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
   } else if (activeTabKey === "feedback") {
     tabContentHtml = renderCustomerFeedbackTab(product);
   } else {
-    tabContentHtml = renderDescriptionsTab(product);
+    tabContentHtml = renderDescriptionTab(product);
   }
 
   return /*html*/ `

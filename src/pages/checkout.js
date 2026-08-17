@@ -5,6 +5,5 @@ const checkoutContainer = document.getElementById("checkout-container");
 
 if (checkoutContainer) {
   checkoutContainer.innerHTML = renderCheckout();
-  //AI
   bindLocationEvents(checkoutContainer);
 }
