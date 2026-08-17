@@ -45,26 +45,38 @@ const CLASS = {
   rating:
     "flex items-center gap-0.5",
   grid:
-    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 lg:gap-6 w-full items-start",
+    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-6 lg:gap-6 w-full items-start",
 };
 
 // =====================================================
-// PRODUCT CARD
+// PRODUCT CARD (TỰ ĐỘNG CHUẨN HÓA CẢ JSON VÀ PRODUCTDATA.JS)
 // =====================================================
 export function renderProductCard(p = {}) {
-  const {
-    id = 1,
-    name = "Tên sản phẩm",
-    price = 0,
-    oldPrice = null,
-    image = "",
-    rating = 4,
-    saleTag = null,
-    bestTag = null
-  } = p;
+  const id = p.id || 1;
+  const name = p.name || "Tên sản phẩm";
+
+  // 📌 1. Tự động nhận diện cả p.price (từ products.json) và p.currentPrice (từ productdata.js)
+  const price = p.price !== undefined ? p.price : (p.currentPrice !== undefined ? p.currentPrice : 0);
+
+  // 📌 2. Tự động nhận diện cả p.oldPrice (từ products.json) và p.originalPrice (từ productdata.js)
+  const oldPrice = p.oldPrice !== undefined ? p.oldPrice : (p.originalPrice !== undefined ? p.originalPrice : null);
+
+  // 📌 3. Tự động nhận diện cả p.image (từ products.json) và p.mainImage (từ productdata.js)
+  const image = p.image || p.mainImage || (p.thumbnails && p.thumbnails[0]) || "";
+
+  const rating = p.rating || 4;
+  const saleTag = p.saleTag || p.discountLabel || null;
+  const bestTag = p.bestTag || null;
 
   const detailUrl = `/product_detail.html?id=${id}&name=${encodeURIComponent(name)}`;
-  const productDataStr = encodeURIComponent(JSON.stringify(p));
+  const productDataStr = encodeURIComponent(JSON.stringify({
+    ...p,
+    id,
+    name,
+    price,
+    oldPrice,
+    image
+  }));
 
   const starsHtml = Array.from({ length: 5 })
     .map(
@@ -140,28 +152,48 @@ export function renderProductGrid(products = []) {
 }
 
 // =====================================================
-// 📌 RENDER RELATED PRODUCTS (4 CỘT SẢN PHẨM LIÊN QUAN)
+// 📌 RENDER RELATED PRODUCTS (LUÔN ĐẢM BẢO ĐỦ 4 CỘT - GIÁ & ẢNH ĐỘNG 100%)
 // =====================================================
 export function renderRelatedProducts(currentProduct = {}, allProducts = productList) {
-  // Lọc sản phẩm liên quan (bỏ sản phẩm đang xem)
-  let related = (allProducts || productList).filter(p => p.id !== currentProduct.id);
+  let displayProducts = [];
 
-  // Nếu sản phẩm hiện tại có danh mục, ưu tiên hiển thị các món cùng danh mục
-  if (currentProduct.category) {
-    const categoryName = typeof currentProduct.category === "object"
-      ? currentProduct.category.name
-      : currentProduct.category;
-
-    const sameCategory = related.filter(p => p.category === categoryName);
-    if (sameCategory.length >= 4) {
-      related = sameCategory;
-    }
+  // 1. NẾU SẢN PHẨM CÓ DANH SÁCH CHỈ ĐỊNH RIÊNG TRONG productdata.js
+  if (currentProduct.relatedProducts && Array.isArray(currentProduct.relatedProducts) && currentProduct.relatedProducts.length > 0) {
+    displayProducts = [...currentProduct.relatedProducts];
+  }
+  else if (currentProduct.relatedIds && Array.isArray(currentProduct.relatedIds)) {
+    displayProducts = (allProducts || productList).filter(p => currentProduct.relatedIds.includes(p.id));
   }
 
-  // Lấy 4 sản phẩm đầu tiên
-  const displayProducts = related.slice(0, 4);
+  // 2. NẾU CHƯA ĐỦ 4 MÓN -> BỔ SUNG THÊM CÁC MÓN KHÁC CHO ĐỦ HẲN 4 CỘT
+  if (displayProducts.length < 4) {
+    let categoryName = "";
+    if (currentProduct.category) {
+      categoryName = typeof currentProduct.category === "object" ? currentProduct.category.name : currentProduct.category;
+    }
 
-  const cardsHtml = displayProducts.map(renderProductCard).join("");
+    const existingNames = new Set(displayProducts.map(p => p.name?.toLowerCase()));
+    existingNames.add(currentProduct.name?.toLowerCase());
+
+    const remainingCandidates = (allProducts || productList).filter(
+      p => p.id !== currentProduct.id && !existingNames.has(p.name?.toLowerCase())
+    );
+
+    const sameCategoryCandidates = remainingCandidates.filter(p => p.category === categoryName);
+    const otherCandidates = remainingCandidates.filter(p => p.category !== categoryName);
+
+    const seed = Number(currentProduct.id) || 1;
+    sameCategoryCandidates.sort((a, b) => ((a.id * seed * 13) % 11) - ((b.id * seed * 13) % 11));
+    otherCandidates.sort((a, b) => ((a.id * seed * 17) % 13) - ((b.id * seed * 17) % 13));
+
+    const pool = [...sameCategoryCandidates, ...otherCandidates];
+    const needed = 4 - displayProducts.length;
+    displayProducts = [...displayProducts, ...pool.slice(0, needed)];
+  }
+
+  // Cắt lấy chuẩn 4 sản phẩm
+  const final4Products = displayProducts.slice(0, 4);
+  const cardsHtml = final4Products.map(renderProductCard).join("");
 
   return /*html*/ `
     <section class="w-full max-w-[1320px] mx-auto px-4 md:px-8 mt-16 mb-20">

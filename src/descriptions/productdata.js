@@ -97,39 +97,6 @@ export const defaultProductData = {
   videoImage: videoSvg,
 };
 
-export const mangoProductData = {
-  name: "Surjapur Mango",
-  inStock: true,
-  sku: "2,51,594",
-  rating: 4,
-  reviewsCount: 4,
-  originalPrice: null,
-  currentPrice: 24.00,
-  discountLabel: "64% Off",
-  brand: "FarmFresh",
-  brandLogo: brandLogoSvg,
-  description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
-  category: { name: "Fresh Fruit", link: "#" },
-  tags: [
-    { name: "Fresh Fruit", link: "#" },
-    { name: "Healthy", link: "#" },
-    { name: "Mango", link: "#" }
-  
-  ],
-  descriptionParagraphs: [
-    "Surjapur Mangoes are renowned for their sweet, aromatic flavor and vibrant golden color. Hand-picked from sun-drenched orchards, they are packed with rich vitamins and antioxidants.",
-    "Perfect for freshly squeezed juices, smoothies, or fruit salads. Each mango is carefully inspected to ensure peak ripeness and premium quality."
-  ],
-  features: [
-    "100% Organically grown tropical mangoes.",
-    "Rich source of Vitamin A, Vitamin C and dietary fiber.",
-    "No artificial ripening agents or chemical sprays used.",
-    "Hand-harvested at full maturity for natural sweetness."
-  ],
-  mainImage: mangoSvg,
-  thumbnails: [mangoSvg, mango1Svg, mango2Svg, mango3Svg],
-  videoImage: videoSvg
-};
 
 export const tomatoProductData = {
   name: "Fresh Tomato",
@@ -177,6 +144,46 @@ export const redcapsiumProductData = {
   videoImage: videoSvg
 };
 
+export const mangoProductData = {
+  name: "Surjapur Mango",
+  inStock: true,
+  sku: "2,51,594",
+  rating: 4,
+  reviewsCount: 4,
+  originalPrice: null,
+  currentPrice: 24.00,
+  discountLabel: "64% Off",
+  brand: "FarmFresh",
+  brandLogo: brandLogoSvg,
+  description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+  category: { name: "Fresh Fruit", link: "#" },
+  tags: [
+    { name: "Fresh Fruit", link: "#" },
+    { name: "Healthy", link: "#" },
+    { name: "Mango", link: "#" }
+  
+  ],
+  descriptionParagraphs: [
+    "Surjapur Mangoes are renowned for their sweet, aromatic flavor and vibrant golden color. Hand-picked from sun-drenched orchards, they are packed with rich vitamins and antioxidants.",
+    "Perfect for freshly squeezed juices, smoothies, or fruit salads. Each mango is carefully inspected to ensure peak ripeness and premium quality."
+  ],
+  features: [
+    "100% Organically grown tropical mangoes.",
+    "Rich source of Vitamin A, Vitamin C and dietary fiber.",
+    "No artificial ripening agents or chemical sprays used.",
+    "Hand-harvested at full maturity for natural sweetness."
+  ],
+  
+  relatedProducts: [
+    tomatoProductData,
+    redcapsiumProductData,
+    defaultProductData
+  ],
+  mainImage: mangoSvg,
+  thumbnails: [mangoSvg, mango1Svg, mango2Svg, mango3Svg],
+  videoImage: videoSvg
+};
+
 export const PRODUCTS_LIST = [
   defaultProductData,
   mangoProductData,
@@ -192,4 +199,6 @@ export const PRODUCTS_MAP = {
   "Red Capsicum": redcapsiumProductData,
   "Green Capsicum": redcapsiumProductData
 };
+
+
 
