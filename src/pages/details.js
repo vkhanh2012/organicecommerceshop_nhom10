@@ -27,6 +27,9 @@ import {
 
 import productList from "../data/products.json";
 
+// 📌 Import tính năng xem nhanh Quick View
+import "../Quickview/quickview.js";
+
 
 // =====================================================
 // LẤY SẢN PHẨM HIỆN TẠI TỪ URL
@@ -79,9 +82,7 @@ function getActiveProduct() {
 
   if (foundJson) {
 
-    // Thử tìm sản phẩm tương ứng
-    // trong PRODUCTS_LIST
-
+    // Thử tìm sản phẩm tương ứng trong PRODUCTS_LIST
     const foundData =
       PRODUCTS_LIST.find(
         p =>
@@ -98,9 +99,7 @@ function getActiveProduct() {
     }
 
 
-    // Nếu không tìm thấy
-    // thì tạo dữ liệu từ products.json
-
+    // Nếu không tìm thấy thì tạo dữ liệu từ products.json
     return {
 
       ...defaultProductData,
@@ -299,7 +298,7 @@ let currentTab =
 
 
 // =====================================================
-// QUANTITY + ADD TO CART
+// QUANTITY + ADD TO CART CHO SẢN PHẨM CHÍNH
 // =====================================================
 
 function bindProductDetailActions(
@@ -406,7 +405,7 @@ function bindProductDetailActions(
 
 
   // ===================================================
-  // ADD TO CART
+  // ADD TO CART SẢN PHẨM CHÍNH
   // ===================================================
 
   const addBtn =
@@ -508,7 +507,7 @@ function bindProductDetailActions(
 
 
 // =====================================================
-// RENDER DESCRIPTION
+// RENDER DESCRIPTION SECTION
 // =====================================================
 
 function renderDescriptionSection(
@@ -532,7 +531,7 @@ function renderDescriptionSection(
   );
 
 
-  // QUANTITY + CART
+  // QUANTITY + CART SẢN PHẨM CHÍNH
   bindProductDetailActions(
     container,
     currentProduct
@@ -540,7 +539,7 @@ function renderDescriptionSection(
 
 
   // ===================================================
-  // TAB
+  // TAB LINK CHUYỂN TAB
   // ===================================================
 
   const tabLinks =
@@ -586,88 +585,103 @@ function renderDescriptionSection(
 
 
 // =====================================================
-// INIT
+// INIT DOM CONTENT LOADED
 // =====================================================
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
 
-
-    // =================================================
-    // NAVIGATION
-    // =================================================
-
     initNavigation();
-
-
-    // =================================================
-    // CART
-    // =================================================
 
     if (
       document.getElementById(
         "cart-container"
       )
     ) {
-
       initShoppingCartPage();
     }
-
-
-    // =================================================
-    // DESCRIPTION PAGE
-    // =================================================
 
     const descriptionContainer =
       document.getElementById(
         "description-container"
       );
 
-
     if (!descriptionContainer) {
       return;
     }
-
-
-    // =================================================
-    // BREADCRUMB
-    // =================================================
 
     const breadcrumbContainer =
       document.getElementById(
         "breadcrumb-container"
       );
 
-
     if (breadcrumbContainer) {
-
       breadcrumbContainer.innerHTML =
         renderBreadCrumb();
     }
-
-
-    // =================================================
-    // DESCRIPTION
-    // =================================================
 
     renderDescriptionSection(
       descriptionContainer
     );
 
-
-    // =================================================
-    // NEWSLETTER
-    // =================================================
-
     initNewsletter();
-
-
-    // =================================================
-    // FOOTER
-    // =================================================
-
     initFooter();
-
   }
 );
+
+
+// =====================================================
+// 📌 BẮT SỰ KIỆN CLICK NÚT GIỎ HÀNG 🛒 CHO CÁC SẢN PHẨM LIÊN QUAN (RELATED PRODUCTS)
+// =====================================================
+document.addEventListener("click", (e) => {
+  const cartBtn = e.target.closest('[data-action="add-to-cart"]');
+
+  // Chỉ bắt sự kiện nếu bấm nút 🛒 trên các card sản phẩm liên quan
+  if (cartBtn && !cartBtn.closest('#quick-view-modal') && cartBtn.closest('section')) {
+    const card = cartBtn.closest('.product-card');
+    if (!card) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    let productData = null;
+
+    if (cartBtn.dataset.product) {
+      try {
+        productData = JSON.parse(decodeURIComponent(cartBtn.dataset.product));
+      } catch (err) {}
+    }
+
+    if (!productData && cartBtn.dataset.id) {
+      productData = productList.find(p => Number(p.id) === Number(cartBtn.dataset.id));
+    }
+
+    if (productData) {
+      const cart = getCart();
+      const existing = cart.find(item => item.name === productData.name);
+      const itemPrice = productData.price || productData.currentPrice || 12;
+      const itemImg = productData.image || productData.mainImage || "";
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: productData.id || Date.now(),
+          name: productData.name,
+          image: itemImg,
+          price: itemPrice,
+          quantity: 1
+        });
+      }
+
+      saveCart(cart);
+
+      // Cập nhật lại số lượng giỏ hàng hiển thị ở thanh Navigation phía trên
+      initNavigation();
+
+      // Hiện thông báo Toast góc phải màn hình
+      showToastNotification(`${productData.name} added to cart.`);
+    }
+  }
+});

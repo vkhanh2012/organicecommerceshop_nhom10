@@ -1,12 +1,12 @@
 import { defaultProductData } from "./productdata.js";
-
 import { renderImage } from "./Image.js";
 import { renderProductInfo } from "./ProductInfo.js";
 import { renderDescriptionTab } from "./descriptiontab.js";
 import { renderAdditionalInfoTab } from "./additionalInfo.js";
 import { renderCustomerFeedbackTab } from "./feedback.js";
+import { renderRelatedProducts } from "./RelatedProductCard.js";
+import productList from "../data/products.json";
 
-// MẢNG CẤU TRÚC LINK TABS
 export const TAB_LINKS = [
   { label: "Descriptions", key: "descriptions", href: "#descriptions" },
   { label: "Additional Information", key: "information", href: "#information" },
@@ -14,7 +14,7 @@ export const TAB_LINKS = [
 ];
 
 export function renderDescription(product = defaultProductData, activeTabKey = "descriptions") {
-  // Duyệt mảng TAB_LINKS để render danh sách Tab
+  // Map danh sách TAB_LINKS
   const tabsHtml = TAB_LINKS.map(tab => {
     const isActive = tab.key === activeTabKey;
     return `
@@ -24,7 +24,7 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
     `;
   }).join("");
 
-  // Gọi hàm render của Tab tương ứng
+  // Nội dung tab tương ứng
   let tabContentHtml = "";
   if (activeTabKey === "information") {
     tabContentHtml = renderAdditionalInfoTab(product);
@@ -37,25 +37,28 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
   return /*html*/ `
     <div class="container-custom mx-auto px-4 md:px-8 pt-12">
     
-    <!--  THÔNG TIN SẢN PHẨM PHÍA TRÊN  -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
-      <!-- CỘT TRÁI: KHU VỰC HÌNH ẢNH -->
-      ${renderImage(product)}
+      <!-- THÔNG TIN SẢN PHẨM PHÍA TRÊN (Ảnh bên trái, Thông tin chữ bên phải) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
+        <!-- CỘT TRÁI: KHU VỰC HÌNH ẢNH -->
+        ${renderImage(product)}
+        
+        <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
+        ${renderProductInfo(product)}
+      </div>
       
-      <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
-      ${renderProductInfo(product)}
-    </div>
-    
-    <!--  THANH TABS CHUYỂN ĐỔI  -->
-    <div class="border-b border-gray-200 flex justify-center gap-10">
-      ${tabsHtml}
-    </div>
+      <!-- THANH TABS CHUYỂN ĐỔI (Descriptions, Additional Information, Customer Feedback) -->
+      <div class="border-b border-gray-200 flex justify-center gap-10">
+        ${tabsHtml}
+      </div>
 
-    <!--  VÙNG ĐỔ NỘI DUNG TƯƠNG ỨNG  -->
-    <div id="tab-content-container">
-      ${tabContentHtml}
-    </div>
+      <!-- VÙNG ĐỔ NỘI DUNG TƯƠNG ỨNG -->
+      <div id="tab-content-container">
+        ${tabContentHtml}
+      </div>
 
-  </div>
+      <!-- 📌 PHẦN RELATED PRODUCTS (4 CỘT SẢN PHẨM LIÊN QUAN CHUẨN THIẾT KẾ) -->
+      ${renderRelatedProducts(product, productList)}
+
+    </div>
   `;
 }
