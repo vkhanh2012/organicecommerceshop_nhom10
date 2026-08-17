@@ -5,8 +5,7 @@ import { renderBreadcrumbsComponent } from "/src/components/breadcrumbs.js"
 import { renderProductGrid } from "/src/shop/productcard.js"
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
-
-// lưu trạng thái của trang
+import { renderQuickViewModal } from "/src/Quickview/quickview.js"
 const shopState = {
   currentPage: 1,
   productsPerPage: 6,

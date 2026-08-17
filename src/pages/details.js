@@ -20,32 +20,66 @@ import {
   getCartSummary,
   saveCart
 } from "../shopping_cart/cartData.js";
-import {initSignInPage} from "./signin.js"
+import { initSignInPage } from "./signin.js";
 
-async function initHomepage() {
-  const homepage = document.getElementById("homepage-container");
-  if (!homepage) return;
+// Import danh sách sản phẩm từ file products.json
+import productList from "../data/products.json"; 
 
-  if (typeof renderHomepageComponent === "function") {
-    homepage.innerHTML = await renderHomepageComponent();
+// 📌 Lấy sản phẩm khớp với ID trên URL (product_detail.html?id=...)
+function getActiveProduct() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = Number(urlParams.get("id"));
 
-    if (typeof bindHeroEvents === "function") {
-      bindHeroEvents(homepage);
-    }
+  const found = productList.find(item => item.id === productId);
+
+  if (!found) return defaultProductData;
+
+  return {
+    ...defaultProductData,
+    id: found.id,
+    name: found.name,
+    currentPrice: found.price,
+    originalPrice: found.oldPrice,
+    rating: found.rating,
+    mainImage: found.image,
+    thumbnails: [
+      found.image,
+      ...(defaultProductData.thumbnails || []).slice(1)
+    ],
+    category: { name: found.category || "Vegetables", link: "#" }
+  };
+}
+
+// Thông báo Toast ở góc phải màn hình
+function showToastNotification(message) {
+  let toast = document.getElementById("toast-notification");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-notification";
+    toast.className = "fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
+    document.body.appendChild(toast);
   }
+
+  toast.textContent = message;
+  
+  toast.classList.remove("translate-y-10", "opacity-0", "pointer-events-none");
+  toast.classList.add("translate-y-0", "opacity-100");
+
+  setTimeout(() => {
+    toast.classList.remove("translate-y-0", "opacity-100");
+    toast.classList.add("translate-y-10", "opacity-0", "pointer-events-none");
+  }, 3000);
 }
 
 function initFooter() {
   const footer = document.getElementById("footer-container");
   if (!footer) return;
-
   footer.innerHTML = renderFooterComponent();
 }
 
 function initNewsletter() {
   const newsletter = document.getElementById("newsletter-container");
   if (!newsletter) return;
-
   newsletter.innerHTML = renderNewsletterComponent();
 }
 
@@ -63,90 +97,81 @@ function initNavigation() {
     activeHref: location.pathname
   });
 
-  // QUAN TRỌNG:
-  // Gắn sự kiện cho nút mở/đóng giỏ hàng
   bindNavigationEvents(navigation, cart);
 }
 
-// Biến lưu trạng thái Tab hiện tại
 let currentTab = "descriptions";
 
-// Xử lý sự kiện nút số lượng & Add to Cart trực tiếp
-function bindProductDetailActions(container) {
-  const qtyVal = container.querySelector("[data-quantity-val]");
-  const decBtn = container.querySelector('[data-action="decrease-qty"]');
-  const incBtn = container.querySelector('[data-action="increase-qty"]');
+function bindProductDetailActions(container, currentProduct) {
+  const qtyInput = container.querySelector(".quantity-stepper-input") || container.querySelector("[data-quantity-val]");
+  const decBtn = container.querySelector('[data-action="decrement"]') || container.querySelector('[data-action="decrease-qty"]');
+  const incBtn = container.querySelector('[data-action="increment"]') || container.querySelector('[data-action="increase-qty"]');
 
-  if (decBtn && qtyVal) {
+  if (decBtn && qtyInput) {
     decBtn.addEventListener("click", (e) => {
       e.preventDefault();
-
-      let current = Number(qtyVal.textContent) || 1;
-
+      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
       if (current > 1) {
-        qtyVal.textContent = current - 1;
+        if ("value" in qtyInput) qtyInput.value = current - 1;
+        else qtyInput.textContent = current - 1;
       }
     });
   }
 
-  if (incBtn && qtyVal) {
+  if (incBtn && qtyInput) {
     incBtn.addEventListener("click", (e) => {
       e.preventDefault();
-
-      let current = Number(qtyVal.textContent) || 1;
-
-      qtyVal.textContent = current + 1;
+      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
+      if ("value" in qtyInput) qtyInput.value = current + 1;
+      else qtyInput.textContent = current + 1;
     });
   }
 
   const addBtn = container.querySelector('[data-action="add-to-cart"]');
-
   if (addBtn) {
     addBtn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      const count = qtyVal
-        ? Number(qtyVal.textContent) || 1
+      const count = qtyInput
+        ? (Number(qtyInput.value || qtyInput.textContent) || 1)
         : 1;
 
       const cart = getCart();
+      const productImage = currentProduct.mainImage || currentProduct.image || (currentProduct.thumbnails && currentProduct.thumbnails[0]) || "";
 
-      const existing = cart.find(
-        item => item.name === defaultProductData.name
-      );
+      const existing = cart.find(item => item.name === currentProduct.name);
 
       if (existing) {
         existing.quantity += count;
+        if (!existing.image) existing.image = productImage;
       } else {
         cart.push({
-          id: Date.now(),
-          name: defaultProductData.name,
-          image: defaultProductData.mainImage,
-          price: defaultProductData.currentPrice,
+          id: currentProduct.id || Date.now(),
+          name: currentProduct.name,
+          image: productImage,
+          price: currentProduct.currentPrice,
           quantity: count
         });
       }
 
       saveCart(cart);
-
-      window.location.href = "./cart.html";
+      initNavigation();
+      showToastNotification(`${currentProduct.name} added to cart.`);
     });
   }
 }
 
 function renderDescriptionSection(container) {
+  const currentProduct = getActiveProduct();
+
   container.innerHTML = renderDescription(
-    defaultProductData,
+    currentProduct,
     currentTab
   );
 
-  // Kích hoạt sự kiện bấm ảnh nhỏ đổi ảnh lớn
   bindImageEvents(container);
+  bindProductDetailActions(container, currentProduct);
 
-  // Kích hoạt sự kiện số lượng & Add to cart
-  bindProductDetailActions(container);
-
-  // Sự kiện chuyển Tab khi bấm vào các nút Tab
   const tabLinks = container.querySelectorAll(".tab-link");
 
   tabLinks.forEach(link => {
@@ -165,16 +190,8 @@ function renderDescriptionSection(container) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
   if (document.getElementById("homepage-container")) {
     initNavigation();
-
-    initHomepage().then(() => {
-      if (typeof initNewsletterPopupPage === "function") {
-        initNewsletterPopupPage();
-      }
-    });
-
     initFooter();
   }
 
@@ -182,32 +199,12 @@ document.addEventListener("DOMContentLoaded", () => {
     initShoppingCartPage();
   }
 
-  if (document.getElementById("signup-container")) {
-    initNavigation();
-    initSignupPage();
-    initNewsletter();
-    initFooter();
-  }
-
-  if (document.getElementById("signin-container")) {
-    initNavigation();
-    renderSignInForm();
-    initNewsletter();
-    initFooter();
-  }
-
-  // Trang Chi tiết sản phẩm (Details Page)
-  const descriptionContainer = document.getElementById(
-    "description-container"
-  );
+  const descriptionContainer = document.getElementById("description-container");
 
   if (descriptionContainer) {
     initNavigation();
 
-    const breadcrumbContainer = document.getElementById(
-      "breadcrumb-container"
-    );
-
+    const breadcrumbContainer = document.getElementById("breadcrumb-container");
     if (breadcrumbContainer) {
       breadcrumbContainer.innerHTML = renderBreadCrumb();
     }

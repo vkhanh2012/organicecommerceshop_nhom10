@@ -12,6 +12,8 @@ import { renderHotDeals } from '../home/hotdeals.js';
 import { renderWideBanner } from '../home/widebanner.js';
 import { renderBrandStrip } from '../home/brandstrip.js';
 import { sectionTitle } from '../home/sectiontitle.js';
+import { addProductToCart } from "../shopping_cart/cartData.js";
+import { renderQuickViewModal } from "../Quickview/quickview.js";
 
 export async function renderHomepageComponent() {
   const products = await getProducts();
