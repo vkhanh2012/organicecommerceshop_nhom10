@@ -1,7 +1,7 @@
 import { getImageUrl } from "../utils/assets.js";
 
 export function renderNewsletterPopup() {
-  const image = getImageUrl("/images/newsletter.png");
+  const image = getImageUrl("/images/newsletter.webp");
 
   return `
     <div class="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 p-4" data-newsletter-overlay>

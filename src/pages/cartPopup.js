@@ -18,7 +18,7 @@ export function renderCartPopup(cart = []) {
     <div class="fixed inset-0 z-[100] hidden bg-black/60" data-cart-overlay>
       <aside class="ml-auto flex h-full w-full max-w-[456px] flex-col bg-white px-5 py-8 shadow-2xl sm:px-10" data-cart-popup>
         <div class="flex items-center justify-between">
-          <h2 class="text-xl font-medium text-neutral-900">Shopping Cart (${count})</h2>
+          <h2 class="section-heading">Shopping Cart (${count})</h2>
           <button class="cursor-pointer text-3xl font-light text-neutral-900" type="button" data-cart-close aria-label="Close shopping cart">×</button>
         </div>
 

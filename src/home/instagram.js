@@ -25,7 +25,7 @@ export function renderInstagramComponent({ images = [], handle = "@ecobazar" } =
     .map(
       (src, i) => `
     <a href="#" class="${CLASS.item}" aria-label="Xem ảnh Instagram ${i + 1}">
-      <img src="${src}" alt="Instagram ${i + 1}" class="${CLASS.img}" loading="lazy" />
+      <img src="${src}" alt="Instagram ${i + 1}" width="200" height="200" class="${CLASS.img}" loading="lazy" decoding="async">
       <span class="${CLASS.overlay}">${iconInstagram}</span>
     </a>`
     )

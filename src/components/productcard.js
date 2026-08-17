@@ -1,6 +1,6 @@
 // src/components/productCard.js
 // Dựa theo component "Product 5n" (264×327px) trong Main Components.
-// Mobile-first: mặc định luôn hiện nút wishlist / quick-view / add-to-cart.
+// Mobile-first: mặc định luôn hiện wishlist / product detail / add-to-cart.
 // Từ md trở lên mới ẩn và chỉ hiện khi hover.
 
 import {
@@ -94,6 +94,7 @@ const CLASS = {
  */
 export function renderProductCard(
   {
+    id,
     name = "Tên sản phẩm",
     price = 0,
     oldPrice = null,
@@ -159,16 +160,19 @@ export function renderProductCard(
         <img
           src="${image}"
           alt="${name}"
-          class="${CLASS.image}"
+          width="254"
+          height="230"
           loading="lazy"
-        />
+          decoding="async"
+          class="${CLASS.image}"
+        >
 
         <div class="${CLASS.actions}">
 
           <button
             type="button"
             class="${CLASS.actionBtn}"
-            aria-label="Thêm vào yêu thích"
+            aria-label="Wishlist"
           >
             ${iconHeart}
           </button>
@@ -176,7 +180,7 @@ export function renderProductCard(
           <button
             type="button"
             class="${CLASS.actionBtn}"
-            aria-label="Xem nhanh"
+            aria-label="Quick view"
           >
             ${iconEye}
           </button>
@@ -215,6 +219,11 @@ export function renderProductCard(
             type="button"
             class="${CLASS.cartBtn}"
             aria-label="Thêm vào giỏ hàng"
+            data-add-cart
+            data-cart-id="${id}"
+            data-cart-name="${name}"
+            data-cart-image="${image}"
+            data-cart-price="${price}"
           >
             ${iconBag}
           </button>
@@ -235,14 +244,18 @@ export function renderProductCard(
  * Render lưới sản phẩm
  * Mobile-first: 2 cột → sm:3 → lg:5
  */
-export function renderProductGrid(products = []) {
+export function renderProductGrid(products = [], page = "home") {
 
   const itemsHtml = products
     .map(renderProductCard)
     .join("");
 
+  const gridClass = page === "shop"
+    ? "grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+    : CLASS.grid;
+
   return `
-    <div class="${CLASS.grid}">
+    <div class="${gridClass}">
       ${itemsHtml}
     </div>
   `;

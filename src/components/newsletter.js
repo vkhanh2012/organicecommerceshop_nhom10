@@ -1,21 +1,12 @@
-import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
+import { SOCIAL_ICONS } from "./icons.js";
 
 export function renderNewsletterComponent() {
-  return /*html*/`
-    <section class="w-full bg-gray-50 border-b border-gray-100">
-  <!-- Main Container to showcase the footer similar to the image -->
-  <div class="w-full bg-white shadow-lg">
-    
-    <!-- NEWSLETTER SECTION -->
-    <div class="bg-gray-50 border-b border-gray-100">
-      <div class="container-custom py-9 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        
-        <!--  Heading & Paragraph -->
+  return `
+    <section class="w-full border-b border-gray-100 bg-gray-50">
+      <div class="container-custom flex flex-col items-start justify-between gap-6 py-9 lg:flex-row lg:items-center">
         <div class="max-w-[448px]">
-          <h2 class="text-2xl font-semibold text-gray-900 leading-tight tracking-tight">Subcribe our Newsletter</h2>
-          <p class="text-sm text-gray-400 mt-2 leading-relaxed font-light">
-            Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna.
-          </p>
+          <h2 class="text-2xl font-semibold leading-tight text-gray-900">Subscribe our Newsletter</h2>
+          <p class="mt-2 text-sm leading-relaxed text-gray-400">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna.</p>
         </div>
         <!--  Form & Social Links -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 w-full lg:w-auto">
@@ -65,6 +56,5 @@ export function renderNewsletterComponent() {
           </div>
         </div>
       </div>
-    </div>
-  `;
+    </section>`;
 }

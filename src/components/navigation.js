@@ -12,12 +12,12 @@ import { getImageUrl } from "../utils/assets.js";
 import { removeProduct, saveCart } from "../shopping_cart/cartData.js";
 
 const NAV_LINKS = [
-  { label: "Home", href: "./index.html", active: true },
+  { label: "Home", href: "./index.html" },
   { label: "Shop", href: "./shop.html" },
   { label: "Pages", href: "/" },
   { label: "Blog", href: "/" },
-  { label: "About Us", href: "/" },
-  { label: "Contact Us", href: "" },
+  { label: "About Us", href: "./about.html" },
+  { label: "Contact Us", href: "/" },
 ]
 
 const LINK_BASE_CLASS = [
@@ -120,8 +120,11 @@ export function renderNavigationComponent({
             class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight md:justify-self-start"
           >
             <img 
-              src="${getImageUrl("/images/plant.jpg")}" 
+              src="${getImageUrl("/images/plant-small.webp")}" 
               alt="Logo" 
+              width="40"
+              height="40"
+              decoding="async"
               class="w-8 h-8 md:w-10 md:h-10 object-contain" 
             /> 
             <span>Ecobazar</span>
@@ -147,13 +150,13 @@ export function renderNavigationComponent({
 
           <!-- Action Icons (Wishlist, Cart) -->
           <div class="flex items-center gap-4 md:justify-self-end">
-            <button 
-              type="button"
+            <a
+              href="./wishlist.html"
               class="relative w-8 h-8 items-center justify-center text-neutral-800 hidden sm:flex" 
               aria-label="Wishlist" 
             >
               ${iconHeart}
-            </button>
+            </a>
             
             <button 
               type="button"
@@ -234,11 +237,13 @@ export function bindNavigationEvents(rootEl, cartItems = []) {
 
   root.querySelectorAll("[data-popup-remove]").forEach((button) => {
     button.addEventListener("click", () => {
-      const productId = Number(button.dataset.popupRemove);
+      const productId = button.dataset.popupRemove;
       const updatedCart = removeProduct(cartItems, productId);
       
       saveCart(updatedCart);
-      location.reload();
+      document.dispatchEvent(new CustomEvent("cart:updated", {
+        detail: { cart: updatedCart, openPopup: true }
+      }));
     });
   });
 }

@@ -3,7 +3,6 @@ import { getProducts, renderProductGrid } from "../components/productcard.js";
 import { getInstagramImages, renderInstagramComponent } from '../home/instagram.js';
 import { renderLatestNewsWrapper } from '../home/latestnewswrapper.js';
 import { renderTestimonialComponent } from '../home/testimonial.js';
-import { renderNewsletterComponent } from '../components/newsletter.js';
 import { getBannerData } from '../home/banners.js';
 import { renderFeatures } from '../home/features.js';
 import { getCategories, renderCategories } from '../home/categories.js';
@@ -26,7 +25,7 @@ export async function renderHomepageComponent() {
 
     <section
       id="popular-products"
-      class="container-custom pb-12 md:pb-16"
+      class="section-container"
     >
       ${sectionTitle("Popular Products")}
       ${renderProductGrid(products.slice(0, 10))}
@@ -36,7 +35,7 @@ export async function renderHomepageComponent() {
     ${renderHotDeals(products)}
     ${renderWideBanner(bannerData.wideBanner)}
 
-    <section class="container-custom pb-12 md:pb-16">
+    <section class="section-container">
       ${sectionTitle("Featured Products")}
       ${renderProductGrid(products.slice(0, 5))}
     </section>
@@ -50,6 +49,5 @@ export async function renderHomepageComponent() {
       handle: ""
     })}
 
-    ${renderNewsletterComponent()}
   `;
 }

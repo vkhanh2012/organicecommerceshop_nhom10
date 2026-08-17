@@ -1,5 +1,5 @@
 import aboutData from "../data/about.json"
-import { renderFeatureCard } from "../components/featureCard.js"
+import { renderFeatureCard } from "../components/featurecard.js"
 
 export function renderAboutMeSection() {
   //Lấy ra mảng feature từ file json

@@ -1,5 +1,5 @@
 import { renderTestimonialCardComponent } from "./testimonialcard.js"
-import { backArrow, nextArrow  } from "../components/icons.js"
+import { backArrow, nextArrow } from "../components/icons.js"
 
 export function renderTestimonialComponent() {
   return /*html*/ `
@@ -21,8 +21,6 @@ export function renderTestimonialComponent() {
             </div>
             <!-- Testimonial cards -->
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 w-full max-w-[1320px] px-4 sm:px-6 lg:px-8 gap-4 sm:gap-5 md:gap-6 mx-auto">
-                ${renderTestimonialCardComponent()}
-                ${renderTestimonialCardComponent()}
                 ${renderTestimonialCardComponent()}
             </div>
         </div>

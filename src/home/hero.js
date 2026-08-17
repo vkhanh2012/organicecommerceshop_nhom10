@@ -16,6 +16,10 @@ export function renderHeroComponent(hero) {
     <img
       src="${hero2.image}"
       alt="${hero2.title}"
+      width="423"
+      height="288"
+      loading="lazy"
+      decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     >
 
@@ -36,7 +40,7 @@ export function renderHeroComponent(hero) {
       </p>
 
       <a
-        href="#popular-products"
+        href="./shop.html"
         class="mt-4 inline-flex cursor-pointer w-fit items-center gap-2
                text-sm font-semibold text-primary
                transition-colors hover:text-primary-dark"
@@ -55,6 +59,10 @@ export function renderHeroComponent(hero) {
     <img
       src="${hero3.image}"
       alt="${hero3.title}"
+      width="423"
+      height="288"
+      loading="lazy"
+      decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     >
 
@@ -74,7 +82,7 @@ export function renderHeroComponent(hero) {
       </h2>
 
       <a
-        href="#popular-products"
+        href="./shop.html"
         class="mt-6 inline-flex cursor-pointer items-center gap-2
                text-sm font-semibold text-primary
                transition-colors hover:text-primary-light"
@@ -91,7 +99,15 @@ export function renderHeroComponent(hero) {
     <div class="container-custom">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
         <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
-          <img src="${mainBanner.image}" alt="${mainBanner.title}" class="absolute inset-0 h-full w-full object-cover"/>
+          <img
+            src="${mainBanner.image}"
+            alt="${mainBanner.title}"
+            width="872"
+            height="600"
+            fetchpriority="high"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-cover"
+          >
           
           <!-- Thay đổi: Tăng độ đậm và vùng phủ của gradient tối từ trái sang để chữ trắng nổi bật lên rõ ràng -->
           <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-black/5"></div>
@@ -102,7 +118,7 @@ export function renderHeroComponent(hero) {
               <p class="text-base">${mainBanner.saleLabel} <span class="rounded bg-warning px-2 py-1 font-semibold">${mainBanner.saleValue}</span></p>
               <p class="mt-2 text-sm text-white/75">${mainBanner.description}</p>
             </div>
-            <a href="#popular-products" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>➜</span></a>
+            <a href="./shop.html" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>➜</span></a>
           </div>
         </article>
 

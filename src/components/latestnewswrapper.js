@@ -1,4 +1,4 @@
-import { renderBlogCardComponent } from "./blogcard"
+import { renderBlogCardComponent } from "./blogcard.js"
 
 export function renderLatestNewsWrapper() {
   return /*html*/ `

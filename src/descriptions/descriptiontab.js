@@ -61,7 +61,7 @@ export function renderDescriptionsTab(product = {}) {
         
         <!-- Video / Ảnh bên dưới -->
         <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-gray-100">
-             <img src="${product.videoImage}" alt="video" class="w-full h-full object-contain" />
+             <img src="${product.videoImage}" alt="video" class="image-contain" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
