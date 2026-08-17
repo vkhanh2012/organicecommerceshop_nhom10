@@ -5,8 +5,6 @@ import {
   bindNavigationEvents
 } from "./components/navigation.js";
 
-
-
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
@@ -17,7 +15,7 @@ import { initSignupPage } from "./pages/signuppage.js";
 import { initShopPage } from "./pages/shop.js";
 import { initAboutPage } from "./pages/about.js";
 import { initWishlistPage } from "./pages/wishlist.js";
-import { initSigninPage } from "./pages/signin.js";
+import { initSignInPage } from "./pages/signin.js";
 import { initCheckoutPage } from "./pages/checkoutpage.js";
 import { initDetailsPage } from "./pages/details.js";
 import { addProduct, getCart, getCartSummary, saveCart } from "./shopping_cart/cartData.js";
@@ -49,13 +47,6 @@ async function initHomepage() {
   bindHeroEvents(homepage);
 }
 
-function initShopPage(){
-  const shopPage = document.getElementById("shop-container");
-
-  if(shopPage){
-    shopPage.innerHTML = initShopPage();
-  }
-}
 
 function initFooter() {
   const footer = document.getElementById("footer-container");
@@ -136,7 +127,7 @@ async function initCurrentPage() {
   if (document.getElementById("product-grid-container")) return initShopPage();
   if (document.getElementById("aboutus-section")) return initAboutPage();
   if (document.getElementById("wishlist-section")) return initWishlistPage();
-  if (document.getElementById("signin-form-container")) return initSigninPage();
+  if (document.getElementById("signin-container")) return initSignInPage();
   if (document.getElementById("checkout-container")) return initCheckoutPage();
   if (document.getElementById("description-container")) return initDetailsPage();
 }

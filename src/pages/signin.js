@@ -14,24 +14,22 @@ function bindTogglePasswordEvent() {
   });
 }
 
- export function initSignInPage() {
+export function initSignInPage() {
   const container = document.getElementById("signin-container");
-  const breadcrumbContainer = document.getElementById("breadcrumbs-container");
-    if(container) {
-      container.innerHTML = renderSignInForm();
-        const passwordInput = document.getElementById("signin-password");
-        const toggleBtn = document.getElementById("toggle-password");
-        handleTogglePassword(passwordInput, toggleBtn);
-        }
-
-  if (breadcrumbContainer) {
-    breadcrumbContainer.innerHTML = renderBreadcrumbsComponent({
-      breadcrumbs: [{ label: "Sign In", url: "./signin.html" }],
-    });
-  }
-
+  if (!container) return;
+  
   container.innerHTML = renderSignInForm();
 
+  const breadcrumbs = document.getElementById("breadcrumbs-container");
+  if (breadcrumbs) {
+    const breadcrumbsData = {
+      breadcrumbs: [
+        { label: "Account", url: "#" },
+        { label: "Sign In", url: "./signin.html" }
+      ]
+    };
+
+    breadcrumbs.innerHTML = renderBreadcrumbsComponent(breadcrumbsData);
+  }
   bindTogglePasswordEvent();
 }
-
