@@ -1,4 +1,4 @@
-import { filter, dropDown } from "../components/icons"
+import { filter, dropDown } from "../components/icons.js"
 
 export const SHOP_TOPBAR_DATA = {
   totalResults: 20,
@@ -54,7 +54,7 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
         </div>  
         <!-- Result found  -->
               <div class="text-sm lg:col-span-1 lg:col-start-4 text-right text-neutral-500">
-                <span class="font-semibold text-neutral-900">${totalResults}</span> Results Found
+                <span id="shop-result-count" class="font-semibold text-neutral-900">${totalResults}</span> Results Found
               </div>
     </div>
     `

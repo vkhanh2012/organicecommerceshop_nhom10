@@ -1,38 +1,84 @@
-// Mảng dữ liệu mẫu
-const CATEGORIES_DATA = [
-  { id: "cat-fruit", label: "Fresh Fruit", count: 134, checked: false },
-  { id: "cat-veg", label: "Vegetables", count: 150, checked: true }, // Mặc định chọn Vegetables
-  { id: "cat-cooking", label: "Cooking", count: 54, checked: false },
-  { id: "cat-snacks", label: "Snacks", count: 47, checked: false },
-  { id: "cat-beverages", label: "Beverages", count: 43, checked: false },
-  { id: "cat-health", label: "Beauty & Health", count: 38, checked: false },
-  { id: "cat-bread", label: "Bread & Bakery", count: 15, checked: false },
-]
+export function renderCategoryFilter(products, selectedCategory = "all") {
+  const categoryCounts = {}
+  //đếm số lượng sản phẩm
+  products.forEach((product) => {
+    const category = product.category
 
-export function renderCategoryFilter() {
-  const listItemsHtml = CATEGORIES_DATA.map((item) => {
-    return /*html*/ `
-      <li class="flex items-center justify-between text-sm text-neutral-600 hover:text-green-600 cursor-pointer group">
+    if (categoryCounts[category]) {
+      categoryCounts[category]++
+    } else {
+      categoryCounts[category] = 1
+    }
+  })
+
+  //tạo mảng cate từ dữ liệu của sản phẩm
+  const categories = [
+    {
+      id: "all-categories",
+      label: "All Categories",
+      value: "all",
+      count: products.length,
+    },
+
+    ...Object.entries(categoryCounts).map(([category, count]) => ({
+      id: category.toLowerCase().replaceAll(" ", "-"),
+
+      label: category,
+      value: category,
+      count: count,
+    })),
+  ]
+
+  const listItemsHtml = categories
+    .map((item) => {
+      const checked = selectedCategory === item.value
+      return /*html*/ `
+      <li class="flex items-center justify-between text-sm text-neutral-600 cursor-pointer group">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
             name="category" 
-            id="${item.id}" 
-            ${item.checked ? "checked" : ""} 
-            class="w-5 h-5 accent-green-600 cursor-pointer"
+            id="${item.id}"
+            value="${item.value}"
+            ${checked ? "checked" : ""}
+            class="
+              peer
+              appearance-none
+              w-5 h-5
+              rounded-full
+              border-2 border-neutral-300
+              bg-white
+              cursor-pointer
+
+              checked:border-primary
+              checked:bg-primary
+              checked:shadow-[inset_0_0_0_3px_white]
+            "
           >
+
           <label 
             for="${item.id}" 
-            class="cursor-pointer ${item.checked ? "text-neutral-900 font-medium" : "text-neutral-600"} group-hover:text-green-600 transition-colors font-poppins"
+            class="
+              cursor-pointer
+              text-neutral-600
+              peer-checked:text-primary-dark
+              peer-checked:font-medium
+              group-hover:text-primary
+              transition-colors
+              font-poppins
+            "
           >
             ${item.label}
           </label>
-        </div>
-        <!-- Số lượng sản phẩm -->
-        <span class="text-neutral-400 text-xs font-poppins">(${item.count})</span>
-      </li>
+            </div>
+
+            <span class="text-neutral-400 text-xs font-poppins">
+              (${item.count})
+            </span>
+          </li>
     `
-  }).join("")
+    })
+    .join("")
 
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">

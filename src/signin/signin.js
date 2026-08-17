@@ -1,3 +1,4 @@
+import { iconEye } from "../components/icons.js"
 export function renderSignInForm() {
   return /*html*/ `
     <section class="container-custom flex justify-center w-full py-8 md:py-20 items-center bg-white">
@@ -20,14 +21,7 @@ export function renderSignInForm() {
                     <!-- nút ẩn hiện mật khẩu bên phải -->
                     <button id="toggle-password" type="button" aria-label="password visibility"
                         class="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-900 hover:text-neutral-800 transition-colors">
-                        <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M0.75 6.58333C0.75 6.58333 3.78 0.75 9.08333 0.75C14.3867 0.75 17.4167 6.58333 17.4167 6.58333C17.4167 6.58333 14.3867 12.4167 9.08333 12.4167C3.78 12.4167 0.75 6.58333 0.75 6.58333Z"
-                                stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M9.08337 9.08301C9.74642 9.08301 10.3823 8.81962 10.8511 8.35077C11.32 7.88193 11.5834 7.24605 11.5834 6.58301C11.5834 5.91997 11.32 5.28408 10.8511 4.81524C10.3823 4.3464 9.74642 4.08301 9.08337 4.08301C8.42033 4.08301 7.78445 4.3464 7.31561 4.81524C6.84677 5.28408 6.58337 5.91997 6.58337 6.58301C6.58337 7.24605 6.84677 7.88193 7.31561 8.35077C7.78445 8.81962 8.42033 9.08301 9.08337 9.08301V9.08301Z"
-                                stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        ${iconEye}
                     </button>
                 </div>
 
@@ -51,7 +45,7 @@ export function renderSignInForm() {
                 <!-- register -->
                 <p class="text-center text-sm text-neutral-600 pt-6 pb-8 ">
                     Don’t have account?
-                    <a href="/index.html" class=" font-semibold text-neutral-900 text-sm hover:text-primary transition-colors">
+                    <a href="/signup.html" class=" font-semibold text-neutral-900 text-sm hover:text-primary transition-colors">
                         Register
                     </a>
                 </p>

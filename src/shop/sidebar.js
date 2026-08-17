@@ -1,20 +1,20 @@
 
-import { renderCategoryFilter } from "./categoryFilter"
-import { renderPriceFilter } from "./priceFilter"
-import { renderRatingFilter } from "./ratingFilter"
-import { renderPopularTags } from "./popularTag"
-import { renderDiscountBanner } from "./discountBanner"
-import { renderSaleProducts } from "./saleProductCards"
+import { renderCategoryFilter } from "/src/shop/categoryfilter.js";
+import { renderPriceFilter } from "/src/shop/priceFilter.js";
+import { renderRatingFilter } from "/src/shop/ratingFilter.js";
+import { renderPopularTags } from "/src/shop/popularTag.js";
+import { renderDiscountBanner } from "/src/shop/discountBanner.js";
+import { renderSaleProducts } from "/src/shop/saleProductCards.js";
 
-export function renderSidebarComponent() {
+
+export function renderSidebarComponent(products, selectedCategory, selectedMinPrice, selectedMaxPrice,selectedRating) {
   return /*html*/ `
         <aside class="lg:block space-y-6">
-            ${renderCategoryFilter()}
-            ${renderPriceFilter()}
-            ${renderRatingFilter()}
+            ${renderCategoryFilter(products, selectedCategory)}
+            ${renderPriceFilter(products, selectedMinPrice,selectedMaxPrice)}
+            ${renderRatingFilter(selectedRating)}
             ${renderPopularTags()}
             ${renderDiscountBanner()}
-            <!-- ${renderSaleProducts()} -->
             <div id="sale-products-wrapper"></div>
         </aside>
     `

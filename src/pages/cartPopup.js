@@ -31,7 +31,7 @@ export function renderCartPopup(cart = []) {
             <span>${count} Product${count === 1 ? '' : 's'}</span>
             <strong class="text-base">$${total.toFixed(2)}</strong>
           </div>
-          <a class="mt-5 flex cursor-pointer justify-center rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" href="./cart.html">Checkout</a>
+          <a class="mt-5 flex cursor-pointer justify-center rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" href="./checkout.html">Checkout</a>
           <a class="mt-3 flex cursor-pointer justify-center rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" href="./cart.html">Go To Cart</a>
         </div>
       </aside>

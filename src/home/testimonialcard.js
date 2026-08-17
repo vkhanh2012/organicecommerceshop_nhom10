@@ -1,4 +1,4 @@
-import { iconStar, quoteIcon } from "./icons.js"
+import { iconStar, quoteIcon } from "../components/icons.js"
 export const TESTIMONIALS_DATA = [
   {
     id: "testimonial-1",
