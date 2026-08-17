@@ -5,7 +5,6 @@ const checkoutContainer = document.getElementById("checkout-container");
 
 if (checkoutContainer) {
   checkoutContainer.innerHTML = renderCheckout();
-  
-  // 📌 Kích hoạt chọn Country tự động đổi States
+  //AI
   bindLocationEvents(checkoutContainer);
 }

@@ -20,7 +20,7 @@ import {
   getCartSummary,
   saveCart
 } from "../shopping_cart/cartData.js";
-import { renderSignInForm } from "../../signin/signin.js";
+import {initSignInPage} from "./signin.js"
 
 async function initHomepage() {
   const homepage = document.getElementById("homepage-container");
