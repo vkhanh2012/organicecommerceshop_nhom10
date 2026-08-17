@@ -7,6 +7,7 @@ import {
   bindNavigationEvents
 } from "./components/navigation.js";
 
+
 import { renderHomepageComponent } from "./pages/homepage.js";
 import { renderFooterComponent } from "./components/footer.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
@@ -15,7 +16,9 @@ import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
 import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
 import { initSignupPage } from "./pages/signuppage.js";
 import { getCart, getCartSummary } from "./shopping_cart/cartData.js";
-import { renderSignInForm } from "../signin/signin.js";
+import {initSignInPage} from "./pages/signin.js"
+import { initShopPage } from "./pages/shop.js";
+
 
 function initNavigation() {
   const navigation = document.getElementById("navigation-container");
@@ -44,6 +47,7 @@ async function initHomepage() {
   bindHeroEvents(homepage);
 }
 
+
 function initFooter() {
   const footer = document.getElementById("footer-container");
 
@@ -68,6 +72,13 @@ if (document.getElementById("cart-container")) {
   initShoppingCartPage();
 }
 
+if(document.getElementById("product-grid-container")){
+  initNavigation();
+  initShopPage();
+  initNewsletter();
+  initFooter();
+}
+
 if (document.getElementById("signup-container")) {
   initNavigation();
   initSignupPage();
@@ -75,9 +86,10 @@ if (document.getElementById("signup-container")) {
   initFooter();
 }
 
-if (document.getElementById("signin-container")) {
+if(document.getElementById("signin-container")){
   initNavigation();
-  renderSignInForm();
+  initSignInPage();
   initNewsletter();
   initFooter();
 }
+

@@ -1,4 +1,4 @@
-import { nextArrow } from "../components/icons";
+import { nextArrow } from "../components/icons.js";
 
 const BANNER_DATA = {
   discountPercentage: 79,

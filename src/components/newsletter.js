@@ -19,7 +19,7 @@ export function renderNewsletterComponent() {
         </div>
         <!--  Form & Social Links -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 w-full lg:w-auto">
-          <!-- Subscription Form -->
+          <!-- Subscription Form
           <div class="relative flex items-center bg-white border border-gray-200 rounded-full p-1 pl-6 shadow-sm focus-within:border-[#00B207] focus-within:ring-2 focus-within:ring-[#00B207]/10 transition-all duration-300 w-full sm:w-[450px]">
             <input 
               type="email" 
@@ -29,7 +29,7 @@ export function renderNewsletterComponent() {
             <button class="bg-[#00B207] hover:bg-[#009e06] text-white text-sm font-semibold py-3 px-8 rounded-full transition-all duration-200 cursor-pointer shrink-0">
               Subscribe
             </button>
-          </div>
+          </div> -->
           <!--  Form & Social Links -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 w-full lg:w-auto">
             <!-- Subscription Form -->

@@ -14,10 +14,10 @@ import { removeProduct, saveCart } from "../shopping_cart/cartData.js";
 const NAV_LINKS = [
   { label: "Home", href: "./index.html", active: true },
   { label: "Shop", href: "./shop.html" },
-  { label: "Pages", href: "/pages" },
-  { label: "Blog", href: "/blog.html" },
-  { label: "About Us", href: "/about.html" },
-  { label: "Contact Us", href: "/descriptions.html" },
+  { label: "Pages", href: "/" },
+  { label: "Blog", href: "/" },
+  { label: "About Us", href: "/" },
+  { label: "Contact Us", href: "" },
 ]
 
 const LINK_BASE_CLASS = [
@@ -91,7 +91,7 @@ export function renderNavigationComponent({
             <span class="hidden sm:inline">Eng</span>
             <span class="hidden sm:inline">USD</span>
             <div class="flex items-center gap-1">
-              <a href="#" class="hover:text-primary transition-colors">Sign In</a>
+              <a href="./signin.html" class="hover:text-primary transition-colors">Sign In</a>
               <span class="text-neutral-300">/</span>
               <a href="./signup.html" class="hover:text-primary transition-colors">Sign Up</a>
             </div>
