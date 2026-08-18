@@ -71,7 +71,7 @@ function showToastNotification(message) {
       "toast-notification";
 
     toast.className =
-      "fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
+      "fixed bottom-6 right-6 z-50 bg-neutral-900 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
 
     document.body.appendChild(toast);
   }

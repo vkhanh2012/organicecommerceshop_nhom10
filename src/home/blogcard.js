@@ -55,7 +55,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
                 </div>
                 <!-- Nội dung card -->
                 <div class="flex flex-col w-full h-auto p-4 sm:p-5 md:p-6 gap-3 sm:gap-4 lg:gap-5 bg-white rounded-b-lg">
-                    <div class="flex flex-row flex-wrap w-auto h-auto gap-3 sm:gap-4 md:gap-4 items-center text-gray-600 text-sm sm:text-base"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex flex-row flex-wrap w-auto h-auto gap-3 sm:gap-4 md:gap-4 items-center text-neutral-600 text-sm sm:text-base"> <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.1583 11.1748L11.1833 17.1498C11.0285 17.3048 10.8447 17.4277 10.6424 17.5116C10.4401 17.5955 10.2232 17.6386 10.0042 17.6386C9.78513 17.6386 9.56825 17.5955 9.36592 17.5116C9.16359 17.4277 8.97978 17.3048 8.82499 17.1498L1.66666 9.99984V1.6665H9.99999L17.1583 8.82484C17.4687 9.13711 17.643 9.55953 17.643 9.99984C17.643 10.4401 17.4687 10.8626 17.1583 11.1748V11.1748Z" stroke="#B3B3B3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M5.83331 5.83301H5.84165" stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg> ${items.category}

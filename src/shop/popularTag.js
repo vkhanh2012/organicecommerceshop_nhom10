@@ -24,7 +24,7 @@ export function renderPopularTags() {
          <button id="${tag.id}" class="px-4 py-1.5 text-sm rounded-full transition-colors cursor-pointer ${
            tag.active
              ? " bg-primary text-white font-medium"
-             : "bg-gray-50 text-gray-900 hover:bg-gray-200"
+             : "bg-neutral-50 text-neutral-900 hover:bg-neutral-200"
          }">
         ${tag.name}
     </button>

@@ -4,8 +4,8 @@ export function renderAdditionalInfoTab(product) {
     <span
       class="cursor-pointer hover:text-primary transition-colors duration-200 ${
         tag.toLowerCase() === "chinese"
-          ? "font-semibold text-gray-900"
-          : "text-gray-500"
+          ? "font-semibold text-neutral-900"
+          : "text-neutral-500"
       }"
     >
       ${tag}
@@ -20,31 +20,31 @@ export function renderAdditionalInfoTab(product) {
 
     <!-- Cột trái -->
    <div class="lg:col-span-7 space-y-4 text-sm">
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Weight:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.weight || '0.3'}</span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-neutral-50">
+        <span class="text-neutral-900 font-medium">Weight:</span>
+        <span class="text-neutral-500 col-span-2 sm:col-span-3">${product.additionalInfo?.weight || '0.3'}</span>
       </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Color:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.color || 'Green'}</span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-neutral-50">
+        <span class="text-neutral-900 font-medium">Color:</span>
+        <span class="text-neutral-500 col-span-2 sm:col-span-3">${product.additionalInfo?.color || 'Green'}</span>
       </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Type:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.type || 'Organic'}</span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-neutral-50">
+        <span class="text-neutral-900 font-medium">Type:</span>
+        <span class="text-neutral-500 col-span-2 sm:col-span-3">${product.additionalInfo?.type || 'Organic'}</span>
       </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Category:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.category || 'Vegetables'}</span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-neutral-50">
+        <span class="text-neutral-900 font-medium">Category:</span>
+        <span class="text-neutral-500 col-span-2 sm:col-span-3">${product.additionalInfo?.category || 'Vegetables'}</span>
       </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Stock Status:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.stockStatus || 'In Stock'}</span>
+      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-neutral-50">
+        <span class="text-neutral-900 font-medium">Stock Status:</span>
+        <span class="text-neutral-500 col-span-2 sm:col-span-3">${product.additionalInfo?.stockStatus || 'In Stock'}</span>
       </div>
         
       <div class="grid grid-cols-3 sm:grid-cols-4 py-1.5">
-        <span class="text-gray-900 font-medium">Tags:</span>
+        <span class="text-neutral-900 font-medium">Tags:</span>
         <span
-  class="text-gray-500 col-span-2 sm:col-span-3 cursor-pointer"
+  class="text-neutral-500 col-span-2 sm:col-span-3 cursor-pointer"
   title="Product Tags: ${product.additionalInfo?.tags?.join(', ') || ''}"
 >
   ${addInfoTagsHtml}
@@ -55,13 +55,13 @@ export function renderAdditionalInfoTab(product) {
     <!-- Cột phải -->
     <div class="lg:col-span-5 space-y-6">
 
-       <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-gray-100">
+       <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-neutral-100">
              <img src="${product.videoImage}" alt="video" class="image-contain" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- Banner: 64% Discount -->
-          <div class="flex items-center gap-3 p-4 border border-gray-200/80 rounded-xl bg-white shadow-xs">
+          <div class="flex items-center gap-3 p-4 border border-neutral-200/80 rounded-xl bg-white shadow-xs">
             <div class="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
               <!-- SVG Icon Giá -->
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,13 +72,13 @@ export function renderAdditionalInfoTab(product) {
               </svg>
             </div>
             <div class="flex flex-col text-left">
-              <span class="text-sm font-semibold text-gray-900">64% Discount</span>
-              <span class="text-[11px] text-gray-400 mt-0.5">Save your 64% money with us</span>
+              <span class="text-sm font-semibold text-neutral-900">64% Discount</span>
+              <span class="text-[11px] text-neutral-400 mt-0.5">Save your 64% money with us</span>
             </div>
           </div>
           
           <!-- Banner: 100% Organic -->
-          <div class="flex items-center gap-3 p-4 border border-gray-200/80 rounded-xl bg-white shadow-xs">
+          <div class="flex items-center gap-3 p-4 border border-neutral-200/80 rounded-xl bg-white shadow-xs">
             <!-- SVG Lá xanh -->
             <div class="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,8 +86,8 @@ export function renderAdditionalInfoTab(product) {
               </svg>
             </div>
             <div class="flex flex-col text-left">
-              <span class="text-sm font-semibold text-gray-900">100% Organic</span>
-              <span class="text-[11px] text-gray-400 mt-0.5">100% Organic Vegetables</span>
+              <span class="text-sm font-semibold text-neutral-900">100% Organic</span>
+              <span class="text-[11px] text-neutral-400 mt-0.5">100% Organic Vegetables</span>
             </div>
           </div>
         </div>

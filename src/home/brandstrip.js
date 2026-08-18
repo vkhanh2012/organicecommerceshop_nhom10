@@ -7,7 +7,7 @@ export function renderBrandStrip() {
     <div class="grid grid-cols-3 items-center gap-6 sm:grid-cols-6">
       ${logos.map((logo, index) => `
         <div class="flex h-12 items-center justify-center ${index ? 'border-l border-neutral-100' : ''}">
-          <img class="max-h-9 max-w-[120px] object-contain opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0" src="${logo.image}" alt="${logo.name}">
+          <img class="max-h-9 max-w-[120px] object-contain opacity-60 neutralscale transition hover:opacity-100 hover:neutralscale-0" src="${logo.image}" alt="${logo.name}">
         </div>`).join('')}
     </div>
   </section>`;

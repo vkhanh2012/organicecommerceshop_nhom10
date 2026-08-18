@@ -248,7 +248,7 @@ export function renderQuickViewModal(product) {
         <button
           id="close-quick-view"
           type="button"
-          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-50"
+          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-500 hover:text-neutral-900 flex items-center justify-center transition-all cursor-pointer z-50"
         >
           ✕
         </button>
@@ -473,7 +473,7 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.id = "quick-view-toast";
   toast.className = `
-    fixed bottom-6 right-6 z-[99999] bg-[#1A1A1A] text-white
+    fixed bottom-6 right-6 z-[99999] bg-neutral-900 text-white
     text-sm font-medium px-5 py-3 rounded-lg shadow-xl
   `;
   toast.textContent = message;

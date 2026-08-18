@@ -36,7 +36,7 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
   const pagesHtml = pages
     .map((page) => {
       if (page === "...") {
-        return /*html*/ `<span class="px-1 md:px-2 text-gray-400 text-xs md:text-sm select-none">...</span>`
+        return /*html*/ `<span class="px-1 md:px-2 text-neutral-400 text-xs md:text-sm select-none">...</span>`
       }
 
       const isActive = page === currentPage
@@ -47,7 +47,7 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
           class="js-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer ${
             isActive
               ? "bg-[#00B307] text-white shadow-sm scale-105"
-              : "text-gray-700 bg-white hover:bg-gray-100 hover:text-[#00B307]"
+              : "text-neutral-700 bg-white hover:bg-neutral-100 hover:text-[#00B307]"
           }"
         >
           ${page}

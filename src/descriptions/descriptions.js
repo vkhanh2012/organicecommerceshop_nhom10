@@ -18,7 +18,7 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
   const tabsHtml = TAB_LINKS.map(tab => {
     const isActive = tab.key === activeTabKey;
     return `
-      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-primary font-semibold' : 'text-gray-500 hover:text-gray-900'}">
+      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-neutral-900 border-b-2 border-primary font-semibold' : 'text-neutral-500 hover:text-neutral-900'}">
         ${tab.label}
       </a>
     `;
@@ -47,7 +47,7 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
       </div>
       
       <!-- THANH TABS CHUYỂN ĐỔI (Descriptions, Additional Information, Customer Feedback) -->
-      <div class="border-b border-gray-200 flex justify-center gap-10">
+      <div class="border-b border-neutral-200 flex justify-center gap-10">
         ${tabsHtml}
       </div>
 

@@ -53,14 +53,14 @@ export function renderTestimonialCardComponent(
   const testimonialHtml = testimonialData
     .map(
       (items) => /*html*/ `
-    <div class="flex flex-col justify-between bg-white w-full h-full min-h-[220px] p-4 sm:p-5 md:p-6 shadow-md border border-gray-100 rounded-lg">
+    <div class="flex flex-col justify-between bg-white w-full h-full min-h-[220px] p-4 sm:p-5 md:p-6 shadow-md border border-neutral-100 rounded-lg">
         <!--Dấu nháy kép (icon)-->
         <div>
             <div class="w-[24px] h-[20px] sm:w-[28px] sm:h-[23px] md:w-[32px] md:h-[26px] flex items-center justify-center">
                 ${quoteIcon}
             </div>
              <!--Phần bình luận-->
-             <p class="font-['Poppins'] text-gray-700 text-sm md:text-base mt-2 sm:mt-3 md:mt-4 mb-4 sm:mb-5 md:mb-6 text-left">
+             <p class="font-['Poppins'] text-neutral-700 text-sm md:text-base mt-2 sm:mt-3 md:mt-4 mb-4 sm:mb-5 md:mb-6 text-left">
                 ${items.content}
              </p>
              <div class="flex flex-row items-center justify-between w-full pt-2 mt:auto">
@@ -68,8 +68,8 @@ export function renderTestimonialCardComponent(
               <div class="flex flex-row items-center gap-2 sm:gap-2 md:gap-3">
                 <img src="${items.author.avatar}" alt="${items.author.name}" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shrink-0"/>
                   <div class="flex flex-col justify-center items-start w-auto">
-                      <p class="font-bold text-gray-900">${items.author.name}</p>
-                      <p class="text-gray-400 text-xs md:text-sm">${items.author.role}</p>
+                      <p class="font-bold text-neutral-900">${items.author.name}</p>
+                      <p class="text-neutral-400 text-xs md:text-sm">${items.author.role}</p>
                   </div>
             </div>
             <!-- Sao của bình luận -->

@@ -8,7 +8,7 @@ export function renderDescriptionTab(product = {}) {
   ];
 
   const paragraphsHtml = paragraphs
-    .map(pText => `<p class="text-sm text-gray-500 leading-relaxed">${pText}</p>`)
+    .map(pText => `<p class="text-sm text-neutral-500 leading-relaxed">${pText}</p>`)
     .join("");
 
   // 2. Lấy danh sách các gạch đầu dòng tích xanh riêng của từng sản phẩm
@@ -27,7 +27,7 @@ export function renderDescriptionTab(product = {}) {
           <path d="M14.4173 7.125L8.68815 12.8542L6.08398 10.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <span class="text-sm text-gray-500 font-light">${feat}</span>
+      <span class="text-sm text-neutral-500 font-light">${feat}</span>
     </div>
   `).join("");
 
@@ -46,14 +46,14 @@ export function renderDescriptionTab(product = {}) {
           ${featuresHtml}
         </div>
         
-        <p class="text-sm text-gray-500 leading-relaxed pt-2">
+        <p class="text-sm text-neutral-500 leading-relaxed pt-2">
           Cras et diam maximus, accumsan sapien et, sollicitudin velit. Nulla blandit eros non turpis lobortis iaculis at ut massa.
         </p>
       </div>
     
       <!-- CỘT PHẢI: Khung ảnh/video minh họa của sản phẩm -->
       <div class="lg:col-span-5 space-y-6">
-        <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-gray-100 bg-white flex items-center justify-center p-4">
+        <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-neutral-100 bg-white flex items-center justify-center p-4">
           <img src="${sideImage}" alt="${product.name}" class="w-full h-full object-contain" />
         </div>
       </div>

@@ -18,7 +18,7 @@ export function renderSaleProducts(productsData = []) {
     <div class="flex items-center rounded-md bg-white border transition-all cursor-pointer group ${
       items.active
         ? " border-primary shadow-sm ring-1 ring-primary/20"
-        : "border-gray-100 hover:border-primary/50 hover:shadow-sm"
+        : "border-neutral-100 hover:border-primary/50 hover:shadow-sm"
     }">
         <!-- Khung hình nền -->
         <div class="w-28 h-28 p-1.25 flex items-center justify-center bg-white rounded-sm ">
@@ -28,13 +28,13 @@ export function renderSaleProducts(productsData = []) {
         <!--Khung Thông tin -->
         <div class="flex-1 min-w-0">
             <!-- Tên -->
-            <h4 class="text-sm text-gray-700 truncate group-hover:text-primary transition-colors">
+            <h4 class="text-sm text-neutral-700 truncate group-hover:text-primary transition-colors">
                 ${items.name}
             </h4>
             <!-- Giá -->
             <div class="flex items-center gap-0.5 mt-0.5">
-                <span class="text-[16px] font-medium text-gray-900">$${items.price.toFixed(2)}</span>
-                <span class="text-sm text-gray-400 line-through">$${items.originalPrice.toFixed(2)}</span>
+                <span class="text-[16px] font-medium text-neutral-900">$${items.price.toFixed(2)}</span>
+                <span class="text-sm text-neutral-400 line-through">$${items.originalPrice.toFixed(2)}</span>
             </div>
             <!-- Sao -->
             <div class="flex items-center gap-0.5 mt-1">
@@ -49,7 +49,7 @@ export function renderSaleProducts(productsData = []) {
   // Khung của tất cả sản phẩm
   return /*html*/ `
     <div class="pt-5 gap-3">
-        <h3 class="text-[20px] font-medium text-gray-900 mb-4">Sale Products</h3>
+        <h3 class="text-[20px] font-medium text-neutral-900 mb-4">Sale Products</h3>
         <div class="space-y-3">
             ${productsHtml}
         </div>

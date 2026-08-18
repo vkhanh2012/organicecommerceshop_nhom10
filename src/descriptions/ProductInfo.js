@@ -6,76 +6,76 @@ export function renderProductInfo(product) {
   }).join("");
   
   const tagsHtml = product.tags.map(tag => `
-    <a href="${tag.link}" class="text-gray-400 hover:text-[#1A1A1A] transition-colors">${tag.name}</a>
-  `).join(`<span class="text-gray-500">,</span>`);
+    <a href="${tag.link}" class="text-neutral-400 hover:text-neutral-900 transition-colors">${tag.name}</a>
+  `).join(`<span class="text-neutral-500">,</span>`);
 
   return /*html*/ `
     <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
     <div class="lg:col-span-6 flex flex-col justify-start">
         <div class="additional-info-row flex-wrap">
-          <h1 class="text-3xl font-semibold text-gray-900">${product.name}</h1>
+          <h1 class="text-3xl font-semibold text-neutral-900">${product.name}</h1>
           ${product.inStock ? `<span class="bg-[#20B526]/20 text-[#2C742F] text-xs font-semibold px-2.5 py-1 rounded">In Stock</span>` : ''}
         </div>
         
         <!-- Đánh giá sao & SKU -->
-        <div class="additional-info-row mt-3 text-sm text-gray-500 flex-wrap">
+        <div class="additional-info-row mt-3 text-sm text-neutral-500 flex-wrap">
           <div class="flex items-center gap-0.5 text-yellow-400">
             ${starsHtml}
           </div>
           <span>${product.reviewsCount} Review${product.reviewsCount > 1 ? 's' : ''}</span>
-          <span class="text-gray-300">•</span>
-          <span>SKU: <strong class="text-gray-700 font-medium">${product.sku}</strong></span>
+          <span class="text-neutral-300">•</span>
+          <span>SKU: <strong class="text-neutral-700 font-medium">${product.sku}</strong></span>
         </div>
 
         <!-- Giá sản phẩm -->
-        <div class="additional-info-row mt-5 pb-5 border-b border-gray-100 flex-wrap">
-          ${product.originalPrice ? `<span class="text-lg text-gray-400 line-through">$${product.originalPrice.toFixed(2)}</span>` : ''}
+        <div class="additional-info-row mt-5 pb-5 border-b border-neutral-100 flex-wrap">
+          ${product.originalPrice ? `<span class="text-lg text-neutral-400 line-through">$${product.originalPrice.toFixed(2)}</span>` : ''}
           <span class="text-2xl font-semibold text-primary">$${product.currentPrice.toFixed(2)}</span>
           ${product.discountLabel ? `<span class="bg-red-50 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">${product.discountLabel}</span>` : ''}
         </div>
 
         <!-- Brand & Share Button -->
-        <div class="flex items-center justify-between py-4 border-b border-gray-100 text-sm flex-wrap gap-4">
+        <div class="flex items-center justify-between py-4 border-b border-neutral-100 text-sm flex-wrap gap-4">
           <div class="flex items-center gap-2">
-            <span class="text-gray-500">Brand:</span>
+            <span class="text-neutral-500">Brand:</span>
             <div class="flex items-center gap-1">
               ${product.brandLogo ? `<img src="${product.brandLogo}" alt="${product.brand}" class="h-8 w-auto" />` : ''}
-              <span class="font-medium text-gray-900">${product.brand || 'FarmFresh'}</span>
+              <span class="font-medium text-neutral-900">${product.brand || 'FarmFresh'}</span>
             </div>
           </div>
           
           <!-- Share item -->
           <div class="flex items-center gap-2">
-            <span class="text-gray-500">Share item:</span>
+            <span class="text-neutral-500">Share item:</span>
             <div class="flex items-center gap-2">
               <a href="#" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-[#009e06] transition-colors" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
-              <a href="#" class="w-8 h-8 rounded-full text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors" aria-label="Twitter">
+              <a href="#" class="w-8 h-8 rounded-full text-neutral-600 hover:bg-neutral-100 flex items-center justify-center transition-colors" aria-label="Twitter">
                 ${SOCIAL_ICONS.twitter}
               </a>
-              <a href="#" class="w-8 h-8 rounded-full text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors" aria-label="Pinterest">
+              <a href="#" class="w-8 h-8 rounded-full text-neutral-600 hover:bg-neutral-100 flex items-center justify-center transition-colors" aria-label="Pinterest">
                 ${SOCIAL_ICONS.pinterest}
               </a>
-              <a href="#" class="w-8 h-8 rounded-full text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors" aria-label="Instagram">
+              <a href="#" class="w-8 h-8 rounded-full text-neutral-600 hover:bg-neutral-100 flex items-center justify-center transition-colors" aria-label="Instagram">
                 ${SOCIAL_ICONS.instagram}
               </a>
             </div>
           </div>
         </div>
         
-        <p class="text-sm text-gray-500 leading-relaxed mt-5">
+        <p class="text-sm text-neutral-500 leading-relaxed mt-5">
           ${product.description}
         </p>
         
         <!-- Chọn số lượng & Add to Cart -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 mt-6 pb-6 border-b border-gray-100">
+        <div class="flex flex-col sm:flex-row items-center gap-4 mt-6 pb-6 border-b border-neutral-100">
           
           <!-- 📌 Nút Chọn số lượng nằm ngang chuẩn hệt Shopping Cart -->
-          <div class="flex h-[44px] w-[124px] items-center justify-between rounded-full border border-gray-200 p-1 bg-white shrink-0 select-none">
+          <div class="flex h-[44px] w-[124px] items-center justify-between rounded-full border border-neutral-200 p-1 bg-white shrink-0 select-none">
             <button
               type="button"
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors shrink-0"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
               data-action="decrement"
             >
               <svg width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ export function renderProductInfo(product) {
             </button>
 
             <input
-              class="quantity-stepper-input w-10 text-center font-semibold text-sm text-gray-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              class="quantity-stepper-input w-10 text-center font-semibold text-sm text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               type="number"
               min="1"
               value="1"
@@ -92,7 +92,7 @@ export function renderProductInfo(product) {
 
             <button
               type="button"
-              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors shrink-0"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
               data-action="increment"
             >
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@ export function renderProductInfo(product) {
         <div class="mt-6 text-sm space-y-2">
           <div>
             <span class="text-black-500">Category:</span>
-            <a href="${product.category.link}" class="text-gray-400 font-medium hover:text-primary ml-1 transition-colors">${product.category.name}</a>
+            <a href="${product.category.link}" class="text-neutral-400 font-medium hover:text-primary ml-1 transition-colors">${product.category.name}</a>
           </div>
       
           <div class="flex items-start gap-1 flex-wrap">

@@ -41,11 +41,11 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
         <div class="flex items-center gap-4 pb-4 w-full">
               <!-- Cụm sort by -->
               <div class="flex items-center gap-2">
-                <span class="text-sm text-gray-500">Sort by:</span>
+                <span class="text-sm text-neutral-500">Sort by:</span>
                 <div class="relative min-w-41.5">
                   <select 
                     id="sort-select"
-                    class ="w-full px-3 py-2 border border-gray-200 rounded text-gray-700 bg-white cursor-pointer focus:outline-none focus:border-primary text-sm font-poppins"
+                    class ="w-full px-3 py-2 border border-neutral-200 rounded text-neutral-700 bg-white cursor-pointer focus:outline-none focus:border-primary text-sm font-poppins"
                     >
                       ${optionsHtml}
                   </select>

@@ -1,6 +1,6 @@
 export function renderFooterComponent() {
   return /*html*/ `
-    <footer class="bg-[#1A1A1A] text-gray-400 pt-16 pb-6">
+    <footer class="bg-neutral-900 text-neutral-400 pt-16 pb-6">
       <div class="container-custom">
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
@@ -24,7 +24,7 @@ export function renderFooterComponent() {
               <a href="tel:2195550114" class="text-white font-medium hover:text-primary border-b border-primary pb-0.5 transition-all">
                 (219) 555-0114
               </a>
-              <span class="text-gray-600">or</span>
+              <span class="text-neutral-600">or</span>
               <a href="mailto:Proxy@gmail.com" class="text-white font-medium hover:text-primary border-b border-primary pb-0.5 transition-all">
                 Proxy@gmail.com
               </a>
@@ -75,10 +75,10 @@ export function renderFooterComponent() {
           </div>
         </div>
         <!-- Copyright và Thanh toán -->
-        <div class="container-custom border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="container-custom border-t border-neutral-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           
           <!-- Copyright Info -->
-          <div class="text-sm font-light text-gray-500">
+          <div class="text-sm font-light text-neutral-500">
             Ecobazar eCommerce © 2021. All Rights Reserved
           </div>
           <!-- Thanh toán -->
@@ -114,7 +114,7 @@ export function renderFooterComponent() {
               </div>
             </div>
             <!-- Secure Payment -->
-            <div class="h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center gap-1.5 px-2">
+            <div class="h-8 rounded border border-neutral-800 bg-neutral-900 flex items-center gap-1.5 px-2">
              <svg width="55" height="26" viewBox="0 0 55 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_460_39913)">
             <rect width="11" height="11" fill="#1A1A1A"/>
