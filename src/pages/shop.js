@@ -2,11 +2,25 @@ import { renderSidebarComponent } from "/src/shop/sidebar.js"
 import { renderTopBar } from "/src/shop/topBar.js"
 import { initSaleProducts } from "/src/shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "/src/components/breadcrumbs.js"
-import { renderProductGrid } from "/src/shop/productcard.js"
+import { renderProductGrid } from "/src/components/productCard.js"
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
+import { renderQuickViewModal } from "/src/Quickview/quickview.js"
 
-// lưu trạng thái của trang
+const images = import.meta.glob("../assets/images/**/*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+export function getImageUrl(path = "") {
+  return images[`../assets${path}`] || path;
+}
+
+export function attachImageUrls(items = []) {
+  return items.map((item) => ({ ...item, image: getImageUrl(item.image) }));
+}
+
 const shopState = {
   currentPage: 1,
   productsPerPage: 6,
@@ -19,7 +33,10 @@ const shopState = {
 
 export async function initShopPage() {
   const response = await fetch(productsUrl)
-  const PRODUCT_DATA = await response.json()
+  let PRODUCT_DATA = await response.json()
+
+  // 📌 GẮN ĐƯỜNG DẪN ẢNH WEBP THẬT CHO TẤT CẢ SẢN PHẨM
+  PRODUCT_DATA = attachImageUrls(PRODUCT_DATA)
 
   const prices = PRODUCT_DATA.map((product) => product.price)
 
@@ -99,30 +116,30 @@ export async function initShopPage() {
   )
 
   function getFilterProducts() {
-  let products = [...PRODUCT_DATA]
+    let products = [...PRODUCT_DATA]
 
-  if (shopState.category !== "all") {
+    if (shopState.category !== "all") {
+      products = products.filter(
+        (product) =>
+          product.category == shopState.category,
+      )
+    }
+
     products = products.filter(
       (product) =>
-        product.category == shopState.category,
+        product.price >= shopState.minPrice &&
+        product.price <= shopState.maxPrice,
     )
+
+    if (shopState.rating > 0) {
+      products = products.filter(
+        (product) =>
+          product.rating >= shopState.rating,
+      )
+    }
+
+    return products
   }
-
-  products = products.filter(
-    (product) =>
-      product.price >= shopState.minPrice &&
-      product.price <= shopState.maxPrice,
-  )
-
-  if (shopState.rating > 0) {
-    products = products.filter(
-      (product) =>
-        product.rating >= shopState.rating,
-    )
-  }
-
-  return products
-}
 
   function getSortedProducts() {
     const products = getFilterProducts()
@@ -137,9 +154,6 @@ export async function initShopPage() {
         break
 
       case "rating":
-        // từ cao tới thấp
-        // products.sort((a, b) => b.rating - a.rating)
-        //thấp tới cao
         products.sort((a, b) => a.rating - b.rating)
         break
 
@@ -155,12 +169,9 @@ export async function initShopPage() {
   if (productGridContainer) {
     function renderShopProducts() {
       const sortedProducts = getSortedProducts()
-
       const totalProducts = sortedProducts.length
       
-      const resultCount =
-      document.getElementById("shop-result-count")
-
+      const resultCount = document.getElementById("shop-result-count")
       if (resultCount) {
         resultCount.textContent = totalProducts
       }
@@ -181,8 +192,7 @@ export async function initShopPage() {
       )
 
       productGridContainer.innerHTML = `
-        ${renderProductGrid(productsOnCurrentPage)}
-
+       ${renderProductGrid(productsOnCurrentPage, "shop")}
         <div id="shop-pagination">
           ${renderPagination({
             currentPage: shopState.currentPage,
@@ -193,7 +203,6 @@ export async function initShopPage() {
     }
 
     const sortSelect = document.getElementById("sort-select")
-
     if (sortSelect) {
       sortSelect.addEventListener("change", (event) => {
         shopState.sortBy = event.target.value
@@ -203,41 +212,32 @@ export async function initShopPage() {
     }
 
     if (sideBarContainer) {
-  sideBarContainer.addEventListener("change", (event) => {
+      sideBarContainer.addEventListener("change", (event) => {
+        if (event.target.name === "category") {
+          shopState.category = event.target.value
+          shopState.currentPage = 1
+          renderShopProducts()
+        }
 
-    if (event.target.name === "category") {
-      shopState.category = event.target.value
-      shopState.currentPage = 1
+        if (event.target.name === "rating") {
+          const ratingInputs = sideBarContainer.querySelectorAll('input[name="rating"]')
+          ratingInputs.forEach((input) => {
+            if (input !== event.target) {
+              input.checked = false
+            }
+          })
 
-      renderShopProducts()
-    }
+          if (event.target.checked) {
+            shopState.rating = Number(event.target.value)
+          } else {
+            shopState.rating = 0
+          }
 
-    if (event.target.name === "rating") {
-
-      const ratingInputs =
-        sideBarContainer.querySelectorAll(
-          'input[name="rating"]',
-        )
-
-      ratingInputs.forEach((input) => {
-        if (input !== event.target) {
-          input.checked = false
+          shopState.currentPage = 1
+          renderShopProducts()
         }
       })
-
-      if (event.target.checked) {
-        shopState.rating =
-          Number(event.target.value)
-      } else {
-        shopState.rating = 0
-      }
-
-      shopState.currentPage = 1
-
-      renderShopProducts()
     }
-  })
-}
 
     const minPriceInput = document.getElementById("min-price")
     const maxPriceInput = document.getElementById("max-price")
@@ -248,7 +248,6 @@ export async function initShopPage() {
       let minValue = Number(minPriceInput.value)
       let maxValue = Number(maxPriceInput.value)
 
-      // Không cho min vượt qua max
       if (minValue > maxValue) {
         minValue = maxValue
         minPriceInput.value = minValue
@@ -256,66 +255,34 @@ export async function initShopPage() {
 
       shopState.minPrice = minValue
       shopState.maxPrice = maxValue
-
       shopState.currentPage = 1
 
-      // Đổi số tiền hiển thị
-      priceValue.textContent = `$${minValue} — $${maxValue}`
+      if (priceValue) priceValue.textContent = `$${minValue} — $${maxValue}`
 
-      // Giá thấp nhất / cao nhất của thanh
       const min = Number(minPriceInput.min)
       const max = Number(minPriceInput.max)
+      const leftPercent = ((minValue - min) / (max - min)) * 100
+      const rightPercent = ((maxValue - min) / (max - min)) * 100
 
-      // Tính vị trí của nút MIN
-      const leftPercent =
-        ((minValue - min) / (max - min)) * 100
-
-      // Tính vị trí của nút MAX
-      const rightPercent =
-        ((maxValue - min) / (max - min)) * 100
-
-      // Tô màu primary giữa 2 nút
-      priceProgress.style.left = `${leftPercent}%`
-      priceProgress.style.width = `${rightPercent - leftPercent}%`
+      if (priceProgress) {
+        priceProgress.style.left = `${leftPercent}%`
+        priceProgress.style.width = `${rightPercent - leftPercent}%`
+      }
 
       renderShopProducts()
     }
 
-    if (
-      minPriceInput &&
-      maxPriceInput &&
-      priceValue &&
-      priceProgress
-    ) {
-      minPriceInput.addEventListener(
-        "input",
-        updatePriceFilter,
-      )
-
-      maxPriceInput.addEventListener(
-        "input",
-        updatePriceFilter,
-      )
-
-      // Cập nhật thanh màu xanh lúc mới mở trang
+    if (minPriceInput && maxPriceInput) {
+      minPriceInput.addEventListener("input", updatePriceFilter)
+      maxPriceInput.addEventListener("input", updatePriceFilter)
       updatePriceFilter()
     }
 
     productGridContainer.addEventListener("click", (event) => {
       const pageButton = event.target.closest("[data-page]")
+      if (!pageButton || pageButton.disabled) return
 
-      if (!pageButton) {
-        return
-      }
-
-      if (pageButton.disabled) {
-        return
-      }
-
-      shopState.currentPage = Number(
-        pageButton.dataset.page,
-      )
-
+      shopState.currentPage = Number(pageButton.dataset.page)
       renderShopProducts()
     })
 

@@ -14,7 +14,7 @@ import { removeProduct, saveCart } from "../shopping_cart/cartData.js";
 const NAV_LINKS = [
   { label: "Home", href: "./index.html" },
   { label: "Shop", href: "./shop.html" },
-  { label: "Pages", href: "/" },
+  { label: "Pages", href: "/descriptions.html" },
   { label: "Blog", href: "/" },
   { label: "About Us", href: "./about.html" },
   { label: "Contact Us", href: "/" },

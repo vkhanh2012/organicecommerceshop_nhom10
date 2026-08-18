@@ -11,8 +11,8 @@ export function cartTotal(cart) {
         <div class="flex justify-between py-3 text-sm"><span class="text-neutral-700">Shipping:</span><span class="font-medium">Free</span></div>
         <div class="flex justify-between py-3"><span class="text-neutral-700">Total:</span><strong class="font-semibold">${money(total)}</strong></div>
       </div>
-      ${cart.length
-        ? `<a href="./checkout.html" class="mt-2 flex w-full cursor-pointer justify-center rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white">Proceed to checkout</a>`
-        : `<button type="button" disabled class="mt-2 w-full cursor-not-allowed rounded-full bg-neutral-100 px-6 py-4 text-sm font-semibold text-neutral-400">Proceed to checkout</button>`}
+
+      <!-- data-action="checkout" -->
+      <button data-action="checkout" class="mt-2 w-full cursor-pointer rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" ${cart.length ? "" : "disabled"}>Proceed to checkout</button>
     </aside>`;
 }

@@ -7,7 +7,13 @@
     "rating": 4,
     "saleTag": "Sale 25%",
     "category": "Fresh Fruit",
-    "image": "/images/product/green-apple.webp"
+    "image": "/images/product/green-apple.webp",
+    "thumbnails": [
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp"
+    ]
   },
   {
     "id": 2,
@@ -15,10 +21,15 @@
     "price": 20,
     "oldPrice": null,
     "rating": 1,
-    "rating": 1,
     "saleTag": null,
     "category": "Fresh Fruit",
-    "image": "/images/product/fresh-indian-malta.webp"
+    "image": "/images/product/fresh-indian-malta.webp",
+    "thumbnails": [
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp"
+    ]
   },
   {
     "id": 3,
@@ -26,10 +37,15 @@
     "price": 12,
     "oldPrice": null,
     "rating": 2,
-    "rating": 2,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/chinese-cabbage.webp"
+    "image": "/images/product/chinese-cabbage.webp",
+    "thumbnails": [
+      "/src/assets/images/cabbage1.svg",
+      "/src/assets/images/cabbage2.svg",
+      "/src/assets/images/cabbage3.svg",
+      "/src/assets/images/cabbage4.svg"
+    ]
   },
   {
     "id": 4,
@@ -37,10 +53,15 @@
     "price": 9,
     "oldPrice": null,
     "rating": 3,
-    "rating": 3,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/green-lecctuce.webp"
+    "image": "/images/product/green-lecctuce.webp",
+    "thumbnails": [
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp"
+    ]
   },
   {
     "id": 5,
@@ -50,7 +71,13 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/eggplant.webp"
+    "image": "/images/product/eggplant.webp",
+    "thumbnails": [
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp"
+    ]
   },
   {
     "id": 6,
@@ -60,7 +87,13 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/big-potatoes.webp"
+    "image": "/images/product/big-potatoes.webp",
+    "thumbnails": [
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp"
+    ]
   },
   {
     "id": 7,
@@ -70,7 +103,13 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/corn.webp"
+    "image": "/images/product/corn.webp",
+    "thumbnails": [
+      "/images/product/corn.webp",
+      "/images/product/corn.webp",
+      "/images/product/corn.webp",
+      "/images/product/corn.webp"
+    ]
   },
   {
     "id": 8,
@@ -80,7 +119,13 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/fresh-cauliflower.webp"
+    "image": "/images/product/fresh-cauliflower.webp",
+    "thumbnails": [
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp"
+    ]
   },
   {
     "id": 9,
@@ -90,7 +135,13 @@
     "rating": 4,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
-    "image": "/images/product/green-capsicum.webp"
+    "image": "/images/product/green-capsicum.webp",
+    "thumbnails": [
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp"
+    ]
   },
   {
     "id": 10,
@@ -100,7 +151,13 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/green-chilli.webp"
+    "image": "/images/product/green-chilli.webp",
+    "thumbnails": [
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp"
+    ]
   },
   {
     "id": 11,
@@ -110,7 +167,13 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
-    "image": "/images/product/red-capsicum.webp"
+    "image": "/images/product/red-capsicum.webp",
+    "thumbnails": [
+      "/src/assets/images/ProductImage/redcapsicum.png",
+      "/src/assets/images/ProductImage/redcapsicum1.png",
+      "/src/assets/images/ProductImage/redcapsicum2.png",
+      "/src/assets/images/ProductImage/redcapsicum3.png"
+    ]
   },
   {
     "id": 12,
@@ -120,7 +183,13 @@
     "rating": 5,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
-    "image": "/images/product/red-tomatos.webp"
+    "image": "/images/product/red-tomatos.webp",
+    "thumbnails": [
+      "/src/assets/images/ProductImage/tomato.png",
+      "/src/assets/images/ProductImage/tomato1.svg",
+      "/src/assets/images/ProductImage/tomato2.png",
+      "/src/assets/images/ProductImage/tomato3.png"
+    ]
   },
   {
     "id": 13,
@@ -130,6 +199,12 @@
     "rating": 4,
     "saleTag": null,
     "category": "Fresh Fruit",
-    "image": "/images/product/surjapur-mango.webp"
+    "image": "/images/product/surjapur-mango.webp",
+    "thumbnails": [
+      "/src/assets/images/ProductImage/mango.png",
+      "/src/assets/images/ProductImage/mango1.png",
+      "/src/assets/images/ProductImage/mango2.svg",
+      "/src/assets/images/ProductImage/mango3.svg"
+    ]
   }
 ]

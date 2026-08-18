@@ -98,3 +98,24 @@ export function changeQuantity(cart, productId, change) {
 export function removeProduct(cart, productId) {
   return normalizeCart(cart).filter((product) => String(product.id) !== String(productId));
 }
+export function addProductToCart(product, quantity = 1) {
+  const cart = getCart();
+
+  const existing = cart.find((item) => item.id === product.id);
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      image: product.mainImage || product.image,
+      price: product.currentPrice || product.price,
+      quantity: quantity,
+    });
+  }
+
+  saveCart(cart);
+
+  return cart;
+}
