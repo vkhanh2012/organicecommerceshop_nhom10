@@ -33,6 +33,8 @@ export function renderCheckout(cart = getCart()) {
         { label: "Checkout", link: "#", active: true },
       ])}
 
+      <h1 class="sr-only">Checkout</h1>
+
       <!-- 2. FORM BILLING & ORDER SUMMARY -->
       <div class="container-custom mx-auto px-4 md:px-8 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
