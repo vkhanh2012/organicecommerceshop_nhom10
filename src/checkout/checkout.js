@@ -60,21 +60,21 @@ export function renderCheckout(cart = getCart()) {
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
   <div>
     <label class="block text-xs font-medium text-gray-700 mb-1.5">Country / Region</label>
-    <select id="country-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
+    <select id="country-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-primary cursor-pointer">
       ${renderCountryOptions()}
     </select>
   </div>
 
   <div>
     <label class="block text-xs font-medium text-gray-700 mb-1.5">States</label>
-    <select id="state-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
+    <select id="state-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-primary cursor-pointer">
       ${renderStateOptions()}
     </select>
   </div>
 
   <div>
     <label class="block text-xs font-medium text-gray-700 mb-1.5">Zip Code</label>
-    <input type="text" placeholder="Zip Code" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+    <input type="text" placeholder="Zip Code" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary" />
   </div>
 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -89,7 +89,7 @@ export function renderCheckout(cart = getCart()) {
                 </div>
 
                 <div class="flex items-center gap-2 pt-2">
-                  <input type="checkbox" id="ship-different" class="w-4 h-4 text-[#00B207] rounded border-gray-300 accent-[#00B207] cursor-pointer" />
+                  <input type="checkbox" id="ship-different" class="w-4 h-4 text-primary rounded border-gray-300 accent-primary cursor-pointer" />
                   <label for="ship-different" class="text-xs text-gray-600 cursor-pointer select-none">Ship to a different address</label>
                 </div>
               </form>
@@ -99,7 +99,7 @@ export function renderCheckout(cart = getCart()) {
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Additional Info</h3>
               <div>
                 <label class="form-label">Order Notes <span class="text-gray-400 font-normal">(Optional)</span></label>
-                <textarea rows="4" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full p-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207] resize-none"></textarea>
+                <textarea rows="4" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full p-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary resize-none"></textarea>
               </div>
             </div>
           </div>
@@ -133,21 +133,21 @@ export function renderCheckout(cart = getCart()) {
                 <h4 class="text-sm font-semibold text-gray-900">Payment Method</h4>
                 <div class="space-y-2.5">
                   <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="cod" checked class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
+                    <input type="radio" name="payment" value="cod" checked class="w-4 h-4 text-primary accent-primary cursor-pointer" />
                     <span>Cash on Delivery</span>
                   </label>
                   <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="paypal" class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
+                    <input type="radio" name="payment" value="paypal" class="w-4 h-4 text-primary accent-primary cursor-pointer" />
                     <span>Paypal</span>
                   </label>
                   <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="amazon" class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
+                    <input type="radio" name="payment" value="amazon" class="w-4 h-4 text-primary accent-primary cursor-pointer" />
                     <span>Amazon Pay</span>
                   </label>
                 </div>
               </div>
 
-              <button class="w-full h-12 bg-[#00B207] hover:bg-[#009e06] text-white font-semibold rounded-full shadow-md transition-all duration-200 cursor-pointer select-none text-sm tracking-wide">
+              <button class="w-full h-12 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full shadow-md transition-all duration-200 cursor-pointer select-none text-sm tracking-wide">
                 Place Order
               </button>
             </div>

@@ -2,7 +2,7 @@ export function renderImage(product) {
   const thumbnailsHtml = product.thumbnails.map((thumb, index) => {
     const isSelected = thumb === product.mainImage || index === 0;
     return `
-      <div data-action="select-thumb" data-src="${thumb}" class="thumbnail-item w-[80px] h-[90px] border ${isSelected ? 'border-[#00B207]' : 'border-gray-200'} hover:border-[#00B207] rounded-lg overflow-hidden p-1 bg-white cursor-pointer transition-all flex items-center justify-center">
+      <div data-action="select-thumb" data-src="${thumb}" class="thumbnail-item w-[80px] h-[90px] border ${isSelected ? 'border-primary' : 'border-gray-200'} hover:border-primary rounded-lg overflow-hidden p-1 bg-white cursor-pointer transition-all flex items-center justify-center">
         <img src="${thumb}" alt="${product.name} Thumbnail ${index + 1}" class="w-full h-full object-contain pointer-events-none" />
       </div>
     `;
@@ -49,11 +49,11 @@ export function bindImageEvents(container = document) {
 
         // Đổi màu viền active xanh lá cho ảnh nhỏ vừa bấm
         thumbs.forEach(t => {
-          t.classList.remove("border-[#00B207]");
+          t.classList.remove("border-primary");
           t.classList.add("border-gray-200");
         });
         thumb.classList.remove("border-gray-200");
-        thumb.classList.add("border-[#00B207]");
+        thumb.classList.add("border-primary");
       }
     });
   });

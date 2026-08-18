@@ -21,7 +21,7 @@ export function renderDescriptionTab(product = {}) {
 
   const featuresHtml = featureList.map(feat => `
     <div class="flex items-start gap-3">
-      <div class="w-5 h-5 bg-[#00B207] text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+      <div class="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="20" height="20" rx="10" fill="#00B307"/>
           <path d="M14.4173 7.125L8.68815 12.8542L6.08398 10.25" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

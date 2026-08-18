@@ -80,7 +80,7 @@ export function renderCustomerFeedbackTab(product) {
 
         <div class="pt-2">
           <button
-            class="bg-[#00B207]/10 hover:bg-[#00B207]/20 text-[#00B207] font-semibold text-sm py-2.5 px-8 rounded-full transition-all duration-200 cursor-pointer"
+            class="bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-sm py-2.5 px-8 rounded-full transition-all duration-200 cursor-pointer"
           >
             Load More
           </button>

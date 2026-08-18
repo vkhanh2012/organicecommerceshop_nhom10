@@ -18,7 +18,7 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
   const tabsHtml = TAB_LINKS.map(tab => {
     const isActive = tab.key === activeTabKey;
     return `
-      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-[#00B207] font-semibold' : 'text-gray-500 hover:text-gray-900'}">
+      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-primary font-semibold' : 'text-gray-500 hover:text-gray-900'}">
         ${tab.label}
       </a>
     `;

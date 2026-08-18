@@ -82,7 +82,7 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
 
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="section-heading">All Categories</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

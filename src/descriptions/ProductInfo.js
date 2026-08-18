@@ -12,13 +12,13 @@ export function renderProductInfo(product) {
   return /*html*/ `
     <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
     <div class="lg:col-span-6 flex flex-col justify-start">
-        <div class="flex items-center gap-3 flex-wrap">
+        <div class="additional-info-row flex-wrap">
           <h1 class="text-3xl font-semibold text-gray-900">${product.name}</h1>
           ${product.inStock ? `<span class="bg-[#20B526]/20 text-[#2C742F] text-xs font-semibold px-2.5 py-1 rounded">In Stock</span>` : ''}
         </div>
         
         <!-- Đánh giá sao & SKU -->
-        <div class="flex items-center gap-3 mt-3 text-sm text-gray-500 flex-wrap">
+        <div class="additional-info-row mt-3 text-sm text-gray-500 flex-wrap">
           <div class="flex items-center gap-0.5 text-yellow-400">
             ${starsHtml}
           </div>
@@ -28,10 +28,10 @@ export function renderProductInfo(product) {
         </div>
 
         <!-- Giá sản phẩm -->
-        <div class="flex items-center gap-3 mt-5 pb-5 border-b border-gray-100 flex-wrap">
+        <div class="additional-info-row mt-5 pb-5 border-b border-gray-100 flex-wrap">
           ${product.originalPrice ? `<span class="text-lg text-gray-400 line-through">$${product.originalPrice.toFixed(2)}</span>` : ''}
-          <span class="text-2xl font-semibold text-[#00B207]">$${product.currentPrice.toFixed(2)}</span>
-          ${product.discountLabel ? `<span class="bg-red-50 text-[#00B207] text-xs font-semibold px-2.5 py-1 rounded-full">${product.discountLabel}</span>` : ''}
+          <span class="text-2xl font-semibold text-primary">$${product.currentPrice.toFixed(2)}</span>
+          ${product.discountLabel ? `<span class="bg-red-50 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">${product.discountLabel}</span>` : ''}
         </div>
 
         <!-- Brand & Share Button -->
@@ -48,7 +48,7 @@ export function renderProductInfo(product) {
           <div class="flex items-center gap-2">
             <span class="text-gray-500">Share item:</span>
             <div class="flex items-center gap-2">
-              <a href="#" class="w-8 h-8 rounded-full bg-[#00B207] text-white flex items-center justify-center hover:bg-[#009e06] transition-colors" aria-label="Facebook">
+              <a href="#" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-[#009e06] transition-colors" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
               <a href="#" class="w-8 h-8 rounded-full text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors" aria-label="Twitter">
@@ -102,7 +102,7 @@ export function renderProductInfo(product) {
           </div>
 
           <!-- Nút Add to Cart -->
-          <button data-action="add-to-cart" class="w-full max-w-[447px] h-[51px] bg-[#00B307] hover:bg-[#00B207] text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none">
+          <button data-action="add-to-cart" class="w-full max-w-[447px] h-[51px] bg-[#00B307] hover:bg-primary text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none">
             <span class="text-[15px] tracking-wide font-medium">Add to Cart</span>
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.81706 6.48336H2.31706L0.650391 15.65H15.6504L13.9837 6.48336H11.4837M4.81706 6.48336V3.98336C4.81706 2.14241 6.30944 0.650024 8.15039 0.650024C9.99134 0.650024 11.4837 2.14241 11.4837 3.98336V6.48336M4.81706 6.48336H11.4837M4.81706 6.48336V8.98336M11.4837 6.48336V8.98336" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -110,7 +110,7 @@ export function renderProductInfo(product) {
           </button>
 
           <!-- Wishlist -->
-          <button class="w-12 h-12 rounded-full bg-[#00B207]/8 hover:bg-[#00B207]/15 text-[#00B207] flex items-center justify-center transition-all cursor-pointer shrink-0" aria-label="Thêm vào danh sách yêu thích">
+          <button class="w-12 h-12 rounded-full bg-primary/8 hover:bg-primary/15 text-primary flex items-center justify-center transition-all cursor-pointer shrink-0" aria-label="Thêm vào danh sách yêu thích">
             <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="52" height="52" rx="26" fill="#20B526" fill-opacity="0.1"/>
               <path d="M25.9996 33.5451C9.33328 24.3334 20.9999 14.3334 25.9996 20.6567C30.9999 14.3334 42.6666 24.3334 25.9996 33.5451Z" stroke="#2C742F" stroke-width="1.5"/>
@@ -121,7 +121,7 @@ export function renderProductInfo(product) {
         <div class="mt-6 text-sm space-y-2">
           <div>
             <span class="text-black-500">Category:</span>
-            <a href="${product.category.link}" class="text-gray-400 font-medium hover:text-[#00B207] ml-1 transition-colors">${product.category.name}</a>
+            <a href="${product.category.link}" class="text-gray-400 font-medium hover:text-primary ml-1 transition-colors">${product.category.name}</a>
           </div>
       
           <div class="flex items-start gap-1 flex-wrap">

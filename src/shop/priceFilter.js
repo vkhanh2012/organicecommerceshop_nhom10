@@ -19,7 +19,7 @@ export function renderPriceFilter(
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
 
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="text-xl font-medium text-neutral-900">
           Price
         </h3>
