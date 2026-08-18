@@ -155,11 +155,38 @@ export function renderProductCard(
 
 
   // ==========================================
+  // DỮ LIỆU CHO QUICK VIEW
+  // ==========================================
+
+  const quickViewData = encodeURIComponent(
+    JSON.stringify({
+      id,
+      name,
+      price,
+      oldPrice,
+      image,
+      rating
+    })
+  );
+
+
+  // ==========================================
+  // LINK DESCRIPTION
+  // ==========================================
+
+  const descriptionUrl =
+    `./descriptions.html?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
+
+
+  // ==========================================
   // PRODUCT CARD
   // ==========================================
 
   return `
-    <article class="${CLASS.card}">
+    <article
+      class="${CLASS.card}"
+      data-product-id="${id}"
+    >
 
       <!-- PRODUCT IMAGE -->
 
@@ -167,15 +194,20 @@ export function renderProductCard(
 
         ${tagsHtml}
 
-        <img
-          src="${image}"
-          alt="${name}"
-          width="254"
-          height="230"
-          loading="lazy"
-          decoding="async"
-          class="${CLASS.image}"
+        <a
+          href="${descriptionUrl}"
+          class="block w-full h-full"
         >
+          <img
+            src="${image}"
+            alt="${name}"
+            width="254"
+            height="230"
+            loading="lazy"
+            decoding="async"
+            class="${CLASS.image}"
+          >
+        </a>
 
 
         <!-- ACTION BUTTONS -->
@@ -191,13 +223,18 @@ export function renderProductCard(
           </button>
 
 
-          <button
-            type="button"
-            class="${CLASS.actionBtn}"
-            aria-label="Quick view"
-          >
-            ${iconEye}
-          </button>
+        <button 
+  type="button" 
+  data-action="quick-view"
+  data-id="${id}"
+  data-product-name="${name}"
+  data-product-price="${price}"
+  data-product-image="${image}"
+  class="${CLASS.actionBtn}" 
+  aria-label="Xem nhanh"
+>
+  ${iconEye}
+</button>
 
         </div>
 
@@ -210,9 +247,12 @@ export function renderProductCard(
 
         <!-- PRODUCT NAME -->
 
-        <div class="${CLASS.name}">
+        <a
+          href="${descriptionUrl}"
+          class="${CLASS.name} block"
+        >
           ${name}
-        </div>
+        </a>
 
 
         <!-- PRICE -->

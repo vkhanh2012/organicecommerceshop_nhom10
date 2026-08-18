@@ -20,7 +20,34 @@ import { initWishlistPage } from "./pages/wishlist.js";
 import { initSignInPage } from "./pages/signin.js";
 import { initCheckoutPage } from "./pages/checkoutpage.js";
 import { initDetailsPage } from "./pages/details.js";
-import { addProduct, getCart, getCartSummary, saveCart } from "./shopping_cart/cartData.js";
+
+import {
+  getCart,
+  getCartSummary
+} from "./shopping_cart/cartData.js";
+
+
+// =====================================================
+// QUICK VIEW
+// =====================================================
+//
+// QUAN TRỌNG:
+// Nếu file quickview.js của bạn nằm ở:
+// src/components/quickview.js
+// thì giữ dòng dưới.
+//
+// Nếu nó nằm ở:
+// src/shop/quickview.js
+// thì đổi thành:
+// import "./shop/quickview.js";
+//
+
+import "./Quickview/quickview.js";
+
+
+// =====================================================
+// NAVIGATION
+// =====================================================
 
 function initNavigation() {
 
@@ -101,73 +128,193 @@ function initFooter() {
 // =====================================================
 
 function initNewsletter() {
-  const newsletter = document.getElementById("newsletter-container");
+
+  const newsletter =
+    document.getElementById(
+      "newsletter-container"
+    );
+
   if (!newsletter) return;
 
   newsletter.innerHTML =
     renderNewsletterComponent();
 }
 
+
 // =====================================================
-// ĐIỀU HƯỚNG CÁC TRANG TRONG ỨNG DỤNG
+// HOMEPAGE
 // =====================================================
 
-if (document.getElementById("homepage-container")) {
+if (
+  document.getElementById(
+    "homepage-container"
+  )
+) {
+
   initNavigation();
-  initHomepage().then(() => initNewsletterPopupPage());
+
+  initHomepage()
+    .then(() => {
+      initNewsletterPopupPage();
+    });
+
   initFooter();
 }
 
-if (document.getElementById("cart-container")) {
-  initShoppingCartPage();
-}
 
-if (document.getElementById("product-grid-container")){
+// =====================================================
+// SHOP
+// =====================================================
+
+if (
+  document.getElementById(
+    "product-grid-container"
+  )
+) {
+
   initNavigation();
+
   initShopPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-if (document.getElementById("signup-container")) {
+
+// =====================================================
+// SHOPPING CART
+// =====================================================
+
+if (
+  document.getElementById(
+    "cart-container"
+  )
+) {
+
   initNavigation();
+
+  initShoppingCartPage();
+
+  initFooter();
+}
+
+
+// =====================================================
+// SIGN UP
+// =====================================================
+
+if (
+  document.getElementById(
+    "signup-container"
+  )
+) {
+
+  initNavigation();
+
   initSignupPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-if (document.getElementById("signin-container")){
+
+// =====================================================
+// SIGN IN
+// =====================================================
+
+if (
+  document.getElementById(
+    "signin-container"
+  )
+) {
+
   initNavigation();
+
   initSignInPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-if (document.getElementById("aboutus-section")) {
+
+// =====================================================
+// ABOUT
+// =====================================================
+
+if (
+  document.getElementById(
+    "aboutus-section"
+  )
+) {
+
   initNavigation();
+
   initAboutPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-if (document.getElementById("wishlist-section")) {
+
+// =====================================================
+// WISHLIST
+// =====================================================
+
+if (
+  document.getElementById(
+    "wishlist-section"
+  )
+) {
+
   initNavigation();
+
   initWishlistPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-if (document.getElementById("checkout-container")) {
+
+// =====================================================
+// CHECKOUT
+// =====================================================
+
+if (
+  document.getElementById(
+    "checkout-container"
+  )
+) {
+
   initNavigation();
+
   initCheckoutPage();
+
   initNewsletter();
+
   initFooter();
 }
 
-// 📌 ĐÂY LÀ ĐOẠN ĐÃ BỔ SUNG ĐỂ MỞ TRANG CHI TIẾT SẢN PHẨM!
-if (document.getElementById("description-container")) {
+
+// =====================================================
+// DESCRIPTION
+// =====================================================
+
+if (
+  document.getElementById(
+    "description-container"
+  )
+) {
+
   initNavigation();
+
   initDetailsPage();
+
   initNewsletter();
+
   initFooter();
 }

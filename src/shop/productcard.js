@@ -146,10 +146,11 @@ export function renderProductCard(p = {}) {
 
   return `
 
-    <article
-      class="${CLASS.card}"
-      data-id="${id}"
-    >
+  <article 
+  class="${CLASS.card}" 
+  data-product-id="${id}"
+  data-id="${id}"
+>
 
 
       <!-- ========================================= -->

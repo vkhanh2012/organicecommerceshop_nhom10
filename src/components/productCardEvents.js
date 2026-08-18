@@ -1,173 +1,263 @@
+// src/components/productEvents.js
+
 import { openQuickView } from "../Quickview/quickview.js";
 import {
   getCart,
   saveCart
 } from "../shopping_cart/cartData.js";
 
-
-// ======================================================
-// PRODUCT CARD EVENTS
-// ======================================================
-
-export function bindProductCardEvents(root = document) {
-
-  // ====================================================
-  // QUICK VIEW
-  // ====================================================
-
-  root.addEventListener("click", (event) => {
-
-    const quickViewButton =
-      event.target.closest(
-        '[data-action="quick-view"]'
-      );
-
-    if (!quickViewButton) return;
+import productsData from "../data/products.json";
+import { attachImageUrls } from "../utils/assets.js";
 
 
-    // QUAN TRỌNG:
-    // Không cho click lan sang link description
+// =====================================================
+// LẤY DANH SÁCH PRODUCT
+// =====================================================
 
-    event.preventDefault();
-    event.stopPropagation();
+let productsCache = null;
 
+async function getAllProducts() {
+  if (productsCache) {
+    return productsCache;
+  }
 
-    const productId =
-      quickViewButton.dataset.id;
+  productsCache = attachImageUrls(productsData);
 
-
-    if (!productId) {
-      console.error(
-        "Không tìm thấy product ID"
-      );
-      return;
-    }
-
-
-    console.log(
-      "QUICK VIEW ID:",
-      productId
-    );
-
-
-    openQuickView(productId);
-  });
-
-
-  // ====================================================
-  // ADD TO CART
-  // ====================================================
-
-  root.addEventListener("click", (event) => {
-
-    const cartButton =
-      event.target.closest(
-        '[data-action="add-to-cart"]'
-      );
-
-    if (!cartButton) return;
-
-
-    event.preventDefault();
-    event.stopPropagation();
-
-
-    const id =
-      cartButton.dataset.cartId;
-
-    const name =
-      cartButton.dataset.cartName;
-
-    const image =
-      cartButton.dataset.cartImage;
-
-    const price =
-      Number(cartButton.dataset.cartPrice);
-
-
-    if (!id) return;
-
-
-    const cart = getCart();
-
-
-    const existing =
-      cart.find(
-        item =>
-          String(item.id) === String(id)
-      );
-
-
-    if (existing) {
-
-      existing.quantity =
-        Number(existing.quantity || 0) + 1;
-
-    } else {
-
-      cart.push({
-        id: id,
-        name: name,
-        image: image,
-        price: price,
-        quantity: 1
-      });
-
-    }
-
-
-    saveCart(cart);
-
-
-    console.log(
-      "Đã thêm vào cart:",
-      name
-    );
-
-
-    showCartToast(name);
-  });
-
+  return productsCache;
 }
 
 
-// ======================================================
-// TOAST
-// ======================================================
+// =====================================================
+// TÌM PRODUCT THEO ID
+// =====================================================
 
-function showCartToast(name) {
+async function findProductById(id) {
+  const products = await getAllProducts();
+
+  return products.find(
+    product => String(product.id) === String(id)
+  );
+}
+
+
+// =====================================================
+// ADD TO CART
+// =====================================================
+
+async function handleAddToCart(button) {
+
+  const id = button.dataset.id;
+
+  if (!id) {
+    console.error("Không có product id");
+    return;
+  }
+
+  const product = await findProductById(id);
+
+  if (!product) {
+    console.error("Không tìm thấy product:", id);
+    return;
+  }
+
+  const cart = getCart();
+
+  const existingProduct = cart.find(
+    item => String(item.id) === String(product.id)
+  );
+
+  if (existingProduct) {
+
+    existingProduct.quantity =
+      Number(existingProduct.quantity || 0) + 1;
+
+  } else {
+
+    cart.push({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: Number(product.price) || 0,
+      quantity: 1
+    });
+
+  }
+
+  saveCart(cart);
+
+  console.log("Đã thêm vào cart:", product);
+
+  showCartToast(product.name);
+}
+
+
+// =====================================================
+// TOAST
+// =====================================================
+
+function showCartToast(productName) {
 
   const oldToast =
-    document.getElementById(
-      "cart-toast"
-    );
+    document.getElementById("cart-toast");
 
   if (oldToast) {
     oldToast.remove();
   }
 
-
   const toast =
     document.createElement("div");
 
-
   toast.id = "cart-toast";
 
-
-  toast.className =
-    "fixed bottom-6 right-6 z-[9999] " +
-    "bg-[#1A1A1A] text-white " +
-    "px-5 py-3 rounded-lg shadow-xl";
-
+  toast.className = `
+    fixed
+    bottom-6
+    right-6
+    z-[9999]
+    bg-[#1A1A1A]
+    text-white
+    px-5
+    py-3
+    rounded-lg
+    shadow-xl
+    text-sm
+    font-medium
+  `;
 
   toast.textContent =
-    `${name} đã được thêm vào giỏ hàng`;
-
+    `${productName} đã được thêm vào giỏ hàng`;
 
   document.body.appendChild(toast);
-
 
   setTimeout(() => {
     toast.remove();
   }, 2500);
+}
+
+
+// =====================================================
+// QUICK VIEW
+// =====================================================
+
+async function handleQuickView(button) {
+
+  const id = button.dataset.id;
+
+  if (!id) {
+    console.error("Quick View không có product id");
+    return;
+  }
+
+  const product = await findProductById(id);
+
+  if (!product) {
+    console.error(
+      "Quick View không tìm thấy product:",
+      id
+    );
+
+    return;
+  }
+
+  console.log(
+    "QUICK VIEW PRODUCT:",
+    product
+  );
+
+  openQuickView(product);
+}
+
+
+// =====================================================
+// BIND PRODUCT EVENTS
+// =====================================================
+
+export function bindProductEvents(container = document) {
+
+  // ===================================================
+  // XÓA EVENT CŨ TRƯỚC KHI GẮN
+  // ===================================================
+
+  if (container.__productEventsBound) {
+    return;
+  }
+
+  container.__productEventsBound = true;
+
+
+  // ===================================================
+  // CLICK
+  // ===================================================
+
+  container.addEventListener(
+    "click",
+    async (event) => {
+
+      // ===============================================
+      // QUICK VIEW
+      // ===============================================
+
+      const quickViewButton =
+        event.target.closest(
+          '[data-action="quick-view"]'
+        );
+
+      if (quickViewButton) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        await handleQuickView(
+          quickViewButton
+        );
+
+        return;
+      }
+
+
+      // ===============================================
+      // ADD TO CART
+      // ===============================================
+
+      const addCartButton =
+        event.target.closest(
+          '[data-action="add-to-cart"]'
+        );
+
+      if (addCartButton) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        await handleAddToCart(
+          addCartButton
+        );
+
+        return;
+      }
+
+
+      // ===============================================
+      // WISHLIST
+      // ===============================================
+
+      const wishlistButton =
+        event.target.closest(
+          '[data-action="wishlist"]'
+        );
+
+      if (wishlistButton) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        wishlistButton.classList.toggle(
+          "text-red-500"
+        );
+
+        return;
+      }
+
+    }
+  );
 }

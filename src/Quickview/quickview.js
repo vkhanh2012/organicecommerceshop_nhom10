@@ -1,266 +1,1039 @@
-import { renderImage, bindImageEvents } from "../descriptions/Image.js";
-import { renderProductInfo } from "../descriptions/ProductInfo.js";
-import productData from "../data/productdata.json";
-import { getCart, saveCart } from "../shopping_cart/cartData.js";
+// src/Quickview/quickview.js
+
+import {
+  renderImage,
+  bindImageEvents
+} from "../descriptions/Image.js";
+
+import {
+  renderProductInfo
+} from "../descriptions/ProductInfo.js";
+
+import defaultProductData from "../data/productdata.json";
+
+import {
+  getCart,
+  saveCart
+} from "../shopping_cart/cartData.js";
+
 import productListJson from "../data/products.json";
 
-// Render HTML cho Modal Quick View
+import {
+  attachImageUrls
+} from "../utils/assets.js";
+
+
+// =====================================================
+// PRODUCT DATA
+// =====================================================
+
+const PRODUCTS = attachImageUrls(productListJson);
+
+
+// =====================================================
+// TÌM PRODUCT THEO ID
+// =====================================================
+
+function findProductById(id) {
+
+  if (id === undefined || id === null) {
+    return null;
+  }
+
+  return PRODUCTS.find(
+    product =>
+      String(product.id) === String(id)
+  ) || null;
+}
+
+
+// =====================================================
+// CHUẨN HÓA PRODUCT CHO QUICK VIEW
+// =====================================================
+
+function normalizeProduct(product) {
+
+  if (!product) {
+    return normalizeProduct(defaultProductData);
+  }
+
+  const image =
+    product.image ||
+    product.mainImage ||
+    defaultProductData.mainImage ||
+    "";
+
+  const thumbnails =
+    Array.isArray(product.thumbnails) &&
+    product.thumbnails.length > 0
+
+      ? product.thumbnails
+
+      : [
+          image,
+          image,
+          image,
+          image
+        ];
+
+
+  // -----------------------------------------------
+  // TAGS
+  // -----------------------------------------------
+
+  const tags =
+    Array.isArray(product.tags)
+
+      ? product.tags
+
+      : (
+          Array.isArray(defaultProductData.tags)
+            ? defaultProductData.tags
+            : []
+        );
+
+
+  // -----------------------------------------------
+  // FEEDBACKS
+  // -----------------------------------------------
+
+  const feedbacks =
+    Array.isArray(product.feedbacks)
+
+      ? product.feedbacks
+
+      : (
+          Array.isArray(defaultProductData.feedbacks)
+            ? defaultProductData.feedbacks
+            : []
+        );
+
+
+  // -----------------------------------------------
+  // ADDITIONAL INFO
+  // -----------------------------------------------
+
+  const defaultAdditionalInfo =
+    defaultProductData.additionalInfo || {};
+
+
+  const additionalInfo = {
+
+    ...defaultAdditionalInfo,
+
+    ...(product.additionalInfo || {}),
+
+    tags:
+      Array.isArray(product.additionalInfo?.tags)
+
+        ? product.additionalInfo.tags
+
+        : (
+            Array.isArray(defaultAdditionalInfo.tags)
+              ? defaultAdditionalInfo.tags
+              : []
+          )
+  };
+
+
+  // -----------------------------------------------
+  // CATEGORY
+  // -----------------------------------------------
+
+  let category;
+
+  if (
+    typeof product.category === "object" &&
+    product.category !== null
+  ) {
+
+    category = {
+      name:
+        product.category.name ||
+        "Vegetables",
+
+      link:
+        product.category.link ||
+        "#"
+    };
+
+  } else {
+
+    category = {
+      name:
+        product.category ||
+        "Vegetables",
+
+      link: "#"
+    };
+  }
+
+
+  // -----------------------------------------------
+  // PRICE
+  // -----------------------------------------------
+
+  const currentPrice =
+    Number(
+      product.currentPrice ??
+      product.price ??
+      defaultProductData.currentPrice ??
+      0
+    );
+
+
+  const originalPrice =
+    product.originalPrice ??
+    product.oldPrice ??
+    defaultProductData.originalPrice ??
+    null;
+
+
+  // -----------------------------------------------
+  // RETURN PRODUCT
+  // -----------------------------------------------
+
+  return {
+
+    ...defaultProductData,
+
+    ...product,
+
+    id:
+      product.id ??
+      defaultProductData.id ??
+      Date.now(),
+
+    name:
+      product.name ||
+      defaultProductData.name ||
+      "Product",
+
+    currentPrice,
+
+    originalPrice,
+
+    price: currentPrice,
+
+    oldPrice: originalPrice,
+
+    mainImage: image,
+
+    image,
+
+    thumbnails,
+
+    tags,
+
+    feedbacks,
+
+    additionalInfo,
+
+    category,
+
+    rating:
+      Number(
+        product.rating ??
+        defaultProductData.rating ??
+        4
+      ),
+
+    reviewsCount:
+      Number(
+        product.reviewsCount ??
+        defaultProductData.reviewsCount ??
+        0
+      ),
+
+    description:
+      product.description ??
+      defaultProductData.description ??
+      ""
+  };
+}
+
+
+// =====================================================
+// RENDER QUICK VIEW MODAL
+// =====================================================
+
 export function renderQuickViewModal(product) {
+
+  const safeProduct =
+    normalizeProduct(product);
+
+
   return /*html*/ `
+
     <div
       id="quick-view-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fade-in"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
     >
+
       <div
         class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
       >
-        <!-- Nút đóng -->
+
+        <!-- CLOSE BUTTON -->
+
         <button
           id="close-quick-view"
           type="button"
-          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-10"
+          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-50"
         >
           ✕
         </button>
 
-        <!-- Nội dung -->
+
+        <!-- CONTENT -->
+
         <div
           id="quick-view-content"
-          class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
         >
-          ${renderImage(product)}
-          ${renderProductInfo(product)}
+
+          ${renderImage(safeProduct)}
+
+          ${renderProductInfo(safeProduct)}
+
         </div>
+
       </div>
+
     </div>
+
   `;
 }
 
-// Mở Quick View
+
+// =====================================================
+// OPEN QUICK VIEW
+// =====================================================
+
 export function openQuickView(productDataOrId) {
-  let product = null;
-  let targetData = null;
 
-  // A. Nếu truyền vào là Object
-  if (typeof productDataOrId === "object" && productDataOrId !== null) {
-    targetData = productDataOrId;
-  } 
-  // B. Nếu truyền vào là ID (Number/String) -> Tìm trong products.json
-  else if (typeof productDataOrId === "number" || typeof productDataOrId === "string") {
-    targetData = productListJson.find(p => p.id === Number(productDataOrId));
-  }
+  let targetProduct = null;
 
-  // 1. Tìm trong PRODUCTS_MAP theo Tên sản phẩm
-  if (targetData?.name && PRODUCTS_MAP) {
-    const matchedKey = Object.keys(PRODUCTS_MAP).find(
-      k => k.toLowerCase().trim() === targetData.name.toLowerCase().trim()
-    );
-    if (matchedKey) {
-      product = PRODUCTS_MAP[matchedKey];
+
+  // ===================================================
+  // TRƯỜNG HỢP 1: TRUYỀN OBJECT
+  // ===================================================
+
+  if (
+    typeof productDataOrId === "object" &&
+    productDataOrId !== null
+  ) {
+
+    // Nếu object có ID thì ưu tiên lấy
+    // dữ liệu đầy đủ từ products.json
+
+    if (productDataOrId.id !== undefined) {
+
+      targetProduct =
+        findProductById(
+          productDataOrId.id
+        );
+
+    }
+
+
+    // Nếu không tìm thấy thì dùng object truyền vào
+
+    if (!targetProduct) {
+
+      targetProduct =
+        productDataOrId;
+
     }
   }
 
-  // 2. Nếu món bấm vào chưa có trong PRODUCTS_MAP (Ví dụ: Green Capsicum, Eggplant, Green Apple...)
-  // Ghép Tên, Giá, Ảnh của món vừa bấm vào để hiển thị, không bị ép về Bắp cải!
-  if (!product && targetData) {
-    const mainImgUrl = targetData.image || targetData.mainImage || defaultProductData.mainImage;
-    const itemThumbnails = targetData.thumbnails || [
-      mainImgUrl,
-      mainImgUrl,
-      mainImgUrl,
-      mainImgUrl
-    ];
 
-    product = {
-      ...defaultProductData,
-      id: targetData.id || Date.now(),
-      name: targetData.name || defaultProductData.name,
-      currentPrice: targetData.price || targetData.currentPrice || 12.00,
-      originalPrice: targetData.oldPrice || targetData.originalPrice || null,
-      rating: targetData.rating || 4,
-      mainImage: mainImgUrl,
-      thumbnails: itemThumbnails,
-      category: { name: targetData.category || "Vegetables", link: "#" }
-    };
+  // ===================================================
+  // TRƯỜNG HỢP 2: TRUYỀN ID
+  // ===================================================
+
+  else if (
+    typeof productDataOrId === "number" ||
+    typeof productDataOrId === "string"
+  ) {
+
+    targetProduct =
+      findProductById(
+        productDataOrId
+      );
   }
 
-  // 3. Cuối cùng mới dùng defaultProductData nếu không tìm thấy bất kỳ thông tin nào
-  if (!product) {
-    product = defaultProductData;
+
+  // ===================================================
+  // NẾU KHÔNG TÌM THẤY
+  // ===================================================
+
+  if (!targetProduct) {
+
+    console.warn(
+      "Không tìm thấy sản phẩm. Dùng defaultProductData."
+    );
+
+    targetProduct =
+      defaultProductData;
   }
 
-  console.log("QUICK VIEW PRODUCT FINAL:", product);
 
-  let modalContainer = document.getElementById("modal-root");
+  // ===================================================
+  // CHUẨN HÓA
+  // ===================================================
+
+  const product =
+    normalizeProduct(
+      targetProduct
+    );
+
+
+  console.log(
+    "QUICK VIEW PRODUCT FINAL:",
+    product
+  );
+
+
+  // ===================================================
+  // MODAL ROOT
+  // ===================================================
+
+  let modalContainer =
+    document.getElementById(
+      "modal-root"
+    );
+
 
   if (!modalContainer) {
-    modalContainer = document.createElement("div");
-    modalContainer.id = "modal-root";
-    document.body.appendChild(modalContainer);
+
+    modalContainer =
+      document.createElement("div");
+
+    modalContainer.id =
+      "modal-root";
+
+    document.body.appendChild(
+      modalContainer
+    );
   }
 
-  modalContainer.innerHTML = renderQuickViewModal(product);
 
-  const modal = document.getElementById("quick-view-modal");
-  const closeBtn = document.getElementById("close-quick-view");
+  // ===================================================
+  // RENDER MODAL
+  // ===================================================
+
+  modalContainer.innerHTML =
+    renderQuickViewModal(product);
+
+
+  // ===================================================
+  // ELEMENTS
+  // ===================================================
+
+  const modal =
+    modalContainer.querySelector(
+      "#quick-view-modal"
+    );
+
+  const closeBtn =
+    modalContainer.querySelector(
+      "#close-quick-view"
+    );
+
+
+  // ===================================================
+  // CLOSE MODAL
+  // ===================================================
 
   const closeModal = () => {
-    if (modalContainer) {
-      modalContainer.innerHTML = "";
-    }
+
+    modalContainer.innerHTML = "";
+
   };
 
-  closeBtn?.addEventListener("click", closeModal);
 
-  modal?.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeModal();
+  closeBtn?.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+  // Click nền đen để đóng
+
+  modal?.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target === modal
+      ) {
+
+        closeModal();
+
+      }
+
     }
-  });
+  );
 
-  // Kích hoạt sự kiện bấm ảnh nhỏ đổi ảnh lớn
-  bindImageEvents(modalContainer);
 
-  // ==============================
-  // QUANTITY STEPPER
-  // ==============================
+  // ===================================================
+  // ESC ĐỂ ĐÓNG
+  // ===================================================
+
+  const handleEscape = (event) => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeModal();
+
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    }
+
+  };
+
+
+  document.addEventListener(
+    "keydown",
+    handleEscape
+  );
+
+
+  // ===================================================
+  // IMAGE EVENTS
+  // ===================================================
+
+  try {
+
+    bindImageEvents(
+      modalContainer
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Không thể bind Image Events:",
+      error
+    );
+
+  }
+
+
+  // ===================================================
+  // QUANTITY
+  // ===================================================
+
   const qtyInput =
-    modalContainer.querySelector(".quantity-stepper-input") ||
-    modalContainer.querySelector("[data-quantity-val]");
+    modalContainer.querySelector(
+      ".quantity-stepper-input"
+    ) ||
+    modalContainer.querySelector(
+      "[data-quantity-val]"
+    );
+
 
   const decBtn =
-    modalContainer.querySelector('[data-action="decrement"]') ||
-    modalContainer.querySelector('[data-action="decrease-qty"]');
+    modalContainer.querySelector(
+      '[data-action="decrement"]'
+    ) ||
+    modalContainer.querySelector(
+      '[data-action="decrease-qty"]'
+    );
+
 
   const incBtn =
-    modalContainer.querySelector('[data-action="increment"]') ||
-    modalContainer.querySelector('[data-action="increase-qty"]');
+    modalContainer.querySelector(
+      '[data-action="increment"]'
+    ) ||
+    modalContainer.querySelector(
+      '[data-action="increase-qty"]'
+    );
 
-  if (decBtn && qtyInput) {
-    decBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
-      if (current > 1) {
-        if ("value" in qtyInput) {
-          qtyInput.value = current - 1;
-        } else {
-          qtyInput.textContent = current - 1;
+
+  // ===================================================
+  // DECREASE
+  // ===================================================
+
+  if (
+    decBtn &&
+    qtyInput
+  ) {
+
+    decBtn.addEventListener(
+      "click",
+      (event) => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        let current =
+          Number(
+            qtyInput.value ||
+            qtyInput.textContent
+          ) || 1;
+
+
+        if (
+          current > 1
+        ) {
+
+          current--;
+
+          if (
+            "value" in qtyInput
+          ) {
+
+            qtyInput.value =
+              current;
+
+          } else {
+
+            qtyInput.textContent =
+              current;
+
+          }
+
         }
+
       }
-    });
+    );
   }
 
-  if (incBtn && qtyInput) {
-    incBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
-      if ("value" in qtyInput) {
-        qtyInput.value = current + 1;
-      } else {
-        qtyInput.textContent = current + 1;
+
+  // ===================================================
+  // INCREASE
+  // ===================================================
+
+  if (
+    incBtn &&
+    qtyInput
+  ) {
+
+    incBtn.addEventListener(
+      "click",
+      (event) => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        let current =
+          Number(
+            qtyInput.value ||
+            qtyInput.textContent
+          ) || 1;
+
+
+        current++;
+
+
+        if (
+          "value" in qtyInput
+        ) {
+
+          qtyInput.value =
+            current;
+
+        } else {
+
+          qtyInput.textContent =
+            current;
+
+        }
+
       }
-    });
+    );
   }
 
-  // ==============================
+
+  // ===================================================
   // ADD TO CART
-  // ==============================
-  const addBtn = modalContainer.querySelector('[data-action="add-to-cart"]');
+  // ===================================================
+
+  const addBtn =
+    modalContainer.querySelector(
+      '[data-action="add-to-cart"]'
+    );
+
 
   if (addBtn) {
-    addBtn.addEventListener("click", (e) => {
-      e.preventDefault();
 
-      const count = qtyInput
-        ? Number(qtyInput.value || qtyInput.textContent) || 1
-        : 1;
+    addBtn.addEventListener(
+      "click",
+      (event) => {
 
-      const cart = getCart();
+        event.preventDefault();
+        event.stopPropagation();
 
-      const existing = cart.find(item => item.name === product.name);
 
-      if (existing) {
-        existing.quantity += count;
-      } else {
-        cart.push({
-          id: product.id || Date.now(),
-          name: product.name,
-          image: product.mainImage,
-          price: product.currentPrice,
-          quantity: count
-        });
+        // ---------------------------------------------
+        // QUANTITY
+        // ---------------------------------------------
+
+        const count =
+          qtyInput
+
+            ? Number(
+                qtyInput.value ||
+                qtyInput.textContent
+              ) || 1
+
+            : 1;
+
+
+        // ---------------------------------------------
+        // CART
+        // ---------------------------------------------
+
+        const cart =
+          getCart();
+
+
+        // ---------------------------------------------
+        // TÌM PRODUCT TRONG CART
+        // ---------------------------------------------
+
+        const existing =
+          cart.find(
+            item =>
+              String(item.id) ===
+              String(product.id)
+          );
+
+
+        // ---------------------------------------------
+        // ĐÃ CÓ
+        // ---------------------------------------------
+
+        if (existing) {
+
+          existing.quantity =
+            Number(
+              existing.quantity || 0
+            ) + count;
+
+        }
+
+
+        // ---------------------------------------------
+        // CHƯA CÓ
+        // ---------------------------------------------
+
+        else {
+
+          cart.push({
+
+            id:
+              product.id,
+
+            name:
+              product.name,
+
+            image:
+              product.mainImage,
+
+            price:
+              Number(
+                product.currentPrice
+              ),
+
+            quantity:
+              count
+
+          });
+
+        }
+
+
+        // ---------------------------------------------
+        // SAVE
+        // ---------------------------------------------
+
+        saveCart(cart);
+
+
+        console.log(
+          "CART AFTER QUICK VIEW:",
+          getCart()
+        );
+
+
+        // ---------------------------------------------
+        // CLOSE
+        // ---------------------------------------------
+
+        closeModal();
+
+
+        // ---------------------------------------------
+        // TOAST
+        // ---------------------------------------------
+
+        showToast(
+          `${product.name} added to cart.`
+        );
+
       }
-
-      saveCart(cart);
-
-      closeModal();
-
-      const toast = document.createElement("div");
-      toast.className =
-        "fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl";
-      toast.textContent = `${product.name} added to cart.`;
-
-      document.body.appendChild(toast);
-
-      setTimeout(() => {
-        toast.remove();
-      }, 3000);
-    });
+    );
   }
 }
 
-// ======================================
-// BẮT SỰ KIỆN QUICK VIEW THÔNG MINH (3 LỚP BẮT DỮ LIỆU)
-// ======================================
-document.addEventListener("click", (e) => {
-  const eyeBtn = e.target.closest('[data-action="quick-view"]') ||
-                 e.target.closest('[aria-label="Xem nhanh"]');
 
-  if (!eyeBtn) return;
+// =====================================================
+// TOAST
+// =====================================================
 
-  e.preventDefault();
-  e.stopPropagation();
+function showToast(message) {
 
-  let productData = null;
+  const oldToast =
+    document.getElementById(
+      "quick-view-toast"
+    );
 
-  // Lớp 1: Đọc từ data-product
-  if (eyeBtn.dataset.product) {
-    try {
-      productData = JSON.parse(decodeURIComponent(eyeBtn.dataset.product));
-    } catch (err) {
-      console.error("Không đọc được data-product:", err);
-    }
+
+  if (oldToast) {
+
+    oldToast.remove();
+
   }
 
-  // Lớp 2: Đọc từ data-id hoặc dataset của card cha
-  if (!productData) {
-    const productId = eyeBtn.dataset.id || eyeBtn.closest('[data-id]')?.dataset.id;
-    if (productId) {
-      const foundInJson = productListJson.find(p => p.id === Number(productId));
-      if (foundInJson) {
-        productData = foundInJson;
-      }
-    }
+
+  const toast =
+    document.createElement(
+      "div"
+    );
+
+
+  toast.id =
+    "quick-view-toast";
+
+
+  toast.className = `
+    fixed
+    bottom-6
+    right-6
+    z-[99999]
+    bg-[#1A1A1A]
+    text-white
+    text-sm
+    font-medium
+    px-5
+    py-3
+    rounded-lg
+    shadow-xl
+  `;
+
+
+  toast.textContent =
+    message;
+
+
+  document.body.appendChild(
+    toast
+  );
+
+
+  setTimeout(
+    () => {
+
+      toast.remove();
+
+    },
+    3000
+  );
+}
+
+
+// =====================================================
+// QUICK VIEW EVENT - HOME + SHOP
+// =====================================================
+
+document.addEventListener("click", (event) => {
+
+  const eyeBtn = event.target.closest(
+    '[data-action="quick-view"]'
+  );
+
+  if (!eyeBtn) {
+    return;
   }
 
-  // Lớp 3: Đọc trực tiếp Tên, Giá, Ảnh từ HTML thẻ Card vừa bấm
-  if (!productData) {
-    const card = eyeBtn.closest(".product-card") || eyeBtn.closest(".group") || eyeBtn.parentElement?.parentElement;
-    if (card) {
-      const name = card.querySelector(".name, h3, a")?.textContent?.trim();
-      const priceText = card.querySelector(".price")?.textContent?.replace(/[^0-9.]/g, "");
-      const image = card.querySelector("img")?.src;
-      if (name) {
-        productData = {
-          name,
-          price: Number(priceText) || 12,
-          image
-        };
-      }
-    }
+  event.preventDefault();
+  event.stopPropagation();
+
+
+  // ===================================================
+  // TÌM CARD
+  // ===================================================
+
+  const card = eyeBtn.closest(".product-card");
+
+  if (!card) {
+
+    console.error(
+      "Quick View: Không tìm thấy product-card.",
+      eyeBtn
+    );
+
+    return;
   }
 
-  console.log("CLICK QUICK VIEW CAPTURED:", productData);
 
-  openQuickView(productData);
+  // ===================================================
+  // LẤY ID
+  // ===================================================
+
+  const id =
+    eyeBtn.getAttribute("data-id") ||
+    card.getAttribute("data-product-id") ||
+    card.getAttribute("data-id");
+
+
+  console.log(
+    "================================="
+  );
+
+  console.log(
+    "QUICK VIEW CLICK"
+  );
+
+  console.log(
+    "BUTTON ID:",
+    eyeBtn.getAttribute("data-id")
+  );
+
+  console.log(
+    "CARD PRODUCT ID:",
+    card.getAttribute("data-product-id")
+  );
+
+  console.log(
+    "CARD ID:",
+    card.getAttribute("data-id")
+  );
+
+  console.log(
+    "FINAL ID:",
+    id
+  );
+
+
+  // ===================================================
+  // KHÔNG CÓ ID
+  // ===================================================
+
+  if (!id) {
+
+    console.error(
+      "Quick View: Card không có product ID.",
+      card
+    );
+
+    return;
+  }
+
+
+  // ===================================================
+  // TÌM PRODUCT TRONG PRODUCTS.JSON
+  // ===================================================
+
+  const product =
+    findProductById(id);
+
+
+  console.log(
+    "PRODUCT FOUND:",
+    product
+  );
+
+
+  // ===================================================
+  // TÌM THẤY PRODUCT
+  // ===================================================
+
+  if (product) {
+
+    openQuickView(product);
+
+    return;
+  }
+
+
+  // ===================================================
+  // FALLBACK - LẤY DỮ LIỆU TỪ CARD
+  // ===================================================
+
+  const nameElement =
+    card.querySelector(
+      "a[href*='descriptions']"
+    ) ||
+    card.querySelector("a");
+
+
+  const imageElement =
+    card.querySelector("img");
+
+
+  const priceElement =
+    card.querySelector(".price");
+
+
+  const name =
+    nameElement?.textContent?.trim() ||
+    "Product";
+
+
+  const image =
+    imageElement?.src ||
+    "";
+
+
+  const priceText =
+    priceElement?.textContent
+      ?.replace(/[^0-9.]/g, "") ||
+    "0";
+
+
+  const price =
+    Number(priceText) || 0;
+
+
+  console.log(
+    "FALLBACK PRODUCT:",
+    {
+      id,
+      name,
+      image,
+      price
+    }
+  );
+
+
+  openQuickView({
+
+    id,
+
+    name,
+
+    price,
+
+    currentPrice: price,
+
+    image,
+
+    mainImage: image,
+
+    thumbnails: [
+      image,
+      image,
+      image,
+      image
+    ]
+
+  });
+
 });
