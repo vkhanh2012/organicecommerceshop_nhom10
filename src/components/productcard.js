@@ -1,7 +1,6 @@
 // src/components/productCard.js
-// Dựa theo component "Product 5n" (264×327px) trong Main Components.
-// Mobile-first: mặc định luôn hiện wishlist / product detail / add-to-cart.
-// Từ md trở lên mới ẩn và chỉ hiện khi hover.
+// Home: 5 sản phẩm / hàng
+// Shop: 3 sản phẩm / hàng
 
 import {
   iconHeart,
@@ -15,6 +14,7 @@ import productsData
 
 import { attachImageUrls }
   from "../utils/assets.js";
+
 
 const CLASS = {
 
@@ -76,21 +76,15 @@ const CLASS = {
   rating:
     "flex items-center gap-0.5",
 
+  // HOME: 5 sản phẩm / hàng trên desktop
   grid:
     "grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 " +
     "lg:grid-cols-5 lg:gap-0",
-
 };
 
+
 /**
- * @param {Object} p
- * @param {string} p.name
- * @param {number} p.price
- * @param {number|null} p.oldPrice - giá gốc nếu đang giảm giá
- * @param {string} p.image - url ảnh sản phẩm
- * @param {number} p.rating - số sao 0-5
- * @param {string|null} p.saleTag - ví dụ "Sale 50%"
- * @param {string|null} p.bestTag - ví dụ "Best Sale"
+ * Render Product Card
  */
 export function renderProductCard(
   {
@@ -104,6 +98,10 @@ export function renderProductCard(
     bestTag = null,
   } = {}
 ) {
+
+  // ==========================================
+  // RATING
+  // ==========================================
 
   const starsHtml = Array.from(
     { length: 5 }
@@ -120,6 +118,11 @@ export function renderProductCard(
       `
     )
     .join("");
+
+
+  // ==========================================
+  // TAG
+  // ==========================================
 
   const tagsHtml =
     saleTag || bestTag
@@ -150,8 +153,15 @@ export function renderProductCard(
         `
       : "";
 
+
+  // ==========================================
+  // PRODUCT CARD
+  // ==========================================
+
   return `
     <article class="${CLASS.card}">
+
+      <!-- PRODUCT IMAGE -->
 
       <div class="${CLASS.imageWrap}">
 
@@ -167,6 +177,9 @@ export function renderProductCard(
           class="${CLASS.image}"
         >
 
+
+        <!-- ACTION BUTTONS -->
+
         <div class="${CLASS.actions}">
 
           <button
@@ -176,6 +189,7 @@ export function renderProductCard(
           >
             ${iconHeart}
           </button>
+
 
           <button
             type="button"
@@ -189,31 +203,44 @@ export function renderProductCard(
 
       </div>
 
+
+      <!-- PRODUCT BODY -->
+
       <div class="${CLASS.body}">
+
+        <!-- PRODUCT NAME -->
 
         <div class="${CLASS.name}">
           ${name}
         </div>
+
+
+        <!-- PRICE -->
 
         <div class="${CLASS.priceRow}">
 
           <div>
 
             <span class="${CLASS.price}">
-              $${price.toFixed(2)}
+              $${Number(price).toFixed(2)}
             </span>
 
             ${
-              oldPrice
+              oldPrice !== null &&
+              oldPrice !== undefined &&
+              oldPrice !== ""
                 ? `
                   <span class="${CLASS.priceOld}">
-                    $${oldPrice.toFixed(2)}
+                    $${Number(oldPrice).toFixed(2)}
                   </span>
                 `
                 : ""
             }
 
           </div>
+
+
+          <!-- ADD TO CART -->
 
           <button
             type="button"
@@ -230,6 +257,9 @@ export function renderProductCard(
 
         </div>
 
+
+        <!-- RATING -->
+
         <div class="${CLASS.rating}">
           ${starsHtml}
         </div>
@@ -240,19 +270,40 @@ export function renderProductCard(
   `;
 }
 
+
 /**
  * Render lưới sản phẩm
- * Mobile-first: 2 cột → sm:3 → lg:5
+ *
+ * HOME:
+ * - Mobile: 2
+ * - Tablet: 3
+ * - Desktop: 5
+ *
+ * SHOP:
+ * - Mobile: 2
+ * - Tablet: 2
+ * - Desktop: 3
  */
-export function renderProductGrid(products = [], page = "home") {
+export function renderProductGrid(
+  products = [],
+  page = "home"
+) {
 
   const itemsHtml = products
     .map(renderProductCard)
     .join("");
 
-  const gridClass = page === "shop"
-    ? "grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
-    : CLASS.grid;
+
+  // ==========================================
+  // SHOP = 3 SẢN PHẨM / HÀNG
+  // HOME = 5 SẢN PHẨM / HÀNG
+  // ==========================================
+
+  const gridClass =
+    page === "shop"
+      ? "grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+      : CLASS.grid;
+
 
   return `
     <div class="${gridClass}">
@@ -261,6 +312,12 @@ export function renderProductGrid(products = [], page = "home") {
   `;
 }
 
+
+/**
+ * Get Products
+ */
 export async function getProducts() {
+
   return attachImageUrls(productsData);
+
 }

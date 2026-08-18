@@ -192,8 +192,7 @@ export async function initShopPage() {
       )
 
       productGridContainer.innerHTML = `
-        ${renderProductGrid(productsOnCurrentPage)}
-
+       ${renderProductGrid(productsOnCurrentPage, "shop")}
         <div id="shop-pagination">
           ${renderPagination({
             currentPage: shopState.currentPage,
