@@ -52,7 +52,7 @@ function initNavigation() {
         location.pathname
     });
 
-  bindNavigationEvents(navigation, cart);
+  bindNavigationEvents(navigation);
 }
 
 
@@ -102,85 +102,72 @@ function initFooter() {
 
 function initNewsletter() {
   const newsletter = document.getElementById("newsletter-container");
-
   if (!newsletter) return;
 
   newsletter.innerHTML =
     renderNewsletterComponent();
 }
 
-function initSharedComponents() {
+// =====================================================
+// ĐIỀU HƯỚNG CÁC TRANG TRONG ỨNG DỤNG
+// =====================================================
+
+if (document.getElementById("homepage-container")) {
   initNavigation();
+  initHomepage().then(() => initNewsletterPopupPage());
+  initFooter();
+}
+
+if (document.getElementById("cart-container")) {
+  initShoppingCartPage();
+}
+
+if (document.getElementById("product-grid-container")){
+  initNavigation();
+  initShopPage();
   initNewsletter();
   initFooter();
-
-  document.addEventListener("cart:updated", (event) => {
-    initNavigation();
-
-    if (event.detail?.openPopup) {
-      document.querySelector("[data-cart-open]")?.click();
-    }
-  });
-
-  document.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-add-cart]");
-    if (!button || button.disabled) return;
-
-    const stepper = button.closest("section, article, div")?.querySelector(".quantity-stepper-input");
-    const quantity = button.hasAttribute("data-cart-use-stepper")
-      ? Number(stepper?.value) || 1
-      : 1;
-
-    const product = {
-      id: button.dataset.cartId,
-      name: button.dataset.cartName,
-      image: button.dataset.cartImage,
-      price: Number(button.dataset.cartPrice),
-      quantity,
-    };
-
-    const updatedCart = addProduct(getCart(), product);
-    saveCart(updatedCart);
-    document.dispatchEvent(new CustomEvent("cart:updated", {
-      detail: { cart: updatedCart }
-    }));
-    showCartMessage(`${product.name} added to cart.`);
-  });
-
 }
 
-function showCartMessage(message) {
-  document.querySelector("[data-cart-toast]")?.remove();
-
-  const toast = document.createElement("div");
-  toast.dataset.cartToast = "";
-  toast.className = "fixed bottom-5 right-5 z-[110] rounded-lg bg-neutral-900 px-5 py-3 text-sm font-medium text-white shadow-lg";
-  toast.textContent = message;
-  document.body.append(toast);
-
-  setTimeout(() => toast.remove(), 2000);
+if (document.getElementById("signup-container")) {
+  initNavigation();
+  initSignupPage();
+  initNewsletter();
+  initFooter();
 }
 
-async function initCurrentPage() {
-  if (document.getElementById("homepage-container")) {
-    await initHomepage();
-    setTimeout(initNewsletterPopupPage, 1500);
-    return;
-  }
-
-  if (document.getElementById("cart-container")) return initShoppingCartPage();
-  if (document.getElementById("signup-container")) return initSignupPage();
-  if (document.getElementById("product-grid-container")) return initShopPage();
-  if (document.getElementById("aboutus-section")) return initAboutPage();
-  if (document.getElementById("wishlist-section")) return initWishlistPage();
-  if (document.getElementById("signin-container")) return initSignInPage();
-  if (document.getElementById("checkout-container")) return initCheckoutPage();
-  if (document.getElementById("description-container")) return initDetailsPage();
+if (document.getElementById("signin-container")){
+  initNavigation();
+  initSignInPage();
+  initNewsletter();
+  initFooter();
 }
 
-async function main() {
-  initSharedComponents();
-  await initCurrentPage();
+if (document.getElementById("aboutus-section")) {
+  initNavigation();
+  initAboutPage();
+  initNewsletter();
+  initFooter();
 }
 
-main();
+if (document.getElementById("wishlist-section")) {
+  initNavigation();
+  initWishlistPage();
+  initNewsletter();
+  initFooter();
+}
+
+if (document.getElementById("checkout-container")) {
+  initNavigation();
+  initCheckoutPage();
+  initNewsletter();
+  initFooter();
+}
+
+// 📌 ĐÂY LÀ ĐOẠN ĐÃ BỔ SUNG ĐỂ MỞ TRANG CHI TIẾT SẢN PHẨM!
+if (document.getElementById("description-container")) {
+  initNavigation();
+  initDetailsPage();
+  initNewsletter();
+  initFooter();
+}

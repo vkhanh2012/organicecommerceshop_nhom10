@@ -1,6 +1,6 @@
 import { renderImage, bindImageEvents } from "../descriptions/Image.js";
 import { renderProductInfo } from "../descriptions/ProductInfo.js";
-import { defaultProductData } from "../descriptions/productdata.js";
+import productData from "../data/productdata.json";
 import { addProductToCart } from "../shopping_cart/cartData.js";
 
 export function renderQuickViewModal(product) {

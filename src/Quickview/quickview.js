@@ -1,9 +1,6 @@
 import { renderImage, bindImageEvents } from "../descriptions/Image.js";
 import { renderProductInfo } from "../descriptions/ProductInfo.js";
-import {
-  defaultProductData,
-  PRODUCTS_MAP
-} from "../descriptions/productdata.js";
+import productData from "../data/productdata.json";
 import { getCart, saveCart } from "../shopping_cart/cartData.js";
 import productListJson from "../data/products.json";
 

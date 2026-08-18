@@ -7,9 +7,7 @@ import {
   iconStar
 } from "../components/icons.js";
 
-
 const CLASS = {
-
   card:
     "product-card max-w-78 mx-auto group relative bg-white border border-neutral-200 rounded-lg p-1.25 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.25)]",
 
@@ -74,16 +72,8 @@ export function renderProductCard(p = {}) {
     image = "",
     rating = 4,
     saleTag = null,
-    bestTag = null
+    bestTag = null,
   } = p;
-
-
-  // ===================================================
-  // URL TRANG DETAILS
-  // ===================================================
-
-  const detailUrl =
-    `/descriptions.html?id=${id}`;
 
 
   // ===================================================
@@ -141,21 +131,34 @@ export function renderProductCard(p = {}) {
 
 
   // ===================================================
-  // PRODUCT CARD HTML
+  // ID AN TOÀN
+  // ===================================================
+
+  const productId =
+    String(id);
+
+
+  // ===================================================
+  // URL TRANG DESCRIPTION
+  // ===================================================
+
+  const detailUrl =
+    `/descriptions.html?id=${encodeURIComponent(productId)}&name=${encodeURIComponent(name)}`;
+
+
+  // ===================================================
+  // PRODUCT CARD
   // ===================================================
 
   return `
-
     <article
       class="${CLASS.card}"
-      data-id="${id}"
+      data-id="${productId}"
     >
 
-
-      <!-- ========================================= -->
+      <!-- ================================= -->
       <!-- PRODUCT IMAGE -->
-      <!-- BẤM ẢNH -> TRANG DESCRIPTION -->
-      <!-- ========================================= -->
+      <!-- ================================= -->
 
       <a
         href="${detailUrl}"
@@ -175,19 +178,18 @@ export function renderProductCard(p = {}) {
       </a>
 
 
-      <!-- ========================================= -->
+      <!-- ================================= -->
       <!-- ACTION BUTTONS -->
-      <!-- ========================================= -->
+      <!-- ================================= -->
 
       <div class="${CLASS.actions}">
-
 
         <!-- Wishlist -->
 
         <button
           type="button"
           data-action="wishlist"
-          data-id="${id}"
+          data-id="${productId}"
           class="${CLASS.actionBtn}"
           aria-label="Thêm vào yêu thích"
         >
@@ -200,7 +202,7 @@ export function renderProductCard(p = {}) {
         <button
           type="button"
           data-action="quick-view"
-          data-id="${id}"
+          data-id="${productId}"
           class="${CLASS.actionBtn}"
           aria-label="Xem nhanh"
         >
@@ -210,17 +212,13 @@ export function renderProductCard(p = {}) {
       </div>
 
 
-      <!-- ========================================= -->
+      <!-- ================================= -->
       <!-- PRODUCT BODY -->
-      <!-- ========================================= -->
+      <!-- ================================= -->
 
       <div class="${CLASS.body}">
 
-
-        <!-- ========================================= -->
         <!-- PRODUCT NAME -->
-        <!-- BẤM TÊN -> TRANG DESCRIPTION -->
-        <!-- ========================================= -->
 
         <a
           href="${detailUrl}"
@@ -230,9 +228,9 @@ export function renderProductCard(p = {}) {
         </a>
 
 
-        <!-- ========================================= -->
+        <!-- ================================= -->
         <!-- PRICE + CART -->
-        <!-- ========================================= -->
+        <!-- ================================= -->
 
         <div class="${CLASS.priceRow}">
 
@@ -241,7 +239,6 @@ export function renderProductCard(p = {}) {
             <span class="${CLASS.price}">
               $${Number(price).toFixed(2)}
             </span>
-
 
             ${
               oldPrice !== null &&
@@ -263,7 +260,7 @@ export function renderProductCard(p = {}) {
           <button
             type="button"
             data-action="add-to-cart"
-            data-id="${id}"
+            data-id="${productId}"
             class="${CLASS.cartBtn}"
             aria-label="Thêm ${name} vào giỏ hàng"
           >
@@ -273,14 +270,13 @@ export function renderProductCard(p = {}) {
         </div>
 
 
-        <!-- ========================================= -->
+        <!-- ================================= -->
         <!-- RATING -->
-        <!-- ========================================= -->
+        <!-- ================================= -->
 
         <div class="${CLASS.rating}">
           ${starsHtml}
         </div>
-
 
       </div>
 
@@ -290,7 +286,7 @@ export function renderProductCard(p = {}) {
 
 
 // =====================================================
-// RENDER PRODUCT GRID
+// PRODUCT GRID
 // =====================================================
 
 export function renderProductGrid(products = []) {
@@ -300,9 +296,7 @@ export function renderProductGrid(products = []) {
       .map(renderProductCard)
       .join("");
 
-
   return `
-
     <div class="w-full">
 
       <div class="${CLASS.grid}">
@@ -310,6 +304,5 @@ export function renderProductGrid(products = []) {
       </div>
 
     </div>
-
   `;
 }

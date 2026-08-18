@@ -1,4 +1,4 @@
-import { renderBreadCrumb } from "../descriptions/breadcrumb.js";
+import {  renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 import { renderCountryOptions, renderStateOptions } from "./Location.js";
 import { getCart, getCartSummary } from "../shopping_cart/cartData.js";
 
@@ -24,7 +24,7 @@ export function renderCheckout(cart = getCart()) {
   return /*html*/ `
     <div class="w-full bg-white">
       <!-- 1. BREADCRUMB BANNER -->
-      ${renderBreadCrumb([
+      ${renderBreadcrumbsComponent([
         { label: "Shopping Cart", link: "./cart.html" },
         { label: "Checkout", link: "#", active: true }
       ])}

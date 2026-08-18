@@ -34,9 +34,8 @@ export function bindCartEvents(root, onCartChange, onNavigate) {
     if (!button) return;
 
     const action = button.dataset.action;
-    const id = button.dataset.id;
 
-    //  Khi bấm nút Proceed to checkout -> Chuyển sang trang Checkout
+    // Khi bấm Proceed to checkout
     if (action === "checkout") {
       if (typeof onNavigate === "function") {
         onNavigate("checkout");
@@ -46,13 +45,23 @@ export function bindCartEvents(root, onCartChange, onNavigate) {
       return;
     }
 
+    // Lấy id sản phẩm
     const id = Number(button.dataset.id);
+
     const cart = getCart();
     let updatedCart = cart;
 
-    if (action === "increase") updatedCart = changeQuantity(cart, id, 1);
-    if (action === "decrease") updatedCart = changeQuantity(cart, id, -1);
-    if (action === "remove") updatedCart = removeProduct(cart, id);
+    if (action === "increase") {
+      updatedCart = changeQuantity(cart, id, 1);
+    }
+
+    if (action === "decrease") {
+      updatedCart = changeQuantity(cart, id, -1);
+    }
+
+    if (action === "remove") {
+      updatedCart = removeProduct(cart, id);
+    }
 
     saveCart(updatedCart);
     onCartChange(updatedCart);
@@ -60,8 +69,11 @@ export function bindCartEvents(root, onCartChange, onNavigate) {
 
   root.addEventListener("submit", (event) => {
     if (!event.target.matches("[data-coupon-form]")) return;
+
     event.preventDefault();
+
     const message = root.querySelector("[data-cart-message]");
+
     message.textContent = "Coupon code has been received.";
     message.classList.remove("hidden");
   });

@@ -5,19 +5,17 @@ import {
   bindNavigationEvents
 } from "../components/navigation.js";
 
-import { renderBreadCrumb } from "../descriptions/breadcrumb.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
+
 import { renderDescription } from "../descriptions/descriptions.js";
-import {
-  defaultProductData,
-  PRODUCTS_LIST
-} from "../descriptions/productdata.js";
+
+import productData from "../data/productdata.json";
 
 import { bindImageEvents } from "../descriptions/Image.js";
 
 import { renderFooterComponent } from "../components/footer.js";
-import { renderNewsletterComponent } from "../components/newsletter.js";
 
-import { initShoppingCartPage } from "./shoppingcardpage.js";
+import { renderNewsletterComponent } from "../components/newsletter.js";
 
 import {
   getCart,
@@ -27,124 +25,29 @@ import {
 
 import productList from "../data/products.json";
 
-// 📌 Import tính năng xem nhanh Quick View
-import "../Quickview/quickview.js";
+
+// =====================================================
+// LẤY DATA TỪ JSON
+// =====================================================
+
+const {
+  defaultProductData,
+  mangoProductData,
+  tomatoProductData,
+  redcapsiumProductData
+} = productData;
 
 
 // =====================================================
-// LẤY SẢN PHẨM HIỆN TẠI TỪ URL
+// DANH SÁCH SẢN PHẨM CHI TIẾT
 // =====================================================
 
-function getActiveProduct() {
-
-  const urlParams =
-    new URLSearchParams(window.location.search);
-
-  const productId =
-    Number(urlParams.get("id"));
-
-  const productName =
-    urlParams.get("name")
-      ? decodeURIComponent(
-          urlParams.get("name")
-        )
-      : null;
-
-
-  // ===================================================
-  // 1. TÌM THEO TÊN
-  // ===================================================
-
-  if (productName) {
-
-    const foundByName =
-      PRODUCTS_LIST.find(
-        p =>
-          p.name.toLowerCase() ===
-          productName.toLowerCase()
-      );
-
-    if (foundByName) {
-      return foundByName;
-    }
-  }
-
-
-  // ===================================================
-  // 2. TÌM THEO ID TRONG PRODUCTS.JSON
-  // ===================================================
-
-  const foundJson =
-    productList.find(
-      p => Number(p.id) === productId
-    );
-
-
-  if (foundJson) {
-
-    // Thử tìm sản phẩm tương ứng trong PRODUCTS_LIST
-    const foundData =
-      PRODUCTS_LIST.find(
-        p =>
-          p.name.toLowerCase() ===
-          foundJson.name.toLowerCase()
-      );
-
-
-    if (foundData) {
-      return {
-        ...foundData,
-        id: foundJson.id
-      };
-    }
-
-
-    // Nếu không tìm thấy thì tạo dữ liệu từ products.json
-    return {
-
-      ...defaultProductData,
-
-      id:
-        foundJson.id,
-
-      name:
-        foundJson.name,
-
-      currentPrice:
-        foundJson.price,
-
-      originalPrice:
-        foundJson.oldPrice,
-
-      rating:
-        foundJson.rating,
-
-      mainImage:
-        foundJson.image,
-
-      thumbnails: [
-        foundJson.image,
-        foundJson.image,
-        foundJson.image
-      ],
-
-      category: {
-        name:
-          foundJson.category ||
-          "Fresh Fruit",
-
-        link: "#"
-      }
-    };
-  }
-
-
-  // ===================================================
-  // 3. KHÔNG TÌM THẤY -> SẢN PHẨM MẶC ĐỊNH
-  // ===================================================
-
-  return defaultProductData;
-}
+const PRODUCTS_LIST = [
+  defaultProductData,
+  mangoProductData,
+  tomatoProductData,
+  redcapsiumProductData
+];
 
 
 // =====================================================
@@ -208,6 +111,136 @@ function showToastNotification(message) {
 
 
 // =====================================================
+// LẤY SẢN PHẨM HIỆN TẠI TỪ URL
+// =====================================================
+
+function getActiveProduct() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const id =
+    params.get("id");
+
+
+  const name =
+    params.get("name")
+      ? decodeURIComponent(
+          params.get("name")
+        )
+      : null;
+
+
+  // ===================================================
+  // 1. TÌM THEO NAME
+  // ===================================================
+
+  if (name) {
+
+    const foundByName =
+      PRODUCTS_LIST.find(
+        product =>
+          product?.name?.toLowerCase() ===
+          name.toLowerCase()
+      );
+
+
+    if (foundByName) {
+
+      return foundByName;
+
+    }
+  }
+
+
+  // ===================================================
+  // 2. TÌM THEO ID TRONG products.json
+  // ===================================================
+
+  if (id) {
+
+    const foundProduct =
+      productList.find(
+        product =>
+          String(product.id) ===
+          String(id)
+      );
+
+
+    if (foundProduct) {
+
+      const foundDetail =
+        PRODUCTS_LIST.find(
+          product =>
+            product?.name?.toLowerCase() ===
+            foundProduct?.name?.toLowerCase()
+        );
+
+
+      if (foundDetail) {
+
+        return {
+          ...foundDetail,
+          id: foundProduct.id
+        };
+
+      }
+
+
+      return {
+
+        ...defaultProductData,
+
+        id:
+          foundProduct.id,
+
+        name:
+          foundProduct.name,
+
+        currentPrice:
+          foundProduct.price,
+
+        originalPrice:
+          foundProduct.oldPrice,
+
+        rating:
+          foundProduct.rating,
+
+        mainImage:
+          foundProduct.image,
+
+        thumbnails: [
+          foundProduct.image,
+          foundProduct.image,
+          foundProduct.image
+        ],
+
+        category: {
+          name:
+            foundProduct.category ||
+            "Fresh Fruit",
+
+          link: "#"
+        }
+
+      };
+
+    }
+  }
+
+
+  // ===================================================
+  // 3. KHÔNG CÓ ID / NAME
+  // ===================================================
+
+  return defaultProductData;
+}
+
+
+// =====================================================
 // FOOTER
 // =====================================================
 
@@ -218,7 +251,9 @@ function initFooter() {
       "footer-container"
     );
 
+
   if (!footer) return;
+
 
   footer.innerHTML =
     renderFooterComponent();
@@ -236,7 +271,9 @@ function initNewsletter() {
       "newsletter-container"
     );
 
+
   if (!newsletter) return;
+
 
   newsletter.innerHTML =
     renderNewsletterComponent();
@@ -253,6 +290,7 @@ function initNavigation() {
     document.getElementById(
       "navigation-container"
     );
+
 
   if (!navigation) return;
 
@@ -278,7 +316,8 @@ function initNavigation() {
         cart,
 
       activeHref:
-        location.pathname
+        window.location.pathname
+
     });
 
 
@@ -298,7 +337,7 @@ let currentTab =
 
 
 // =====================================================
-// QUANTITY + ADD TO CART CHO SẢN PHẨM CHÍNH
+// QUANTITY + CART
 // =====================================================
 
 function bindProductDetailActions(
@@ -334,16 +373,20 @@ function bindProductDetailActions(
 
 
   // ===================================================
-  // GIẢM SỐ LƯỢNG
+  // GIẢM
   // ===================================================
 
-  if (decBtn && qtyInput) {
+  if (
+    decBtn &&
+    qtyInput
+  ) {
 
     decBtn.addEventListener(
       "click",
       e => {
 
         e.preventDefault();
+
 
         let current =
           Number(
@@ -363,24 +406,32 @@ function bindProductDetailActions(
 
             qtyInput.textContent =
               current - 1;
+
           }
+
         }
+
       }
     );
+
   }
 
 
   // ===================================================
-  // TĂNG SỐ LƯỢNG
+  // TĂNG
   // ===================================================
 
-  if (incBtn && qtyInput) {
+  if (
+    incBtn &&
+    qtyInput
+  ) {
 
     incBtn.addEventListener(
       "click",
       e => {
 
         e.preventDefault();
+
 
         let current =
           Number(
@@ -398,14 +449,17 @@ function bindProductDetailActions(
 
           qtyInput.textContent =
             current + 1;
+
         }
+
       }
     );
+
   }
 
 
   // ===================================================
-  // ADD TO CART SẢN PHẨM CHÍNH
+  // ADD TO CART
   // ===================================================
 
   const addBtn =
@@ -414,100 +468,94 @@ function bindProductDetailActions(
     );
 
 
-  if (addBtn) {
-
-    addBtn.addEventListener(
-      "click",
-      e => {
-
-        e.preventDefault();
+  if (!addBtn) return;
 
 
-        const count =
-          qtyInput
-            ? (
-                Number(
-                  qtyInput.value ||
-                  qtyInput.textContent
-                ) || 1
-              )
-            : 1;
+  addBtn.addEventListener(
+    "click",
+    e => {
+
+      e.preventDefault();
 
 
-        const cart =
-          getCart();
+      const count =
+        qtyInput
+          ? (
+              Number(
+                qtyInput.value ||
+                qtyInput.textContent
+              ) || 1
+            )
+          : 1;
 
 
-        const productImage =
-          currentProduct.mainImage ||
-          currentProduct.image ||
-          (
-            currentProduct.thumbnails &&
-            currentProduct.thumbnails[0]
-          ) ||
-          "";
+      const cart =
+        getCart();
 
 
-        const existing =
-          cart.find(
-            item =>
-              item.name ===
-              currentProduct.name
-          );
+      const image =
+        currentProduct.mainImage ||
+        currentProduct.image ||
+        currentProduct.thumbnails?.[0] ||
+        "";
 
 
-        if (existing) {
-
-          existing.quantity +=
-            count;
-
-
-          if (!existing.image) {
-
-            existing.image =
-              productImage;
-          }
-
-        } else {
-
-          cart.push({
-
-            id:
-              currentProduct.id ||
-              Date.now(),
-
-            name:
-              currentProduct.name,
-
-            image:
-              productImage,
-
-            price:
-              currentProduct.currentPrice,
-
-            quantity:
-              count
-          });
-        }
-
-
-        saveCart(cart);
-
-
-        initNavigation();
-
-
-        showToastNotification(
-          `${currentProduct.name} added to cart.`
+      const existing =
+        cart.find(
+          item =>
+            item.name ===
+            currentProduct.name
         );
+
+
+      if (existing) {
+
+        existing.quantity +=
+          count;
+
+      } else {
+
+        cart.push({
+
+          id:
+            currentProduct.id ||
+            Date.now(),
+
+          name:
+            currentProduct.name,
+
+          image,
+
+          price:
+            currentProduct.currentPrice ||
+            currentProduct.price ||
+            0,
+
+          quantity:
+            count
+
+        });
+
       }
-    );
-  }
+
+
+      saveCart(cart);
+
+
+      initNavigation();
+
+
+      showToastNotification(
+        `${currentProduct.name} added to cart.`
+      );
+
+    }
+  );
 }
 
 
 // =====================================================
-// RENDER DESCRIPTION SECTION
+// RENDER DESCRIPTION
 // =====================================================
 
 function renderDescriptionSection(
@@ -525,13 +573,19 @@ function renderDescriptionSection(
     );
 
 
-  // ẢNH
+  // ===================================================
+  // IMAGE EVENTS
+  // ===================================================
+
   bindImageEvents(
     container
   );
 
 
-  // QUANTITY + CART SẢN PHẨM CHÍNH
+  // ===================================================
+  // QUANTITY + CART
+  // ===================================================
+
   bindProductDetailActions(
     container,
     currentProduct
@@ -539,7 +593,7 @@ function renderDescriptionSection(
 
 
   // ===================================================
-  // TAB LINK CHUYỂN TAB
+  // TAB
   // ===================================================
 
   const tabLinks =
@@ -564,124 +618,212 @@ function renderDescriptionSection(
             );
 
 
-          if (
-            selectedTab &&
-            selectedTab !== currentTab
-          ) {
-
-            currentTab =
-              selectedTab;
+          if (!selectedTab) return;
 
 
-            renderDescriptionSection(
-              container
-            );
-          }
+          currentTab =
+            selectedTab;
+
+
+          renderDescriptionSection(
+            container
+          );
+
         }
       );
+
     }
   );
 }
 
 
 // =====================================================
-// INIT DOM CONTENT LOADED
+// RELATED PRODUCTS CART
 // =====================================================
 
 document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+  "click",
+  e => {
+
+    const cartBtn =
+      e.target.closest(
+        '[data-action="add-to-cart"]'
+      );
+
+
+    if (!cartBtn) return;
+
+
+    const card =
+      cartBtn.closest(
+        ".product-card"
+      );
+
+
+    if (!card) return;
+
+
+    /*
+      Nếu nút này nằm trong phần
+      product detail chính thì
+      bindProductDetailActions xử lý.
+    */
+
+    if (
+      cartBtn.closest(
+        "#description-container"
+      ) &&
+      !cartBtn.closest(
+        ".product-card"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    e.preventDefault();
+
+
+    const productId =
+      cartBtn.dataset.id;
+
+
+    const product =
+      productList.find(
+        item =>
+          String(item.id) ===
+          String(productId)
+      );
+
+
+    if (!product) return;
+
+
+    const cart =
+      getCart();
+
+
+    const existing =
+      cart.find(
+        item =>
+          item.name ===
+          product.name
+      );
+
+
+    if (existing) {
+
+      existing.quantity += 1;
+
+    } else {
+
+      cart.push({
+
+        id:
+          product.id,
+
+        name:
+          product.name,
+
+        image:
+          product.image || "",
+
+        price:
+          product.price || 0,
+
+        quantity:
+          1
+
+      });
+
+    }
+
+
+    saveCart(cart);
+
 
     initNavigation();
 
-    if (
-      document.getElementById(
-        "cart-container"
-      )
-    ) {
-      initShoppingCartPage();
-    }
 
-    const descriptionContainer =
-      document.getElementById(
-        "description-container"
-      );
-
-    if (!descriptionContainer) {
-      return;
-    }
-
-    const breadcrumbContainer =
-      document.getElementById(
-        "breadcrumb-container"
-      );
-
-    if (breadcrumbContainer) {
-      breadcrumbContainer.innerHTML =
-        renderBreadCrumb();
-    }
-
-    renderDescriptionSection(
-      descriptionContainer
+    showToastNotification(
+      `${product.name} added to cart.`
     );
 
-    initNewsletter();
-    initFooter();
   }
 );
 
 
 // =====================================================
-// 📌 BẮT SỰ KIỆN CLICK NÚT GIỎ HÀNG 🛒 CHO CÁC SẢN PHẨM LIÊN QUAN (RELATED PRODUCTS)
+// INIT DETAILS PAGE
 // =====================================================
-document.addEventListener("click", (e) => {
-  const cartBtn = e.target.closest('[data-action="add-to-cart"]');
 
-  // Chỉ bắt sự kiện nếu bấm nút 🛒 trên các card sản phẩm liên quan
-  if (cartBtn && !cartBtn.closest('#quick-view-modal') && cartBtn.closest('section')) {
-    const card = cartBtn.closest('.product-card');
-    if (!card) return;
+export function initDetailsPage() {
 
-    e.preventDefault();
-    e.stopPropagation();
+  console.log(
+    "DETAILS JS OK"
+  );
 
-    let productData = null;
 
-    if (cartBtn.dataset.product) {
-      try {
-        productData = JSON.parse(decodeURIComponent(cartBtn.dataset.product));
-      } catch (err) {}
-    }
+  initNavigation();
 
-    if (!productData && cartBtn.dataset.id) {
-      productData = productList.find(p => Number(p.id) === Number(cartBtn.dataset.id));
-    }
 
-    if (productData) {
-      const cart = getCart();
-      const existing = cart.find(item => item.name === productData.name);
-      const itemPrice = productData.price || productData.currentPrice || 12;
-      const itemImg = productData.image || productData.mainImage || "";
+  const descriptionContainer =
+    document.getElementById(
+      "description-container"
+    );
 
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({
-          id: productData.id || Date.now(),
-          name: productData.name,
-          image: itemImg,
-          price: itemPrice,
-          quantity: 1
-        });
-      }
 
-      saveCart(cart);
+  if (!descriptionContainer) {
 
-      // Cập nhật lại số lượng giỏ hàng hiển thị ở thanh Navigation phía trên
-      initNavigation();
+    console.error(
+      "Không tìm thấy #description-container"
+    );
 
-      // Hiện thông báo Toast góc phải màn hình
-      showToastNotification(`${productData.name} added to cart.`);
-    }
+    return;
+
   }
-});
+
+
+  // ===================================================
+  // BREADCRUMB
+  // ===================================================
+
+  const breadcrumbContainer =
+    document.getElementById(
+      "breadcrumb-container"
+    );
+
+
+  if (breadcrumbContainer) {
+
+    breadcrumbContainer.innerHTML =
+      renderBreadcrumbsComponent();
+
+  }
+
+
+  // ===================================================
+  // DESCRIPTION
+  // ===================================================
+
+  renderDescriptionSection(
+    descriptionContainer
+  );
+
+
+  // ===================================================
+  // NEWSLETTER
+  // ===================================================
+
+  initNewsletter();
+
+
+  // ===================================================
+  // FOOTER
+  // ===================================================
+
+  initFooter();
+
+}
