@@ -9,6 +9,7 @@ import {
 
 import productList from "../data/products.json";
 import productData from "../data/productdata.json";
+import { getImageUrl } from "../utils/assets.js";
 
 // =====================================================
 // LẤY DATA TỪ productdata.json
@@ -101,78 +102,47 @@ const CLASS = {
 // =====================================================
 
 function findProductDataByName(name) {
+  if (!name) return null;
 
-  if (!name) {
-    return null;
-  }
-
-  const nameKey =
-    name.toLowerCase().trim();
-
+  const nameKey = name.toLowerCase().trim();
 
   // Tìm trong PRODUCTS
-  const found =
-    PRODUCTS.find(
-      product =>
-        product &&
-        product.name &&
-        product.name.toLowerCase().trim() === nameKey
-    );
+  const found = PRODUCTS.find(
+    product =>
+      product &&
+      product.name &&
+      product.name.toLowerCase().trim() === nameKey
+  );
 
-
-  if (found) {
-    return found;
-  }
-
+  if (found) return found;
 
   // Tìm thông qua PRODUCTS_MAP
-  const mapKey =
-    Object.keys(PRODUCTS_MAP).find(
-      key =>
-        key.toLowerCase().trim() === nameKey
-    );
-
+  const mapKey = Object.keys(PRODUCTS_MAP).find(
+    key => key.toLowerCase().trim() === nameKey
+  );
 
   if (mapKey) {
-
-    const dataKey =
-      PRODUCTS_MAP[mapKey];
-
-    if (
-      dataKey &&
-      productData[dataKey]
-    ) {
+    const dataKey = PRODUCTS_MAP[mapKey];
+    if (dataKey && productData[dataKey]) {
       return productData[dataKey];
     }
   }
-
 
   return null;
 }
 
 
 // =====================================================
-// BẢNG BẢN BỐ TRÍ ẢNH
+// BẢNG Bố TRÍ ẢNH
 // =====================================================
 
 const PRODUCT_IMAGE_MAP = {};
 
-
 // Tự động lấy ảnh từ productdata.json
 PRODUCTS.forEach(product => {
-
-  if (
-    product &&
-    product.name &&
-    product.mainImage
-  ) {
-
-    PRODUCT_IMAGE_MAP[
-      product.name.toLowerCase().trim()
-    ] = product.mainImage;
-
+  if (product && product.name && product.mainImage) {
+    PRODUCT_IMAGE_MAP[product.name.toLowerCase().trim()] = product.mainImage;
   }
-
 });
 
 
@@ -181,95 +151,36 @@ PRODUCTS.forEach(product => {
 // =====================================================
 
 function resolveImage(p = {}) {
+  // 1. Ưu tiên lấy ảnh trực tiếp từ đối tượng p
+  let imgPath = p.image || p.mainImage || (Array.isArray(p.thumbnails) && p.thumbnails[0]);
 
-  const nameKey =
-    (p.name || "")
-      .toLowerCase()
-      .trim();
-
-
-  // ===================================================
-  // 1. Tìm trong bảng ảnh
-  // ===================================================
-
-  if (
-    PRODUCT_IMAGE_MAP[nameKey]
-  ) {
-
-    return PRODUCT_IMAGE_MAP[nameKey];
-
+  // 2. Nếu p không chứa đường dẫn ảnh, tìm trong productData theo tên
+  if (!imgPath) {
+    const dataProduct = findProductDataByName(p.name);
+    if (dataProduct && dataProduct.mainImage) {
+      imgPath = dataProduct.mainImage;
+    }
   }
 
-
-  // ===================================================
-  // 2. Tìm product data theo tên
-  // ===================================================
-
-  const dataProduct =
-    findProductDataByName(p.name);
-
-
-  if (
-    dataProduct &&
-    dataProduct.mainImage
-  ) {
-
-    return dataProduct.mainImage;
-
+  // 3. Tìm trong PRODUCT_IMAGE_MAP
+  if (!imgPath) {
+    const nameKey = (p.name || "").toLowerCase().trim();
+    if (PRODUCT_IMAGE_MAP[nameKey]) {
+      imgPath = PRODUCT_IMAGE_MAP[nameKey];
+    }
   }
 
-
-  // ===================================================
-  // 3. Nếu p.image là ảnh hợp lệ
-  // ===================================================
-
-  if (
-    p.image &&
-    typeof p.image === "string" &&
-    !p.image.startsWith("/images/") &&
-    !p.image.includes("undefined")
-  ) {
-
-    return p.image;
-
+  // 4. Nếu vẫn không có, dùng ảnh mặc định
+  if (!imgPath || typeof imgPath !== "string" || imgPath.includes("undefined")) {
+    imgPath = defaultProductData?.mainImage || "";
   }
 
-
-  // ===================================================
-  // 4. Lấy mainImage
-  // ===================================================
-
-  if (
-    p.mainImage &&
-    typeof p.mainImage === "string"
-  ) {
-
-    return p.mainImage;
-
+  // 5. Chuyển đổi đường dẫn ảnh chuẩn bằng getImageUrl
+  if (imgPath.startsWith("/images/") || imgPath.startsWith("images/")) {
+    return getImageUrl(imgPath);
   }
 
-
-  // ===================================================
-  // 5. Lấy thumbnail đầu tiên
-  // ===================================================
-
-  if (
-    p.thumbnails &&
-    Array.isArray(p.thumbnails) &&
-    p.thumbnails[0]
-  ) {
-
-    return p.thumbnails[0];
-
-  }
-
-
-  // ===================================================
-  // 6. ẢNH MẶC ĐỊNH
-  // ===================================================
-
-  return defaultProductData?.mainImage || "";
-
+  return imgPath;
 }
 
 
@@ -278,158 +189,72 @@ function resolveImage(p = {}) {
 // =====================================================
 
 export function renderProductCard(p = {}) {
-
-  const id =
-    p.id || 1;
-
-
-  const name =
-    p.name || "Tên sản phẩm";
-
-
-  const image =
-    resolveImage(p);
-
+  const id = p.id || 1;
+  const name = p.name || "Tên sản phẩm";
+  const image = resolveImage(p);
 
   const price =
     p.price !== undefined
       ? p.price
-      : (
-          p.currentPrice !== undefined
-            ? p.currentPrice
-            : 0
-        );
-
+      : (p.currentPrice !== undefined ? p.currentPrice : 0);
 
   const oldPrice =
     p.oldPrice !== undefined
       ? p.oldPrice
-      : (
-          p.originalPrice !== undefined
-            ? p.originalPrice
-            : null
-        );
+      : (p.originalPrice !== undefined ? p.originalPrice : null);
 
+  const rating = p.rating || 4;
+  const saleTag = p.saleTag || p.discountLabel || null;
+  const bestTag = p.bestTag || null;
 
-  const rating =
-    p.rating || 4;
-
-
-  const saleTag =
-    p.saleTag ||
-    p.discountLabel ||
-    null;
-
-
-  const bestTag =
-    p.bestTag ||
-    null;
-
-
-  // ===================================================
   // LINK DETAIL
-  // ===================================================
+  const detailUrl = `./descriptions.html?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
 
-  const detailUrl =
-    `./descriptions.html?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
+  // DATA CHO QUICK VIEW / CART (Truyền đúng đường dẫn ảnh chuẩn)
+  const productDataStr = encodeURIComponent(
+    JSON.stringify({
+      ...p,
+      id,
+      name,
+      price,
+      oldPrice,
+      image
+    })
+  );
 
-
-  // ===================================================
-  // DATA CHO QUICK VIEW / CART
-  // ===================================================
-
-  const productDataStr =
-    encodeURIComponent(
-      JSON.stringify({
-        ...p,
-        id,
-        name,
-        price,
-        oldPrice,
-        image
-      })
-    );
-
-
-  // ===================================================
   // RATING
-  // ===================================================
+  const starsHtml = Array.from({ length: 5 })
+    .map(
+      (_, i) => `
+        <span class="${i < rating ? "text-warning" : "text-neutral-200"} text-xs">
+          ${iconStar(i < rating)}
+        </span>
+      `
+    )
+    .join("");
 
-  const starsHtml =
-    Array.from({ length: 5 })
-      .map(
-        (_, i) => `
-          <span
-            class="${
-              i < rating
-                ? "text-warning"
-                : "text-neutral-200"
-            } text-xs"
-          >
-            ${iconStar(i < rating)}
-          </span>
-        `
-      )
-      .join("");
-
-
-  // ===================================================
   // TAG
-  // ===================================================
-
   const tagsHtml =
     saleTag || bestTag
       ? `
         <div class="${CLASS.tags}">
-
-          ${
-            saleTag
-              ? `
-                <span class="${CLASS.tagSale}">
-                  ${saleTag}
-                </span>
-              `
-              : ""
-          }
-
-          ${
-            bestTag
-              ? `
-                <span class="${CLASS.tagBest}">
-                  ${bestTag}
-                </span>
-              `
-              : ""
-          }
-
+          ${saleTag ? `<span class="${CLASS.tagSale}">${saleTag}</span>` : ""}
+          ${bestTag ? `<span class="${CLASS.tagBest}">${bestTag}</span>` : ""}
         </div>
       `
       : "";
 
-
-  // ===================================================
-  // RETURN PRODUCT CARD
-  // ===================================================
-
   return `
-    <article
-      class="${CLASS.card}"
-      data-id="${id}"
-    >
+    <article class="${CLASS.card}" data-id="${id}">
 
-      <!-- ================================= -->
       <!-- PRODUCT IMAGE -->
-      <!-- ================================= -->
-
       <a
         href="${detailUrl}"
         data-action="view-detail"
         class="${CLASS.imageWrap}"
         aria-label="Xem chi tiết ${name}"
       >
-
         ${tagsHtml}
-
         <img
           src="${image}"
           alt="${name}"
@@ -437,18 +262,12 @@ export function renderProductCard(p = {}) {
           loading="lazy"
           onerror="this.onerror=null; this.src='${defaultProductData?.mainImage || ""}';"
         />
-
       </a>
 
-
-      <!-- ================================= -->
       <!-- ACTION BUTTONS -->
-      <!-- ================================= -->
-
       <div class="${CLASS.actions}">
 
         <!-- Wishlist -->
-
         <button
           type="button"
           data-action="wishlist"
@@ -459,9 +278,7 @@ export function renderProductCard(p = {}) {
           ${iconHeart}
         </button>
 
-
         <!-- Quick View -->
-
         <button
           type="button"
           data-action="quick-view"
@@ -475,15 +292,10 @@ export function renderProductCard(p = {}) {
 
       </div>
 
-
-      <!-- ================================= -->
       <!-- PRODUCT BODY -->
-      <!-- ================================= -->
-
       <div class="${CLASS.body}">
 
         <!-- PRODUCT NAME -->
-
         <a
           href="${detailUrl}"
           data-action="view-detail"
@@ -492,23 +304,14 @@ export function renderProductCard(p = {}) {
           ${name}
         </a>
 
-
-        <!-- ================================= -->
         <!-- PRICE + CART -->
-        <!-- ================================= -->
-
         <div class="${CLASS.priceRow}">
-
           <div>
-
             <span class="${CLASS.price}">
               $${Number(price).toFixed(2)}
             </span>
-
             ${
-              oldPrice !== null &&
-              oldPrice !== undefined &&
-              oldPrice !== ""
+              oldPrice !== null && oldPrice !== undefined && oldPrice !== ""
                 ? `
                   <span class="${CLASS.priceOld}">
                     $${Number(oldPrice).toFixed(2)}
@@ -516,12 +319,9 @@ export function renderProductCard(p = {}) {
                 `
                 : ""
             }
-
           </div>
 
-
           <!-- Add To Cart -->
-
           <button
             type="button"
             data-action="add-to-cart"
@@ -532,14 +332,9 @@ export function renderProductCard(p = {}) {
           >
             ${iconBag}
           </button>
-
         </div>
 
-
-        <!-- ================================= -->
         <!-- RATING -->
-        <!-- ================================= -->
-
         <div class="${CLASS.rating}">
           ${starsHtml}
         </div>
@@ -555,70 +350,37 @@ export function renderProductCard(p = {}) {
 // TỰ ĐỘNG BẮT CLICK ĐIỀU HƯỚNG DETAIL
 // =====================================================
 
-document.addEventListener(
-  "click",
-  (e) => {
+document.addEventListener("click", (e) => {
+  const detailLink = e.target.closest('[data-action="view-detail"]');
 
-    const detailLink =
-      e.target.closest(
-        '[data-action="view-detail"]'
-      );
+  if (!detailLink) return;
 
+  const href = detailLink.getAttribute("href");
 
-    if (!detailLink) {
-      return;
-    }
-
-
-    const href =
-      detailLink.getAttribute("href");
-
-
-    if (
-      href &&
-      !e.target.closest(
-        '[data-action="wishlist"]'
-      ) &&
-      !e.target.closest(
-        '[data-action="quick-view"]'
-      ) &&
-      !e.target.closest(
-        '[data-action="add-to-cart"]'
-      )
-    ) {
-
-      e.preventDefault();
-
-      window.location.href =
-        href;
-
-    }
-
+  if (
+    href &&
+    !e.target.closest('[data-action="wishlist"]') &&
+    !e.target.closest('[data-action="quick-view"]') &&
+    !e.target.closest('[data-action="add-to-cart"]')
+  ) {
+    e.preventDefault();
+    window.location.href = href;
   }
-);
+});
 
 
 // =====================================================
 // RENDER PRODUCT GRID
 // =====================================================
 
-export function renderProductGrid(
-  products = []
-) {
-
-  const itemsHtml =
-    products
-      .map(renderProductCard)
-      .join("");
-
+export function renderProductGrid(products = []) {
+  const itemsHtml = products.map(renderProductCard).join("");
 
   return `
     <div class="w-full">
-
       <div class="${CLASS.grid}">
         ${itemsHtml}
       </div>
-
     </div>
   `;
 }
@@ -632,302 +394,92 @@ export function renderRelatedProducts(
   currentProduct = {},
   allProducts = productList
 ) {
-
   let displayProducts = [];
 
-
-  // ===================================================
   // RELATED PRODUCTS CÓ SẴN
-  // ===================================================
-
   if (
     currentProduct.relatedProducts &&
-    Array.isArray(
-      currentProduct.relatedProducts
-    ) &&
+    Array.isArray(currentProduct.relatedProducts) &&
     currentProduct.relatedProducts.length > 0
   ) {
-
-    displayProducts =
-      [
-        ...currentProduct.relatedProducts
-      ];
-
+    displayProducts = [...currentProduct.relatedProducts];
   }
-
-
-  // ===================================================
   // RELATED IDS
-  // ===================================================
-
   else if (
     currentProduct.relatedIds &&
-    Array.isArray(
-      currentProduct.relatedIds
-    )
+    Array.isArray(currentProduct.relatedIds)
   ) {
-
-    displayProducts =
-      (
-        allProducts ||
-        productList
-      ).filter(
-        p =>
-          currentProduct.relatedIds.includes(
-            p.id
-          )
-      );
-
+    displayProducts = (allProducts || productList).filter(p =>
+      currentProduct.relatedIds.includes(p.id)
+    );
   }
 
-
-  // ===================================================
   // CHƯA ĐỦ 4 SẢN PHẨM
-  // ===================================================
-
-  if (
-    displayProducts.length < 4
-  ) {
-
+  if (displayProducts.length < 4) {
     let categoryName = "";
 
-
-    if (
-      currentProduct.category
-    ) {
-
+    if (currentProduct.category) {
       categoryName =
         typeof currentProduct.category === "object"
           ? currentProduct.category.name
           : currentProduct.category;
-
     }
 
+    const existingNames = new Set(
+      displayProducts.map(p => p.name?.toLowerCase())
+    );
 
-    const existingNames =
-      new Set(
-        displayProducts.map(
-          p =>
-            p.name?.toLowerCase()
-        )
-      );
-
-
-    if (
-      currentProduct.name
-    ) {
-
-      existingNames.add(
-        currentProduct.name.toLowerCase()
-      );
-
+    if (currentProduct.name) {
+      existingNames.add(currentProduct.name.toLowerCase());
     }
 
+    const sourceProducts = allProducts || productList;
 
-    // =================================================
-    // PRODUCT LIST
-    // =================================================
+    const remainingCandidates = sourceProducts.filter(
+      p =>
+        p.id !== currentProduct.id &&
+        !existingNames.has(p.name?.toLowerCase())
+    );
 
-    const sourceProducts =
-      allProducts ||
-      productList;
+    const sameCategoryCandidates = remainingCandidates.filter(p => {
+      let category = p.category;
+      if (typeof category === "object") category = category.name;
+      return category === categoryName;
+    });
 
+    const otherCandidates = remainingCandidates.filter(p => {
+      let category = p.category;
+      if (typeof category === "object") category = category.name;
+      return category !== categoryName;
+    });
 
-    const remainingCandidates =
-      sourceProducts.filter(
-        p =>
-          p.id !== currentProduct.id &&
-          !existingNames.has(
-            p.name?.toLowerCase()
-          )
-      );
-
-
-    // =================================================
-    // CÙNG CATEGORY
-    // =================================================
-
-    const sameCategoryCandidates =
-      remainingCandidates.filter(
-        p => {
-
-          let category =
-            p.category;
-
-
-          if (
-            typeof category === "object"
-          ) {
-
-            category =
-              category.name;
-
-          }
-
-
-          return (
-            category ===
-            categoryName
-          );
-
-        }
-      );
-
-
-    // =================================================
-    // KHÁC CATEGORY
-    // =================================================
-
-    const otherCandidates =
-      remainingCandidates.filter(
-        p => {
-
-          let category =
-            p.category;
-
-
-          if (
-            typeof category === "object"
-          ) {
-
-            category =
-              category.name;
-
-          }
-
-
-          return (
-            category !==
-            categoryName
-          );
-
-        }
-      );
-
-
-    // =================================================
-    // GIỮ NGUYÊN CÁCH SORT CỦA BẠN
-    // =================================================
-
-    const seed =
-      Number(
-        currentProduct.id
-      ) || 1;
-
+    const seed = Number(currentProduct.id) || 1;
 
     sameCategoryCandidates.sort(
-      (a, b) =>
-        (
-          (a.id * seed * 13) % 11
-        ) -
-        (
-          (b.id * seed * 13) % 11
-        )
+      (a, b) => ((a.id * seed * 13) % 11) - ((b.id * seed * 13) % 11)
     );
-
 
     otherCandidates.sort(
-      (a, b) =>
-        (
-          (a.id * seed * 17) % 13
-        ) -
-        (
-          (b.id * seed * 17) % 13
-        )
+      (a, b) => ((a.id * seed * 17) % 13) - ((b.id * seed * 17) % 13)
     );
 
+    const pool = [...sameCategoryCandidates, ...otherCandidates];
+    const needed = 4 - displayProducts.length;
 
-    const pool = [
-      ...sameCategoryCandidates,
-      ...otherCandidates
-    ];
-
-
-    const needed =
-      4 -
-      displayProducts.length;
-
-
-    displayProducts = [
-      ...displayProducts,
-      ...pool.slice(
-        0,
-        needed
-      )
-    ];
-
+    displayProducts = [...displayProducts, ...pool.slice(0, needed)];
   }
 
-
-  // ===================================================
-  // CHỈ LẤY 4
-  // ===================================================
-
-  const final4Products =
-    displayProducts.slice(
-      0,
-      4
-    );
-
-
-  // ===================================================
-  // RENDER CARD
-  // ===================================================
-
-  const cardsHtml =
-    final4Products
-      .map(renderProductCard)
-      .join("");
-
-
-  // ===================================================
-  // RETURN
-  // ===================================================
+  const final4Products = displayProducts.slice(0, 4);
+  const cardsHtml = final4Products.map(renderProductCard).join("");
 
   return `
-    <section
-      class="
-        w-full
-        max-w-[1320px]
-        mx-auto
-        px-4
-        md:px-8
-        mt-16
-        mb-20
-      "
-    >
-
-      <h2
-        class="
-          text-2xl
-          sm:text-[32px]
-          font-semibold
-          text-center
-          text-gray-900
-          mb-8
-          font-poppins
-        "
-      >
+    <section class="w-full max-w-[1320px] mx-auto px-4 md:px-8 mt-16 mb-20">
+      <h2 class="text-2xl sm:text-[32px] font-semibold text-center text-gray-900 mb-8 font-poppins">
         Related Products
       </h2>
-
-
-      <div
-        class="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-4
-          gap-6
-          w-full
-          items-stretch
-        "
-      >
-
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch">
         ${cardsHtml}
-
       </div>
-
     </section>
   `;
 }

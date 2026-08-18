@@ -318,3 +318,8 @@ if (
 
   initFooter();
 }
+
+// Lắng nghe sự kiện giỏ hàng thay đổi để tự động vẽ lại Navigation (Header)
+window.addEventListener("cartUpdated", () => {
+  initNavigation();
+});
