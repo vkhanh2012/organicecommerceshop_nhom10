@@ -21,6 +21,10 @@ export function renderCategories(categories = []) {
               <img
                 src="${category.image}"
                 alt="${category.name}"
+                width="190"
+                height="146"
+                loading="lazy"
+                decoding="async"
                 class="h-full w-full object-contain transition duration-300 group-hover:scale-105"
               >
             </div>

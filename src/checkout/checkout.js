@@ -13,7 +13,7 @@ export function renderCheckout(cart = getCart()) {
     <div class="flex items-center justify-between py-2.5">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-lg border border-gray-100 bg-gray-50 flex items-center justify-center p-1 overflow-hidden shrink-0">
-          <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain" />
+          <img src="${item.image}" alt="${item.name}" class="image-contain" />
         </div>
         <span class="text-sm text-gray-700 font-medium">${item.name} <span class="text-gray-400 text-xs font-normal">x${item.quantity}</span></span>
       </div>
@@ -40,22 +40,22 @@ export function renderCheckout(cart = getCart()) {
               <form class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">First name</label>
-                    <input type="text" placeholder="Your first name" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                    <label class="form-label">First name</label>
+                    <input type="text" placeholder="Your first name" class="form-input" />
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Last name</label>
-                    <input type="text" placeholder="Your last name" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                    <label class="form-label">Last name</label>
+                    <input type="text" placeholder="Your last name" class="form-input" />
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Company Name <span class="text-gray-400 font-normal">(optional)</span></label>
-                    <input type="text" placeholder="Company name" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                    <label class="form-label">Company Name <span class="text-gray-400 font-normal">(optional)</span></label>
+                    <input type="text" placeholder="Company name" class="form-input" />
                   </div>
                 </div>
 
                 <div>
-                  <label class="block text-xs font-medium text-gray-700 mb-1.5">Street Address</label>
-                  <input type="text" placeholder="Email or address" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                  <label class="form-label">Street Address</label>
+                  <input type="text" placeholder="Email or address" class="form-input" />
                 </div>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
   <div>
@@ -79,12 +79,12 @@ export function renderCheckout(cart = getCart()) {
 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Email</label>
-                    <input type="email" placeholder="Email Address" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                    <label class="form-label">Email</label>
+                    <input type="email" placeholder="Email Address" class="form-input" />
                   </div>
                   <div>
-                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Phone</label>
-                    <input type="tel" placeholder="Phone number" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
+                    <label class="form-label">Phone</label>
+                    <input type="tel" placeholder="Phone number" class="form-input" />
                   </div>
                 </div>
 
@@ -98,7 +98,7 @@ export function renderCheckout(cart = getCart()) {
             <div class="pt-4 border-t border-gray-100">
               <h3 class="text-xl font-semibold text-gray-900 mb-4">Additional Info</h3>
               <div>
-                <label class="block text-xs font-medium text-gray-700 mb-1.5">Order Notes <span class="text-gray-400 font-normal">(Optional)</span></label>
+                <label class="form-label">Order Notes <span class="text-gray-400 font-normal">(Optional)</span></label>
                 <textarea rows="4" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full p-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207] resize-none"></textarea>
               </div>
             </div>

@@ -16,8 +16,8 @@ export function cartTable(cart) {
       </div>
       ${cart.map(cartRow).join("")}
       <div class="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 px-5 py-4 sm:px-6">
-        <a class="cursor-pointer rounded-full bg-neutral-50 px-6 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-800 hover:text-white" href="./shop.html">Return to shop</a>
-        <button class="cursor-pointer rounded-full bg-neutral-50 px-6 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-800 hover:text-white" data-action="update">Update Cart</button>
+        <a class="action-button" href="./shop.html">Return to shop</a>
+        <button type="button" class="action-button">Update Cart</button>
       </div>
     </div>`;
 }

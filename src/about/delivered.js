@@ -24,11 +24,10 @@ export function renderDeliveredFeature() {
               ${deliveredFeatureHtml}
             </div>
             <!-- Button Shop Now -->
-             <div class="inline-flex items-center px-8 py-3.5 md:px-10 md:py-4 rounded-pill bg-primary text-white font-semibold text-sm gap-4 hover:bg-primary-dark cursor-pointer">
+             <a href="./shop.html" class="inline-flex items-center px-8 py-3.5 md:px-10 md:py-4 rounded-pill bg-primary text-white font-semibold text-sm gap-4 hover:bg-primary-dark cursor-pointer">
                ${aboutData.delivered.buttonText}
                 ${nextArrow}
-                <a href="${aboutData.delivered.buttonLink}"></a>
-              </div>
+              </a>
             </div>
           <!-- Cột 2: hình ảnh -->
           <div class="w-full md:w-1/2">

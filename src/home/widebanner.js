@@ -25,7 +25,7 @@ export function renderWideBanner(banner) {
           </p>
 
           <a
-            href="#"
+            href="./shop.html"
             class="mt-5 inline-flex w-fit cursor-pointer rounded-full bg-white
                    px-7 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
           >

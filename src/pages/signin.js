@@ -1,4 +1,5 @@
 import { renderSignInForm } from "../signin/signin.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 function bindTogglePasswordEvent() {
   const passwordInput = document.getElementById("signin-password");
@@ -13,12 +14,22 @@ function bindTogglePasswordEvent() {
   });
 }
 
- export function initSignInPage() {
+export function initSignInPage() {
   const container = document.getElementById("signin-container");
   if (!container) return;
-
+  
   container.innerHTML = renderSignInForm();
 
+  const breadcrumbs = document.getElementById("breadcrumbs-container");
+  if (breadcrumbs) {
+    const breadcrumbsData = {
+      breadcrumbs: [
+        { label: "Account", url: "#" },
+        { label: "Sign In", url: "./signin.html" }
+      ]
+    };
+
+    breadcrumbs.innerHTML = renderBreadcrumbsComponent(breadcrumbsData);
+  }
   bindTogglePasswordEvent();
 }
-

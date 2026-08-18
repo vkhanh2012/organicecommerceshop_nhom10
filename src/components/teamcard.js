@@ -1,5 +1,5 @@
 import aboutData from "../data/about.json"
-import { iconInstagram, SOCIAL_ICONS } from "./icons"
+import { iconInstagram, SOCIAL_ICONS } from "./icons.js"
 export function renderTeamCard(item){
     return /*html*/`
     <!-- Teawm card 1 -->
