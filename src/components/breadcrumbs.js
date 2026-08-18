@@ -21,16 +21,16 @@ export function renderBreadcrumbsComponent({ breadcrumbs = [] } = {}) {
     ${separator}`;
     }).join("");
     return `
-        <section class="relative flex h-24 items-center overflow-hidden bg-neutral-900 sm:h-[120px]">
+        <div class="relative flex h-24 items-center overflow-hidden bg-neutral-900 sm:h-[120px]">
             <img src="${breadcrumbsImage}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-60">
             <div class="absolute inset-0 bg-gradient-to-r from-neutral-900 via-neutral-900/85 to-transparent"></div>
             <div class="container-custom relative z-10">
                 <nav class="flex flex-wrap items-center gap-2 text-sm" aria-label="Breadcrumb">
-                    <<a href="./index.html" class="footer-link" aria-label="Home">${homeIcon}</a>
+                    <a href="./index.html" class="footer-link" aria-label="Home">${homeIcon}</a>
                     ${breadcrumbs.length ? separator : ""}
                     ${itemsHtml}
                 </nav>
             </div>
-        </section>
+        </div>
     `;
 }

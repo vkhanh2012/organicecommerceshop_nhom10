@@ -21,7 +21,7 @@ export function renderWishlistSection(items = []) {
     .join("") || `<tr><td colspan="4" class="px-6 py-12 text-center text-neutral-500">Your wishlist is empty.</td></tr>`;
 
   return /*html*/ `
-    <section class="w-full bg-white py-8 md:py-14">
+    <section class="w-full bg-white py-8 md:py-14" aria-labelledby="wishlist-title>
         <div class="container-custom">
             <h1 class="text-center text-title-900 font-semibold text-2xl sm:text-[32px]">
                 My Wishlist

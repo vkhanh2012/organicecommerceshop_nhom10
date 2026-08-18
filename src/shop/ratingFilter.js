@@ -1,4 +1,6 @@
 import { ratingStar } from "../components/icons";
+const star = 'var(--color-star)';
+const greystar = 'var(--color-greystar)';
 //Dữ liệu demo
 const RATING_DATA = [
   { stars: 5, label: "5.0" },

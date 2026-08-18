@@ -100,7 +100,7 @@ export function renderCheckout(cart = getCart()) {
             </div>
 
             <div class="pt-4 border-t border-neutral-100">
-              <h3 class="text-xl font-semibold text-neutral-900 mb-4">Additional Info</h3>
+              <h2 class="text-xl font-semibold text-neutral-900 mb-4">Additional Info</h2>
               <div>
                 <label class="form-label">Order Notes <span class="text-neutral-400 font-normal">(Optional)</span></label>
                 <textarea rows="4" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full p-4 border border-neutral-200 rounded-lg text-sm focus:outline-none focus:border-primary resize-none"></textarea>
@@ -111,7 +111,7 @@ export function renderCheckout(cart = getCart()) {
           <!-- CỘT PHẢI: ORDER SUMMARY (CÁC MÓN THANH TOÁN TỪ GIỎ HÀNG THỰC TẾ) -->
           <div class="lg:col-span-5">
             <div class="p-6 md:p-8 rounded-2xl border border-neutral-200 bg-white shadow-xs space-y-6">
-              <h3 class="text-lg font-semibold text-neutral-900">Order Summary</h3>
+              <h2 class="text-lg font-semibold text-neutral-900">Order Summary</h2>
 
               <!-- Danh sách món ăn trong giỏ hàng -->
               <div class="divide-y divide-neutral-100">
@@ -134,7 +134,7 @@ export function renderCheckout(cart = getCart()) {
               </div>
 
               <div class="pt-4 border-t border-neutral-100 space-y-3">
-                <h4 class="text-sm font-semibold text-neutral-900">Payment Method</h4>
+                <h3 class="text-sm font-semibold text-neutral-900">Payment Method</h3>
                 <div class="space-y-2.5">
                   <label class="flex items-center gap-2.5 text-xs text-neutral-700 cursor-pointer">
                     <input type="radio" name="payment" value="cod" checked class="w-4 h-4 text-primary accent-primary cursor-pointer" />
