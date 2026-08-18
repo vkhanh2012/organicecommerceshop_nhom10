@@ -8,7 +8,7 @@ export function renderCustomerFeedbackTab(product) {
       const feedbackStars = Array.from({ length: 5 }, (_, i) => {
   // Nếu vị trí i nhỏ hơn số rating của khách thì là sao vàng, ngược lại là sao xám/trống
   const isFilled = i < item.rating;
-  const starColor = isFilled ? "#FFB800" : "#E4E7E9"; 
+  const starColor = isFilled ? star : greystar
   
   return `<span style="color: ${starColor}; display: inline-flex;">${iconStar(isFilled)}</span>`;
 }).join("");

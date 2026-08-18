@@ -37,7 +37,7 @@ export function renderNewsletterComponent() {
             <!-- Social Icons -->
             <div class="flex items-center gap-2.5 self-center">
               <!-- Facebook -->
-              <a href="#" class="w-10 h-10 rounded-full bg-primary hover:bg-primary-dark flex items-center justify-center transition-all duration-200 shadow-sm text-white" aria-label="Facebook">
+              <a href="#" class="icon-social-facebook" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
               <!-- Twitter -->

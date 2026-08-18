@@ -54,7 +54,7 @@ export function renderHeroComponent(hero) {
   <!-- HERO 3 -->
   <article
     class="relative min-h-[240px] overflow-hidden rounded-[10px]
-           bg-[#002603] lg:h-[288px]"
+           bg-hero lg:h-[288px]"
   >
     <img
       src="${hero3.image}"
@@ -66,7 +66,7 @@ export function renderHeroComponent(hero) {
       class="absolute inset-0 h-full w-full object-cover"
     >
 
-    <div class="absolute inset-0 bg-[#002603]/80"></div>
+    <div class="absolute inset-0 bg-hero/80"></div>
 
     <div class="relative z-10 flex h-full min-h-[240px]
                 flex-col items-center justify-center p-7
@@ -98,7 +98,7 @@ export function renderHeroComponent(hero) {
   <section class="bg-white pt-4 md:pt-6" data-hero-root>
     <div class="container-custom">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
-        <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
+        <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-hero-background sm:min-h-[520px] lg:h-[600px]">
           <img
             src="${mainBanner.image}"
             alt="${mainBanner.title}"

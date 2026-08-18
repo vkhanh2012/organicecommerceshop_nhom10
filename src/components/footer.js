@@ -109,8 +109,8 @@ export function renderFooterComponent() {
             <!-- Mastercard -->
             <div class="payment-method">
               <div class="flex items-center -space-x-1.5">
-                <div class="w-3.5 h-3.5 rounded-full bg-[#EB001B]"></div>
-                <div class="w-3.5 h-3.5 rounded-full bg-[#F79E1B] opacity-80"></div>
+                <div class="w-3.5 h-3.5 rounded-full bg-mastercard-red"></div>
+                <div class="w-3.5 h-3.5 rounded-full bg-mastercard-yellow opacity-80"></div>
               </div>
             </div>
             <!-- Secure Payment -->

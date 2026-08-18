@@ -46,8 +46,8 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
           data-page="${page}"
           class="js-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer ${
             isActive
-              ? "bg-[#00B307] text-white shadow-sm scale-105"
-              : "text-neutral-700 bg-white hover:bg-neutral-100 hover:text-[#00B307]"
+              ? "bg-primary text-white shadow-sm scale-105"
+              : "text-neutral-700 bg-white hover:bg-neutral-100 hover:text-primary"
           }"
         >
           ${page}
@@ -61,7 +61,7 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
       <!-- Nút Prev (<) -->
       <button 
         data-page="${currentPage - 1}"
-        class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-[#00B307] hover:text-white hover:border-[#00B307] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
+        class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
         ${currentPage === 1 ? "disabled" : ""}
         aria-label="Previous Page"
       >
@@ -78,7 +78,7 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
       <!-- Nút Next (>) -->
       <button 
         data-page="${currentPage + 1}"
-        class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-[#00B307] hover:text-white hover:border-[#00B307] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
+        class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
         ${currentPage === totalPages ? "disabled" : ""}
         aria-label="Next Page"
       >

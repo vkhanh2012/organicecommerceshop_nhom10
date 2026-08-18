@@ -13,7 +13,7 @@ export function renderDiscountBanner(data = BANNER_DATA) {
     <div class="relative overflow-hidden pb-6 pt-10 gap-3 rounded-[10px] bg-neutral-50 text-center">
         <!-- Badge discount -->
         <div class="mb-1 pb-5 gap-0.5 text-3xl font-semibold text-neutral-900">
-            <span class="text-[#FF8A00] font-bold">${data.discountPercentage}%</span> Discount
+            <span class="text-text-discount font-bold">${data.discountPercentage}%</span> Discount
         </div>
         <p class="text-sm text-neutral-700 mb-4">${data.description}</p>
         <!-- Nút Shop now -->

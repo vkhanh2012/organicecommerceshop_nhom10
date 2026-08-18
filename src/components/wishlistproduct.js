@@ -4,11 +4,11 @@ export function renderWistlistRow(item) {
   if (!item) return ""
 
   const stockBadgeClass = item.inStock
-    ? "text-[#2C742F] bg-[#20B526]/10"
-    : "text-[#EA4335] bg-[#EA4335]/10"
+    ? "text-text-instock bg-instock/20"
+    : "text-outstock bg-outstock/10"
 
   const buttonClass = item.inStock
-    ? "bg-[#00B307] hover:bg-[#009A06] text-white cursor-pointer"
+    ? "bg-primary hover:bg-primary-dark text-white cursor-pointer"
     : "bg-neutral-100 text-neutral-400 cursor-not-allowed"
 
   return /*html*/ `

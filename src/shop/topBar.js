@@ -32,7 +32,7 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
       <div class="relative w-full lg:col-span-1 space-y-6">
             <button id="open-filter-btn"
               type="button"
-              class="bg-[#00B307] text-white max-w-32.75 px-6 py-3.5 rounded-full text-[14px] font-semibold flex items-center gap-3 hover:opacity-90 cursor-pointer w-full sm:w-auto justify-center mb-4">
+              class="bg-primary text-white max-w-32.75 px-6 py-3.5 rounded-full text-[14px] font-semibold flex items-center gap-3 hover:opacity-90 cursor-pointer w-full sm:w-auto justify-center mb-4">
               <span>${buttonName}</span>
               ${filter}
             </button>

@@ -9,7 +9,7 @@ const RATING_DATA = [
 ]
 // tạo 1 ngôi sao
 function makeStar(filled) {
-  const color = filled ? "#FF8A00" : "#CCCCCC";
+  const color = filled ? star : greystar;
   return ratingStar(color);
 }
 

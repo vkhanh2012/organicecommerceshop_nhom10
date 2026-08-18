@@ -88,7 +88,12 @@
   @apply w-10 h-10 rounded-full hover:text-primary hover:bg-neutral-100 flex items-center justify-center transition-all duration-200 text-neutral-700
 }
 
+.icon-social-facebook {
+  @apply w-10 h-10 rounded-full bg-primary hover:bg-primary-dark flex items-center justify-center transition-all duration-200 shadow-sm text-white
+}
+
 .additional-info-row {
   @apply flex items-center gap-3
 }
+
 

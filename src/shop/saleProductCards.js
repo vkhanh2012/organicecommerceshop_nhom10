@@ -5,7 +5,7 @@ function renderMiniStars(rating = 5) {
   return Array.from({ length: 5 })
     .map(
       (_, i) =>
-        /*html*/ `<span class="${i < rating ? "text-[#FF8A00]" : "text-neutral-200"}">${iconStar(i < rating)}</span>`,
+        /*html*/ `<span class="${i < rating ? "text-text-discount" : "text-neutral-200"}">${iconStar(i < rating)}</span>`,
     )
     .join("")
 }

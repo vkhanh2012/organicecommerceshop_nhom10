@@ -49,19 +49,19 @@ export function renderWishlistSection(items = []) {
                     </span>
                     <div class="flex items-center gap-2">
                         <a href="${socials.facebook || "#"}"
-                            class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white transition-opacity hover:opacity-90">
+                            class="icon-social-facebook">
                             ${SOCIAL_ICONS?.facebook || ""}
                         </a>
                         <a href="${socials.twitter || "#"}"
-                            class="w-10 h-10 rounded-full flex items-center justify-center text-neutral-700 hover:text-[#00B307] transition-colors">
+                            class="icon-social">
                             ${SOCIAL_ICONS?.twitter || ""}
                         </a>
                         <a href="${socials.pinterest || "#"}"
-                            class="w-10 h-10 rounded-full flex items-center justify-center text-neutral-700 hover:text-[#00B307] transition-colors">
+                            class="icon-social">
                             ${SOCIAL_ICONS?.pinterest || ""}
                         </a>
                         <a href="${socials.instagram || "#"}"
-                            class="w-10 h-10 rounded-full flex items-center justify-center text-neutral-700 hover:text-[#00B307] transition-colors">
+                            class="icon-social">
                             ${SOCIAL_ICONS?.instagram || ""}
                         </a>
                     </div>

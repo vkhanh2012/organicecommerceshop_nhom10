@@ -13,6 +13,6 @@ export function cartTotal(cart) {
       </div>
 
       <!-- data-action="checkout" -->
-      <button data-action="checkout" class="mt-2 w-full cursor-pointer rounded-full bg-[#edfff0] px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" ${cart.length ? "" : "disabled"}>Proceed to checkout</button>
+      <button data-action="checkout" class="mt-2 w-full cursor-pointer rounded-full bg-card-popup px-6 py-4 text-sm font-semibold text-primary hover:bg-primary hover:text-white" ${cart.length ? "" : "disabled"}>Proceed to checkout</button>
     </aside>`;
 }

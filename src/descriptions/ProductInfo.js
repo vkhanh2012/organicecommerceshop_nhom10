@@ -14,7 +14,7 @@ export function renderProductInfo(product) {
     <div class="lg:col-span-6 flex flex-col justify-start">
         <div class="additional-info-row flex-wrap">
           <h1 class="text-3xl font-semibold text-neutral-900">${product.name}</h1>
-          ${product.inStock ? `<span class="bg-[#20B526]/20 text-[#2C742F] text-xs font-semibold px-2.5 py-1 rounded">In Stock</span>` : ''}
+          ${product.inStock ? `<span class="bg-instock/20 text-text-instock text-xs font-semibold px-2.5 py-1 rounded">In Stock</span>` : ''}
         </div>
         
         <!-- Đánh giá sao & SKU -->
@@ -48,7 +48,7 @@ export function renderProductInfo(product) {
           <div class="flex items-center gap-2">
             <span class="text-neutral-500">Share item:</span>
             <div class="flex items-center gap-2">
-              <a href="#" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-[#009e06] transition-colors" aria-label="Facebook">
+              <a href="#" class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-colors" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
               <a href="#" class="w-8 h-8 rounded-full text-neutral-600 hover:bg-neutral-100 flex items-center justify-center transition-colors" aria-label="Twitter">
@@ -102,7 +102,7 @@ export function renderProductInfo(product) {
           </div>
 
           <!-- Nút Add to Cart -->
-          <button data-action="add-to-cart" class="w-full max-w-[447px] h-[51px] bg-[#00B307] hover:bg-primary text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none">
+          <button data-action="add-to-cart" class="w-full max-w-[447px] h-[51px] bg-primary hover:bg-primary text-white font-semibold rounded-full flex items-center justify-center gap-2.5 shadow-xs transition-colors cursor-pointer select-none">
             <span class="text-[15px] tracking-wide font-medium">Add to Cart</span>
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.81706 6.48336H2.31706L0.650391 15.65H15.6504L13.9837 6.48336H11.4837M4.81706 6.48336V3.98336C4.81706 2.14241 6.30944 0.650024 8.15039 0.650024C9.99134 0.650024 11.4837 2.14241 11.4837 3.98336V6.48336M4.81706 6.48336H11.4837M4.81706 6.48336V8.98336M11.4837 6.48336V8.98336" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
