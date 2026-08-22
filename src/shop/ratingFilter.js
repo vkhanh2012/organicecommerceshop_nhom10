@@ -21,7 +21,7 @@ function makeStarHtml(starCount) {
 }
 
 //tạo cho 1 dòng rating (1 li)
-function renderRating(item, selectedRating) {
+function renderRating(item, selectedRating, layout = "sidebar") {
   return /*html*/ `
     <li class = "flex items-center gap-2 cursor-pointer group">
        <input
@@ -47,12 +47,52 @@ function renderRating(item, selectedRating) {
     </li>`;
 }
 //hàm để render ra tất cả
-export function renderRatingFilter(selectedRating =0) {
+export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
   const listItemsHtml = RATING_DATA
     .map((item) =>
       renderRating(item, selectedRating)
     )
     .join("")
+
+    // shop2
+    if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-36 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Rating</span>
+        <span class="transition-transform group-open:rotate-180">
+          ⌄
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-64
+          rounded-lg
+          border border-neutral-100
+          bg-white p-4 shadow-lg
+        "
+      >
+        <ul class="space-y-3">
+          ${listItemsHtml}
+        </ul>
+      </div>
+
+    </details>
+  `
+}
 
   return `
     <div class="border-b border-neutral-100 pb-6.5 font-poppins">

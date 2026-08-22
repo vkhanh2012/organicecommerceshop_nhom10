@@ -1,4 +1,4 @@
-export function renderCategoryFilter(products, selectedCategory = "all") {
+export function renderCategoryFilter(products, selectedCategory = "all",layout = "sidebar") {
   const categoryCounts = {}
   //đếm số lượng sản phẩm
   products.forEach((product) => {
@@ -79,6 +79,53 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
     `
     })
     .join("")
+
+// shop2
+
+    if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-40 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Category</span>
+
+        <span
+          class="
+            transition-transform
+            group-open:rotate-180
+          "
+        >
+          ⌄
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-72
+          rounded-lg
+          border border-neutral-100
+          bg-white p-4 shadow-lg
+        "
+      >
+        <ul class="space-y-3">
+          ${listItemsHtml}
+        </ul>
+      </div>
+
+    </details>
+  `
+}
 
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">

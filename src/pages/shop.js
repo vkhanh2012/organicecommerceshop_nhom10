@@ -1,8 +1,12 @@
 import { renderSidebarComponent } from "/src/shop/sidebar.js"
+import { renderCategoryFilter } from "/src/shop/categoryfilter.js"
+import { renderPriceFilter } from "/src/shop/priceFilter.js"
+import { renderRatingFilter } from "/src/shop/ratingFilter.js"
+import { renderPopularTags } from "/src/shop/popularTag.js"
 import { renderTopBar } from "/src/shop/topBar.js"
 import { initSaleProducts } from "/src/shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "/src/components/breadcrumbs.js"
-import { renderProductGrid } from "/src/components/productCard.js"
+import { renderProductGrid } from "/src/components/productcard.js"
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
 import { renderQuickViewModal } from "/src/Quickview/quickview.js"
@@ -11,14 +15,14 @@ const images = import.meta.glob("../assets/images/**/*", {
   eager: true,
   query: "?url",
   import: "default",
-});
+})
 
 export function getImageUrl(path = "") {
-  return images[`../assets${path}`] || path;
+  return images[`../assets${path}`] || path
 }
 
 export function attachImageUrls(items = []) {
-  return items.map((item) => ({ ...item, image: getImageUrl(item.image) }));
+  return items.map((item) => ({ ...item, image: getImageUrl(item.image) }))
 }
 
 const shopState = {
@@ -29,13 +33,51 @@ const shopState = {
   minPrice: null,
   maxPrice: null,
   rating: 0,
+  tag: "all",
+}
+
+function setTagButtonState(
+  container,
+  selectedTag
+) {
+  if (!container) return
+
+  const buttons =
+    container.querySelectorAll(
+      "[data-tag-value]"
+    )
+
+  buttons.forEach((button) => {
+    const active =
+      button.dataset.tagValue ===
+      selectedTag
+
+    button.classList.toggle(
+      "bg-primary",
+      active
+    )
+
+    button.classList.toggle(
+      "text-white",
+      active
+    )
+
+    button.classList.toggle(
+      "bg-neutral-50",
+      !active
+    )
+
+    button.classList.toggle(
+      "text-neutral-900",
+      !active
+    )
+  })
 }
 
 export async function initShopPage() {
   const response = await fetch(productsUrl)
   let PRODUCT_DATA = await response.json()
 
-  // 📌 GẮN ĐƯỜNG DẪN ẢNH WEBP THẬT CHO TẤT CẢ SẢN PHẨM
   PRODUCT_DATA = attachImageUrls(PRODUCT_DATA)
 
   const prices = PRODUCT_DATA.map((product) => product.price)
@@ -46,48 +88,227 @@ export async function initShopPage() {
   shopState.minPrice = minProductPrice
   shopState.maxPrice = maxProductPrice
 
-  const topBar = document.getElementById("top-Bar")
+  
 
-  if (topBar) {
-    topBar.innerHTML = renderTopBar({
-      totalResults: PRODUCT_DATA.length,
-      currentSort: shopState.sortBy,
-      buttonName: "Filter",
-      sortOptions: [
-        { value: "latest", label: "Latest" },
-        {
-          value: "price-low",
-          label: "Price: Low to High",
-        },
-        {
-          value: "price-high",
-          label: "Price: High to Low",
-        },
-        {
-          value: "rating",
-          label: "Popularity",
-        },
-      ],
-    })
+  //shop1
+  const sideBarContainer = document.getElementById("sidebar")
+  //shop2
+  const horizontalFilterContainer = document.getElementById(
+    "horizontal-filter-container",
+  )
+
+  const isShop2 = horizontalFilterContainer !== null
+
+  const topBar =
+  document.getElementById("top-Bar")
+
+if (topBar && !isShop2) {
+  topBar.innerHTML = renderTopBar({
+    totalResults: PRODUCT_DATA.length,
+    currentSort: shopState.sortBy,
+    buttonName: "Filter",
+    sortOptions: [
+      {
+        value: "latest",
+        label: "Latest",
+      },
+      {
+        value: "price-low",
+        label: "Price: Low to High",
+      },
+      {
+        value: "price-high",
+        label: "Price: High to Low",
+      },
+      {
+        value: "rating",
+        label: "Popularity",
+      },
+    ],
+  })
+}
+
+  if (isShop2) {
+    shopState.productsPerPage = 16
   }
 
-  const sideBarContainer = document.getElementById("sidebar")
+  const filterContainer = horizontalFilterContainer || sideBarContainer
 
-  if (sideBarContainer) {
+  // SHOP 2 - dùng lại chính các module filter của Shop 1
+  if (horizontalFilterContainer) {
+  horizontalFilterContainer.innerHTML = `
+    <div
+      class="
+        flex
+        w-full
+        flex-col
+        gap-4
+
+        xl:flex-row
+        xl:items-center
+        xl:justify-between
+      "
+    >
+      <!-- LEFT: FILTER -->
+      <div
+        class="
+          flex
+          flex-wrap
+          items-center
+          gap-3
+        "
+      >
+        ${renderCategoryFilter(
+          PRODUCT_DATA,
+          shopState.category,
+          "horizontal"
+        )}
+
+        ${renderPriceFilter(
+          PRODUCT_DATA,
+          shopState.minPrice,
+          shopState.maxPrice,
+          "horizontal"
+        )}
+
+        ${renderRatingFilter(
+          shopState.rating,
+          "horizontal"
+        )}
+
+        ${renderPopularTags(
+          shopState.tag,
+          "horizontal"
+        )}
+      </div>
+
+      <!-- RIGHT: SORT + SHOW -->
+      <div
+        class="
+          flex
+          flex-wrap
+          items-center
+          gap-4
+
+          xl:shrink-0
+        "
+      >
+        <!-- SORT -->
+        <label
+          class="
+            flex
+            items-center
+            gap-2
+            text-sm
+            text-neutral-500
+          "
+        >
+          <span>Sort by:</span>
+
+          <select
+            id="sort-select"
+            class="
+              min-w-40
+              cursor-pointer
+              rounded
+              border
+              border-neutral-200
+              bg-white
+              px-3
+              py-2
+              text-sm
+              text-neutral-700
+              outline-none
+              focus:border-primary
+            "
+          >
+            <option value="latest">
+              Latest
+            </option>
+
+            <option value="price-low">
+              Price: Low to High
+            </option>
+
+            <option value="price-high">
+              Price: High to Low
+            </option>
+
+            <option value="rating">
+              Popularity
+            </option>
+          </select>
+        </label>
+
+        <!-- SHOW -->
+        <label
+          class="
+            flex
+            items-center
+            gap-2
+            text-sm
+            text-neutral-500
+          "
+        >
+          <span>Show:</span>
+
+          <select
+            id="products-per-page"
+            class="
+              cursor-pointer
+              rounded
+              border
+              border-neutral-200
+              bg-white
+              px-3
+              py-2
+              text-sm
+              text-neutral-700
+              outline-none
+              focus:border-primary
+            "
+          >
+            <option value="8">
+              8
+            </option>
+
+            <option
+              value="16"
+              selected
+            >
+              16
+            </option>
+
+            <option value="24">
+              24
+            </option>
+          </select>
+        </label>
+      </div>
+    </div>
+  `
+}
+
+  // SHOP 1 - sidebar cũ
+  else if (sideBarContainer) {
     sideBarContainer.innerHTML = renderSidebarComponent(
       PRODUCT_DATA,
       shopState.category,
       shopState.minPrice,
       shopState.maxPrice,
       shopState.rating,
+      shopState.tag,
     )
 
-    const saleProductsContainer = document.getElementById(
-      "sale-products-wrapper",
-    )
+    const saleProductsContainer =
+      document.getElementById(
+        "sale-products-wrapper"
+      )
 
     if (saleProductsContainer) {
-      initSaleProducts(saleProductsContainer)
+      initSaleProducts(
+        saleProductsContainer
+      )
     }
   }
 
@@ -111,19 +332,26 @@ export async function initShopPage() {
     })
   }
 
-  const productGridContainer = document.getElementById(
-    "product-grid-container",
-  )
+  const productGridContainer = document.getElementById("product-grid-container")
 
   function getFilterProducts() {
     let products = [...PRODUCT_DATA]
 
     if (shopState.category !== "all") {
       products = products.filter(
-        (product) =>
-          product.category == shopState.category,
+        (product) => product.category == shopState.category,
       )
     }
+
+    //tag filter
+    if (shopState.tag !== "all") {
+      products = products.filter(
+        (product) =>
+          Array.isArray(product.tags) && product.tags.includes(shopState.tag),
+      )
+    }
+
+
 
     products = products.filter(
       (product) =>
@@ -133,8 +361,7 @@ export async function initShopPage() {
 
     if (shopState.rating > 0) {
       products = products.filter(
-        (product) =>
-          product.rating >= shopState.rating,
+        (product) => product.rating >= shopState.rating,
       )
     }
 
@@ -154,7 +381,7 @@ export async function initShopPage() {
         break
 
       case "rating":
-        products.sort((a, b) => a.rating - b.rating)
+        products.sort((a, b) => b.rating - a.rating)
         break
 
       case "latest":
@@ -170,37 +397,69 @@ export async function initShopPage() {
     function renderShopProducts() {
       const sortedProducts = getSortedProducts()
       const totalProducts = sortedProducts.length
-      
+
       const resultCount = document.getElementById("shop-result-count")
       if (resultCount) {
         resultCount.textContent = totalProducts
       }
 
-      const totalPages = Math.ceil(
-        totalProducts / shopState.productsPerPage,
-      )
+      const totalPages = Math.ceil(totalProducts / shopState.productsPerPage)
 
-      const startIndex =
-        (shopState.currentPage - 1) * shopState.productsPerPage
+      const startIndex = (shopState.currentPage - 1) * shopState.productsPerPage
 
-      const endIndex =
-        startIndex + shopState.productsPerPage
+      const endIndex = startIndex + shopState.productsPerPage
 
-      const productsOnCurrentPage = sortedProducts.slice(
-        startIndex,
-        endIndex,
-      )
+      const productsOnCurrentPage = sortedProducts.slice(startIndex, endIndex)
 
       productGridContainer.innerHTML = `
-       ${renderProductGrid(productsOnCurrentPage, "shop")}
+        ${renderProductGrid(productsOnCurrentPage, isShop2 ? "shop2" : "shop")}
         <div id="shop-pagination">
           ${renderPagination({
-            currentPage: shopState.currentPage,
-            totalPages: totalPages,
-          })}
+        currentPage: shopState.currentPage,
+        totalPages: totalPages,
+      })}
         </div>
       `
     }
+
+    if (filterContainer) {
+  filterContainer.addEventListener(
+    "click",
+    (event) => {
+      const tagButton =
+        event.target.closest(
+          "[data-tag-value]"
+        )
+
+      if (!tagButton) return
+
+      const selectedTag =
+        tagButton.dataset.tagValue
+
+      // Click lại tag đang chọn -> bỏ lọc
+      shopState.tag =
+        shopState.tag === selectedTag
+          ? "all"
+          : selectedTag
+
+      shopState.currentPage = 1
+
+      setTagButtonState(
+        filterContainer,
+        shopState.tag
+      )
+
+      renderShopProducts()
+
+      // Shop2: chọn xong đóng dropdown
+      if (isShop2) {
+        tagButton
+          .closest("details")
+          ?.removeAttribute("open")
+      }
+    }
+  )
+}
 
     const sortSelect = document.getElementById("sort-select")
     if (sortSelect) {
@@ -211,33 +470,54 @@ export async function initShopPage() {
       })
     }
 
-    if (sideBarContainer) {
-      sideBarContainer.addEventListener("change", (event) => {
-        if (event.target.name === "category") {
-          shopState.category = event.target.value
-          shopState.currentPage = 1
-          renderShopProducts()
-        }
+    const productsPerPageSelect =
+  document.getElementById(
+    "products-per-page"
+  )
 
-        if (event.target.name === "rating") {
-          const ratingInputs = sideBarContainer.querySelectorAll('input[name="rating"]')
-          ratingInputs.forEach((input) => {
-            if (input !== event.target) {
-              input.checked = false
-            }
-          })
+if (productsPerPageSelect) {
+  productsPerPageSelect.addEventListener(
+    "change",
+    (event) => {
+      shopState.productsPerPage =
+        Number(event.target.value)
 
-          if (event.target.checked) {
-            shopState.rating = Number(event.target.value)
-          } else {
-            shopState.rating = 0
-          }
+      shopState.currentPage = 1
 
-          shopState.currentPage = 1
-          renderShopProducts()
-        }
-      })
+      renderShopProducts()
     }
+  )
+}
+
+    // if (filterContainer) {
+    //   filterContainer.addEventListener("change", (event) => {
+    //     if (event.target.name === "category") {
+    //       shopState.category = event.target.value
+    //       shopState.currentPage = 1
+    //       renderShopProducts()
+    //     }
+
+    //     if (event.target.name === "rating") {
+    //       const ratingInputs = filterContainer.querySelectorAll(
+    //         'input[name="rating"]',
+    //       )
+    //       ratingInputs.forEach((input) => {
+    //         if (input !== event.target) {
+    //           input.checked = false
+    //         }
+    //       })
+
+    //       if (event.target.checked) {
+    //         shopState.rating = Number(event.target.value)
+    //       } else {
+    //         shopState.rating = 0
+    //       }
+
+    //       shopState.currentPage = 1
+    //       renderShopProducts()
+    //     }
+    //   })
+    // }
 
     const minPriceInput = document.getElementById("min-price")
     const maxPriceInput = document.getElementById("max-price")
@@ -276,6 +556,19 @@ export async function initShopPage() {
       minPriceInput.addEventListener("input", updatePriceFilter)
       maxPriceInput.addEventListener("input", updatePriceFilter)
       updatePriceFilter()
+      if (isShop2) {
+        minPriceInput.addEventListener("change", (event) => {
+          event.target
+            .closest("details")
+            ?.removeAttribute("open")
+        })
+
+        maxPriceInput.addEventListener("change", (event) => {
+          event.target
+            .closest("details")
+            ?.removeAttribute("open")
+        })
+      }
     }
 
     productGridContainer.addEventListener("click", (event) => {
@@ -285,7 +578,6 @@ export async function initShopPage() {
       shopState.currentPage = Number(pageButton.dataset.page)
       renderShopProducts()
     })
-
     renderShopProducts()
   }
 }

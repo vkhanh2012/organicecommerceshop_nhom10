@@ -12,11 +12,56 @@ import productsData from "../data/products.json";
 
 const CLASS = {
   // Card phẳng nằm trong khung viền 1px
-  card:
-    "product-card w-full h-full group relative bg-white p-3 flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer",
+  cardHome: `
+  product-card
+  group
+  relative
+  flex
+  h-full
+  w-full
+  cursor-pointer
+  flex-col
+  justify-between
+  bg-white
+  p-3
 
-  imageWrap:
-    "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
+  transition-shadow
+  duration-300
+
+  hover:z-20
+  hover:shadow-[0_0_15px_rgba(0,0,0,0.12)]
+`,
+
+cardShop: `
+  product-card
+  group
+  relative
+  flex
+  h-full
+  w-full
+  cursor-pointer
+  flex-col
+  justify-between
+  overflow-hidden
+
+  rounded-lg
+  border
+  border-neutral-200
+  bg-white
+  p-3
+
+  transition-[border-color,box-shadow]
+  duration-300
+
+  hover:z-20
+  hover:border-primary
+  hover:shadow-[0_0_12px_rgba(0,178,7,0.20)]
+
+  xl:h-96
+`,
+
+ imageWrap: 
+  "relative aspect-square overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
 
   image:
     "w-full h-full object-cover",
@@ -58,8 +103,48 @@ const CLASS = {
     "flex items-center gap-0.5",
 
   // 📌 LƯỚI 5 CỘT DÀNH CHO HOME (lg:grid-cols-5) VÀ NỐI VIỀN DÍNH SÁT NHAU (gap-px)
-  grid:
-    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-neutral-200 border border-neutral-200 rounded-lg overflow-hidden w-full items-stretch",
+  gridHome: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-px
+  overflow-hidden
+  rounded-lg
+  border
+  border-neutral-200
+  bg-neutral-200
+
+  sm:grid-cols-3
+  md:grid-cols-4
+  lg:grid-cols-5
+`,
+
+gridShop: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-4
+
+  md:grid-cols-2
+
+  xl:grid-cols-3
+  xl:gap-6
+`,
+
+gridShop2: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-4
+
+  md:grid-cols-3
+
+  xl:grid-cols-4
+  xl:gap-6
+`,
 };
 
 // =====================================================
@@ -108,7 +193,8 @@ export async function getProducts() {
 // =====================================================
 // RENDER PRODUCT CARD
 // =====================================================
-export function renderProductCard(p = {}) {
+export function renderProductCard(  p = {},
+  page = "home") {
   const {
     id = 1,
     name = "Tên sản phẩm",
@@ -118,6 +204,15 @@ export function renderProductCard(p = {}) {
     saleTag = null,
     bestTag = null
   } = p;
+
+const isShop =
+  page === "shop" ||
+  page === "shop2";
+
+const cardClass =
+  isShop
+    ? CLASS.cardShop
+    : CLASS.cardHome;
 
   const image = resolveImage(p);
   const detailUrl = `./descriptions.html?id=${id}`;
@@ -141,7 +236,7 @@ export function renderProductCard(p = {}) {
   ` : "";
 
   return `
-    <article class="${CLASS.card}" data-id="${id}">
+    <article class="${cardClass}" data-id="${id}">
       <a href="${detailUrl}" class="${CLASS.imageWrap}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
         <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
@@ -188,15 +283,31 @@ export function renderProductCard(p = {}) {
 // =====================================================
 // RENDER PRODUCT GRID (5 CỘT CHO HOME, 3 CỘT CHO SHOP)
 // =====================================================
-export function renderProductGrid(products = [], page = "home") {
-  const itemsHtml = products.map(renderProductCard).join("");
-  const gridClass = page === "shop"
-    ? "grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 items-stretch"
-    : CLASS.grid;
+export function renderProductGrid(
+  products = [],
+  page = "home"
+) {
+  let gridClass = CLASS.gridHome;
+
+  if (page === "shop") {
+    gridClass = CLASS.gridShop;
+  }
+
+  if (page === "shop2") {
+    gridClass = CLASS.gridShop2;
+  }
+
+  const itemsHtml = products
+    .map((product) =>
+      renderProductCard(product, page)
+    )
+    .join("");
 
   return `
     <div class="w-full">
-      <div class="${gridClass}">${itemsHtml}</div>
+      <div class="${gridClass}">
+        ${itemsHtml}
+      </div>
     </div>
   `;
 }

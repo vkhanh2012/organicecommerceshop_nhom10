@@ -7,6 +7,16 @@
     "rating": 4,
     "saleTag": "Sale 25%",
     "category": "Fresh Fruit",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Kid foods",
+      "Vitamins",
+      "Snacks",
+      "Breackfast",
+      "Fruit"
+    ],
     "image": "/images/product/green-apple.webp",
     "thumbnails": [
       "/images/product/green-apple.webp",
@@ -23,6 +33,14 @@
     "rating": 1,
     "saleTag": null,
     "category": "Fresh Fruit",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Kid foods",
+      "Vitamins",
+      "Fruit"
+    ],
     "image": "/images/product/fresh-indian-malta.webp",
     "thumbnails": [
       "/images/product/fresh-indian-malta.webp",
@@ -39,6 +57,13 @@
     "rating": 2,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Dinner"
+    ],
     "image": "/images/product/chinese-cabbage.webp",
     "thumbnails": [
       "/src/assets/images/cabbage1.svg",
@@ -55,6 +80,13 @@
     "rating": 3,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Dinner"
+    ],
     "image": "/images/product/green-lecctuce.webp",
     "thumbnails": [
       "/images/product/green-lecctuce.webp",
@@ -71,6 +103,12 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Dinner"
+    ],
     "image": "/images/product/eggplant.webp",
     "thumbnails": [
       "/images/product/eggplant.webp",
@@ -87,6 +125,12 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Vegetarian",
+      "Tiffin",
+      "Launch",
+      "Dinner"
+    ],
     "image": "/images/product/big-potatoes.webp",
     "thumbnails": [
       "/images/product/big-potatoes.webp",
@@ -103,6 +147,13 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Vegetarian",
+      "Kid foods",
+      "Tiffin",
+      "Dinner"
+    ],
     "image": "/images/product/corn.webp",
     "thumbnails": [
       "/images/product/corn.webp",
@@ -119,6 +170,13 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Dinner"
+    ],
     "image": "/images/product/fresh-cauliflower.webp",
     "thumbnails": [
       "/images/product/fresh-cauliflower.webp",
@@ -135,6 +193,13 @@
     "rating": 4,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Dinner"
+    ],
     "image": "/images/product/green-capsicum.webp",
     "thumbnails": [
       "/images/product/green-capsicum.webp",
@@ -151,6 +216,12 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins"
+    ],
     "image": "/images/product/green-chilli.webp",
     "thumbnails": [
       "/images/product/green-chilli.webp",
@@ -167,6 +238,13 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Dinner"
+    ],
     "image": "/images/product/red-capsicum.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/redcapsicum.png",
@@ -183,6 +261,14 @@
     "rating": 5,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
+    "tags": [
+      "Healthy",
+      "Low fat",
+      "Vegetarian",
+      "Vitamins",
+      "Launch",
+      "Dinner"
+    ],
     "image": "/images/product/red-tomatos.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/tomato.png",
@@ -199,6 +285,14 @@
     "rating": 4,
     "saleTag": null,
     "category": "Fresh Fruit",
+    "tags": [
+      "Healthy",
+      "Vegetarian",
+      "Kid foods",
+      "Vitamins",
+      "Snacks",
+      "Fruit"
+    ],
     "image": "/images/product/surjapur-mango.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/mango.png",
