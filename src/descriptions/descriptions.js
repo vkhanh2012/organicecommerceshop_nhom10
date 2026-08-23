@@ -13,18 +13,16 @@ export const TAB_LINKS = [
   { label: "Customer Feedback", key: "feedback", href: "#feedback" }
 ];
 
-export function renderDescription(product = defaultProductData, activeTabKey = "descriptions") {
-  // Map danh sách TAB_LINKS
+export function renderDescription(product = productData, activeTabKey = "descriptions") {
   const tabsHtml = TAB_LINKS.map(tab => {
     const isActive = tab.key === activeTabKey;
     return `
-      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-[#00B207] font-semibold' : 'text-gray-500 hover:text-gray-900'}">
+      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-zinc-900 border-b-2 border-[#20B126] font-semibold' : 'text-zinc-500 hover:text-zinc-900'}">
         ${tab.label}
       </a>
     `;
   }).join("");
 
-  // Nội dung tab tương ứng
   let tabContentHtml = "";
   if (activeTabKey === "information") {
     tabContentHtml = renderAdditionalInfoTab(product);
@@ -35,29 +33,28 @@ export function renderDescription(product = defaultProductData, activeTabKey = "
   }
 
   return /*html*/ `
-    <div class="container-custom mx-auto px-4 md:px-8 pt-12">
-    
-      <!-- THÔNG TIN SẢN PHẨM PHÍA TRÊN (Ảnh bên trái, Thông tin chữ bên phải) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
-        <!-- CỘT TRÁI: KHU VỰC HÌNH ẢNH -->
+    <div class="container-custom mx-auto font-['Poppins']">
+      
+      <!-- THÔNG TIN SẢN PHẨM PHÍA TRÊN -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10">
         ${renderImage(product)}
-        
-        <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
         ${renderProductInfo(product)}
       </div>
       
-      <!-- THANH TABS CHUYỂN ĐỔI (Descriptions, Additional Information, Customer Feedback) -->
-      <div class="border-b border-gray-200 flex justify-center gap-10">
+      <!-- THANH TABS: Khoảng cách giữa các nút là gap-10 (40px), pb-3 cho viền xanh sát chữ -->
+      <div class="border-b border-neutral-200 flex justify-center gap-10 mx-auto -mt-6 translate-x-[42px]">
         ${tabsHtml}
       </div>
 
-      <!-- VÙNG ĐỔ NỘI DUNG TƯƠNG ỨNG -->
-      <div id="tab-content-container">
+      <!-- VÙNG ĐỔ NỘI DUNG: pt-8 (32px) chuẩn khoảng cách từ đường gạch tab xuống chữ -->
+      <div id="tab-content-container" class="pt-8 pb-12">
         ${tabContentHtml}
       </div>
 
-      <!-- 📌 PHẦN RELATED PRODUCTS (4 CỘT SẢN PHẨM LIÊN QUAN CHUẨN THIẾT KẾ) -->
-      ${renderRelatedProducts(product, productList)}
+      <!-- SẢN PHẨM LIÊN QUAN -->
+      <div>
+        ${renderRelatedProducts(product, productList)}
+      </div>
 
     </div>
   `;

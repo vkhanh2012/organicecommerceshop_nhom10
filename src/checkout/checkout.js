@@ -1,159 +1,180 @@
-import {  renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
+import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 import { renderCountryOptions, renderStateOptions } from "./Location.js";
 import { getCart, getCartSummary } from "../shopping_cart/cartData.js";
 
-//AI làm
 export function renderCheckout(cart = getCart()) {
   const { total } = getCartSummary(cart);
   const shipping = 0.00;
   const grandTotal = total + shipping;
 
-  // Render động danh sách sản phẩm từ giỏ hàng thật
-  const cartItemsHtml = cart.map(item => `
-    <div class="flex items-center justify-between py-2.5">
+const safeCart = Array.isArray(cart) ? cart : [];
+
+const cartItemsHtml = safeCart.length > 0 
+  ? safeCart.map(item => `
+    <div class="w-full flex justify-between items-center py-1.5">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-lg border border-gray-100 bg-gray-50 flex items-center justify-center p-1 overflow-hidden shrink-0">
-          <img src="${item.image}" alt="${item.name}" class="image-contain" />
-        </div>
-        <span class="text-sm text-gray-700 font-medium">${item.name} <span class="text-gray-400 text-xs font-normal">x${item.quantity}</span></span>
+        <img class="w-[60px] h-[60px] object-cover rounded shrink-0" src="${item.image}" alt="${item.name}" />
+        <span class="text-zinc-900 text-sm font-normal leading-5">${item.name} <span class="text-zinc-900">x${item.quantity}</span></span>
       </div>
-      <span class="text-sm font-semibold text-gray-900">$${(item.price * item.quantity).toFixed(2)}</span>
+      <div class="text-zinc-900 text-sm font-medium leading-5">$${(item.price * item.quantity).toFixed(2)}</div>
     </div>
-  `).join("");
+  `).join("")
+  : `<p class="text-sm text-neutral-400 py-2">Your cart is empty.</p>`;
 
   return /*html*/ `
-    <div class="w-full bg-white">
-      <!-- 1. BREADCRUMB BANNER -->
+    <div class="w-full bg-white font-['Poppins']">
+      <!-- BREADCRUMB BANNER -->
       ${renderBreadcrumbsComponent([
         { label: "Shopping Cart", link: "./cart.html" },
         { label: "Checkout", link: "#", active: true }
       ])}
 
-      <!-- 2. FORM BILLING & ORDER SUMMARY -->
-      <div class="container-custom mx-auto px-4 md:px-8 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <!-- MAIN CONTAINER (1320px chuẩn Figma) -->
+      <div class="w-[1320px] mx-auto py-12">
+        <form id="checkout-form" class="flex gap-6 items-start">
           
-          <!-- CỘT TRÁI: BILLING INFORMATION -->
-          <div class="lg:col-span-7 space-y-8">
-            <div>
-              <h2 class="text-2xl font-semibold text-gray-900 mb-6">Billing Information</h2>
-              <form class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label class="form-label">First name</label>
-                    <input type="text" placeholder="Your first name" class="form-input" />
+          <!-- CỘT TRÁI: BILLING INFORMATION (872px) -->
+          <div class="w-[872px] shrink-0 flex flex-col gap-8">
+            <div class="flex flex-col gap-6">
+              <h2 class="text-zinc-900 text-2xl font-medium leading-9">Billing Information</h2>
+              
+              <div class="flex flex-col gap-4">
+                <!-- Hàng 1: First name / Last name / Company Name -->
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">First name</label>
+                    <input type="text" placeholder="Your first name" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
                   </div>
-                  <div>
-                    <label class="form-label">Last name</label>
-                    <input type="text" placeholder="Your last name" class="form-input" />
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Last name</label>
+                    <input type="text" placeholder="Your last name" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
                   </div>
-                  <div>
-                    <label class="form-label">Company Name <span class="text-gray-400 font-normal">(optional)</span></label>
-                    <input type="text" placeholder="Company name" class="form-input" />
-                  </div>
-                </div>
-
-                <div>
-                  <label class="form-label">Street Address</label>
-                  <input type="text" placeholder="Email or address" class="form-input" />
-                </div>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-  <div>
-    <label class="block text-xs font-medium text-gray-700 mb-1.5">Country / Region</label>
-    <select id="country-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-      ${renderCountryOptions()}
-    </select>
-  </div>
-
-  <div>
-    <label class="block text-xs font-medium text-gray-700 mb-1.5">States</label>
-    <select id="state-select" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm text-gray-500 bg-white focus:outline-none focus:border-[#00B207] cursor-pointer">
-      ${renderStateOptions()}
-    </select>
-  </div>
-
-  <div>
-    <label class="block text-xs font-medium text-gray-700 mb-1.5">Zip Code</label>
-    <input type="text" placeholder="Zip Code" class="w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]" />
-  </div>
-</div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label class="form-label">Email</label>
-                    <input type="email" placeholder="Email Address" class="form-input" />
-                  </div>
-                  <div>
-                    <label class="form-label">Phone</label>
-                    <input type="tel" placeholder="Phone number" class="form-input" />
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Company Name <span class="text-zinc-500">(optional)</span></label>
+                    <input type="text" placeholder="Company name" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 pt-2">
-                  <input type="checkbox" id="ship-different" class="w-4 h-4 text-[#00B207] rounded border-gray-300 accent-[#00B207] cursor-pointer" />
-                  <label for="ship-different" class="text-xs text-gray-600 cursor-pointer select-none">Ship to a different address</label>
+                <!-- Hàng 2: Street Address -->
+                <div class="flex flex-col gap-2">
+                  <label class="text-zinc-900 text-sm font-normal leading-5">Street Address</label>
+                  <input type="text" placeholder="Email" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
                 </div>
-              </form>
+
+                <!-- Hàng 3: Country / States / Zip Code -->
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Country / Region</label>
+                    <select id="country-select" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-neutral-400 text-base cursor-pointer">
+                      ${renderCountryOptions()}
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">States</label>
+                    <select id="state-select" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-neutral-400 text-base cursor-pointer">
+                      ${renderStateOptions()}
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Zip Code</label>
+                    <input type="text" placeholder="Zip Code" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
+                  </div>
+                </div>
+
+                <!-- Hàng 4: Email / Phone -->
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Email</label>
+                    <input type="email" placeholder="Email Address" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-zinc-900 text-sm font-normal leading-5">Phone</label>
+                    <input type="tel" placeholder="Phone number" class="w-full h-12 px-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400" />
+                  </div>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="inline-flex items-center gap-1.5 pt-1">
+                  <input type="checkbox" id="ship-different" class="w-5 h-5 rounded border-stone-300 accent-green-600 cursor-pointer" />
+                  <label for="ship-different" class="text-neutral-600 text-sm font-normal leading-5 cursor-pointer select-none">Ship to a different address</label>
+                </div>
+              </div>
             </div>
 
-            <div class="pt-4 border-t border-gray-100">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">Additional Info</h3>
-              <div>
-                <label class="form-label">Order Notes <span class="text-gray-400 font-normal">(Optional)</span></label>
-                <textarea rows="4" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full p-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207] resize-none"></textarea>
+            <!-- Đường kẻ ngang -->
+            <div class="w-full h-px bg-neutral-200"></div>
+
+            <!-- ADDITIONAL INFO -->
+            <div class="flex flex-col gap-5">
+              <h3 class="text-zinc-900 text-2xl font-medium leading-9">Additional Info</h3>
+              <div class="flex flex-col gap-2">
+                <label class="text-zinc-900 text-sm font-normal leading-5">Order Notes (Optional)</label>
+                <textarea rows="3" placeholder="Notes about your order, e.g. special notes for delivery" class="w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:outline-green-600 text-base text-zinc-900 placeholder:text-neutral-400 resize-none"></textarea>
               </div>
             </div>
           </div>
 
-          <!-- CỘT PHẢI: ORDER SUMMARY (CÁC MÓN THANH TOÁN TỪ GIỎ HÀNG THỰC TẾ) -->
-          <div class="lg:col-span-5">
-            <div class="p-6 md:p-8 rounded-2xl border border-gray-200 bg-white shadow-xs space-y-6">
-              <h3 class="text-lg font-semibold text-gray-900">Order Summary</h3>
-
-              <!-- Danh sách món ăn trong giỏ hàng -->
-              <div class="divide-y divide-gray-100">
-                ${cartItemsHtml}
-              </div>
-
-              <div class="space-y-3 pt-4 border-t border-gray-100 text-sm">
-                <div class="flex items-center justify-between text-gray-600">
-                  <span>Subtotal:</span>
-                  <span class="font-semibold text-gray-900">$${total.toFixed(2)}</span>
+          <!-- CỘT PHẢI: ORDER SUMMERY (424px) -->
+          <div class="w-[424px] shrink-0">
+            <div class="p-6 bg-white rounded-lg border border-neutral-200 flex flex-col gap-6">
+              
+              <div class="flex flex-col gap-3">
+                <h3 class="text-zinc-900 text-xl font-medium leading-8">Order Summery</h3>
+                
+                <!-- Danh sách sản phẩm từ giỏ hàng -->
+                <div class="flex flex-col">
+                  ${cartItemsHtml}
                 </div>
-                <div class="flex items-center justify-between text-gray-600">
-                  <span>Shipping:</span>
-                  <span class="font-semibold text-gray-900">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
-                </div>
-                <div class="flex items-center justify-between text-base font-semibold text-gray-900 pt-2 border-t border-gray-100">
-                  <span>Total:</span>
-                  <span class="text-lg font-bold text-gray-900">$${grandTotal.toFixed(2)}</span>
-                </div>
-              </div>
 
-              <div class="pt-4 border-t border-gray-100 space-y-3">
-                <h4 class="text-sm font-semibold text-gray-900">Payment Method</h4>
-                <div class="space-y-2.5">
-                  <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="cod" checked class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
-                    <span>Cash on Delivery</span>
-                  </label>
-                  <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="paypal" class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
-                    <span>Paypal</span>
-                  </label>
-                  <label class="flex items-center gap-2.5 text-xs text-gray-700 cursor-pointer">
-                    <input type="radio" name="payment" value="amazon" class="w-4 h-4 text-[#00B207] accent-[#00B207] cursor-pointer" />
-                    <span>Amazon Pay</span>
-                  </label>
+                <!-- Bảng giá tính toán động -->
+                <div class="flex flex-col pt-1">
+                  <div class="py-3 flex justify-between items-center">
+                    <span class="text-neutral-600 text-sm font-normal leading-5">Subtotal:</span>
+                    <span class="text-zinc-900 text-sm font-medium leading-5">$${total.toFixed(2)}</span>
+                  </div>
+                  <div class="w-full h-px bg-neutral-200"></div>
+                  
+                  <div class="py-3 flex justify-between items-center">
+                    <span class="text-neutral-600 text-sm font-normal leading-5">Shipping:</span>
+                    <span class="text-zinc-900 text-sm font-medium leading-5">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
+                  </div>
+                  <div class="w-full h-px bg-neutral-200"></div>
+                  
+                  <div class="pt-3 flex justify-between items-center">
+                    <span class="text-neutral-600 text-base font-normal leading-6">Total:</span>
+                    <span class="text-zinc-900 text-lg font-semibold leading-5">$${grandTotal.toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
 
-              <button class="w-full h-12 bg-[#00B207] hover:bg-[#009e06] text-white font-semibold rounded-full shadow-md transition-all duration-200 cursor-pointer select-none text-sm tracking-wide">
+              <!-- Payment Method -->
+              <div class="flex flex-col gap-2.5">
+                <h4 class="text-zinc-900 text-xl font-medium leading-8">Payment Method</h4>
+                <div class="flex flex-col gap-2.5">
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="payment" value="cod" checked class="w-5 h-5 accent-green-600 cursor-pointer" />
+                    <span class="text-neutral-600 text-sm font-normal leading-5">Cash on Delivery</span>
+                  </label>
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="payment" value="paypal" class="w-5 h-5 accent-green-600 cursor-pointer" />
+                    <span class="text-neutral-600 text-sm font-normal leading-5">Paypal</span>
+                  </label>
+                  <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="payment" value="amazon" class="w-5 h-5 accent-green-600 cursor-pointer" />
+                    <span class="text-zinc-900 text-sm font-normal leading-5">Amazon Pay</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Nút Place Order -->
+              <button type="submit" class="w-full h-12 bg-[#00b207] hover:bg-green-700 transition-colors rounded-[43px] flex justify-center items-center text-white text-base font-semibold leading-5 cursor-pointer">
                 Place Order
               </button>
+
             </div>
           </div>
 
-        </div>
+        </form>
       </div>
     </div>
   `;

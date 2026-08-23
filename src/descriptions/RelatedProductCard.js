@@ -48,52 +48,52 @@ const PRODUCTS = [
 
 const CLASS = {
   card:
-    "product-card w-full h-full flex flex-col justify-between group relative bg-white border border-neutral-200 rounded-xl p-3 transition-all duration-300 hover:border-primary hover:shadow-[0_4px_20px_rgba(0,178,7,0.15)]",
+    "product-card w-full flex flex-col justify-between group relative bg-white border border-neutral-200 rounded-lg p-3 transition-all duration-300 hover:border-[#20B526] hover:shadow-[0px_0px_12px_0px_rgba(32,181,38,0.32)]",
 
   imageWrap:
-    "relative aspect-square w-full rounded-lg overflow-hidden bg-white flex items-center justify-center mb-3 block cursor-pointer p-2",
+    "relative aspect-square w-full rounded-lg overflow-hidden bg-white flex items-center justify-center mb-3 block cursor-pointer p-1",
 
   image:
     "w-full h-full object-contain transition-transform duration-300 group-hover:scale-105",
 
   tags:
-    "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
+    "absolute top-4 left-4 z-10 flex gap-1 pointer-events-none",
 
   tagSale:
-    "bg-error text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded",
+    "bg-[#EA4335] text-white text-xs font-medium font-poppins px-2 py-1 rounded-sm flex items-center gap-1",
 
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded",
+    "bg-sky-500 text-white text-xs font-medium font-poppins px-2 py-1 rounded-sm",
 
   actions:
-    "absolute top-2 right-2 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
+    "absolute top-4 right-4 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
   actionBtn:
-    "w-8 h-8 md:w-9 md:h-9 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
+    "w-10 h-10 rounded-full bg-white border border-neutral-100 shadow flex items-center justify-center text-neutral-700 hover:bg-[#20B526] hover:text-white hover:border-[#20B526] transition-colors cursor-pointer",
 
   body:
     "px-1 flex flex-col flex-1 justify-between mt-auto",
 
   name:
-    "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer font-medium line-clamp-1",
+    "font-poppins text-sm text-neutral-600 mb-1 transition-colors md:group-hover:text-[#20B526] block cursor-pointer font-normal line-clamp-1",
 
   priceRow:
-    "flex items-center justify-between mb-1 mt-auto pt-2",
+    "flex items-center justify-between mb-1 mt-auto pt-1",
 
   price:
-    "font-poppins text-sm md:text-base font-semibold text-neutral-900",
+    "font-poppins text-base font-medium text-zinc-900",
 
   priceOld:
-    "font-poppins text-xs md:text-sm text-neutral-400 line-through ml-1.5",
+    "font-poppins text-base text-neutral-400 line-through ml-1.5 font-normal",
 
   cartBtn:
-    "w-10 h-10 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+    "w-10 h-10 rounded-full bg-zinc-100 text-zinc-900 flex items-center justify-center transition-colors md:group-hover:bg-[#20B526] md:group-hover:text-white cursor-pointer shrink-0",
 
   rating:
     "flex items-center gap-0.5 mt-1",
 
   grid:
-    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch",
+    "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch",
 };
 
 
@@ -106,7 +106,6 @@ function findProductDataByName(name) {
 
   const nameKey = name.toLowerCase().trim();
 
-  // Tìm trong PRODUCTS
   const found = PRODUCTS.find(
     product =>
       product &&
@@ -116,7 +115,6 @@ function findProductDataByName(name) {
 
   if (found) return found;
 
-  // Tìm thông qua PRODUCTS_MAP
   const mapKey = Object.keys(PRODUCTS_MAP).find(
     key => key.toLowerCase().trim() === nameKey
   );
@@ -133,12 +131,11 @@ function findProductDataByName(name) {
 
 
 // =====================================================
-// BẢNG Bố TRÍ ẢNH
+// BẢNG BỐ TRÍ ẢNH
 // =====================================================
 
 const PRODUCT_IMAGE_MAP = {};
 
-// Tự động lấy ảnh từ productdata.json
 PRODUCTS.forEach(product => {
   if (product && product.name && product.mainImage) {
     PRODUCT_IMAGE_MAP[product.name.toLowerCase().trim()] = product.mainImage;
@@ -151,10 +148,8 @@ PRODUCTS.forEach(product => {
 // =====================================================
 
 function resolveImage(p = {}) {
-  // 1. Ưu tiên lấy ảnh trực tiếp từ đối tượng p
   let imgPath = p.image || p.mainImage || (Array.isArray(p.thumbnails) && p.thumbnails[0]);
 
-  // 2. Nếu p không chứa đường dẫn ảnh, tìm trong productData theo tên
   if (!imgPath) {
     const dataProduct = findProductDataByName(p.name);
     if (dataProduct && dataProduct.mainImage) {
@@ -162,7 +157,6 @@ function resolveImage(p = {}) {
     }
   }
 
-  // 3. Tìm trong PRODUCT_IMAGE_MAP
   if (!imgPath) {
     const nameKey = (p.name || "").toLowerCase().trim();
     if (PRODUCT_IMAGE_MAP[nameKey]) {
@@ -170,12 +164,10 @@ function resolveImage(p = {}) {
     }
   }
 
-  // 4. Nếu vẫn không có, dùng ảnh mặc định
   if (!imgPath || typeof imgPath !== "string" || imgPath.includes("undefined")) {
     imgPath = defaultProductData?.mainImage || "";
   }
 
-  // 5. Chuyển đổi đường dẫn ảnh chuẩn bằng getImageUrl
   if (imgPath.startsWith("/images/") || imgPath.startsWith("images/")) {
     return getImageUrl(imgPath);
   }
@@ -185,7 +177,7 @@ function resolveImage(p = {}) {
 
 
 // =====================================================
-// PRODUCT CARD
+// PRODUCT CARD (EXPORT)
 // =====================================================
 
 export function renderProductCard(p = {}) {
@@ -207,10 +199,8 @@ export function renderProductCard(p = {}) {
   const saleTag = p.saleTag || p.discountLabel || null;
   const bestTag = p.bestTag || null;
 
-  // LINK DETAIL
   const detailUrl = `./descriptions.html?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
 
-  // DATA CHO QUICK VIEW / CART (Truyền đúng đường dẫn ảnh chuẩn)
   const productDataStr = encodeURIComponent(
     JSON.stringify({
       ...p,
@@ -222,7 +212,6 @@ export function renderProductCard(p = {}) {
     })
   );
 
-  // RATING
   const starsHtml = Array.from({ length: 5 })
     .map(
       (_, i) => `
@@ -233,7 +222,6 @@ export function renderProductCard(p = {}) {
     )
     .join("");
 
-  // TAG
   const tagsHtml =
     saleTag || bestTag
       ? `
@@ -266,8 +254,6 @@ export function renderProductCard(p = {}) {
 
       <!-- ACTION BUTTONS -->
       <div class="${CLASS.actions}">
-
-        <!-- Wishlist -->
         <button
           type="button"
           data-action="wishlist"
@@ -278,7 +264,6 @@ export function renderProductCard(p = {}) {
           ${iconHeart}
         </button>
 
-        <!-- Quick View -->
         <button
           type="button"
           data-action="quick-view"
@@ -289,13 +274,10 @@ export function renderProductCard(p = {}) {
         >
           ${iconEye}
         </button>
-
       </div>
 
       <!-- PRODUCT BODY -->
       <div class="${CLASS.body}">
-
-        <!-- PRODUCT NAME -->
         <a
           href="${detailUrl}"
           data-action="view-detail"
@@ -304,7 +286,6 @@ export function renderProductCard(p = {}) {
           ${name}
         </a>
 
-        <!-- PRICE + CART -->
         <div class="${CLASS.priceRow}">
           <div>
             <span class="${CLASS.price}">
@@ -321,7 +302,6 @@ export function renderProductCard(p = {}) {
             }
           </div>
 
-          <!-- Add To Cart -->
           <button
             type="button"
             data-action="add-to-cart"
@@ -334,11 +314,9 @@ export function renderProductCard(p = {}) {
           </button>
         </div>
 
-        <!-- RATING -->
         <div class="${CLASS.rating}">
           ${starsHtml}
         </div>
-
       </div>
 
     </article>
@@ -347,7 +325,7 @@ export function renderProductCard(p = {}) {
 
 
 // =====================================================
-// TỰ ĐỘNG BẮT CLICK ĐIỀU HƯỚNG DETAIL
+// CLICK EVENT
 // =====================================================
 
 document.addEventListener("click", (e) => {
@@ -396,16 +374,13 @@ export function renderRelatedProducts(
 ) {
   let displayProducts = [];
 
-  // RELATED PRODUCTS CÓ SẴN
   if (
     currentProduct.relatedProducts &&
     Array.isArray(currentProduct.relatedProducts) &&
     currentProduct.relatedProducts.length > 0
   ) {
     displayProducts = [...currentProduct.relatedProducts];
-  }
-  // RELATED IDS
-  else if (
+  } else if (
     currentProduct.relatedIds &&
     Array.isArray(currentProduct.relatedIds)
   ) {
@@ -414,7 +389,6 @@ export function renderRelatedProducts(
     );
   }
 
-  // CHƯA ĐỦ 4 SẢN PHẨM
   if (displayProducts.length < 4) {
     let categoryName = "";
 
@@ -473,11 +447,16 @@ export function renderRelatedProducts(
   const cardsHtml = final4Products.map(renderProductCard).join("");
 
   return `
-    <section class="w-full max-w-[1320px] mx-auto px-4 md:px-8 mt-16 mb-20">
-      <h2 class="text-2xl sm:text-[32px] font-semibold text-center text-gray-900 mb-8 font-poppins">
-        Related Products
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch">
+    <section class="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-16">
+      <!-- TIÊU ĐỀ: Căn giữa tuyệt đối theo trục khung chứa -->
+      <div class="w-full text-center mb-6">
+        <h2 class="text-[32px] font-semibold text-zinc-900 font-poppins leading-tight inline-block">
+          Related Products
+        </h2>
+      </div>
+
+      <!-- LƯỚI CARD: Căn đều 4 cột, ép rộng đầy đủ khung -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full justify-center items-stretch">
         ${cardsHtml}
       </div>
     </section>
