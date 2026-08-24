@@ -7,6 +7,7 @@ import {
   iconStar
 } from "./icons.js";
 import { addProductToCart } from "../shopping_cart/cartData.js";
+import { isInWishlist, toggleWishlist } from "../wishlist/wishlistData.js";
 import { getImageUrl, attachImageUrls } from "../utils/assets.js";
 import productsData from "../data/products.json";
 
@@ -220,6 +221,13 @@ const cardClass =
   const productDataStr = encodeURIComponent(
     JSON.stringify({ ...p, id, name, price, oldPrice, image })
   );
+  const wishlistActive = isInWishlist(id);
+  const wishlistButtonClass = wishlistActive
+    ? `${CLASS.actionBtn} !bg-white !text-primary hover:!bg-white hover:!text-primary-dark`
+    : `${CLASS.actionBtn} border border-transparent hover:border-primary`;
+  const wishlistIcon = wishlistActive
+    ? iconHeart.replace('fill="none"', 'fill="currentColor"')
+    : iconHeart;
 
   const starsHtml = Array.from({ length: 5 })
     .map((_, i) => `
@@ -243,8 +251,8 @@ const cardClass =
       </a>
 
       <div class="${CLASS.actions}">
-        <button type="button" data-action="wishlist" data-id="${id}" class="${CLASS.actionBtn}" aria-label="Wishlist">
-          ${iconHeart}
+        <button type="button" data-action="wishlist" data-id="${id}" data-product="${productDataStr}" class="${wishlistButtonClass}" aria-pressed="${wishlistActive}" aria-label="${wishlistActive ? "Remove" : "Add"} ${name} ${wishlistActive ? "from" : "to"} wishlist">
+          ${wishlistIcon}
         </button>
         <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view">
           ${iconEye}
@@ -339,3 +347,52 @@ export function bindCardEvents(container = document) {
     }
   });
 }
+
+function updateWishlistButtons(productId, active) {
+  document.querySelectorAll('[data-action="wishlist"]').forEach((button) => {
+    if (String(button.dataset.id) !== String(productId)) return;
+
+    button.setAttribute("aria-pressed", String(active));
+    const rawData = button.getAttribute("data-product");
+    let productName = "product";
+
+    try {
+      productName = JSON.parse(decodeURIComponent(rawData)).name || productName;
+    } catch {
+      // Keep the fallback label when old card data is invalid.
+    }
+
+    button.setAttribute(
+      "aria-label",
+      `${active ? "Remove" : "Add"} ${productName} ${active ? "from" : "to"} wishlist`,
+    );
+    button.classList.toggle("!bg-white", active);
+    button.classList.toggle("!text-primary", active);
+    button.classList.toggle("hover:!bg-white", active);
+    button.classList.toggle("hover:!text-primary-dark", active);
+    button.classList.toggle("border-transparent", !active);
+    button.classList.toggle("hover:border-primary", !active);
+
+    const heartIcon = button.querySelector("svg");
+    if (heartIcon) heartIcon.setAttribute("fill", active ? "currentColor" : "none");
+  });
+}
+
+document.addEventListener("click", (event) => {
+  const wishlistButton = event.target.closest('[data-action="wishlist"]');
+  if (!wishlistButton) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const rawData = wishlistButton.getAttribute("data-product");
+  if (!rawData) return;
+
+  try {
+    const product = JSON.parse(decodeURIComponent(rawData));
+    const { added } = toggleWishlist(product);
+    updateWishlistButtons(product.id, added);
+  } catch (error) {
+    console.error("Unable to update wishlist:", error);
+  }
+});

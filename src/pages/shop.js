@@ -6,7 +6,7 @@ import { renderPopularTags } from "/src/shop/popularTag.js"
 import { renderTopBar } from "/src/shop/topBar.js"
 import { initSaleProducts } from "/src/shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "/src/components/breadcrumbs.js"
-import { renderProductGrid } from "/src/components/productcard.js"
+import { renderProductGrid, bindCardEvents } from "/src/components/productcard.js"
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
 import { renderQuickViewModal } from "/src/Quickview/quickview.js"
@@ -164,22 +164,25 @@ if (topBar && !isShop2) {
           "horizontal"
         )}
 
-        ${renderPriceFilter(
-          PRODUCT_DATA,
-          shopState.minPrice,
-          shopState.maxPrice,
-          "horizontal"
-        )}
+        <details class="group relative">
+          <summary class="flex min-w-36 cursor-pointer list-none items-center justify-between gap-4 rounded border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-600">
+            <span>Select Price</span>
+            <span class="transition-transform group-open:rotate-180">⌄</span>
+          </summary>
+          <div class="absolute left-0 top-full z-40 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg">
+            ${renderPriceFilter(
+              PRODUCT_DATA,
+              shopState.minPrice,
+              shopState.maxPrice
+            )}
+          </div>
+        </details>
 
         ${renderRatingFilter(
           shopState.rating,
           "horizontal"
         )}
 
-        ${renderPopularTags(
-          shopState.tag,
-          "horizontal"
-        )}
       </div>
 
       <!-- RIGHT: SORT + SHOW -->
@@ -312,6 +315,61 @@ if (topBar && !isShop2) {
     }
   }
 
+  const activeFilterContainer = document.getElementById(
+    "active-filter-container",
+  )
+
+  function renderActiveFilters(totalResults) {
+    if (!isShop2 || !activeFilterContainer) return
+
+    const chips = []
+
+    if (shopState.category !== "all") {
+      chips.push({ type: "category", label: shopState.category })
+    }
+
+    if (
+      shopState.minPrice !== minProductPrice ||
+      shopState.maxPrice !== maxProductPrice
+    ) {
+      chips.push({
+        type: "price",
+        label: `Min $${shopState.minPrice} — Max $${shopState.maxPrice}`,
+      })
+    }
+
+    if (shopState.rating > 0) {
+      chips.push({
+        type: "rating",
+        label: `${shopState.rating} Stars & Up`,
+      })
+    }
+
+    activeFilterContainer.innerHTML = `
+      <div class="flex flex-wrap items-center gap-2 text-sm">
+        <span class="text-neutral-500">Active Filters:</span>
+        ${chips
+          .map(
+            (chip) => `
+              <span class="inline-flex items-center gap-1.5 font-medium text-neutral-900">
+                ${chip.label}
+                <button
+                  type="button"
+                  data-remove-filter="${chip.type}"
+                  class="cursor-pointer text-neutral-400 transition-colors hover:text-error"
+                  aria-label="Remove ${chip.type} filter"
+                >×</button>
+              </span>
+            `,
+          )
+          .join("")}
+      </div>
+      <p class="shrink-0 text-sm text-neutral-600">
+        <span class="font-semibold text-neutral-900">${totalResults}</span> Results found.
+      </p>
+    `
+  }
+
   const openBtn = document.getElementById("open-filter-btn")
   const filterDrawer = document.getElementById("mobile-filter-drawer")
 
@@ -386,7 +444,11 @@ if (topBar && !isShop2) {
 
       case "latest":
       default:
-        products.sort((a, b) => b.id - a.id)
+        if (!isShop2) {
+          products.sort((a, b) => b.id - a.id)
+        } else if (shopState.rating > 0) {
+          products.sort((a, b) => a.rating - b.rating)
+        }
         break
     }
 
@@ -397,6 +459,8 @@ if (topBar && !isShop2) {
     function renderShopProducts() {
       const sortedProducts = getSortedProducts()
       const totalProducts = sortedProducts.length
+
+      renderActiveFilters(totalProducts)
 
       const resultCount = document.getElementById("shop-result-count")
       if (resultCount) {
@@ -420,6 +484,10 @@ if (topBar && !isShop2) {
       })}
         </div>
       `
+    }
+
+    if (isShop2) {
+      bindCardEvents(productGridContainer)
     }
 
     if (filterContainer) {
@@ -489,40 +557,91 @@ if (productsPerPageSelect) {
   )
 }
 
-    // if (filterContainer) {
-    //   filterContainer.addEventListener("change", (event) => {
-    //     if (event.target.name === "category") {
-    //       shopState.category = event.target.value
-    //       shopState.currentPage = 1
-    //       renderShopProducts()
-    //     }
+    if (filterContainer) {
+      filterContainer.addEventListener("change", (event) => {
+        if (event.target.name === "category") {
+          shopState.category = event.target.value
+          shopState.currentPage = 1
+          renderShopProducts()
 
-    //     if (event.target.name === "rating") {
-    //       const ratingInputs = filterContainer.querySelectorAll(
-    //         'input[name="rating"]',
-    //       )
-    //       ratingInputs.forEach((input) => {
-    //         if (input !== event.target) {
-    //           input.checked = false
-    //         }
-    //       })
+          if (isShop2) {
+            event.target.closest("details")?.removeAttribute("open")
+          }
+        }
 
-    //       if (event.target.checked) {
-    //         shopState.rating = Number(event.target.value)
-    //       } else {
-    //         shopState.rating = 0
-    //       }
+        if (event.target.name === "rating") {
+          const ratingInputs = filterContainer.querySelectorAll(
+            'input[name="rating"]',
+          )
+          ratingInputs.forEach((input) => {
+            if (input !== event.target) input.checked = false
+          })
 
-    //       shopState.currentPage = 1
-    //       renderShopProducts()
-    //     }
-    //   })
-    // }
+          shopState.rating = event.target.checked
+            ? Number(event.target.value)
+            : 0
+          shopState.currentPage = 1
+          renderShopProducts()
+
+          if (isShop2) {
+            event.target.closest("details")?.removeAttribute("open")
+          }
+        }
+      })
+    }
 
     const minPriceInput = document.getElementById("min-price")
     const maxPriceInput = document.getElementById("max-price")
     const priceValue = document.getElementById("price-value")
     const priceProgress = document.getElementById("price-progress")
+
+    filterContainer
+      ?.querySelectorAll('input[name="rating"]')
+      .forEach((input) => {
+        const ratingItem = input.closest("li")
+        if (ratingItem) ratingItem.classList.add("relative")
+
+        input.classList.add(
+          "peer",
+          "absolute",
+          "left-0",
+          "top-1/2",
+          "z-10",
+          "-translate-y-1/2",
+          "opacity-0",
+        )
+
+        input.insertAdjacentHTML(
+          "afterend",
+          `
+            <span
+              class="pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded border border-neutral-300 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.18)] transition-colors group-hover:border-primary peer-checked:border-primary peer-checked:bg-primary"
+              aria-hidden="true"
+            >
+              <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.6667 1L4.33333 8.33333L1 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          `,
+        )
+      })
+
+    ;[minPriceInput, maxPriceInput].forEach((input) => {
+      if (!input) return
+
+      input.classList.remove(
+        "[&::-webkit-slider-thumb]:bg-primary",
+        "[&::-webkit-slider-thumb]:border-white",
+      )
+      input.classList.add(
+        "[&::-webkit-slider-thumb]:bg-white",
+        "[&::-webkit-slider-thumb]:border-2",
+        "[&::-webkit-slider-thumb]:border-primary",
+        "[&::-moz-range-thumb]:bg-white",
+        "[&::-moz-range-thumb]:border-2",
+        "[&::-moz-range-thumb]:border-primary",
+      )
+    })
 
     function updatePriceFilter() {
       let minValue = Number(minPriceInput.value)
@@ -537,7 +656,11 @@ if (productsPerPageSelect) {
       shopState.maxPrice = maxValue
       shopState.currentPage = 1
 
-      if (priceValue) priceValue.textContent = `$${minValue} — $${maxValue}`
+      if (priceValue) {
+        priceValue.textContent = isShop2
+          ? `$${minValue} — $${maxValue}`
+          : `${minValue} — ${maxValue}`
+      }
 
       const min = Number(minPriceInput.min)
       const max = Number(minPriceInput.max)
@@ -569,6 +692,44 @@ if (productsPerPageSelect) {
             ?.removeAttribute("open")
         })
       }
+    }
+
+    if (isShop2 && activeFilterContainer) {
+      activeFilterContainer.addEventListener("click", (event) => {
+        const removeButton = event.target.closest("[data-remove-filter]")
+        if (!removeButton) return
+
+        const filterType = removeButton.dataset.removeFilter
+
+        if (filterType === "category") {
+          shopState.category = "all"
+          const allCategories = filterContainer.querySelector(
+            'input[name="category"][value="all"]',
+          )
+          if (allCategories) allCategories.checked = true
+        }
+
+        if (filterType === "price") {
+          shopState.minPrice = minProductPrice
+          shopState.maxPrice = maxProductPrice
+          minPriceInput.value = minProductPrice
+          maxPriceInput.value = maxProductPrice
+          updatePriceFilter()
+          return
+        }
+
+        if (filterType === "rating") {
+          shopState.rating = 0
+          filterContainer
+            .querySelectorAll('input[name="rating"]')
+            .forEach((input) => {
+              input.checked = false
+            })
+        }
+
+        shopState.currentPage = 1
+        renderShopProducts()
+      })
     }
 
     productGridContainer.addEventListener("click", (event) => {

@@ -1,5 +1,5 @@
-import wishlistData from "../data/wishlist.json";
 import { renderWishlistSection } from "../wishlist/wishlist.js";
+import { getWishlist, removeFromWishlist } from "../wishlist/wishlistData.js";
 import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 export function initWishlistPage() {
@@ -14,11 +14,24 @@ export function initWishlistPage() {
 
   if (!wishlistSection) return;
 
-  // Wishlist chỉ hiển thị dữ liệu tĩnh từ file JSON.
-  const items = wishlistData.wishlist.items.map((item) => ({
-    ...item,
-    image: item.image.src,
-  }));
+  function renderWishlist() {
+    const items = getWishlist().map((item) => ({
+      ...item,
+      originalPrice: item.originalPrice ?? item.oldPrice ?? null,
+      inStock: item.inStock ?? true,
+      stockStatusText: item.stockStatusText || "In Stock",
+    }));
 
-  wishlistSection.innerHTML = renderWishlistSection(items);
+    wishlistSection.innerHTML = renderWishlistSection(items);
+  }
+
+  wishlistSection.addEventListener("click", (event) => {
+    const removeButton = event.target.closest("[data-remove-wishlist]");
+    if (!removeButton) return;
+
+    removeFromWishlist(removeButton.dataset.removeWishlist);
+    renderWishlist();
+  });
+
+  renderWishlist();
 }
