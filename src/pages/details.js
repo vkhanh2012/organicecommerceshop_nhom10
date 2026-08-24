@@ -796,13 +796,43 @@ export function initDetailsPage() {
     );
 
 
-  if (breadcrumbContainer) {
+if (breadcrumbContainer) {
 
-    breadcrumbContainer.innerHTML =
-      renderBreadcrumbsComponent();
+  const currentProduct = getActiveProduct();
 
-  }
+  const categoryName =
+    currentProduct?.category?.name ||
+    currentProduct?.category ||
+    "Fresh Fruit";
 
+  const productName =
+    currentProduct?.name ||
+    "Product";
+
+  const categoryUrl =
+    `./shop.html?category=${encodeURIComponent(
+      categoryName.toLowerCase()
+    )}`;
+
+  breadcrumbContainer.innerHTML =
+    renderBreadcrumbsComponent({
+      breadcrumbs: [
+        {
+          label: "Category",
+          url: "./shop.html"
+        },
+        {
+          label: categoryName,
+          url: categoryUrl
+        },
+        {
+          label: productName,
+          url: "#"
+        }
+      ]
+    });
+
+}
 
   // ===================================================
   // DESCRIPTION

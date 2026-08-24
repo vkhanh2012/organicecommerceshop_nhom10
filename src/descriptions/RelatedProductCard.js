@@ -447,7 +447,7 @@ export function renderRelatedProducts(
   const cardsHtml = final4Products.map(renderProductCard).join("");
 
   return `
-    <section class="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-16">
+    <section class="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-25">
       <!-- TIÊU ĐỀ: Căn giữa tuyệt đối theo trục khung chứa -->
       <div class="w-full text-center mb-6">
         <h2 class="text-[32px] font-semibold text-zinc-900 font-poppins leading-tight inline-block">

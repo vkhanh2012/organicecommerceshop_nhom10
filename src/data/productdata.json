@@ -1,14 +1,114 @@
 {
   "defaultProductData": {
     "id": 1,
-    "name": "Chinese Cabbage",
+    "name": "Green Apple",
     "inStock": true,
     "sku": "2,51,594",
     "rating": 4,
     "reviewsCount": 4,
+    "originalPrice": 20.0,
+    "currentPrice": 14.99,
+    "discountLabel": "Sale 25%",
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "category": {
+      "name": "Fresh Fruit",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Fresh Fruit", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Apple", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.5",
+      "color": "Green",
+      "type": "Organic",
+      "category": "Fresh Fruit",
+      "stockStatus": "Available (5,413)",
+      "tags": ["Fresh Fruit", "Healthy", "Apple"],
+      "discount": "25% Discount",
+      "discountSub": "Save your 25% money with us",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Fresh Fruit"
+    },
+    "feedbacks": [
+      {
+        "id": 1,
+        "name": "Kristin Watson",
+        "avatar": "/src/assets/images/client1.jpg",
+        "rating": 5,
+        "time": "2 min ago",
+        "comment": "Duis at ullamcorper nulla, eu dictum eros."
+      }
+    ],
+    "mainImage": "/images/product/green-apple.webp",
+    "thumbnails": [
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp",
+      "/images/product/green-apple.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "maltaProductData": {
+    "id": 2,
+    "name": "Fresh Indian Malta",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 1,
+    "reviewsCount": 2,
+    "originalPrice": null,
+    "currentPrice": 20.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "category": {
+      "name": "Fresh Fruit",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Fresh Fruit", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Malta", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.4",
+      "color": "Orange",
+      "type": "Organic",
+      "category": "Fresh Fruit",
+      "stockStatus": "Available (3,200)",
+      "tags": ["Fresh Fruit", "Healthy", "Malta"],
+      "discount": "0% Discount",
+      "discountSub": "Best market price",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Fresh Fruit"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/fresh-indian-malta.webp",
+    "thumbnails": [
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp",
+      "/images/product/fresh-indian-malta.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "cabbageProductData": {
+    "id": 3,
+    "name": "Chinese Cabbage",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 2,
+    "reviewsCount": 4,
     "originalPrice": 48.0,
-    "currentPrice": 17.28,
+    "currentPrice": 12.0,
     "discountLabel": "64% Off",
+    "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
     "category": {
@@ -16,26 +116,11 @@
       "link": "#"
     },
     "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Chinese",
-        "link": "#"
-      },
-      {
-        "name": "Cabbage",
-        "link": "#"
-      },
-      {
-        "name": "Green Cabbage",
-        "link": "#"
-      }
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Chinese", "link": "#" },
+      { "name": "Cabbage", "link": "#" },
+      { "name": "Green Cabbage", "link": "#" }
     ],
     "additionalInfo": {
       "weight": "0.3",
@@ -43,13 +128,7 @@
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (5,413)",
-      "tags": [
-        "Vegetables",
-        "Healthy",
-        "Chinese",
-        "Cabbage",
-        "Green Cabbage"
-      ],
+      "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
       "discount": "64% Discount",
       "discountSub": "Save your 64% money with us",
       "organic": "100% Organic",
@@ -63,30 +142,6 @@
         "rating": 5,
         "time": "2 min ago",
         "comment": "Duis at ullamcorper nulla, eu dictum eros."
-      },
-      {
-        "id": 2,
-        "name": "Jane Cooper",
-        "avatar": "/src/assets/images/client1.jpg",
-        "rating": 5,
-        "time": "30 Apr, 2021",
-        "comment": "Keep the soil evenly moist for the healthiest growth. If the sun gets too hot, Chinese cabbage tends to bolt or go to seed; in long periods of heat, some kind of shade may be helpful. Watch out for snails, as they will harm the plants."
-      },
-      {
-        "id": 3,
-        "name": "Jacob Jones",
-        "avatar": "/src/assets/images/client1.jpg",
-        "rating": 4,
-        "time": "2 min ago",
-        "comment": "Vivamus eget euismod magna. Nam sed lacinia nibh, et lacinia lacus."
-      },
-      {
-        "id": 4,
-        "name": "Ralph Edwards",
-        "avatar": "/src/assets/images/client1.jpg",
-        "rating": 5,
-        "time": "2 min ago",
-        "comment": "200+ Canton Pak Choi Bok Choy Chinese Cabbage Seeds Heirloom Non-GMO Productive Brassica rapa VAR. chinensis, a.k.a. Canton's Choice, Bok Choy, from USA."
       }
     ],
     "mainImage": "/src/assets/images/largecabage.svg",
@@ -99,8 +154,406 @@
     "videoImage": "/src/assets/images/video.svg"
   },
 
+  "lettuceProductData": {
+    "id": 4,
+    "name": "Green Lettuce",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 3,
+    "reviewsCount": 5,
+    "originalPrice": null,
+    "currentPrice": 9.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Lettuce", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.2",
+      "color": "Green",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (1,200)",
+      "tags": ["Vegetables", "Lettuce"],
+      "discount": "0%",
+      "discountSub": "Best price",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/green-lecctuce.webp",
+    "thumbnails": [
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp",
+      "/images/product/green-lecctuce.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "eggplantProductData": {
+    "id": 5,
+    "name": "Eggplant",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 4,
+    "reviewsCount": 8,
+    "originalPrice": null,
+    "currentPrice": 34.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Eggplant", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.5",
+      "color": "Purple",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (850)",
+      "tags": ["Vegetables", "Eggplant"],
+      "discount": "0%",
+      "discountSub": "Fresh from farm",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/eggplant.webp",
+    "thumbnails": [
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp",
+      "/images/product/eggplant.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "potatoesProductData": {
+    "id": 6,
+    "name": "Big Potatoes",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 4,
+    "reviewsCount": 12,
+    "originalPrice": null,
+    "currentPrice": 20.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Potatoes", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "1.0",
+      "color": "Brown",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (2,400)",
+      "tags": ["Vegetables", "Potatoes"],
+      "discount": "0%",
+      "discountSub": "Farm fresh",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/big-potatoes.webp",
+    "thumbnails": [
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp",
+      "/images/product/big-potatoes.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "cornProductData": {
+    "id": 7,
+    "name": "Corn",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 5,
+    "reviewsCount": 15,
+    "originalPrice": null,
+    "currentPrice": 20.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Sweet and juicy fresh corn on the cob, harvested daily.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Corn", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.4",
+      "color": "Yellow",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (1,800)",
+      "tags": ["Vegetables", "Corn"],
+      "discount": "0%",
+      "discountSub": "Sweet corn",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/corn.webp",
+    "thumbnails": [
+      "/images/product/corn.webp",
+      "/images/product/corn.webp",
+      "/images/product/corn.webp",
+      "/images/product/corn.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "cauliflowerProductData": {
+    "id": 8,
+    "name": "Fresh Cauliflower",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 4,
+    "reviewsCount": 6,
+    "originalPrice": null,
+    "currentPrice": 12.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Fresh cauliflower packed with vitamins and minerals.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Cauliflower", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.6",
+      "color": "White",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (950)",
+      "tags": ["Vegetables", "Cauliflower"],
+      "discount": "0%",
+      "discountSub": "Healthy choice",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/fresh-cauliflower.webp",
+    "thumbnails": [
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp",
+      "/images/product/fresh-cauliflower.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "greenCapsicumProductData": {
+    "id": 9,
+    "name": "Green Capsicum",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 4,
+    "reviewsCount": 10,
+    "originalPrice": 20.99,
+    "currentPrice": 9.0,
+    "discountLabel": "Sale 50%",
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Fresh green capsicum, crisp and crunchy for salads and cooking.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Capsicum", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.3",
+      "color": "Green",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (1,400)",
+      "tags": ["Vegetables", "Capsicum"],
+      "discount": "50% Discount",
+      "discountSub": "Save 50% today",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/green-capsicum.webp",
+    "thumbnails": [
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp",
+      "/images/product/green-capsicum.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "chilliProductData": {
+    "id": 10,
+    "name": "Green Chilli",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 4,
+    "reviewsCount": 3,
+    "originalPrice": null,
+    "currentPrice": 34.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Spicy organic green chillies for your culinary dishes.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Chilli", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.1",
+      "color": "Green",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (600)",
+      "tags": ["Vegetables", "Chilli"],
+      "discount": "0%",
+      "discountSub": "Spicy & Fresh",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/images/product/green-chilli.webp",
+    "thumbnails": [
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp",
+      "/images/product/green-chilli.webp"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "redcapsicumProductData": {
+    "id": 11,
+    "name": "Red Capsicum",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 5,
+    "reviewsCount": 4,
+    "originalPrice": null,
+    "currentPrice": 18.0,
+    "discountLabel": null,
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Red Capsicum", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.3",
+      "color": "Red",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (2,100)",
+      "tags": ["Vegetables", "Healthy", "Red Capsicum"],
+      "discount": "0%",
+      "discountSub": "Fresh harvest",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/src/assets/images/ProductImage/redcapsicum.png",
+    "thumbnails": [
+      "/src/assets/images/ProductImage/redcapsicum.png",
+      "/src/assets/images/ProductImage/redcapsicum1.png",
+      "/src/assets/images/ProductImage/redcapsicum2.png",
+      "/src/assets/images/ProductImage/redcapsicum3.png"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
+  "tomatoProductData": {
+    "id": 12,
+    "name": "Fresh Tomato",
+    "inStock": true,
+    "sku": "2,51,594",
+    "rating": 5,
+    "reviewsCount": 4,
+    "originalPrice": 16.0,
+    "currentPrice": 16.0,
+    "discountLabel": "Sale 50%",
+    "brand": "FarmFresh",
+    "brandLogo": "/src/assets/images/brand.svg",
+    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "category": {
+      "name": "Vegetables",
+      "link": "#"
+    },
+    "tags": [
+      { "name": "Vegetables", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Tomato", "link": "#" }
+    ],
+    "additionalInfo": {
+      "weight": "0.5",
+      "color": "Red",
+      "type": "Organic",
+      "category": "Vegetables",
+      "stockStatus": "Available (4,500)",
+      "tags": ["Vegetables", "Healthy", "Tomato"],
+      "discount": "50% Discount",
+      "discountSub": "Save 50% today",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Vegetables"
+    },
+    "feedbacks": [],
+    "mainImage": "/src/assets/images/ProductImage/tomato.png",
+    "thumbnails": [
+      "/src/assets/images/ProductImage/tomato.png",
+      "/src/assets/images/ProductImage/tomato1.svg",
+      "/src/assets/images/ProductImage/tomato2.png",
+      "/src/assets/images/ProductImage/tomato3.png"
+    ],
+    "videoImage": "/src/assets/images/video.svg"
+  },
+
   "mangoProductData": {
-    "id": 2,
+    "id": 13,
     "name": "Surjapur Mango",
     "inStock": true,
     "sku": "2,51,594",
@@ -117,107 +570,29 @@
       "link": "#"
     },
     "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Mango",
-        "link": "#"
-      }
+      { "name": "Fresh Fruit", "link": "#" },
+      { "name": "Healthy", "link": "#" },
+      { "name": "Mango", "link": "#" }
     ],
+    "additionalInfo": {
+      "weight": "1.0",
+      "color": "Yellow",
+      "type": "Organic",
+      "category": "Fresh Fruit",
+      "stockStatus": "Available (1,500)",
+      "tags": ["Fresh Fruit", "Healthy", "Mango"],
+      "discount": "64% Discount",
+      "discountSub": "Special deal",
+      "organic": "100% Organic",
+      "organicSub": "100% Organic Fresh Fruit"
+    },
+    "feedbacks": [],
     "mainImage": "/src/assets/images/ProductImage/mango.png",
     "thumbnails": [
       "/src/assets/images/ProductImage/mango.png",
       "/src/assets/images/ProductImage/mango1.png",
       "/src/assets/images/ProductImage/mango2.svg",
       "/src/assets/images/ProductImage/mango3.svg"
-    ],
-    "videoImage": "/src/assets/images/video.svg"
-  },
-
-  "tomatoProductData": {
-    "id": 3,
-    "name": "Fresh Tomato",
-    "inStock": true,
-    "sku": "2,51,594",
-    "rating": 4,
-    "reviewsCount": 4,
-    "originalPrice": 16.0,
-    "currentPrice": 8.0,
-    "discountLabel": "50% Off",
-    "brand": "FarmFresh",
-    "brandLogo": "/src/assets/images/brand.svg",
-    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
-    "category": {
-      "name": "Fresh Fruit",
-      "link": "#"
-    },
-    "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Tomato",
-        "link": "#"
-      }
-    ],
-    "mainImage": "/src/assets/images/ProductImage/tomato.png",
-    "thumbnails": [
-      "/src/assets/images/ProductImage/tomato.png",
-      "/src/assets/images/ProductImage/tomato1.svg",
-      "/src/assets/images/ProductImage/tomato2.png",
-      "/src/assets/images/ProductImage/tomato3.png"
-    ],
-    "videoImage": "/src/assets/images/video.svg"
-  },
-
-  "redcapsicumProductData": {
-    "id": 4,
-    "name": "Red Capsicum",
-    "inStock": true,
-    "sku": "2,51,594",
-    "rating": 4,
-    "reviewsCount": 4,
-    "originalPrice": null,
-    "currentPrice": 18.0,
-    "discountLabel": null,
-    "brand": "FarmFresh",
-    "brandLogo": "/src/assets/images/brand.svg",
-    "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
-    "category": {
-      "name": "Fresh Fruit",
-      "link": "#"
-    },
-    "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Red Capsium",
-        "link": "#"
-      }
-    ],
-    "mainImage": "/src/assets/images/ProductImage/redcapsicum.png",
-    "thumbnails": [
-      "/src/assets/images/ProductImage/redcapsicum.png",
-      "/src/assets/images/ProductImage/redcapsicum1.png",
-      "/src/assets/images/ProductImage/redcapsicum2.png",
-      "/src/assets/images/ProductImage/redcapsicum3.png"
     ],
     "videoImage": "/src/assets/images/video.svg"
   }

@@ -1,64 +1,116 @@
 export function renderAdditionalInfoTab(product) {
   const addInfoTagsHtml = (product.additionalInfo?.tags || [])
-  .map(tag => `
-    <span
-      class="cursor-pointer hover:text-[#00B207] transition-colors duration-200 ${
-        tag.toLowerCase() === "chinese"
-          ? "font-semibold text-gray-900"
-          : "text-gray-500"
-      }"
-    >
-      ${tag}
-    </span>
-  `)
-  .join(", ");
-  return /*html*/ `
-  
-
-<div class="container-custom">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-12">
-
-    <!-- Cột trái -->
-   <div class="lg:col-span-7 space-y-4 text-sm">
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Weight:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.weight || '0.3'}</span>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Color:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.color || 'Green'}</span>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Type:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.type || 'Organic'}</span>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Category:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.category || 'Vegetables'}</span>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1 border-b border-gray-50">
-        <span class="text-gray-900 font-medium">Stock Status:</span>
-        <span class="text-gray-500 col-span-2 sm:col-span-3">${product.additionalInfo?.stockStatus || 'In Stock'}</span>
-      </div>
-        
-      <div class="grid grid-cols-3 sm:grid-cols-4 py-1.5">
-        <span class="text-gray-900 font-medium">Tags:</span>
+    .map(
+      (tag) => `
         <span
-  class="text-gray-500 col-span-2 sm:col-span-3 cursor-pointer"
-  title="Product Tags: ${product.additionalInfo?.tags?.join(', ') || ''}"
->
-  ${addInfoTagsHtml}
-</span>
-      </div>
-    </div>
+          class="cursor-pointer transition-colors duration-200 ${
+            tag.toLowerCase() === "chinese"
+              ? "text-zinc-900 underline font-medium"
+              : "text-zinc-500"
+          }"
+        >
+          ${tag}
+        </span>
+      `
+    )
+    .join(", ");
 
-    <!-- Cột phải -->
-    <div class="lg:col-span-5 space-y-6">
+  return /*html*/ `
+    <div class="w-full bg-white py-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-[1320px] mx-auto">
 
-       <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-xs border border-gray-100">
-             <img src="${product.videoImage}" alt="video" class="image-contain" />
+        <!-- ================= LEFT COLUMN ================= -->
+        <div class="lg:col-span-7 space-y-3 text-sm -mt-5">
+          
+          <!-- Weight -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Weight:</span>
+            <span class="text-stone-500 leading-5">
+              ${product.additionalInfo?.weight || "03"}
+            </span>
+          </div>
+
+          <!-- Color -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Color:</span>
+            <span class="text-stone-500 leading-5">
+              ${product.additionalInfo?.color || "Green"}
+            </span>
+          </div>
+
+          <!-- Type -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Type:</span>
+            <span class="text-stone-500 leading-5">
+              ${product.additionalInfo?.type || "Organic"}
+            </span>
+          </div>
+
+          <!-- Category -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Category:</span>
+            <span class="text-stone-500 leading-5">
+              ${product.additionalInfo?.category || "Vegetables"}
+            </span>
+          </div>
+
+          <!-- Stock Status -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Stock Status:</span>
+            <span class="text-stone-500 leading-5">
+              ${product.additionalInfo?.stockStatus || "Available"}
+              ${
+                product.additionalInfo?.stock
+                  ? `<span class="text-neutral-400">(${product.additionalInfo.stock})</span>`
+                  : `<span class="text-neutral-400">(5,413)</span>`
+              }
+            </span>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex items-start">
+            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Tags:</span>
+            <div class="leading-5">
+              ${addInfoTagsHtml}
+            </div>
+          </div>
+
         </div>
 
+
+        <!-- ================= RIGHT COLUMN ================= -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- Video Container -->
+          <div class="relative w-[536px] h-[300px] rounded-md overflow-hidden bg-gray-100 -mt-4 ml-4">
+            <img
+              src="${product.videoImage}"
+              alt="video"
+              class="w-full h-full object-cover"
+            />
+            
+            <!-- Play Button -->
+            <div
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-700 transition-colors"
+            >
+              <svg
+                width="14"
+                height="16"
+                viewBox="0 0 14 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.25 7.13397C13.9167 7.51887 13.9167 8.48113 13.25 8.86603L1.25 15.7942C0.583334 16.1791 -2.51891e-07 15.6979 -2.18219e-07 14.9282L3.87532e-07 1.0718C4.21127e-07 0.302096 0.583334 -0.179155 1.25 0.205745L13.25 7.13397Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </div>
+
+
+          <!-- Benefit Cards Container -->
+          
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- Banner: 64% Discount -->
           <div class="flex items-center gap-3 p-4 border border-gray-200/80 rounded-xl bg-white shadow-xs">
@@ -90,7 +142,9 @@ export function renderAdditionalInfoTab(product) {
               <span class="text-[11px] text-gray-400 mt-0.5">100% Organic Vegetables</span>
             </div>
           </div>
+
         </div>
+
       </div>
     </div>
   `;

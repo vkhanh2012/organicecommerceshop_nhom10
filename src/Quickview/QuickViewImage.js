@@ -1,21 +1,31 @@
-export function renderImage(product) {
-  const thumbnails = Array.isArray(product?.thumbnails) ? product.thumbnails : [];
-  const fullImages = Array.isArray(product?.images) && product.images.length > 0 ? product.images : [];
+// src/Quickview/QuickViewImage.js
+
+export function renderQuickViewImage(product) {
+  const thumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
+    ? product.thumbnails
+    : [product?.mainImage || product?.image || ""];
+
+  const fullImages = Array.isArray(product?.images) && product.images.length > 0
+    ? product.images
+    : thumbnails;
+
   const mainImage = product?.mainImage || fullImages[0] || thumbnails[0] || "";
   const productName = product?.name || "Product";
 
   const thumbnailsHtml = thumbnails
     .map((thumb, index) => {
-      const fullSrc = fullImages[index] || (index === 0 && product?.mainImage ? product.mainImage : thumb);
+      const fullSrc = fullImages[index] || thumb;
       const isSelected = fullSrc === mainImage || (index === 0 && !product?.mainImage);
 
       return `
         <div
-          data-action="select-thumb"
+          data-qv-action="select-thumb"
           data-src="${fullSrc}"
           data-index="${index}"
-          class="thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
-            isSelected ? "border-2 border-[#00B207]" : "border border-gray-200 hover:border-[#00B207]"
+          class="qv-thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
+            isSelected
+              ? "border-2 border-[#00B207]"
+              : "border border-gray-200 hover:border-[#00B207]"
           }"
         >
           <img
@@ -30,15 +40,15 @@ export function renderImage(product) {
 
   return /*html*/ `
     <div
-      id="product-gallery"
-      class="col-span-12 lg:col-span-6 w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-4 select-none"
+      id="qv-product-gallery"
+      class="w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-4 select-none"
     >
-      <!-- THUMBNAILS CONTAINER (Bỏ pt-[40px] để căn lề trên bằng với ảnh chính) -->
+      <!-- DANH SÁCH THUMBNAIL DỌC BÊN TRÁI FIGMA -->
       <div class="order-2 sm:order-1 w-full sm:w-[80px] shrink-0 flex sm:flex-col items-center justify-between gap-2 h-full max-h-[556px]">
         <!-- MŨI TÊN LÊN -->
         <button
           type="button"
-          data-action="thumb-prev"
+          data-qv-action="thumb-prev"
           class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
@@ -47,15 +57,15 @@ export function renderImage(product) {
           </svg>
         </button>
 
-        <!-- DANH SÁCH THUMBNAIL -->
-        <div id="thumbnail-list" class="flex sm:flex-col items-center gap-3 overflow-hidden mt-1">
+        <!-- THUMBNAIL LIST -->
+        <div id="qv-thumbnail-list" class="flex sm:flex-col items-center gap-3 overflow-hidden max-h-[460px] scroll-smooth">
           ${thumbnailsHtml}
         </div>
 
         <!-- MŨI TÊN XUỐNG -->
         <button
           type="button"
-          data-action="thumb-next"
+          data-qv-action="thumb-next"
           class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
@@ -65,12 +75,12 @@ export function renderImage(product) {
         </button>
       </div>
 
-      <!-- MAIN IMAGE CONTAINER (Tự động mở rộng linh hoạt flex-1) -->
+      <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
-        class="order-1 sm:order-2 shrink-0 w-[556px] h-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-0"
+        class="order-1 sm:order-2 flex-1 w-full max-w-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-4"
       >
         <img
-          id="main-product-image"
+          id="qv-main-product-image"
           src="${mainImage}"
           alt="${productName} img main"
           class="w-full h-full object-contain transition-all duration-200 select-none"
@@ -80,15 +90,15 @@ export function renderImage(product) {
   `;
 }
 
-// BIND IMAGE EVENTS
-export function bindImageEvents(container = document) {
-  const gallery = container.querySelector("#product-gallery") || container;
+// BIND QUICKVIEW IMAGE EVENTS (ISOLATED TO PREVENT CONFLICTS)
+export function bindQuickViewImageEvents(container = document) {
+  const gallery = container.querySelector("#qv-product-gallery") || container;
   if (!gallery) return;
 
-  const mainImg = gallery.querySelector("#main-product-image");
+  const mainImg = gallery.querySelector("#qv-main-product-image");
   if (!mainImg) return;
 
-  const thumbs = Array.from(gallery.querySelectorAll('[data-action="select-thumb"]'));
+  const thumbs = Array.from(gallery.querySelectorAll('[data-qv-action="select-thumb"]'));
   if (!thumbs.length) return;
 
   const setActiveThumbnail = (activeThumb) => {
@@ -116,7 +126,7 @@ export function bindImageEvents(container = document) {
     });
   });
 
-  const prevBtn = gallery.querySelector('[data-action="thumb-prev"]');
+  const prevBtn = gallery.querySelector('[data-qv-action="thumb-prev"]');
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
@@ -125,7 +135,7 @@ export function bindImageEvents(container = document) {
     });
   }
 
-  const nextBtn = gallery.querySelector('[data-action="thumb-next"]');
+  const nextBtn = gallery.querySelector('[data-qv-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));

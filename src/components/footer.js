@@ -1,80 +1,92 @@
+// src/components/footer.js
+
 export function renderFooterComponent() {
   return /*html*/ `
-    <footer class="bg-[#1A1A1A] text-gray-400 pt-16 pb-6">
-      <div class="container-custom">
+    <footer class="w-full bg-zinc-900 text-neutral-400 pt-14 pb-6 font-['Poppins']">
+      <div class="container-custom mx-auto px-4 lg:px-0">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
+        <!-- ROW CHÍNH: LOGO + 4 CỘT MENU FIGMA -->
+        <div class="container-custom flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-0 pb-16">
           
-          <!-- Logo EcoBaza -->
-          <div class="lg:col-span-4 flex flex-col items-start">
-            <!-- Logo -->
-            <div class="flex items-center gap-2 mb-4">
+          <!-- CỘT BÊN TRÁI: LOGO & LIÊN HỆ (RỘNG 336PX FIGMA) -->
+          <div class="w-full lg:w-[336px] shrink-0 flex flex-col items-start gap-4">
+            <!-- LOGO ECOBAZAR -->
+            <div class="flex items-center gap-2">
               <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M31.2749 2.87433C27.4022 2.87433 21.9311 3.19836 19.1352 5.99279C17.9247 7.20329 17.3202 9.17664 17.4771 11.4102C17.4975 11.7052 17.6937 11.9566 17.9756 12.0496C18.256 12.1412 18.5641 12.0554 18.7559 11.8302C20.3108 10.0006 22.2435 8.53443 24.5046 7.47215C24.6964 7.3806 24.9231 7.37331 25.1295 7.44599C25.3111 7.51138 25.4535 7.63488 25.5276 7.79332C25.6816 8.11885 25.6322 8.54751 25.1207 8.78871C25.0917 8.80322 25.0655 8.82216 25.0365 8.83524C25.0263 8.8396 25.0147 8.83817 25.006 8.84252C19.4346 11.4611 16.6954 16.0299 15.4514 20.7279C14.5446 14.8455 12.6294 11.3826 10.8202 9.25667C9.51095 7.55941 8.22341 6.65986 7.47943 6.1513C7.34136 6.05682 6.92435 5.77202 6.7514 5.59907C6.46803 5.3157 6.46803 4.85503 6.7514 4.57166C7.03477 4.28973 7.49687 4.28973 7.81218 4.60361C7.88923 4.67193 8.01272 4.75912 8.16966 4.86375L8.29902 4.95094C9.35108 5.67168 11.31 7.01004 13.0479 9.89166C13.2034 10.1489 13.5042 10.2869 13.7963 10.2317C14.0928 10.1794 14.3252 9.95126 14.3834 9.65625C14.7627 7.71921 14.5927 4.84481 12.8649 3.11703C10.069 0.324032 4.59789 1.06881e-08 0.726671 1.06881e-08C0.32553 -6.81062e-05 0 0.325462 0 0.726535C0 4.59918 0.324032 10.0703 3.11846 12.8663C4.28387 14.0317 6.08147 14.5548 7.86736 14.5548C9.32486 14.5548 10.7533 14.19 11.8476 13.5579C13.3399 16.6502 14.5316 21.2698 14.5316 28.3366C14.5316 28.7376 14.8571 29.0632 15.2582 29.0632C15.6592 29.0632 15.9848 28.7376 15.9848 28.3366C15.9848 24.3942 16.6605 19.6626 19.173 15.7682C20.18 16.752 21.9137 17.3754 23.8347 17.4335C23.9306 17.4364 24.0251 17.4379 24.1195 17.4379C26.0711 17.4379 27.796 16.8261 28.8815 15.7391C31.6773 12.9432 31.9999 7.47208 31.9999 3.59936C32.0015 3.19836 31.6774 2.87433 31.2749 2.87433Z" fill="#00B307"/>
-                </svg>
-
-              <span class="text-white text-2xl font-semibold tracking-tight">Ecobazar</span>
+                <path d="M31.2749 2.87433C27.4022 2.87433 21.9311 3.19836 19.1352 5.99279C17.9247 7.20329 17.3202 9.17664 17.4771 11.4102C17.4975 11.7052 17.6937 11.9566 17.9756 12.0496C18.256 12.1412 18.5641 12.0554 18.7559 11.8302C20.3108 10.0006 22.2435 8.53443 24.5046 7.47215C24.6964 7.3806 24.9231 7.37331 25.1295 7.44599C25.3111 7.51138 25.4535 7.63488 25.5276 7.79332C25.6816 8.11885 25.6322 8.54751 25.1207 8.78871C25.0917 8.80322 25.0655 8.82216 25.0365 8.83524C25.0263 8.8396 25.0147 8.83817 25.006 8.84252C19.4346 11.4611 16.6954 16.0299 15.4514 20.7279C14.5446 14.8455 12.6294 11.3826 10.8202 9.25667C9.51095 7.55941 8.22341 6.65986 7.47943 6.1513C7.34136 6.05682 6.92435 5.77202 6.7514 5.59907C6.46803 5.3157 6.46803 4.85503 6.7514 4.57166C7.03477 4.28973 7.49687 4.28973 7.81218 4.60361C7.88923 4.67193 8.01272 4.75912 8.16966 4.86375L8.29902 4.95094C9.35108 5.67168 11.31 7.01004 13.0479 9.89166C13.2034 10.1489 13.5042 10.2869 13.7963 10.2317C14.0928 10.1794 14.3252 9.95126 14.3834 9.65625C14.7627 7.71921 14.5927 4.84481 12.8649 3.11703C10.069 0.324032 4.59789 1.06881e-08 0.726671 1.06881e-08C0.32553 -6.81062e-05 0 0.325462 0 0.726535C0 4.59918 0.324032 10.0703 3.11846 12.8663C4.28387 14.0317 6.08147 14.5548 7.86736 14.5548C9.32486 14.5548 10.7533 14.19 11.8476 13.5579C13.3399 16.6502 14.5316 21.2698 14.5316 28.3366C14.5316 28.7376 14.8571 29.0632 15.2582 29.0632C15.6592 29.0632 15.9848 28.7376 15.9848 28.3366C15.9848 24.3942 16.6605 19.6626 19.173 15.7682C20.18 16.752 21.9137 17.3754 23.8347 17.4335C23.9306 17.4364 24.0251 17.4379 24.1195 17.4379C26.0711 17.4379 27.796 16.8261 28.8815 15.7391C31.6773 12.9432 31.9999 7.47208 31.9999 3.59936C32.0015 3.19836 31.6774 2.87433 31.2749 2.87433Z" fill="#00B207"/>
+              </svg>
+              <span class="text-white text-3xl font-medium leading-9 tracking-tight">Ecobazar</span>
             </div>
-            <!-- Mô tả -->
-            <p class="text-sm leading-relaxed mb-6 font-light max-w-sm">
+
+            <!-- MÔ TẢ -->
+            <p class="w-full max-w-[320px] text-zinc-500 text-sm font-normal leading-5">
               Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis dui, eget bibendum magna congue nec.
             </p>
-            <!-- Liên hệ -->
-            <div class="flex items-center gap-2.5 text-sm flex-wrap">
-              <a href="tel:2195550114" class="text-white font-medium hover:text-[#00B207] border-b border-[#00B207] pb-0.5 transition-all">
+
+            <!-- LIÊN HỆ FIGMA -->
+            <div class="flex items-center gap-4 pt-1">
+              <a href="tel:2195550114" class="py-1 border-b-[1.5px] border-[#20B126] text-white font-medium text-sm leading-5 hover:text-green-500 transition-colors">
                 (219) 555-0114
               </a>
-              <span class="text-gray-600">or</span>
-              <a href="mailto:Proxy@gmail.com" class="text-white font-medium hover:text-[#00B207] border-b border-[#00B207] pb-0.5 transition-all">
+              <span class="text-zinc-500 text-base font-normal leading-6">or</span>
+              <a href="mailto:Proxy@gmail.com" class="py-1 border-b-[1.5px] border-[#20B126] text-white font-medium text-sm leading-5 hover:text-green-500 transition-colors">
                 Proxy@gmail.com
               </a>
             </div>
           </div>
-          <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+
+          <!-- KHỐI 4 CỘT MENU BÊN PHẢI CHUẨN KÍCH THƯỚC FIGMA (GAP & SPACING) -->
+          <div class="w-full lg:w-[880px] grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-0 lg:flex lg:justify-between">
             
-            <!-- My Account -->
-            <div>
-              <h3 class="text-white font-medium text-base mb-5">My Account</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">My Account</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Order History</a></li>
-                <li> <a href="#" class="hover:text-white transition-colors"> Shopping Cart</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Wishlist</a></li>
-              </ul>
+            <!-- CỘT 1: MY ACCOUNT -->
+            <div class="flex flex-col items-start gap-5 translate-x-20">
+              <h3 class="text-white text-base font-medium leading-6">My Account</h3>
+              <div class="flex flex-col items-start gap-3">
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">My Account</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Order History</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Shoping Cart</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Wishlist</a>
+              </div>
             </div>
-            <!-- Helps -->
-            <div>
-              <h3 class="text-white font-medium text-base mb-5">Helps</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Faqs</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Terms & Condition</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-              </ul>
+
+            <!-- CỘT 2: HELPS -->
+            <div class="flex flex-col items-start gap-5 translate-x-18">
+              <h3 class="text-white text-base font-medium leading-6">Helps</h3>
+              <div class="flex flex-col items-start gap-3">
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Contact</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Faqs</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Terms & Condition</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Privacy Policy</a>
+              </div>
             </div>
-            <!--Proxy -->
-            <div>
-              <h3 class="text-white font-medium text-base mb-5">Proxy</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Shop</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Product</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Track Order</a></li>
-              </ul>
+
+            <!-- CỘT 3: PROXY -->
+            <div class="flex flex-col items-start gap-5">
+              <h3 class="text-white text-base font-medium leading-6">Proxy</h3>
+              <div class="flex flex-col items-start gap-3">
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">About</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Shop</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Product</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Track Order</a>
+              </div>
             </div>
-            <!-- Categories -->
-            <div>
-              <h3 class="text-white font-medium text-base mb-5">Categories</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">Fruit & Vegetables</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Meat & Fish</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Bread & Bakery</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Beauty & Health</a></li>
-              </ul>
+
+            <!-- CỘT 4: CATEGORIES -->
+            <div class="flex flex-col items-start gap-5">
+              <h3 class="text-white text-base font-medium leading-6">Categories</h3>
+              <div class="flex flex-col items-start gap-3">
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Fruit & Vegetables</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Meat & Fish</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Bread & Bakery</a>
+                <a href="#" class="text-neutral-400 text-sm font-normal leading-5 hover:text-white transition-colors">Beauty & Health</a>
+              </div>
             </div>
+
           </div>
+
         </div>
-        <!-- Copyright và Thanh toán -->
+
+        <!-- COPYRIGHT VÀ THANH TOÁN BẢO MẬT FIGMA -->
         <div class="container-custom border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           
           <!-- Copyright Info -->
@@ -82,7 +94,7 @@ export function renderFooterComponent() {
             Ecobazar eCommerce © 2021. All Rights Reserved
           </div>
           <!-- Thanh toán -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 translate-x-20">
             
             <!-- Apple Pay -->
             <div class="w-12 h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center justify-center">
@@ -132,10 +144,10 @@ export function renderFooterComponent() {
 
               <div class="flex flex-col leading-none select-none">
               </div>
-            </div>
-          </div>
+
         </div>
+
       </div>
     </footer>
-    `;
-  }
+  `;
+}
