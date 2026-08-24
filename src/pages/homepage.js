@@ -27,10 +27,12 @@ export async function renderHomepageComponent() {
 
     <section
       id="popular-products"
-      class="section-container"
+      class="section-container -mt-[13px]"
     >
       ${sectionTitle("Popular Products")}
-      ${renderProductGrid(products.slice(0, 10))}
+      <div class="lg:-mt-[9px]">
+        ${renderProductGrid(products.slice(0, 10))}
+      </div>
     </section>
 
     ${renderPromoBanners(bannerData.promoBanners)}
@@ -50,6 +52,5 @@ export async function renderHomepageComponent() {
       images: instagramImages,
       handle: ""
     })}
-
   `;
 }

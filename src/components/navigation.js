@@ -81,7 +81,7 @@ export function renderNavigationComponent({
     <header data-nav-root>
       <!-- Topbar -->
       <div class="w-full bg-white border-b border-neutral-100">
-        <div class="container-custom flex items-center justify-between py-2 md:py-3 font-poppins text-xs text-neutral-600 gap-3">
+        <div class="container-custom flex h-[42px] items-center justify-between font-poppins text-xs text-neutral-600 gap-3">
           <div class="items-center gap-2 hidden md:flex">
             ${iconLocation}
             <span>Store location: Lincoln - 344, Illinois, Chicago, USA</span>
@@ -101,7 +101,7 @@ export function renderNavigationComponent({
 
       <!-- Main Header -->
       <div class="w-full bg-white">
-        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-5">
+        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:h-[92px] md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-0">
           
           <!-- Mobile Menu Toggle -->
           <button 
@@ -125,7 +125,7 @@ export function renderNavigationComponent({
               width="40"
               height="40"
               decoding="async"
-              class="w-8 h-8 md:w-10 md:h-10 object-contain" 
+              class="h-8 w-8 object-contain" 
             /> 
             <span>Ecobazar</span>
           </a>
@@ -181,7 +181,7 @@ export function renderNavigationComponent({
 
       <!-- Navigation Panel -->
       <div class="w-full bg-neutral-800 hidden md:block" data-nav-panel>
-        <div class="container-custom flex flex-col md:flex-row gap-2 md:gap-4 py-2 md:py-4 items-stretch md:items-center">
+        <div class="container-custom flex flex-col md:h-[62px] md:flex-row gap-2 md:gap-4 py-2 md:py-0 items-stretch md:items-center">
           <nav class="flex flex-col md:flex-row gap-0 md:gap-8 items-stretch md:items-center">
             ${linksHtml}
           </nav>

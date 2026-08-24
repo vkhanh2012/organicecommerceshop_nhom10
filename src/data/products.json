@@ -35,7 +35,7 @@
     "id": 3,
     "name": "Chinese Cabbage",
     "price": 12,
-    "oldPrice": null,
+    "oldPrice": 24,
     "rating": 2,
     "saleTag": null,
     "category": "Vegetables",

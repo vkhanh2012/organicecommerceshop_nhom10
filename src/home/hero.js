@@ -7,7 +7,7 @@ export function renderHeroComponent(hero) {
   const hero2 = smallBanners[0];
   const hero3 = smallBanners[1];
 
-  const smallBannersHtml = `
+const smallBannersHtml = `
   <!-- HERO 2 -->
   <article
     class="relative min-h-[240px] overflow-hidden rounded-[10px]
@@ -23,33 +23,45 @@ export function renderHeroComponent(hero) {
       class="absolute inset-0 h-full w-full object-cover"
     >
 
-    <div class="relative z-10 flex h-full min-h-[240px]
-                max-w-[230px] flex-col justify-start p-7 pt-8
-                lg:min-h-[288px]">
-
-      <p class="text-xs font-medium uppercase tracking-wide text-neutral-700">
+    <div
+      class="relative z-10 flex h-full min-h-[240px]
+             max-w-[230px] flex-col justify-start
+             p-8 pt-7 lg:min-h-[288px]"
+    >
+      <p
+        class="text-xs font-medium uppercase
+               leading-[18px] tracking-wide text-neutral-700"
+      >
         ${hero2.subTitle}
       </p>
 
-      <h2 class="mt-2 text-3xl font-semibold text-neutral-900">
+      <h2
+        class="mt-2 text-4xl font-semibold
+               leading-[43px] text-neutral-900"
+      >
         ${hero2.title}
       </h2>
 
-      <p class="mt-2 text-sm text-neutral-600">
+      <p
+        class="mt-2 text-sm leading-[21px] text-neutral-600"
+      >
         ${hero2.description}
       </p>
 
       <a
         href="./shop.html"
-        class="mt-4 inline-flex cursor-pointer w-fit items-center gap-2
-               text-sm font-semibold text-primary
-               transition-colors hover:text-primary-dark"
+        class="mt-6 inline-flex w-fit cursor-pointer
+               items-center gap-2
+               text-sm font-semibold leading-[21px]
+               text-primary transition-colors
+               hover:text-primary-dark"
       >
         ${hero2.buttonText}
-        <span>→</span>
+        <span aria-hidden="true">→</span>
       </a>
     </div>
   </article>
+
 
   <!-- HERO 3 -->
   <article
@@ -61,74 +73,92 @@ export function renderHeroComponent(hero) {
       alt="${hero3.title}"
       width="423"
       height="288"
-      loading="lazy"
       decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     >
 
-    <div class="absolute inset-0 bg-[#002603]/80"></div>
+    <div class="absolute inset-0 bg-[#002603]/72"></div>
 
-    <div class="relative z-10 flex h-full min-h-[240px]
-                flex-col items-center justify-center p-7
-                text-center lg:min-h-[288px]">
-
-      <p class="text-xs font-medium uppercase tracking-wide text-white">
+    <div
+      class="relative z-10 flex h-full min-h-[240px]
+             flex-col items-center justify-center
+             px-7 py-8 text-center
+             lg:min-h-[288px] lg:px-8 lg:py-0
+             lg:-translate-y-[4px]"
+    >
+      <p
+        class="text-xs font-medium uppercase
+               leading-[18px] tracking-[0.03em]
+               text-white"
+      >
         ${hero3.subTitle}
       </p>
 
-      <h2 class="mt-3 text-3xl font-semibold leading-[1.25] text-white">
+      <h2
+        class="mt-3 text-[32px] font-semibold
+               leading-[38px] text-white"
+      >
         ${hero3.title}<br>
         ${hero3.description}
       </h2>
 
       <a
         href="./shop.html"
-        class="mt-6 inline-flex cursor-pointer items-center gap-2
-               text-sm font-semibold text-primary
-               transition-colors hover:text-primary-light"
+        class="mt-6 inline-flex items-center gap-2
+               text-sm font-semibold leading-[21px]
+               text-primary transition-colors
+               hover:text-primary-light"
       >
         ${hero3.buttonText}
-        <span>→</span>
+        <span aria-hidden="true">→</span>
       </a>
     </div>
   </article>
 `;
 
   return `
-  <section class="bg-white pt-4 md:pt-6" data-hero-root>
-    <div class="container-custom">
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
-        <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
-          <img
-            src="${mainBanner.image}"
-            alt="${mainBanner.title}"
-            width="872"
-            height="600"
-            fetchpriority="high"
-            decoding="async"
-            class="absolute inset-0 h-full w-full object-cover"
-          >
-          
-          <!-- Thay đổi: Tăng độ đậm và vùng phủ của gradient tối từ trái sang để chữ trắng nổi bật lên rõ ràng -->
-          <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-black/5"></div>
-          
-          <div class="relative z-10 flex min-h-[440px] max-w-[660px] flex-col justify-center p-6 text-white sm:min-h-[520px] sm:p-10 lg:h-[600px] lg:p-[60px]">
-            <h1 class="text-3xl font-semibold leading-[1.2] sm:text-5xl lg:text-[48px]">${mainBanner.title}</h1>
-            <div class="mt-5 border-l-2 border-primary-light pl-4">
-              <p class="text-base">${mainBanner.saleLabel} <span class="rounded bg-warning px-2 py-1 font-semibold">${mainBanner.saleValue}</span></p>
-              <p class="mt-2 text-sm text-white/75">${mainBanner.description}</p>
-            </div>
-            <a href="./shop.html" class="mt-7 inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary cursor-pointer transition-colors hover:bg-primary hover:text-white">${mainBanner.buttonText} <span>➜</span></a>
-          </div>
-        </article>
+    <section class="bg-white pt-4 md:pt-6" data-hero-root>
+      <div class="container-custom">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
+          <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
+            <img
+              src="${mainBanner.image}"
+              alt="${mainBanner.title}"
+              width="872"
+              height="600"
+              fetchpriority="high"
+              decoding="async"
+              class="absolute inset-0 h-full w-full object-cover"
+            >
+            
+            <!-- Thay đổi: Tăng độ đậm và vùng phủ của gradient tối từ trái sang để chữ trắng nổi bật lên rõ ràng -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-black/5"></div>
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-6">
-          ${smallBannersHtml}
+            <div class="relative z-10 flex min-h-[440px] max-w-[560px] flex-col justify-center p-6 text-white sm:min-h-[520px] sm:p-10 lg:h-[600px] lg:justify-start lg:px-[60px] lg:pb-[60px] lg:pt-[155px]">
+              <h1 class="text-3xl font-semibold leading-[1.2] drop-shadow-[0_2px_10px_rgba(0,0,0,0.16)] sm:text-5xl lg:text-[48px] lg:leading-[58px]">${mainBanner.title}</h1>
+
+              <div class="mt-[26px] border-l-2 border-primary-light pl-4">
+                <p class="text-xl leading-[30px] text-white/95">
+                  ${mainBanner.saleLabel}
+                  <span class="ml-2 rounded bg-warning px-3 py-[3px] text-[20px] font-semibold leading-[30px] text-white shadow-[0_2px_6px_rgba(0,0,0,0.08)]">${mainBanner.saleValue}</span>
+                </p>
+                <p class="mt-1.5 text-sm leading-[21px] text-white/80">${mainBanner.description}</p>
+              </div>
+
+              <a href="./shop.html" class="mt-[28px] inline-flex h-[51px] w-fit items-center gap-3 rounded-[53px] bg-neutral-50 px-10 text-base font-semibold text-primary shadow-[0_6px_16px_rgba(0,0,0,0.08)] transition-colors hover:bg-primary hover:text-white">
+                ${mainBanner.buttonText}
+                <span aria-hidden="true">➜</span>
+              </a>
+            </div>
+          </article>
+
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-6">
+            ${smallBannersHtml}
+          </div>
         </div>
       </div>
-    </div>
-  </section>`;
+    </section>`;
 }
-
+        
 export function bindHeroEvents() {
 }

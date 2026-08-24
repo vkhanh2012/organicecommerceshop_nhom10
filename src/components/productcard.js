@@ -11,57 +11,54 @@ import { getImageUrl, attachImageUrls } from "../utils/assets.js";
 import productsData from "../data/products.json";
 
 const CLASS = {
-  // Card phẳng nằm trong khung viền 1px
   card:
-    "product-card w-full h-full group relative bg-white p-3 flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer",
+    "product-card w-full h-full group relative bg-white flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer lg:h-[327px]",
 
   imageWrap:
-    "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
+    "relative overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0 lg:h-[240px]",
 
   image:
     "w-full h-full object-cover",
 
   tags:
-    "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
+    "absolute top-4 left-4 z-10 flex gap-1 pointer-events-none",
 
   tagSale:
-    "bg-error text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
+    "bg-error text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
+    "bg-sky-500 text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   actions:
-    "absolute top-2 right-2 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
+    "absolute top-4 right-4 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
   actionBtn:
-    "w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
+    "w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
   body:
-    "px-0.5 flex flex-col flex-1 justify-between",
+    "relative h-[87px] px-3 pt-[9px] pb-[7px] flex flex-col flex-none",
 
   name:
-    "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer line-clamp-1 h-5 leading-5",
+    "font-poppins text-sm font-normal leading-[27px] text-neutral-700 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis",
 
   priceRow:
-    "flex items-center justify-between mb-1 mt-auto pt-1.5",
+    "flex items-center mt-[1px] leading-none",
 
   price:
-    "font-poppins text-sm md:text-base font-medium text-neutral-900",
+    "font-poppins text-base font-medium leading-[24px] text-neutral-900",
 
   priceOld:
-    "font-poppins text-xs text-neutral-400 line-through ml-1",
+    "font-poppins text-sm font-normal leading-[21px] text-neutral-400 line-through ml-1",
 
   cartBtn:
-    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+    "absolute right-4 top-[23px] w-10 h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
 
   rating:
-    "flex items-center gap-0.5",
+    "flex items-center gap-0 mt-[1px] h-[18px]",
 
-  // 📌 LƯỚI 5 CỘT DÀNH CHO HOME (lg:grid-cols-5) VÀ NỐI VIỀN DÍNH SÁT NHAU (gap-px)
   grid:
-    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-neutral-200 border border-neutral-200 rounded-lg overflow-hidden w-full items-stretch",
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-neutral-200 border border-neutral-200 w-full items-stretch",
 };
-
 // =====================================================
 // HIỂN THỊ THÔNG BÁO (TOAST) GÓC PHẢI DƯỚI
 // =====================================================

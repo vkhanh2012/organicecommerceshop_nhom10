@@ -100,8 +100,6 @@ async function initHomepage() {
     await renderHomepageComponent();
 
   bindHeroEvents(homepage);
-
-  initNewsletterPopupPage();
 }
 
 
@@ -157,7 +155,7 @@ if (
     .then(() => {
       initNewsletterPopupPage();
     });
-
+  initNewsletter();  
   initFooter();
 }
 

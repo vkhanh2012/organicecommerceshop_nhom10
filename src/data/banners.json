@@ -25,7 +25,6 @@
       }
     ]
   },
-
   "promoBanners": [
     {
       "id": 1,
@@ -33,7 +32,26 @@
       "subTitle": "Best Deals",
       "title": "Sale of the Month",
       "buttonText": "Shop Now",
-      "textColor": "text-white"
+      "textColor": "text-white",
+      "detailType": "countdown",
+      "countdown": [
+        {
+          "value": "00",
+          "label": "Days"
+        },
+        {
+          "value": "02",
+          "label": "Hours"
+        },
+        {
+          "value": "18",
+          "label": "Mins"
+        },
+        {
+          "value": "46",
+          "label": "Secs"
+        }
+      ]
     },
     {
       "id": 2,
@@ -41,7 +59,10 @@
       "subTitle": "85% Fat Free",
       "title": "Low-Fat Meat",
       "buttonText": "Shop Now",
-      "textColor": "text-white"
+      "textColor": "text-white",
+      "detailType": "price",
+      "detailLabel": "Started at:",
+      "detailValue": "$79.99"
     },
     {
       "id": 3,
@@ -49,16 +70,18 @@
       "subTitle": "Summer Sale",
       "title": "100% Fresh Fruit",
       "buttonText": "Shop Now",
-      "textColor": "text-neutral-900"
+      "textColor": "text-neutral-900",
+      "detailType": "discount",
+      "detailLabel": "Up to",
+      "detailValue": "64% OFF"
     }
   ],
-
   "wideBanner": {
     "image": "/images/Discount Bannar.webp",
     "subTitle": "Summer Sale",
     "discount": "37%",
     "title": "OFF",
-    "description": "Free on all your online order.",
+    "description": "Free on all your order, Free Shipping and  30 days money-back guarantee.",
     "buttonText": "Shop Now"
   }
 }

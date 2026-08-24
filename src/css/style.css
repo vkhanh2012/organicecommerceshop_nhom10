@@ -32,16 +32,51 @@
   --color-content-600: #666666;
   --color-content-500: #808080;
 
+  --color-best-sale: #2388ff;
 }
 
-/* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
 @utility container-custom {
-  @apply mx-auto w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
+  /* Desktop content: 1384px outer - 32px left - 32px right = 1320px Figma grid. */
+  @apply mx-auto w-full max-w-[1384px] px-4 sm:px-6 lg:px-8;
 }
 
 
 
 input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
+input[type="password"]::-ms-clear { 
   display: none !important;
+}
+
+.brand-logo-mask {
+  width: calc(var(--logo-width) * 0.875);
+  height: 28px;
+
+  background-color: var(--color-brand-logo);
+
+  -webkit-mask-image: var(--logo-image);
+  mask-image: var(--logo-image);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  transition: background-color 0.2s ease;
+
+  --color-brand-logo: #d9d9d9;
+}
+
+.brand-logo-item:hover .brand-logo-mask {
+  background-color: var(--color-primary);
+}
+
+@media (min-width: 640px) {
+  .brand-logo-mask {
+    width: var(--logo-width);
+    height: 32px;
+  }
 }
