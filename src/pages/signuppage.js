@@ -26,7 +26,7 @@ function passwordField({ name, placeholder }) {
 export function renderSignupPage() {
 
   return `
-    <section class="container-custom flex min-h-[520px] items-center justify-center py-10 sm:min-h-[590px] sm:py-16 lg:min-h-[600px]">
+    <section class="container-custom flex min-h-[520px] items-center justify-center py-10 sm:min-h-[590px] sm:py-16">
       <div class="w-full max-w-[520px] rounded-lg border border-neutral-50 bg-white p-5 shadow-[0_0_56px_rgba(0,38,3,.08)] sm:min-h-[430px] sm:p-6">
         <h1 class="text-center text-[28px] font-semibold leading-[1.2] text-neutral-900 sm:text-[32px]">Create Account</h1>
 
