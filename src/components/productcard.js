@@ -13,58 +13,42 @@ import productsData from "../data/products.json";
 
 const CLASS = {
   // Card phẳng nằm trong khung viền 1px
-  cardHome: `
-  product-card
-  group
-  relative
-  flex
-  h-full
-  w-full
-  cursor-pointer
-  flex-col
-  justify-between
-  bg-white
-  p-3
+  cardHome: 
+    "product-card w-full h-full group relative bg-white flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer lg:h-[327px]",
 
-  transition-shadow
-  duration-300
+  cardShop: `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    overflow-hidden
 
-  hover:z-20
-  hover:shadow-[0_0_15px_rgba(0,0,0,0.12)]
-`,
+    rounded-lg
+    border
+    border-neutral-200
+    bg-white
 
-cardShop: `
-  product-card
-  group
-  relative
-  flex
-  h-full
-  w-full
-  cursor-pointer
-  flex-col
-  justify-between
-  overflow-hidden
+    transition-[border-color,box-shadow]
+    duration-300
 
-  rounded-lg
-  border
-  border-neutral-200
-  bg-white
-  p-3
+    hover:z-20
+    hover:border-primary
+    hover:shadow-[0_0_12px_rgba(0,178,7,0.20)]
 
-  transition-[border-color,box-shadow]
-  duration-300
+    xl:h-[407px]
+  `,
 
-  hover:z-20
-  hover:border-primary
-  hover:shadow-[0_0_12px_rgba(0,178,7,0.20)]
-
-  xl:h-96
-`,
-
- imageWrap: 
+  imageWrapHome:
   "relative aspect-square overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
 
-  image:
+  imageWrapShop:
+    "relative aspect-square w-full overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0",
+  
+    image:
     "w-full h-full object-cover",
 
   tags:
@@ -82,9 +66,11 @@ cardShop: `
   actionBtn:
     "w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
-  body:
-    "relative h-[87px] px-3 pt-[9px] pb-[7px] flex flex-col flex-none",
+  bodyHome:
+  "relative h-[87px] px-3 pt-[9px] pb-[7px] flex flex-col flex-none",
 
+  bodyShop:
+    "relative h-[95px] px-4 pt-[11px] pb-[9px] flex flex-col flex-none",
   name:
     "font-poppins text-sm font-normal leading-[27px] text-neutral-700 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis",
 
@@ -205,14 +191,19 @@ export function renderProductCard(  p = {},
     bestTag = null
   } = p;
 
-const isShop =
-  page === "shop" ||
-  page === "shop2";
+  const isShop = page === "shop" || page === "shop2";
 
-const cardClass =
+  const cardClass = isShop ? CLASS.cardShop : CLASS.cardHome;
+
+  const imageWrapClass =
   isShop
-    ? CLASS.cardShop
-    : CLASS.cardHome;
+    ? CLASS.imageWrapShop
+    : CLASS.imageWrapHome;
+
+const bodyClass =
+  isShop
+    ? CLASS.bodyShop
+    : CLASS.bodyHome;
 
   const image = resolveImage(p);
   const detailUrl = `./descriptions.html?id=${id}`;
@@ -244,7 +235,7 @@ const cardClass =
 
   return `
     <article class="${cardClass}" data-id="${id}">
-      <a href="${detailUrl}" class="${CLASS.imageWrap}" aria-label="Xem chi tiết ${name}">
+      <a href="${detailUrl}" class="${imageWrapClass}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
         <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
       </a>
@@ -258,7 +249,7 @@ const cardClass =
         </button>
       </div>
 
-      <div class="${CLASS.body}">
+      <div class="${bodyClass}">
         <a href="${detailUrl}" class="${CLASS.name}" title="${name}">${name}</a>
 
         <div>

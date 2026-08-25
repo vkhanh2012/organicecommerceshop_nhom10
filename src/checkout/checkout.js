@@ -28,10 +28,12 @@ export function renderCheckout(cart = getCart()) {
   return /*html*/ `
     <div class="w-full bg-white">
       <!-- 1. BREADCRUMB BANNER -->
-      ${renderBreadcrumbsComponent([
-        { label: "Shopping Cart", link: "./cart.html" },
-        { label: "Checkout", link: "#", active: true },
-      ])}
+      ${renderBreadcrumbsComponent({
+        breadcrumbs: [
+          { label: "Shopping Cart", url: "./cart.html" },
+          { label: "Checkout", url: "./checkout.html" },
+        ],
+      })}
 
       <h1 class="sr-only">Checkout</h1>
 

@@ -792,14 +792,25 @@ export function initDetailsPage() {
 
   const breadcrumbContainer =
     document.getElementById(
-      "breadcrumb-container"
+      "breadcrumbs-container"
     );
 
 
   if (breadcrumbContainer) {
 
+    const currentProduct = getActiveProduct();
+    const categoryLabel =
+      currentProduct?.category?.name ||
+      currentProduct?.category ||
+      "Categories";
+
     breadcrumbContainer.innerHTML =
-      renderBreadcrumbsComponent();
+      renderBreadcrumbsComponent({
+        breadcrumbs: [
+          { label: categoryLabel, url: "./shop.html" },
+          { label: currentProduct?.name || "Product", url: window.location.href },
+        ],
+      });
 
   }
 

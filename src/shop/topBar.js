@@ -1,4 +1,4 @@
-import { filter, dropDown } from "../components/icons.js"
+import { filter, dropDown } from "../components/icons.js";
 
 export const SHOP_TOPBAR_DATA = {
   totalResults: 20,
@@ -10,54 +10,145 @@ export const SHOP_TOPBAR_DATA = {
     { value: "price-high", label: "Price: High to Low" },
     { value: "rating", label: "Popularity" },
   ],
-}
+};
 
 export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
-  const { totalResults, currentSort, buttonName, sortOptions } = topBarData
-  // Map các option thành chuỗi HTML
+  const {
+    totalResults,
+    currentSort,
+    buttonName,
+    sortOptions,
+  } = topBarData;
+
   const optionsHtml = sortOptions
     .map(
       (opt) => /*html*/ `
-      <option value="${opt.value}" ${opt.value === currentSort ? "selected" : ""}>
-        ${opt.label}
-      </option>
-    `,
+        <option
+          value="${opt.value}"
+          ${opt.value === currentSort ? "selected" : ""}
+        >
+          ${opt.label}
+        </option>
+      `,
     )
-    .join("")
-  const topBarHtml = /*html*/ `
-<!-- Chia topbar thành 1 dòng 4 cột (cột 1 chứa nút filter và các 3 cột còn lại là sort và result) -->
+    .join("");
 
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center w-full mb-6">
-        <!-- Nút filter -->
-      <div class="relative w-full lg:col-span-1 space-y-6">
-            <button id="open-filter-btn"
-              type="button"
-              class="bg-primary text-white max-w-32.75 px-6 py-3.5 rounded-full text-[14px] font-semibold flex items-center gap-3 hover:opacity-90 cursor-pointer w-full sm:w-auto justify-center mb-4">
-              <span>${buttonName}</span>
-              ${filter}
-            </button>
+  return /*html*/ `
+    <div
+      class="grid w-full
+             grid-cols-1
+             items-center
+             gap-4
+             md:grid-cols-2 md:gap-5
+             lg:grid-cols-4 lg:gap-6"
+    >
+
+      <!-- FILTER -->
+      <div class="relative w-full lg:col-span-1">
+        <button
+          id="open-filter-btn"
+          type="button"
+          class="flex h-[45px]
+                 w-[135px]
+                 cursor-pointer
+                 items-center justify-center
+                 gap-3
+                 rounded-full
+                 bg-primary
+                 px-6
+                 text-[13px] font-semibold
+                 leading-[20px]
+                 text-white
+                 transition-opacity
+                 hover:opacity-90
+
+                 md:w-[145px]
+                 lg:w-[130px]"
+        >
+          <span>${buttonName}</span>
+          ${filter}
+        </button>
+      </div>
+
+
+      <!-- SORT BY -->
+      <div
+        class="flex w-full
+               items-center
+               gap-3"
+      >
+        <span
+          class="shrink-0
+                 text-[13px]
+                 leading-[20px]
+                 text-neutral-500"
+        >
+          Sort by:
+        </span>
+
+        <div
+          class="relative
+                 w-[145px]
+                 md:w-[150px]
+                 lg:w-[150px]"
+        >
+          <select
+            id="sort-select"
+            class="h-[40px]
+                   w-full
+                   cursor-pointer
+                   appearance-none
+                   rounded
+                   border border-neutral-200
+                   bg-white
+                   py-0 pl-3 pr-8
+                   font-poppins
+                   text-[13px]
+                   leading-[20px]
+                   text-neutral-700
+                   outline-none
+                   transition-colors
+                   focus:border-primary"
+          >
+            ${optionsHtml}
+          </select>
+
+          <span
+            class="pointer-events-none
+                   absolute right-3 top-1/2
+                   flex -translate-y-1/2
+                   items-center
+                   text-neutral-500
+                   [&>svg]:h-3
+                   [&>svg]:w-3"
+          >
+            ${dropDown}
+          </span>
         </div>
-        <!-- Sortby và result -->
-        <div class="flex items-center gap-4 pb-4 w-full">
-              <!-- Cụm sort by -->
-              <div class="flex items-center gap-2">
-                <span class="text-sm text-neutral-500">Sort by:</span>
-                <div class="relative min-w-41.5">
-                  <select 
-                    id="sort-select"
-                    class ="w-full px-3 py-2 border border-neutral-200 rounded text-neutral-700 bg-white cursor-pointer focus:outline-none focus:border-primary text-sm font-poppins"
-                    >
-                      ${optionsHtml}
-                  </select>
-                </div>
-              </div>
-        </div>  
-        <!-- Result found  -->
-              <div class="text-sm lg:col-span-1 lg:col-start-4 text-right text-neutral-500">
-                <span id="shop-result-count" class="font-semibold text-neutral-900">${totalResults}</span> Results Found
-              </div>
-    </div>
-    `
+      </div>
 
-  return topBarHtml
+
+      <!-- RESULT FOUND -->
+      <div
+        class="text-left
+               text-[13px]
+               leading-[20px]
+               text-neutral-500
+
+               md:text-right
+
+               lg:col-span-1
+               lg:col-start-4"
+      >
+        <span
+          id="shop-result-count"
+          class="font-semibold text-neutral-900"
+        >
+          ${totalResults}
+        </span>
+        Results Found
+      </div>
+
+    </div>
+  `;
 }

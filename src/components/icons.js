@@ -136,7 +136,7 @@ export const filter = `
 `
 export const dropDown = `
 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.91634 4.95834L6.99967 9.04168L11.083 4.95834" stroke="#4D4D4D" stroke-width="1.5"
+                    <path d="M2.91634 4.95834L6.99967 9.04168L11.083 4.95834" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
 `

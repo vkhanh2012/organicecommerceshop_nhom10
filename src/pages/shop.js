@@ -384,7 +384,7 @@ if (topBar && !isShop2) {
   if (breadcrumbs) {
     breadcrumbs.innerHTML = renderBreadcrumbsComponent({
       breadcrumbs: [
-        { label: "Shop", url: "./shop.html" },
+        { label: "Categories", url: "./shop.html" },
         { label: "Vegetables", url: "./shop.html" },
       ],
     })
