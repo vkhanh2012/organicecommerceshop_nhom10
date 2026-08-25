@@ -49,24 +49,12 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
     .map(
       (items) => /*html*/ `
         <article
-          class="group
-                 flex w-full flex-col
-                 overflow-hidden
-                 rounded-lg
-                 border border-neutral-100
-                 bg-white
-                 transition-shadow
-                 hover:shadow-md
-                 lg:h-[494px]
-                 lg:w-[424px]"
+          class="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-100 bg-white transition-shadow hover:shadow-md lg:h-[494px] lg:w-[424px]"
         >
 
           <!-- IMAGE -->
           <div
-            class="relative w-full overflow-hidden
-                   aspect-[424/324]
-                   lg:h-[324px]
-                   lg:aspect-auto"
+            class="relative w-full overflow-hidden aspect-[424/324] lg:h-[324px] lg:aspect-auto"
           >
             <img
               src="${items.image}"
@@ -80,23 +68,16 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
 
             <!-- DATE -->
             <div
-              class="absolute bottom-6 left-6
-                     flex h-[58px] w-[58px]
-                     flex-col items-center justify-center
-                     rounded bg-white/90"
+              class="absolute bottom-6 left-6 flex h-[58px] w-[58px] flex-col items-center justify-center rounded bg-white/90"
             >
               <span
-                class="text-[20px] font-medium
-                       leading-[24px]
-                       text-neutral-900"
+                class="text-[20px] font-medium leading-[24px] text-neutral-900"
               >
                 ${items.date.day}
               </span>
 
               <span
-                class="text-[12px] font-medium
-                       uppercase leading-[18px]
-                       text-neutral-500"
+                class="text-[12px] font-medium uppercase leading-[18px] text-neutral-500"
               >
                 ${items.date.month}
               </span>
@@ -106,31 +87,18 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
 
           <!-- CONTENT -->
           <div
-            class="flex flex-1 flex-col
-                   bg-white
-                   px-6 pt-6 pb-5"
+            class="flex flex-1 flex-col bg-white px-6 pt-6 pb-5"
           >
 
             <!-- META -->
             <div
-              class="flex flex-wrap
-                     items-center
-                     gap-x-4
-                     text-[14px]
-                     font-normal
-                     leading-[21px]
-                     text-neutral-500"
+              class="flex flex-wrap items-center gap-x-4 text-[14px] font-normal leading-[21px] text-neutral-500"
             >
 
               <!-- CATEGORY -->
               <span class="flex items-center gap-[6px]">
                 <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="text-neutral-300"
+                  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-300"
                 >
                   <path
                     d="M17.1583 11.1748L11.1833 17.1498C11.0285 17.3048 10.8447 17.4277 10.6424 17.5116C10.4401 17.5955 10.2232 17.6386 10.0042 17.6386C9.78513 17.6386 9.56825 17.5955 9.36592 17.5116C9.16359 17.4277 8.97978 17.3048 8.82499 17.1498L1.66666 9.99984V1.6665H9.99999L17.1583 8.82484C17.4687 9.13711 17.643 9.55953 17.643 9.99984C17.643 10.4401 17.4687 10.8626 17.1583 11.1748Z"
@@ -154,12 +122,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
               <!-- AUTHOR -->
               <span class="flex items-center gap-[6px]">
                 <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="text-neutral-300"
+                  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-300"
                 >
                   <path
                     d="M9.99993 9.16667C11.8409 9.16667 13.3333 7.67428 13.3333 5.83333C13.3333 3.99238 11.8409 2.5 9.99993 2.5C8.15898 2.5 6.6666 3.99238 6.6666 5.83333C6.6666 7.67428 8.15898 9.16667 9.99993 9.16667Z"
@@ -180,12 +143,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
               <!-- COMMENTS -->
               <span class="flex items-center gap-[6px]">
                 <svg
-                  width="15"
-                  height="14"
-                  viewBox="0 0 15 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="text-neutral-300"
+                  width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-300"
                 >
                   <path
                     d="M8.87382 10.9979L7.83207 12.7338C7.78209 12.8171 7.7114 12.886 7.62687 12.9339C7.54234 12.9817 7.44686 13.0069 7.34973 13.0069C7.25259 13.0069 7.15711 12.9817 7.07258 12.9339C6.98805 12.886 6.91736 12.8171 6.86738 12.7338L5.82676 10.9979C5.77672 10.9146 5.70597 10.8457 5.62139 10.7979C5.53681 10.7501 5.44129 10.725 5.34413 10.7251H1.16251C1.01332 10.7251 0.870248 10.6658 0.764759 10.5603C0.659269 10.4549 0.600006 10.3118 0.600006 10.1626V1.1626C0.600006 1.01341 0.659269 0.870339 0.764759 0.76485C0.870248 0.659361 1.01332 0.600098 1.16251 0.600098H13.5375C13.6867 0.600098 13.8298 0.659361 13.9353 0.76485C14.0407 0.870339 14.1 1.01341 14.1 1.1626V10.1626C14.1 10.3118 14.0407 10.4549 13.9353 10.5603C13.8298 10.6658 13.6867 10.7251 13.5375 10.7251H9.35588C9.25882 10.7251 9.16341 10.7502 9.07894 10.7981C8.99447 10.8459 8.9238 10.9147 8.87382 10.9979Z"
@@ -203,12 +161,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
 
             <!-- TITLE -->
             <h3
-              class="mt-2
-                     text-[18px] font-medium
-                     leading-[27px]
-                     text-neutral-900
-                     transition-colors
-                     group-hover:text-primary"
+              class="mt-2 text-[18px] font-medium leading-[27px] text-neutral-900 transition-colors group-hover:text-primary"
             >
               ${items.title}
             </h3>
@@ -217,23 +170,12 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
             <!-- READ MORE -->
             <a
               href="${items.link}"
-              class="mt-4
-                     inline-flex w-fit
-                     items-center gap-3
-                     text-[16px] font-semibold
-                     leading-[24px]
-                     text-primary
-                     transition-colors
-                     hover:text-primary-dark"
+              class="mt-4 inline-flex w-fit items-center gap-3 text-[16px] font-semibold leading-[24px] text-primary transition-colors hover:text-primary-dark"
             >
               Read More
 
               <svg
-                width="17"
-                height="14"
-                viewBox="0 0 17 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M15.75 6.7749H0.75"
@@ -260,11 +202,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
 
   return /*html*/ `
     <div
-      class="grid grid-cols-1
-             gap-6
-             md:grid-cols-2
-             lg:grid-cols-[repeat(3,424px)]
-             lg:gap-6"
+      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-[repeat(3,424px)] lg:gap-6"
     >
       ${cardsHtml}
     </div>

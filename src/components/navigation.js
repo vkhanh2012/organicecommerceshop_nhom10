@@ -1,4 +1,3 @@
-// src/components/navigation.js
 import {
   iconHeart,
   iconCart,

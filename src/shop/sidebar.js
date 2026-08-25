@@ -7,13 +7,14 @@ import { renderDiscountBanner } from "/src/shop/discountBanner.js";
 import { renderSaleProducts } from "/src/shop/saleProductCards.js";
 
 
-export function renderSidebarComponent(products, selectedCategory, selectedMinPrice, selectedMaxPrice,selectedRating) {
+export function renderSidebarComponent(products, selectedCategory,
+     selectedMinPrice, selectedMaxPrice,selectedRating, selectedTag = "all") {
   return /*html*/ `
         <aside class="lg:block space-y-6">
             ${renderCategoryFilter(products, selectedCategory)}
             ${renderPriceFilter(products, selectedMinPrice,selectedMaxPrice)}
             ${renderRatingFilter(selectedRating)}
-            ${renderPopularTags()}
+            ${renderPopularTags(selectedTag)}
             ${renderDiscountBanner()}
             <div id="sale-products-wrapper"></div>
         </aside>

@@ -2,7 +2,8 @@ const WISHLIST_KEY = "shopery-wishlist";
 
 export function getWishlist() {
   try {
-    return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    const wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY));
+    return Array.isArray(wishlist) ? wishlist : [];
   } catch {
     return [];
   }
@@ -31,4 +32,21 @@ export function removeFromWishlist(productId) {
 
   saveWishlist(wishlist);
   return wishlist;
+}
+
+export function isInWishlist(productId) {
+  return getWishlist().some(
+    (item) => String(item.id) === String(productId)
+  );
+}
+
+export function toggleWishlist(product) {
+  if (isInWishlist(product.id)) {
+    return {
+      wishlist: removeFromWishlist(product.id),
+      added: false,
+    };
+  }
+
+  return addToWishlist(product);
 }

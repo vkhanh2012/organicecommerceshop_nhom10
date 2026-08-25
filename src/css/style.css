@@ -28,16 +28,23 @@
   --font-poppins: "Poppins", sans-serif;
   --radius-pill: 43px; /* radius nút Button */
 
-  --color-title-900: #1A1A1A;
-  --color-content-600: #666666;
-  --color-content-500: #808080;
+  --color-instock: #20B526;
+  --color-text-instock: #2C742F;
+  --color-star: #FFB800;
+  --color-greystar: #E4E7E9;
+  --color-card-popup: #edfff0;
+  --color-text-discount: #FF8A00; /*tilte của discount*/
+  --color-hero: #002603; /*màu phủ của hero*/
+  --color-outstock: #EA4335;
+  --color-mastercard-red: #EB001B;
+  --color-mastercard-yellow: #F79E1B;
+  --color-hero-background: #087f3d;
 
-  --color-best-sale: #2388ff;
 }
 
+/* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
 @utility container-custom {
-  /* Desktop content: 1384px outer - 32px left - 32px right = 1320px Figma grid. */
-  @apply mx-auto w-full max-w-[1384px] px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-8;
 }
 
 

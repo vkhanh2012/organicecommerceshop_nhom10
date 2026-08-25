@@ -66,7 +66,7 @@ const smallBannersHtml = `
   <!-- HERO 3 -->
   <article
     class="relative min-h-[240px] overflow-hidden rounded-[10px]
-           bg-[#002603] lg:h-[288px]"
+           bg-hero lg:h-[288px]"
   >
     <img
       src="${hero3.image}"
@@ -80,23 +80,16 @@ const smallBannersHtml = `
     <div class="absolute inset-0 bg-[#002603]/72"></div>
 
     <div
-      class="relative z-10 flex h-full min-h-[240px]
-             flex-col items-center justify-center
-             px-7 py-8 text-center
-             lg:min-h-[288px] lg:px-8 lg:py-0
-             lg:-translate-y-[4px]"
+      class="relative z-10 flex h-full min-h-[240px] flex-col items-center justify-center px-7 py-8 text-center lg:min-h-[288px] lg:px-8 lg:py-0 lg:-translate-y-[4px]"
     >
       <p
-        class="text-xs font-medium uppercase
-               leading-[18px] tracking-[0.03em]
-               text-white"
+        class="text-xs font-medium uppercase leading-[18px] tracking-[0.03em] text-white"
       >
         ${hero3.subTitle}
       </p>
 
       <h2
-        class="mt-3 text-[32px] font-semibold
-               leading-[38px] text-white"
+        class="mt-3 text-[32px] font-semibold leading-[38px] text-white"
       >
         ${hero3.title}<br>
         ${hero3.description}
@@ -104,10 +97,7 @@ const smallBannersHtml = `
 
       <a
         href="./shop.html"
-        class="mt-6 inline-flex items-center gap-2
-               text-sm font-semibold leading-[21px]
-               text-primary transition-colors
-               hover:text-primary-light"
+        class="mt-6 inline-flex items-center gap-2 text-sm font-semibold leading-[21px] text-primary transition-colors hover:text-primary-light"
       >
         ${hero3.buttonText}
         <span aria-hidden="true">→</span>

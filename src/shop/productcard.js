@@ -1,4 +1,3 @@
-// src/components/productCard.js
 
 import {
   iconHeart,
@@ -11,8 +10,53 @@ import { getImageUrl, attachImageUrls } from "../utils/assets.js";
 import productsData from "../data/products.json";
 
 const CLASS = {
-  card:
-    "product-card w-full h-full group relative bg-white border border-neutral-200 rounded-lg p-2.5 flex flex-col justify-between transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.25)]",
+ cardHome:
+  `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    justify-between
+    bg-white
+    p-3
+    transition-all
+    duration-300
+    hover:z-20
+    hover:shadow-[0_0_15px_rgba(0,0,0,0.12)]
+  `,
+
+cardShop:
+  `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    justify-between
+    overflow-hidden
+
+    rounded-lg
+    border
+    border-neutral-200
+    bg-white
+    p-3
+
+    transition-all
+    duration-300
+
+    hover:z-20
+    hover:border-primary
+    hover:shadow-[0_0_15px_rgba(0,0,0,0.12)]
+
+    xl:h-96
+  `,
 
   imageWrap:
     "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
@@ -29,17 +73,17 @@ const CLASS = {
   tagBest:
     "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
 
-  actions:
-    "absolute top-2 right-2 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
+  actions: 
+  "absolute top-2 right-2 md:top-5 md:right-5 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
-  actionBtn:
-    "w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
+  actionBtn: 
+  "w-8 h-8 md:w-10 md:h-10 rounded-full bg-white shadow md:shadow-none md:border md:border-neutral-50 flex items-center justify-center text-neutral-700 md:text-neutral-900 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
   body:
     "px-0.5 flex flex-col flex-1 justify-between",
 
-  name:
-    "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer line-clamp-1 h-5 leading-5",
+  name: 
+  "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block cursor-pointer line-clamp-1 h-5 leading-5",
 
   priceRow:
     "flex items-center justify-between mb-1 mt-auto pt-1.5",
@@ -50,8 +94,8 @@ const CLASS = {
   priceOld:
     "font-poppins text-xs text-neutral-400 line-through ml-1",
 
-  cartBtn:
-    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+  cartBtn: 
+  "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
 
   rating:
     "flex items-center gap-0.5",
@@ -61,8 +105,8 @@ const CLASS = {
     "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-stretch w-full",
 
   // CLASS DÀNH CHO SHOP: 3 CỘT TRÊN MH LỚN (lg:grid-cols-3)
-  gridShop:
-    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch w-full",
+  gridShop: 
+  "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch w-full lg:[&_.product-card-cart]:mr-2",
 };
 
 // =====================================================
@@ -73,7 +117,7 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast-notification";
-    toast.className = "fixed bottom-5 right-5 bg-[#1a1a1a] text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none";
+    toast.className = "fixed bottom-5 right-5 bg-neutral-900 text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none";
     document.body.appendChild(toast);
   }
 

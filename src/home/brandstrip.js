@@ -9,23 +9,16 @@ export function renderBrandStrip() {
 
   return `
     <section
-      class="container-custom
-             pt-8 pb-8
-             sm:pt-10 sm:pb-10
-             lg:pt-[45px] lg:pb-[58px]"
+      class="container-custom pt-8 pb-8 sm:pt-10 sm:pb-10 lg:pt-[45px] lg:pb-[58px]"
     >
       <div
-        class="grid grid-cols-3
-               items-center
-               sm:grid-cols-6"
+        class="grid grid-cols-3 items-center sm:grid-cols-6"
       >
         ${logos
           .map(
             (logo, index) => `
               <div
-                class="brand-logo-item
-                      flex h-12
-                      items-center
+                class="brand-logo-item flex h-12 items-center
                       ${
                         index === 0
                           ? "justify-start"
@@ -33,9 +26,7 @@ export function renderBrandStrip() {
                             ? "justify-end"
                             : "justify-center"
                         }
-                      sm:h-14
-                      lg:h-[50px]
-                      lg:pl-[0px]
+                      sm:h-14 lg:h-[50px] lg:pl-[0px]
                       ${index !== 0 ? "border-l border-neutral-100" : ""}"
                       
               >

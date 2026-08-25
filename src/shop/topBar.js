@@ -32,7 +32,7 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
       <div class="relative w-full lg:col-span-1 space-y-6">
             <button id="open-filter-btn"
               type="button"
-              class="bg-[#00B307] text-white max-w-32.75 px-6 py-3.5 rounded-full text-[14px] font-semibold flex items-center gap-3 hover:opacity-90 cursor-pointer w-full sm:w-auto justify-center mb-4">
+              class="bg-primary text-white max-w-32.75 px-6 py-3.5 rounded-full text-[14px] font-semibold flex items-center gap-3 hover:opacity-90 cursor-pointer w-full sm:w-auto justify-center mb-4">
               <span>${buttonName}</span>
               ${filter}
             </button>
@@ -41,11 +41,11 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
         <div class="flex items-center gap-4 pb-4 w-full">
               <!-- Cụm sort by -->
               <div class="flex items-center gap-2">
-                <span class="text-sm text-gray-500">Sort by:</span>
+                <span class="text-sm text-neutral-500">Sort by:</span>
                 <div class="relative min-w-41.5">
                   <select 
                     id="sort-select"
-                    class ="w-full px-3 py-2 border border-gray-200 rounded text-gray-700 bg-white cursor-pointer focus:outline-none focus:border-primary text-sm font-poppins"
+                    class ="w-full px-3 py-2 border border-neutral-200 rounded text-neutral-700 bg-white cursor-pointer focus:outline-none focus:border-primary text-sm font-poppins"
                     >
                       ${optionsHtml}
                   </select>

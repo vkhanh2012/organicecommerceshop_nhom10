@@ -474,7 +474,7 @@ export function renderRelatedProducts(
 
   return `
     <section class="w-full max-w-[1320px] mx-auto px-4 md:px-8 mt-16 mb-20">
-      <h2 class="text-2xl sm:text-[32px] font-semibold text-center text-gray-900 mb-8 font-poppins">
+      <h2 class="text-2xl sm:text-[32px] font-semibold text-center text-neutral-900 mb-8 font-poppins">
         Related Products
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch">

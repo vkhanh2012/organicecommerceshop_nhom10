@@ -8,7 +8,7 @@ export function renderCustomerFeedbackTab(product) {
       const feedbackStars = Array.from({ length: 5 }, (_, i) => {
   // Nếu vị trí i nhỏ hơn số rating của khách thì là sao vàng, ngược lại là sao xám/trống
   const isFilled = i < item.rating;
-  const starColor = isFilled ? "#FFB800" : "#E4E7E9"; 
+  const starColor = isFilled ? star : greystar
   
   return `<span style="color: ${starColor}; display: inline-flex;">${iconStar(isFilled)}</span>`;
 }).join("");
@@ -23,13 +23,13 @@ export function renderCustomerFeedbackTab(product) {
           />
         `
         : `
-          <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center shrink-0">
+          <div class="w-10 h-10 rounded-full bg-neutral-200 text-neutral-400 flex items-center justify-center shrink-0">
             <i class="fa-solid fa-user text-sm"></i>
           </div>
         `;
 
       return `
-        <div class="py-1 border-b border-gray-100 last:border-b-0 space-y-2">
+        <div class="py-1 border-b border-neutral-100 last:border-b-0 space-y-2">
 
           <div class="flex items-center justify-between">
 
@@ -37,7 +37,7 @@ export function renderCustomerFeedbackTab(product) {
               ${avatarHtml}
 
               <div>
-                <h4 class="text-sm font-semibold text-gray-900">
+                <h4 class="text-sm font-semibold text-neutral-900">
                   ${item.name}
                 </h4>
 
@@ -47,13 +47,13 @@ export function renderCustomerFeedbackTab(product) {
               </div>
             </div>
 
-            <span class="text-xs text-gray-400">
+            <span class="text-xs text-neutral-400">
               ${item.time}
             </span>
 
           </div>
 
-          <p class="text-sm text-gray-500 leading-relaxed">
+          <p class="text-sm text-neutral-500 leading-relaxed">
             ${item.comment}
           </p>
 
@@ -67,20 +67,20 @@ export function renderCustomerFeedbackTab(product) {
 
       <div
         id="customer-feedback"
-        class="max-w-4xl pt-8 mt-8 border-t border-gray-100 space-y-6"
+        class="max-w-4xl pt-8 mt-8 border-t border-neutral-100 space-y-6"
       >
 
-        <h3 class="text-xl font-semibold text-gray-900">
+        <h3 class="text-xl font-semibold text-neutral-900">
           Customer Feedback
         </h3>
 
-        <div class="divide-y divide-gray-100">
+        <div class="divide-y divide-neutral-100">
           ${feedbacksHtml}
         </div>
 
         <div class="pt-2">
           <button
-            class="bg-[#00B207]/10 hover:bg-[#00B207]/20 text-[#00B207] font-semibold text-sm py-2.5 px-8 rounded-full transition-all duration-200 cursor-pointer"
+            class="bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-sm py-2.5 px-8 rounded-full transition-all duration-200 cursor-pointer"
           >
             Load More
           </button>

@@ -1,4 +1,4 @@
-export function renderCategoryFilter(products, selectedCategory = "all") {
+export function renderCategoryFilter(products, selectedCategory = "all",layout = "sidebar") {
   const categoryCounts = {}
   //đếm số lượng sản phẩm
   products.forEach((product) => {
@@ -80,9 +80,56 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
     })
     .join("")
 
+// shop2
+
+    if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-40 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Category</span>
+
+        <span
+          class="
+            transition-transform
+            group-open:rotate-180
+          "
+        >
+          ⌄
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-72
+          rounded-lg
+          border border-neutral-100
+          bg-white p-4 shadow-lg
+        "
+      >
+        <ul class="space-y-3">
+          ${listItemsHtml}
+        </ul>
+      </div>
+
+    </details>
+  `
+}
+
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="section-heading">All Categories</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

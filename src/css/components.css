@@ -58,9 +58,42 @@
 }
 
 .form-label {
-  @apply block text-xs font-medium text-gray-700 mb-1.5;
+  @apply block text-xs font-medium text-neutral-700 mb-1.5;
 }
 
 .form-input {
-  @apply w-full h-11 px-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#00B207]
+  @apply w-full h-11 px-4 border border-neutral-200 rounded-lg text-sm focus:outline-none focus:border-primary
 }
+.shop-filter-header {
+  @apply flex items-center justify-between cursor-pointer mb-5
+}
+
+.footer-heading {
+  @apply text-white font-medium text-base mb-5
+}
+
+.footer-list {
+  @apply space-y-3 text-sm
+}
+
+.footer-link {
+  @apply hover:text-white transition-colors
+}
+
+.payment-method {
+  @apply w-12 h-8 rounded border border-neutral-800 bg-neutral-900 flex items-center justify-center
+}
+
+.icon-social {
+  @apply w-10 h-10 rounded-full hover:text-primary hover:bg-neutral-100 flex items-center justify-center transition-all duration-200 text-neutral-700
+}
+
+.icon-social-facebook {
+  @apply w-10 h-10 rounded-full bg-primary hover:bg-primary-dark flex items-center justify-center transition-all duration-200 shadow-sm text-white
+}
+
+.additional-info-row {
+  @apply flex items-center gap-3
+}
+
+
