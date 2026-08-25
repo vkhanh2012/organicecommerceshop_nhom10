@@ -27,9 +27,9 @@ export function renderNewsletterPopup() {
           >
         </div>
 
-        <div class="flex flex-col justify-center px-6 pb-7 pt-5 text-center sm:px-10 md:py-10 md:pl-[30px] md:pr-10">
+        <div class="flex flex-col justify-center px-6 pb-7 pt-5 text-center sm:px-10 md:justify-start md:pb-10 md:pl-[30px] md:pr-10 md:pt-[49px]">
           <h2 id="newsletter-popup-title" class="text-[28px] font-semibold leading-[1.2] text-neutral-900 sm:text-[32px] md:text-[40px]">
-            Subscribe to Our Newsletter
+            Subcribe to Our Newsletter
           </h2>
 
           <p class="mx-auto mt-3 max-w-[410px] text-sm leading-6 text-neutral-400 md:text-base">
@@ -50,11 +50,11 @@ export function renderNewsletterPopup() {
               type="submit"
               class="h-12 cursor-pointer rounded-full bg-primary px-8 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
             >
-              Subscribe
+              Subcribe
             </button>
           </form>
 
-          <label class="mt-5 flex cursor-pointer items-center justify-center gap-2 text-sm text-neutral-600">
+          <label class="mt-5 flex cursor-pointer items-center justify-center gap-2 text-sm text-neutral-600 md:mt-[53px] md:pr-4">
             <input type="checkbox" class="h-5 w-5 accent-primary" data-newsletter-hide>
             <span>Do not show this window</span>
           </label>
