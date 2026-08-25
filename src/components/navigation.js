@@ -1,6 +1,6 @@
 import {
-  iconHeart,
-  iconCart,
+  iconHeaderHeart,
+  iconBag,
   iconPhone,
   iconLocation,
   iconMenu,
@@ -95,7 +95,7 @@ export function renderNavigationComponent({
   }).join("");
 
   return `
-    <header data-nav-root>
+    <header class="font-poppins" data-nav-root>
       <!-- Topbar: Home trắng, các trang trong màu tối theo Figma -->
       <div class="w-full ${topbarClass}">
         <div class="container-custom flex h-[42px] items-center justify-between gap-3 font-poppins text-xs">
@@ -104,9 +104,16 @@ export function renderNavigationComponent({
             <span>Store location: Lincoln - 344, Illinois, Chicago, USA</span>
           </div>
 
-          <div class="flex items-center gap-3 md:gap-4">
-            <span class="hidden sm:inline">Eng</span>
-            <span class="hidden sm:inline">USD</span>
+          <div class="flex items-center gap-4 md:gap-5">
+            <button type="button" class="hidden cursor-pointer items-center gap-1 transition-colors hover:text-primary sm:flex" aria-label="Choose language">
+              <span>Eng</span>
+              <span class="flex [&>svg]:h-3 [&>svg]:w-3">${dropDown}</span>
+            </button>
+            <button type="button" class="hidden cursor-pointer items-center gap-1 transition-colors hover:text-primary sm:flex" aria-label="Choose currency">
+              <span>USD</span>
+              <span class="flex [&>svg]:h-3 [&>svg]:w-3">${dropDown}</span>
+            </button>
+            <span class="hidden h-[15px] w-px bg-current opacity-25 sm:block" aria-hidden="true"></span>
             <div class="flex items-center gap-1">
               <a href="./signin.html" class="transition-colors hover:text-primary">Sign In</a>
               <span class="opacity-50">/</span>
@@ -117,7 +124,7 @@ export function renderNavigationComponent({
       </div>
 
       <!-- Main Header -->
-      <div class="w-full bg-white border-b border-neutral-500">
+      <div class="w-full border-b border-neutral-100 bg-white">
         <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:h-[92px] md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-0">
 
           <!-- Mobile Menu Toggle -->
@@ -169,19 +176,19 @@ export function renderNavigationComponent({
           <div class="flex items-center gap-4 md:justify-self-end">
             <a
               href="./wishlist.html"
-              class="relative hidden h-8 w-8 items-center justify-center text-neutral-800 sm:flex"
+              class="relative hidden h-10 w-10 items-center justify-center text-neutral-800 transition-colors hover:text-primary sm:flex"
               aria-label="Wishlist"
             >
-              ${iconHeart}
+              ${iconHeaderHeart}
             </a>
 
             <button
               type="button"
-              class="relative flex h-8 w-8 cursor-pointer items-center justify-center text-neutral-800"
+              class="relative flex h-10 w-10 cursor-pointer items-center justify-center text-neutral-800 transition-colors hover:text-primary"
               aria-label="Mở giỏ hàng"
               data-cart-open
             >
-              ${iconCart}
+              <span class="flex [&>svg]:h-8 [&>svg]:w-8">${iconBag}</span>
               <span class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-[10px] text-white">
                 ${cartCount}
               </span>

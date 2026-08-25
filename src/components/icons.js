@@ -19,6 +19,34 @@ export const iconCart = `
   <circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/>
 </svg>`
 
+export const iconValidationWarning = `
+<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+  <circle cx="10" cy="10" r="7.25"/><path d="M10 6.2v4.6"/><circle cx="10" cy="13.8" r=".7" fill="currentColor" stroke="none"/>
+</svg>`
+
+export const iconValidationError = `
+<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M8.45 3.7 2.7 13.65A1.6 1.6 0 0 0 4.08 16h11.84a1.6 1.6 0 0 0 1.38-2.35L11.55 3.7a1.79 1.79 0 0 0-3.1 0Z"/><path d="M10 7v4"/><path d="M10 13.5h.01"/>
+</svg>`
+
+export const iconValidationSuccess = `
+<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="m5 10.25 3.1 3.1L15.5 6"/>
+</svg>`
+
+// Header actions use the 32px variants from the Navigation component in Figma.
+// Product cards keep the compact 20px icons above.
+export const iconHeaderHeart = `
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M16 27.2S4.8 20.7 4.8 11.8A6.9 6.9 0 0 1 16 6.5a6.9 6.9 0 0 1 11.2 5.3C27.2 20.7 16 27.2 16 27.2Z"/>
+</svg>`
+
+export const iconHeaderCart = `
+<svg width="34" height="34" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <path d="M4 7H16L15.2 16C15.1 16.6 14.6 17 14 17H6C5.4 17 4.9 16.6 4.8 16L4 7Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7 7V5.5C7 3.84 8.34 2.5 10 2.5C11.66 2.5 13 3.84 13 5.5V7" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
 export const iconClose = `
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
   <path d="M6 6l12 12M18 6L6 18"/>

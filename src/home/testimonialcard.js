@@ -87,11 +87,11 @@ export function renderTestimonialCardComponent(
             class="mt-3
                    text-left
                    font-poppins
-                   text-[16px] font-normal
-                   leading-[19px]
+                   text-[14px] font-normal
+                   leading-[21px]
                    text-neutral-600
                    sm:text-[14px] sm:leading-[21px]
-                   lg:text-[13px] lg:leading-[19px]"
+                   lg:text-[14px] lg:leading-[21px]"
           >
             ${items.content}
           </p>

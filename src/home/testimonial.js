@@ -6,7 +6,7 @@ export function renderTestimonialComponent(variant = "default") {
 
   return /*html*/ `
     <section
-      class="w-full bg-neutral-50
+      class="w-full bg-neutral-50 font-poppins
              py-10
              sm:py-12
              ${isAboutPage ? "lg:pt-[78px] lg:pb-[110px]" : "lg:py-[60px]"}"

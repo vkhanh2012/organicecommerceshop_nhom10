@@ -43,13 +43,16 @@ const CLASS = {
   `,
 
   imageWrapHome:
-  "relative aspect-square overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
+  "relative h-[220px] overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0 sm:h-[240px]",
 
   imageWrapShop:
     "relative aspect-square w-full overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0",
   
-    image:
-    "w-full h-full object-cover",
+  imageHome:
+    "h-full w-full object-contain",
+
+  imageShop:
+    "h-full w-full object-cover",
 
   tags:
     "absolute top-4 left-4 z-10 flex gap-1 pointer-events-none",
@@ -205,6 +208,8 @@ const bodyClass =
     ? CLASS.bodyShop
     : CLASS.bodyHome;
 
+  const imageClass = isShop ? CLASS.imageShop : CLASS.imageHome;
+
   const image = resolveImage(p);
   const detailUrl = `./descriptions.html?id=${id}`;
 
@@ -237,7 +242,7 @@ const bodyClass =
     <article class="${cardClass}" data-id="${id}">
       <a href="${detailUrl}" class="${imageWrapClass}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
-        <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
+        <img src="${image}" alt="${name}" class="${imageClass}" loading="lazy" />
       </a>
 
       <div class="${CLASS.actions}">

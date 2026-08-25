@@ -14,7 +14,7 @@ export function renderBrandStrip(variant = "default") {
              ${isAboutPage ? "lg:flex lg:min-h-[192px] lg:items-center lg:py-0" : "lg:pt-[45px] lg:pb-[58px]"}"
     >
       <div
-        class="grid w-full grid-cols-3 items-center sm:grid-cols-6"
+        class="relative grid w-full grid-cols-3 items-center sm:grid-cols-6 lg:flex lg:justify-between"
       >
         ${logos
           .map(
@@ -28,7 +28,7 @@ export function renderBrandStrip(variant = "default") {
                             ? "justify-end"
                             : "justify-center"
                         }
-                      sm:h-14 lg:h-[50px] lg:pl-[0px]
+                      sm:h-14 lg:h-[50px] lg:shrink-0 lg:border-l-0
                       ${index !== 0 ? "border-l border-neutral-100" : ""}"
                       
               >
@@ -45,6 +45,11 @@ export function renderBrandStrip(variant = "default") {
                   ${logo.name}
                 </span>
               </div>
+              ${
+                index < logos.length - 1
+                  ? '<span class="hidden h-[32px] w-px shrink-0 bg-neutral-100 lg:block" aria-hidden="true"></span>'
+                  : ""
+              }
             `,
           )
           .join("")}

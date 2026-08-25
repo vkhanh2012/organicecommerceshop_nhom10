@@ -1,9 +1,9 @@
 export function renderFooterComponent() {
   return /*html*/ `
-    <footer class="bg-neutral-900 text-gray-400 pt-14 pb-4">
-      <div class="container-custom">
+    <footer class="bg-neutral-900 pt-14 pb-4 font-poppins text-gray-400 lg:min-h-[368px] lg:pb-0 lg:pt-[60px]">
+      <div class="container-custom lg:flex lg:min-h-[308px] lg:flex-col">
         
-        <div class="grid grid-cols-1 gap-8 pb-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:pb-[28px]" >
+        <div class="grid grid-cols-1 gap-8 pb-8 md:grid-cols-2 lg:flex-1 lg:grid-cols-12 lg:gap-8 lg:pb-7" >
           
           <!-- Logo EcoBaza -->
           <div class="lg:col-span-4 flex flex-col items-start">
@@ -75,7 +75,7 @@ export function renderFooterComponent() {
           </div>
         </div>
         <!-- Copyright và Thanh toán -->
-        <div class="container-custom border-t border-neutral-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex min-h-[80px] flex-col items-center justify-between gap-4 border-t border-neutral-800 pt-6 md:flex-row lg:pt-0">
           
           <!-- Copyright Info -->
           <div class="text-sm font-light text-neutral-500">
