@@ -99,23 +99,19 @@ export function removeProduct(cart, productId) {
   return normalizeCart(cart).filter((product) => String(product.id) !== String(productId));
 }
 export function addProductToCart(product, quantity = 1) {
-  const cart = getCart();
+  const updatedCart = addProduct(getCart(), {
+    ...product,
+    quantity,
+  });
 
-  const existing = cart.find((item) => item.id === product.id);
+  saveCart(updatedCart);
+  const savedCart = getCart();
 
-  if (existing) {
-    existing.quantity += quantity;
-  } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      image: product.mainImage || product.image,
-      price: product.currentPrice || product.price,
-      quantity: quantity,
-    });
-  }
+  document.dispatchEvent(
+    new CustomEvent("cart:updated", {
+      detail: { cart: savedCart },
+    }),
+  );
 
-  saveCart(cart);
-
-  return cart;
+  return savedCart;
 }

@@ -8,6 +8,14 @@ export function renderHotDeals(products = []) {
   const mainProduct = products.find((product) => Number(product.id) === 3) || products[0];
   const currentPrice = mainProduct.price ?? 0;
   const oldPrice = mainProduct.oldPrice ?? null;
+  const mainProductData = encodeURIComponent(
+    JSON.stringify({
+      ...mainProduct,
+      price: currentPrice,
+      oldPrice,
+      image: mainProduct.image,
+    }),
+  );
   const smallProducts = products
     .filter((product) => String(product.id) !== String(mainProduct.id))
     .slice(0, 11);
@@ -132,11 +140,9 @@ return `
     <button
       type="button"
 
-      data-add-cart
-      data-cart-id="${mainProduct.id}"
-      data-cart-name="${mainProduct.name}"
-      data-cart-image="${mainProduct.image}"
-      data-cart-price="${currentPrice}"
+      data-action="add-to-cart"
+      data-id="${mainProduct.id}"
+      data-product="${mainProductData}"
 
       class="flex h-[45px] flex-1
              cursor-pointer
