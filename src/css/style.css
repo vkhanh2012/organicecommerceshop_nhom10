@@ -87,3 +87,16 @@ input[type="password"]::-ms-clear {
     height: 32px;
   }
 }
+
+@media (min-width: 1024px) {
+  .about-page footer {
+    min-height: 368px;
+  }
+
+  .about-page footer > .container-custom {
+    display: flex;
+    min-height: 288px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

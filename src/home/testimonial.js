@@ -1,13 +1,15 @@
 import { renderTestimonialCardComponent } from "./testimonialcard.js";
 import { backArrow, nextArrow } from "../components/icons.js";
 
-export function renderTestimonialComponent() {
+export function renderTestimonialComponent(variant = "default") {
+  const isAboutPage = variant === "about";
+
   return /*html*/ `
     <section
-      class="w-full bg-gray-100
+      class="w-full bg-neutral-50
              py-10
              sm:py-12
-             lg:py-[60px]"
+             ${isAboutPage ? "lg:pt-[78px] lg:pb-[110px]" : "lg:py-[60px]"}"
     >
       <div class="container-custom mx-auto">
 
@@ -16,7 +18,7 @@ export function renderTestimonialComponent() {
           class="mb-6
                  flex items-center justify-between
                  sm:mb-7
-                 lg:mb-8"
+                 ${isAboutPage ? "lg:mb-16" : "lg:mb-8"}"
         >
           <h2
             class="text-[24px] font-semibold
@@ -25,7 +27,7 @@ export function renderTestimonialComponent() {
                    sm:text-[28px] sm:leading-[34px]
                    lg:text-[32px] lg:leading-[38px]"
           >
-            Client Testimonials
+            ${isAboutPage ? "Client Testimonial" : "Client Testimonials"}
           </h2>
 
           <!-- ARROWS -->

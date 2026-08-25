@@ -1,18 +1,20 @@
 import companyLogosData from "../data/companyLogo.json";
 import { attachImageUrls } from "../utils/assets.js";
 
-export function renderBrandStrip() {
+export function renderBrandStrip(variant = "default") {
   const logos = attachImageUrls(companyLogosData);
+  const isAboutPage = variant === "about";
 
   // Kích thước thật của 6 file logo đã kiểm tra
   const logoWidths = [82, 67, 60, 83, 132, 96];
 
   return `
     <section
-      class="container-custom pt-8 pb-8 sm:pt-10 sm:pb-10 lg:pt-[45px] lg:pb-[58px]"
+      class="container-custom pt-8 pb-8 sm:pt-10 sm:pb-10
+             ${isAboutPage ? "lg:flex lg:min-h-[192px] lg:items-center lg:py-0" : "lg:pt-[45px] lg:pb-[58px]"}"
     >
       <div
-        class="grid grid-cols-3 items-center sm:grid-cols-6"
+        class="grid w-full grid-cols-3 items-center sm:grid-cols-6"
       >
         ${logos
           .map(

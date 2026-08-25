@@ -6,17 +6,17 @@ export function renderDeliveredFeature() {
     .map((item) => renderDeliveredFeatureComponent(item))
     .join("")
   return /*html*/ `
-  <section class="w-full mx-auto px-4 py-6 md:py-14 bg-white" aria-labelledby="about-delivery-title">
+  <section class="w-full bg-white py-10 md:py-14 lg:min-h-[685px] lg:py-0" aria-labelledby="about-delivery-title">
       <div class="container-custom">
-        <div class="flex flex-col md:flex-row gap-8 md:gap-8 lg:gap-12 items-center">
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:min-h-[685px] lg:grid-cols-[536px_minmax(0,1fr)] lg:gap-[68px]">
           <!-- Cột 1: tiêu đề và nội dung -->
           <!-- tiêu đề -->
-          <div class="w-full md:w-1/2 text-left space-y-2 md:space-y-4 lg:space-y-6">
-            <h2 class="text-lg sm:text-2xl md:text-4xl lg:text-[56px] text-title font-semibold leading-tight">
+          <div class="w-full text-left space-y-2 md:space-y-4 lg:space-y-6">
+            <h2 id="about-delivery-title" class="text-[32px] sm:text-[40px] lg:text-[48px] text-neutral-900 font-semibold leading-[1.2]">
               ${aboutData.delivered.title}
             </h2>
             <!-- Nội dung -->
-            <p class="text-content-600 text-xs sm:text-sm md:text-base lg:text-[18px] font-normal leading-relaxed">
+            <p class="text-neutral-600 text-sm md:text-base font-normal leading-relaxed">
             ${aboutData.delivered.description}
             </p>
             <!-- 3 feature -->
@@ -30,9 +30,9 @@ export function renderDeliveredFeature() {
               </a>
             </div>
           <!-- Cột 2: hình ảnh -->
-          <div class="w-full md:w-1/2">
+          <div class="flex w-full items-end self-stretch overflow-visible">
             <img src="${aboutData.delivered.image.src}" alt="${aboutData.delivered.image.alt}"
-              class="w-full h-auto rounded-lg object-cover">
+              class="block h-auto w-full object-contain md:max-w-full lg:h-[606px] lg:w-[895px] lg:max-w-none">
           </div>
         </div>
       </div>
