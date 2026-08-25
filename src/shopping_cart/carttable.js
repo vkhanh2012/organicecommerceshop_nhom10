@@ -11,13 +11,13 @@ export function cartTable(cart) {
 
   return `
     <div class="overflow-hidden rounded-lg border border-neutral-100 bg-white">
-      <div class="hidden grid-cols-[minmax(260px,1fr)_100px_150px_100px_24px] gap-3 px-6 py-4 text-xs font-medium uppercase tracking-wide text-neutral-500 sm:grid">
+      <div class="hidden grid-cols-[minmax(260px,1fr)_100px_150px_100px_24px] gap-3 px-6 py-4 text-sm font-medium uppercase leading-[21px] tracking-wide text-neutral-500 sm:grid xl:grid-cols-[371px_102px_174px_100px_24px] xl:px-5">
         <span>Product</span><span>Price</span><span>Quantity</span><span>Subtotal</span><span></span>
       </div>
       ${cart.map(cartRow).join("")}
-      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 px-5 py-4 sm:px-6">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 px-5 py-4 sm:px-6 xl:px-5">
         <a class="action-button" href="./shop.html">Return to shop</a>
-        <button type="button" class="action-button">Update Cart</button>
+        <button type="button" class="action-button" data-action="update">Update Cart</button>
       </div>
     </div>`;
 }

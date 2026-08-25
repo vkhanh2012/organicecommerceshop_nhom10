@@ -196,6 +196,8 @@ if (
 
   initShoppingCartPage();
 
+  initNewsletter();
+
   initFooter();
 }
 
