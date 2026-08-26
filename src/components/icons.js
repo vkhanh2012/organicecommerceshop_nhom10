@@ -13,6 +13,30 @@ export const iconEye = `
   <circle cx="12" cy="12" r="3"/>
 </svg>`
 
+export const iconValidationError = `
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8.57465 3.21667L1.51632 15C1.37079 15.252 1.29379 15.5378 1.29298 15.8288C1.29216 16.1198 1.36756 16.4059 1.51167 16.6588C1.65579 16.9116 1.86359 17.1223 2.11441 17.2699C2.36523 17.4175 2.65032 17.4968 2.94132 17.5H17.058C17.349 17.4968 17.6341 17.4175 17.8849 17.2699C18.1357 17.1223 18.3435 16.9116 18.4876 16.6588C18.6317 16.4059 18.7071 16.1198 18.7063 15.8288C18.7055 15.5378 18.6285 15.252 18.483 15L11.4247 3.21667C11.2761 2.97176 11.0669 2.76927 10.8173 2.62874C10.5677 2.48821 10.2861 2.41438 9.99965 2.41438C9.71321 2.41438 9.43159 2.48821 9.18199 2.62874C8.93238 2.76927 8.72321 2.97176 8.57465 3.21667Z" stroke="#EA4B48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 7.5V10.8333" stroke="#EA4B48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 14.1667H10.0083" stroke="#EA4B48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
+export const iconValidationWarning = `
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10.0003 18.3333C14.6027 18.3333 18.3337 14.6024 18.3337 10C18.3337 5.39763 14.6027 1.66667 10.0003 1.66667C5.39795 1.66667 1.66699 5.39763 1.66699 10C1.66699 14.6024 5.39795 18.3333 10.0003 18.3333Z" stroke="#FF8A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 6.66667V10" stroke="#FF8A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 13.3333H10.0083" stroke="#FF8A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
+export const iconValidationSuccess = `
+<svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.0833 0.75L4.91667 9.91667L0.75 5.75" stroke="#00B307" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
+export const iconCheckboxCheck = `
+<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.6667 1L4.33333 8.33333L1 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
 export const iconCart = `
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
   <path d="M3 6h2l2.5 12h11L21 9H6"/>

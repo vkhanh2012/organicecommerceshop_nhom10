@@ -1,0 +1,170 @@
+.signin-field {
+  width: 100%;
+}
+
+.signin-input-control {
+  position: relative;
+}
+
+.signin-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 0 44px 0 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #333333;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.signin-input::placeholder {
+  color: #999999;
+}
+
+.signin-field[data-state="typing"] .signin-input {
+  border-color: #00b207;
+}
+
+.signin-field[data-state="filled"] .signin-input {
+  border-color: #e5e5e5;
+}
+
+.signin-field[data-state="error"] .signin-input {
+  border-color: #ea4b48;
+}
+
+.signin-field[data-state="warning"] .signin-input {
+  border-color: #ff8a00;
+}
+
+.signin-field[data-state="success"] .signin-input {
+  border-color: #20b526;
+  background: rgba(32, 181, 38, 0.05);
+}
+
+.signin-field-message {
+  display: none;
+  min-height: 20px;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.signin-field[data-state="error"] .signin-field-message,
+.signin-field[data-state="warning"] .signin-field-message {
+  display: block;
+}
+
+.signin-field[data-state="error"] .signin-field-message {
+  color: #ea4b48;
+}
+
+.signin-field[data-state="warning"] .signin-field-message {
+  color: #ff8a00;
+}
+
+.signin-state-icon {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+}
+
+.signin-field[data-state="error"] .signin-error-icon,
+.signin-field[data-state="warning"] .signin-warning-icon,
+.signin-field[data-state="success"] .signin-success-icon {
+  display: block;
+}
+
+.signin-success-icon {
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-input-password {
+  padding-right: 76px;
+}
+
+.signin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 42px;
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.signin-field[data-state="normal"] .signin-password-toggle,
+.signin-field[data-state="typing"] .signin-password-toggle,
+.signin-field[data-state="filled"] .signin-password-toggle {
+  right: 14px;
+}
+
+.signin-password-toggle:focus-visible {
+  outline: 2px solid #84d187;
+  outline-offset: 2px;
+}
+
+.signin-input:focus-visible {
+  outline: none;
+}
+
+.signin-checkbox-control {
+  position: relative;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.signin-checkbox-input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.signin-checkbox-box {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background: #ffffff;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.signin-checkbox-box svg {
+  display: none;
+}
+
+.signin-checkbox-input:checked + .signin-checkbox-box {
+  border-color: #00b207;
+  background: #00b207;
+}
+
+.signin-checkbox-input:checked + .signin-checkbox-box svg {
+  display: block;
+}
+
+.signin-checkbox-input:focus-visible + .signin-checkbox-box {
+  outline: 2px solid #84d187;
+  outline-offset: 2px;
+}
