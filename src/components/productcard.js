@@ -396,3 +396,16 @@ document.addEventListener("click", (event) => {
     console.error("Unable to update wishlist:", error);
   }
 });
+
+document.addEventListener("wishlist:updated", (event) => {
+  const wishlist = Array.isArray(event.detail?.wishlist)
+    ? event.detail.wishlist
+    : [];
+
+  document.querySelectorAll('[data-action="wishlist"]').forEach((button) => {
+    const active = wishlist.some(
+      (item) => String(item.id) === String(button.dataset.id),
+    );
+    updateWishlistButtons(button.dataset.id, active);
+  });
+});

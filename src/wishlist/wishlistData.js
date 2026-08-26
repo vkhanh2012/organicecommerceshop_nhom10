@@ -1,4 +1,10 @@
-const WISHLIST_KEY = "shopery-wishlist";
+export const WISHLIST_KEY = "shopery-wishlist";
+
+function notifyWishlistUpdated(wishlist, source = "current-tab") {
+  document.dispatchEvent(new CustomEvent("wishlist:updated", {
+    detail: { wishlist, source },
+  }));
+}
 
 export function getWishlist() {
   try {
@@ -11,6 +17,7 @@ export function getWishlist() {
 
 export function saveWishlist(wishlist) {
   localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+  notifyWishlistUpdated(wishlist);
 }
 
 export function addToWishlist(product) {
@@ -50,3 +57,17 @@ export function toggleWishlist(product) {
 
   return addToWishlist(product);
 }
+
+window.addEventListener("storage", (event) => {
+  if (event.key !== WISHLIST_KEY) return;
+
+  let wishlist = [];
+  try {
+    const savedWishlist = JSON.parse(event.newValue || "[]");
+    wishlist = Array.isArray(savedWishlist) ? savedWishlist : [];
+  } catch {
+    wishlist = [];
+  }
+
+  notifyWishlistUpdated(wishlist, "storage");
+});
