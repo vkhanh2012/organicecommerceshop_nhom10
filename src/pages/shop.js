@@ -10,6 +10,7 @@ import { renderProductGrid, bindCardEvents } from "/src/components/productcard.j
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
 import { renderQuickViewModal } from "/src/Quickview/quickview.js"
+import { dropDown } from "/src/components/icons.js"
 
 const images = import.meta.glob("../assets/images/**/*", {
   eager: true,
@@ -167,7 +168,7 @@ export async function initShopPage() {
         <details class="group relative">
           <summary class="flex min-w-36 cursor-pointer list-none items-center justify-between gap-4 rounded border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-600">
             <span>Select Price</span>
-            <span class="transition-transform group-open:rotate-180">⌄</span>
+            <span class="transition-transform group-open:rotate-180">${dropDown}</span>
           </summary>
           <div class="absolute left-0 top-full z-40 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg">
             ${renderPriceFilter(
@@ -196,7 +197,7 @@ export async function initShopPage() {
           flex
           flex-wrap
           items-center
-          gap-4
+          gap-3
 
           xl:shrink-0
         "
@@ -205,18 +206,17 @@ export async function initShopPage() {
         <label
           class="
             flex
+            relative
             items-center
             gap-2
             text-sm
             text-neutral-500
           "
         >
-          <span>Sort by:</span>
-
           <select
             id="sort-select"
             class="
-              min-w-40
+              w-40
               cursor-pointer
               rounded
               border
@@ -226,43 +226,48 @@ export async function initShopPage() {
               py-2
               text-sm
               text-neutral-700
+              appearance-none
+              pr-10
               outline-none
               focus:border-primary
             "
           >
             <option value="latest">
-              Latest
+              Sort by: Latest
             </option>
 
             <option value="price-low">
-              Price: Low to High
+              Sort by: Price Low
             </option>
 
             <option value="price-high">
-              Price: High to Low
+              Sort by: Price High
             </option>
 
             <option value="rating">
-              Popularity
+              Sort by: Popularity
             </option>
           </select>
+          <span class="pointer-events-none absolute right-3 flex items-center" aria-hidden="true">
+            ${dropDown}
+          </span>
         </label>
 
         <!-- SHOW -->
         <label
           class="
             flex
+            relative
             items-center
             gap-2
             text-sm
             text-neutral-500
           "
         >
-          <span>Show:</span>
-
           <select
             id="products-per-page"
             class="
+              w-40
               cursor-pointer
               rounded
               border
@@ -272,25 +277,30 @@ export async function initShopPage() {
               py-2
               text-sm
               text-neutral-700
+              appearance-none
+              pr-10
               outline-none
               focus:border-primary
             "
           >
             <option value="8">
-              8
+              Show: 8
             </option>
 
             <option
               value="16"
               selected
             >
-              16
+              Show: 16
             </option>
 
             <option value="24">
-              24
+              Show: 24
             </option>
           </select>
+          <span class="pointer-events-none absolute right-3 flex items-center" aria-hidden="true">
+            ${dropDown}
+          </span>
         </label>
       </div>
     </div>
@@ -628,7 +638,11 @@ export async function initShopPage() {
           "afterend",
           `
             <span
-              class="pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded border border-neutral-300 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.18)] transition-colors group-hover:border-primary peer-checked:border-primary peer-checked:bg-primary"
+              class="pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded border bg-white transition-colors ${
+                isShop2
+                  ? "border-neutral-200 group-hover/rating:border-primary peer-hover:border-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/20 peer-checked:border-primary peer-checked:bg-primary"
+                  : "border-neutral-300 shadow-[0_1px_3px_rgba(0,0,0,0.18)] group-hover:border-primary peer-checked:border-primary peer-checked:bg-primary"
+              }"
               aria-hidden="true"
             >
               <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
