@@ -183,6 +183,11 @@ if (topBar && !isShop2) {
           "horizontal"
         )}
 
+        ${renderPopularTags(
+          shopState.tag,
+          "horizontal"
+        )}
+
       </div>
 
       <!-- RIGHT: SORT + SHOW -->
@@ -320,7 +325,7 @@ if (topBar && !isShop2) {
   )
 
   function renderActiveFilters(totalResults) {
-    if (!isShop2 || !activeFilterContainer) return
+    if (!activeFilterContainer) return
 
     const chips = []
 
@@ -342,6 +347,13 @@ if (topBar && !isShop2) {
       chips.push({
         type: "rating",
         label: `${shopState.rating} Stars & Up`,
+      })
+    }
+
+    if (shopState.tag !== "all") {
+      chips.push({
+        type: "tag",
+        label: shopState.tag,
       })
     }
 
@@ -694,7 +706,7 @@ if (productsPerPageSelect) {
       }
     }
 
-    if (isShop2 && activeFilterContainer) {
+    if (activeFilterContainer) {
       activeFilterContainer.addEventListener("click", (event) => {
         const removeButton = event.target.closest("[data-remove-filter]")
         if (!removeButton) return
@@ -725,6 +737,11 @@ if (productsPerPageSelect) {
             .forEach((input) => {
               input.checked = false
             })
+        }
+
+        if (filterType === "tag") {
+          shopState.tag = "all"
+          setTagButtonState(filterContainer, shopState.tag)
         }
 
         shopState.currentPage = 1
