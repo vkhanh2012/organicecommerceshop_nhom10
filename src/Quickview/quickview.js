@@ -10,7 +10,7 @@ import {
   bindQuickViewInfoEvents
 } from "./QuickViewInfo.js";
 
-import { getCart, saveCart } from "../shopping_cart/cartData.js";
+import { getCart, saveCart, addProductToCart } from "../shopping_cart/cartData.js";
 
 // =====================================================
 // DEFAULT PRODUCT FALLBACK
@@ -87,7 +87,7 @@ export function renderQuickViewModal(product) {
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 sm:p-6"
     >
       <div
-        class="container-custom bg-white rounded-2xl shadow-2xl p-6 sm:p-10 overflow-y-auto"
+        class="container-custom bg-white rounded-2xl shadow-2xl p-6 sm:p-10 overflow-y-auto max-h-[90vh] relative"
       >
         <!-- CLOSE BUTTON FIGMA -->
         <button
@@ -156,26 +156,8 @@ export function openQuickView(productDataOrId) {
   bindQuickViewImageEvents(modalContainer);
 
   bindQuickViewInfoEvents(modalContainer, ({ quantity }) => {
-    const cart = getCart();
-    const existing = cart.find((item) => String(item.name) === String(product.name));
-
-    if (existing) {
-      existing.quantity = Number(existing.quantity || 0) + quantity;
-    } else {
-      cart.push({
-        id: product.id || Date.now(),
-        name: product.name,
-        image: product.mainImage || product.image,
-        price: Number(product.currentPrice || product.price || 12),
-        quantity: quantity,
-      });
-    }
-
-    saveCart(cart);
-
-    if (typeof window.updateNavigationCart === "function") {
-      window.updateNavigationCart();
-    }
+    // THÊM SẢN PHẨM VÀO GIỎ HÀNG & TỰ ĐỘNG BẮN SỰ KIỆN CẬP NHẬT HEADER/POPUP
+    addProductToCart(product, quantity);
 
     closeModal();
     showToast(`${product.name} added to cart (${quantity}).`);
