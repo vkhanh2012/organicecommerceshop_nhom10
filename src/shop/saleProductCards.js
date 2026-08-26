@@ -33,12 +33,14 @@ export function renderSaleProducts(productsData = []) {
             </h4>
             <!-- Giá -->
             <div class="flex items-center gap-0.5 mt-0.5">
-                <span class="text-[16px] font-medium text-neutral-900">$${items.price.toFixed(2)}</span>
-                <span class="text-sm text-neutral-400 line-through">$${items.originalPrice.toFixed(2)}</span>
+                <span class="text-[16px] font-medium text-neutral-900">$${Number(items.price).toFixed(2)}</span>
+                ${items.oldPrice !== null && items.oldPrice !== undefined
+                  ? `<span class="text-sm text-neutral-400 line-through">$${Number(items.oldPrice).toFixed(2)}</span>`
+                  : ""}
             </div>
             <!-- Sao -->
             <div class="flex items-center gap-0.5 mt-1">
-                ${renderMiniStars(items.stars)}
+                ${renderMiniStars(items.rating)}
             </div>
         </div>
     </div>         
@@ -57,18 +59,10 @@ export function renderSaleProducts(productsData = []) {
   `
 }
 
-// Hàm fetch dữ liệu từ file saleProducts.json
-export async function initSaleProducts(containerEl) {
-  try {
-    const response = await fetch("/src/data/saleProducts.json");
-    if(!response.ok) throw new Error("Lỗi đọc file JSON")
+// Lấy Sale Products trực tiếp từ catalog products.json đã được trang Shop tải.
+export function initSaleProducts(containerEl, productsData = []) {
+  if (!containerEl) return
 
-      const productsData = await response.json()
-
-      if(containerEl){
-        containerEl.innerHTML = renderSaleProducts(productsData)
-      }
-  } catch (error){
-      console.error("Lỗi tải Sale Products: ", error)
-  }
+  const saleProducts = productsData.filter((product) => Boolean(product.saleTag))
+  containerEl.innerHTML = renderSaleProducts(saleProducts)
 }

@@ -33,7 +33,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
     .map((item) => {
       const checked = selectedCategory === item.value
       return /*html*/ `
-      <li class="flex items-center justify-between text-sm text-neutral-600 cursor-pointer group">
+      <li class="flex items-center ${layout === "horizontal" ? "justify-between" : ""} text-sm text-neutral-600 cursor-pointer group">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
@@ -70,11 +70,18 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
           >
             ${item.label}
           </label>
-            </div>
-
+          ${layout === "horizontal" ? "" : `
             <span class="text-neutral-400 text-xs font-poppins">
               (${item.count})
             </span>
+          `}
+            </div>
+
+            ${layout === "horizontal" ? `
+              <span class="text-neutral-400 text-xs font-poppins">
+                (${item.count})
+              </span>
+            ` : ""}
           </li>
     `
     })

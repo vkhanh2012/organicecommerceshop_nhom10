@@ -315,7 +315,8 @@ if (topBar && !isShop2) {
 
     if (saleProductsContainer) {
       initSaleProducts(
-        saleProductsContainer
+        saleProductsContainer,
+        PRODUCT_DATA
       )
     }
   }
