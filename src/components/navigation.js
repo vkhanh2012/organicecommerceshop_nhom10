@@ -1,6 +1,6 @@
 import {
   iconHeaderHeart,
-  iconBag,
+  iconHeaderCart,
   iconPhone,
   iconLocation,
   iconMenu,
@@ -188,7 +188,7 @@ export function renderNavigationComponent({
               aria-label="Mở giỏ hàng"
               data-cart-open
             >
-              <span class="flex [&>svg]:h-8 [&>svg]:w-8">${iconBag}</span>
+              ${iconHeaderCart}
               <span class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-[10px] text-white">
                 ${cartCount}
               </span>

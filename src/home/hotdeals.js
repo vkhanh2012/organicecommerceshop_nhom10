@@ -157,10 +157,7 @@ return `
 
              transition-colors duration-200
 
-             group-hover:bg-primary
-             group-hover:text-white
-
-             hover:bg-primary-dark
+             hover:bg-primary
              hover:text-white"
     >
       <span>Add to Cart</span>

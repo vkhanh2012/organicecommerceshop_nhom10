@@ -95,7 +95,7 @@ cardShop:
     "font-poppins text-xs text-neutral-400 line-through ml-1",
 
   cartBtn: 
-  "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+  "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors hover:bg-primary hover:text-white cursor-pointer shrink-0",
 
   rating:
     "flex items-center gap-0.5",

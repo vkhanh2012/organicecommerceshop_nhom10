@@ -3,10 +3,6 @@ import { getImageUrl } from "../utils/assets.js";
 
 const CART_KEY = "shopery-cart";
 const catalog = productsData.map((product) => ({ ...product, image: getImageUrl(product.image) }));
-const defaultCart = [
-  { ...catalog.find((product) => product.id === 9), quantity: 1 },
-  { ...catalog.find((product) => product.id === 11), quantity: 1 },
-];
 
 function normalizeName(name = "") {
   return name.trim().toLowerCase();
@@ -46,7 +42,7 @@ export function normalizeCart(cart = []) {
 
 export function getCart() {
   const savedCart = localStorage.getItem(CART_KEY);
-  if (!savedCart) return defaultCart.map((item) => ({ ...item }));
+  if (!savedCart) return [];
 
   try {
     const oldCart = JSON.parse(savedCart);
@@ -56,9 +52,8 @@ export function getCart() {
     }
     return normalizedCart;
   } catch {
-    const fallbackCart = defaultCart.map((item) => ({ ...item }));
-    localStorage.setItem(CART_KEY, JSON.stringify(fallbackCart));
-    return fallbackCart;
+    localStorage.setItem(CART_KEY, JSON.stringify([]));
+    return [];
   }
 }
 
