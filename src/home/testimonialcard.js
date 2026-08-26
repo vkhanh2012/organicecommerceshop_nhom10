@@ -5,7 +5,7 @@ export const TESTIMONIALS_DATA = [
     content:
       "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     author: {
-      name: "Jennie Kim",
+      name: "Robert Fox",
       role: "Customer",
       avatar: "./src/assets/images/client1.jpg",
     },
@@ -16,7 +16,7 @@ export const TESTIMONIALS_DATA = [
     content:
       "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     author: {
-      name: "Ruka Kawai",
+      name: "Dianne Russell",
       role: "Customer",
       avatar: "./src/assets/images/client2.jpg",
     },
@@ -27,7 +27,7 @@ export const TESTIMONIALS_DATA = [
     content:
       "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
     author: {
-      name: "Yujin An",
+      name: "Eleanor Pena",
       role: "Customer",
       avatar: "./src/assets/images/client3.jpg",
     },
