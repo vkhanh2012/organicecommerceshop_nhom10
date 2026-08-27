@@ -1,6 +1,6 @@
 export function renderFooterComponent() {
   return /*html*/ `
-    <footer class="bg-neutral-900 pt-14 pb-4 font-poppins text-gray-400 lg:min-h-[368px] lg:pb-0 lg:pt-[60px]">
+    <footer class="bg-neutral-900 pt-14 pb-4 font-poppins text-neutral-400 lg:min-h-[368px] lg:pb-0 lg:pt-[60px]">
       <div class="container-custom lg:flex lg:min-h-[308px] lg:flex-col">
         
         <div class="grid grid-cols-1 gap-8 pb-8 md:grid-cols-2 lg:flex-1 lg:grid-cols-12 lg:gap-8 lg:pb-7" >

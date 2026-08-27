@@ -2,6 +2,8 @@ import { renderWishlistSection } from "../wishlist/wishlist.js";
 import { getWishlist, removeFromWishlist } from "../wishlist/wishlistData.js";
 import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 import { addProductToCart } from "../shopping_cart/cartData.js";
+import productsData from "../data/products.json";
+import { getImageUrl } from "../utils/assets.js";
 
 function showCartNotification(message) {
   let toast = document.getElementById("toast-notification");
@@ -36,12 +38,23 @@ export function initWishlistPage() {
   if (!wishlistSection) return;
 
   function renderWishlist() {
-    const items = getWishlist().map((item) => ({
-      ...item,
-      originalPrice: item.originalPrice ?? item.oldPrice ?? null,
-      inStock: item.inStock ?? true,
-      stockStatusText: item.stockStatusText || "In Stock",
-    }));
+    const items = getWishlist().map((item) => {
+      const catalogProduct = productsData.find((product) =>
+        String(product.id) === String(item.id)
+        || product.name?.trim().toLowerCase() === item.name?.trim().toLowerCase()
+      );
+      const imagePath = catalogProduct?.image || item.image || "";
+
+      return {
+        ...catalogProduct,
+        ...item,
+        image: getImageUrl(imagePath),
+        price: Number(item.price ?? catalogProduct?.price ?? 0),
+        originalPrice: item.originalPrice ?? item.oldPrice ?? catalogProduct?.oldPrice ?? null,
+        inStock: item.inStock ?? catalogProduct?.inStock ?? true,
+        stockStatusText: item.stockStatusText || (item.inStock === false ? "Out of Stock" : "In Stock"),
+      };
+    });
 
     wishlistSection.innerHTML = renderWishlistSection(items);
   }

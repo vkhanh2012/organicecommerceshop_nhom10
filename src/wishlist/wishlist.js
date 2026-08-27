@@ -9,7 +9,7 @@ export function renderWishlistSection(items = []) {
   const tableHeadersHtml = tableHeaders
     .map(
       (header, index) => `
-      <th scope="col" class="py-4 px-4 md:px-6 font-medium text-neutral-400 text-xs tracking-wider uppercase ${index === 3 ? "text-right" : ""}">
+      <th scope="col" class="h-12 px-5 md:px-6 font-medium text-neutral-400 text-xs tracking-wide uppercase ${index === 3 ? "text-right" : ""}">
         ${header}
       </th>
     `,
@@ -21,15 +21,21 @@ export function renderWishlistSection(items = []) {
     .join("") || `<tr><td colspan="4" class="px-6 py-12 text-center text-neutral-500">Your wishlist is empty.</td></tr>`;
 
   return /*html*/ `
-    <section class="w-full lg:px-[300px] bg-white py-8 md:py-14" aria-labelledby="wishlist-title>
-        <div class="w-full px-4 sm:px-8 lg:px-[300px]">
-            <h1 class="text-center text-title-900 font-semibold text-2xl sm:text-[32px]">
+    <section class="w-full bg-white pt-10 pb-16 lg:pb-20" aria-labelledby="wishlist-title">
+        <div class="container-custom">
+            <h1 id="wishlist-title" class="text-center text-neutral-900 font-semibold text-2xl sm:text-[32px] leading-tight">
                 My Wishlist
             </h1>
             <!-- Khung của các sản phẩm -->
-            <div class="w-full border border-neutral-200 bg-white shadow-sm rounded-xl overflow-hidden mt-6">
+            <div class="mt-6 w-full overflow-hidden rounded-lg border border-neutral-200 bg-white">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse min-w-120 md:min-w-0">
+                    <table class="w-full min-w-[1227px] table-fixed border-collapse text-left">
+                        <colgroup>
+                            <col class="w-[40%]">
+                            <col class="w-[25%]">
+                            <col class="w-[18%]">
+                            <col class="w-[17%]">
+                        </colgroup>
                         <thead>
                             <tr class="border-b border-neutral-200 bg-white">
                                 ${tableHeadersHtml}
@@ -43,7 +49,7 @@ export function renderWishlistSection(items = []) {
                 </div>
                 
                 <!-- Share Footer -->
-                <div class="flex border-t border-neutral-100 px-4 md:px-6 py-4 items-center gap-3 bg-white">
+                <div class="flex min-h-[100px] border-t border-neutral-100 px-5 md:px-6 py-4 items-center gap-3 bg-white">
                     <span class="text-neutral-900 text-sm font-normal">
                         Share:
                     </span>

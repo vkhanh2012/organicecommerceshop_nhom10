@@ -51,8 +51,8 @@ export function renderDescription(
         data-tab="${tab.key}"
         class="tab-link pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
           isActive
-            ? "text-zinc-900 border-b-2 border-[#20B126] font-semibold"
-            : "text-zinc-500 hover:text-zinc-900"
+            ? "border-b-2 border-primary font-semibold text-neutral-900"
+            : "text-neutral-500 hover:text-neutral-900"
         }"
       >
         ${tab.label}
@@ -83,10 +83,10 @@ export function renderDescription(
 
 
   return /*html*/ `
-    <div class="container-custom mx-auto font-['Poppins']">
+    <div class="container-custom font-['Poppins']">
 
       <!-- PRODUCT INFORMATION -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 pt-8">
+      <div class="grid grid-cols-1 gap-8 pb-4 pt-8 lg:grid-cols-2 lg:gap-8 min-[1400px]:grid-cols-[648px_648px] min-[1400px]:gap-6">
 
         ${renderImage(product)}
 
@@ -97,7 +97,7 @@ export function renderDescription(
 
       <!-- TABS -->
       <div
-        class="border-b border-neutral-200 flex justify-center gap-10 mx-auto -mt-6 translate-x-[42px]"
+        class="mx-auto flex justify-center gap-10 border-b border-neutral-200"
       >
         ${tabsHtml}
       </div>
@@ -106,14 +106,14 @@ export function renderDescription(
       <!-- TAB CONTENT -->
       <div
         id="tab-content-container"
-        class="pt-8 pb-12"
+        class="pb-12 pt-8"
       >
         ${tabContentHtml}
       </div>
 
 
       <!-- RELATED PRODUCTS -->
-      <div class="mt-16">
+      <div class="mt-10">
         ${renderRelatedProducts(product, productList)}
       </div>
 

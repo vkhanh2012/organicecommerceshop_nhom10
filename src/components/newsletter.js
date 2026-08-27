@@ -61,7 +61,7 @@ export function renderNewsletterComponent() {
             <a
               href="#"
               aria-label="Facebook"
-              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-primary"
+              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-primary hover:text-white"
             >
               ${SOCIAL_ICONS.facebook}
             </a>
@@ -69,7 +69,7 @@ export function renderNewsletterComponent() {
             <a
               href="#"
               aria-label="Twitter"
-              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-primary"
+              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-primary hover:text-white"
             >
               ${SOCIAL_ICONS.twitter}
             </a>
@@ -77,7 +77,7 @@ export function renderNewsletterComponent() {
             <a
               href="#"
               aria-label="Pinterest"
-              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-primary"
+              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-primary hover:text-white"
             >
               ${SOCIAL_ICONS.pinterest}
             </a>
@@ -85,7 +85,7 @@ export function renderNewsletterComponent() {
             <a
               href="#"
               aria-label="Instagram"
-              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-primary"
+              class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-primary hover:text-white"
             >
               ${SOCIAL_ICONS.instagram}
             </a>

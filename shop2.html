@@ -14,53 +14,58 @@
 <body class="font-['Poppins'] bg-white">
     <div id="navigation-container"></div>
     <div id="breadcrumbs-container"></div>
-    <main class="bg-white py-8 md:py-12 xl:py-16">
+    <main class="bg-white pb-20">
         <section class="container-custom">
             <h1 class="sr-only">Shop</h1>
 
             <!-- Banner -->
-            <div class="relative overflow-hidden rounded-lg">
+            <div class="relative min-h-[260px] overflow-hidden rounded-lg md:aspect-[11/3] md:min-h-0">
                 <img src="/src/assets/images/Discount Bannar.webp" alt="Sale of the Month"
-                    class="block h-auto w-full scale-x-[-1]" />
+                    class="absolute inset-0 h-full w-full scale-x-[-1] object-cover" />
 
-                <div class="absolute inset-y-0 left-0 flex w-1/2 flex-col justify-center px-6 md:px-10 xl:px-14">
-                    <p class="text-xs font-medium uppercase tracking-wide text-white">
+                <div class="absolute inset-y-0 left-0 flex w-1/2 flex-col justify-center px-6 md:px-10 xl:px-[60px]">
+                    <p class="text-sm font-medium uppercase tracking-wide text-white">
                         Best Deals
                     </p>
 
-                    <h2 class="mt-2 text-2xl font-semibold text-white md:text-3xl xl:text-4xl">
+                    <h2 class="mt-2 text-2xl font-semibold leading-tight text-white md:text-3xl xl:text-[40px]">
                         Sale of the Month
                     </h2>
 
-                    <div class="mt-4 hidden items-center gap-3 text-primary md:flex">
-                        <span>00</span>
-                        <span>:</span>
-                        <span>02</span>
-                        <span>:</span>
-                        <span>18</span>
-                        <span>:</span>
-                        <span>46</span>
+                    <div class="mt-5 hidden items-start gap-2 text-primary md:flex">
+                        <span class="text-center text-2xl leading-7">00<small class="mt-1 block text-[10px] uppercase leading-4 text-neutral-400">Days</small></span>
+                        <span class="text-xl leading-7 text-neutral-400">:</span>
+                        <span class="text-center text-2xl leading-7">02<small class="mt-1 block text-[10px] uppercase leading-4 text-neutral-400">Hours</small></span>
+                        <span class="text-xl leading-7 text-neutral-400">:</span>
+                        <span class="text-center text-2xl leading-7">18<small class="mt-1 block text-[10px] uppercase leading-4 text-neutral-400">Mins</small></span>
+                        <span class="text-xl leading-7 text-neutral-400">:</span>
+                        <span class="text-center text-2xl leading-7">46<small class="mt-1 block text-[10px] uppercase leading-4 text-neutral-400">Secs</small></span>
                     </div>
 
                     <a href="#product-grid-container"
-                        class="mt-5 inline-flex w-fit items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
-                        Shop Now
+                        class="mt-5 inline-flex w-fit items-center gap-3 rounded-pill bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
+                        Shop Now <span aria-hidden="true">→</span>
                     </a>
+                </div>
+
+                <div class="absolute left-[36%] top-[16%] hidden h-[100px] w-[100px] flex-col items-center justify-center rounded-full bg-warning text-white xl:flex">
+                    <strong class="text-2xl leading-7">56%</strong>
+                    <span class="text-xs font-medium uppercase">Off</span>
                 </div>
             </div>
 
             <!-- Filter ngang và sort -->
-            <div class="mt-8">
+            <div class="mt-10">
                 <div id="horizontal-filter-container" class="w-full"></div>
             </div>
 
             <!-- Active filter -->
             <div id="active-filter-container"
-                class="mt-5 flex min-h-10 flex-col gap-3 border-y border-neutral-100 py-3 md:flex-row md:items-center md:justify-between">
+                class="relative mt-5 flex min-h-14 flex-col gap-3 py-4 before:absolute before:left-1/2 before:top-0 before:h-px before:w-screen before:-translate-x-1/2 before:bg-neutral-100 after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-screen after:-translate-x-1/2 after:bg-neutral-100 md:flex-row md:items-center md:justify-between">
             </div>
 
             <!-- Product -->
-            <div id="product-grid-container" class="mt-8 w-full"></div>
+            <div id="product-grid-container" class="mt-6 w-full"></div>
         </section>
     </main>
     <div id="newsletter-container"></div>

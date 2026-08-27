@@ -30,12 +30,10 @@ import productList from "../data/products.json";
 // LẤY DATA TỪ JSON
 // =====================================================
 
-const {
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-} = productData;
+const defaultProductData = productData.find((product) => Number(product.id) === 3) || productData[0];
+const mangoProductData = productData.find((product) => Number(product.id) === 13);
+const tomatoProductData = productData.find((product) => Number(product.id) === 12);
+const redcapsiumProductData = productData.find((product) => Number(product.id) === 11);
 
 
 // =====================================================
@@ -191,41 +189,13 @@ function getActiveProduct() {
 
 
       return {
-
-        ...defaultProductData,
-
-        id:
-          foundProduct.id,
-
-        name:
-          foundProduct.name,
-
-        currentPrice:
-          foundProduct.price,
-
-        originalPrice:
-          foundProduct.oldPrice,
-
-        rating:
-          foundProduct.rating,
-
-        mainImage:
-          foundProduct.image,
-
-        thumbnails: [
-          foundProduct.image,
-          foundProduct.image,
-          foundProduct.image
-        ],
-
-        category: {
-          name:
-            foundProduct.category ||
-            "Fresh Fruit",
-
-          link: "#"
-        }
-
+        ...foundProduct,
+        currentPrice: foundProduct.currentPrice ?? foundProduct.price,
+        originalPrice: foundProduct.originalPrice ?? foundProduct.oldPrice,
+        mainImage: foundProduct.mainImage || foundProduct.image,
+        thumbnails: Array.isArray(foundProduct.thumbnails)
+          ? foundProduct.thumbnails
+          : [foundProduct.image],
       };
 
     }

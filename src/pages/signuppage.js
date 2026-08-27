@@ -8,44 +8,50 @@ import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 function passwordField({ name, placeholder }) {
   return `
-    <div data-field="${name}">
-      <div class="relative">
+    <div class="signin-field" data-field="${name}" data-state="normal">
+      <div class="signin-input-control">
         <input
           type="password"
           name="${name}"
           required
           minlength="6"
           placeholder="${placeholder}"
-          class="h-[49px] w-full rounded-md border border-neutral-100 px-4 pr-20 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400"
+          class="signin-input signin-input-password"
+          aria-invalid="false"
         >
-        <span class="absolute inset-y-0 right-11 hidden items-center" data-field-icon></span>
         <button
           type="button"
-          class="absolute inset-y-0 right-3 my-auto flex h-8 w-8 cursor-pointer items-center justify-center text-neutral-600 transition-colors hover:text-primary"
+          class="signin-password-toggle"
           data-password-toggle="${name}"
           aria-label="Show or hide ${placeholder.toLowerCase()}"
         >
           ${iconEye}
         </button>
+        <span class="signin-state-icon signin-error-icon" aria-hidden="true">${iconValidationError}</span>
+        <span class="signin-state-icon signin-warning-icon" aria-hidden="true">${iconValidationWarning}</span>
+        <span class="signin-state-icon signin-success-icon" aria-hidden="true">${iconValidationSuccess}</span>
       </div>
-      <p class="mt-1 hidden text-xs leading-[18px]" data-field-message></p>
+      <p class="signin-field-message" data-field-message aria-live="polite"></p>
     </div>`;
 }
 
 function emailField() {
   return `
-    <div data-field="email">
-      <div class="relative">
+    <div class="signin-field" data-field="email" data-state="normal">
+      <div class="signin-input-control">
         <input
           type="email"
           name="email"
           required
           placeholder="Email"
-          class="h-[49px] w-full rounded-md border border-neutral-100 px-4 pr-11 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400"
+          class="signin-input"
+          aria-invalid="false"
         >
-        <span class="absolute inset-y-0 right-4 hidden items-center" data-field-icon></span>
+        <span class="signin-state-icon signin-error-icon" aria-hidden="true">${iconValidationError}</span>
+        <span class="signin-state-icon signin-warning-icon" aria-hidden="true">${iconValidationWarning}</span>
+        <span class="signin-state-icon signin-success-icon" aria-hidden="true">${iconValidationSuccess}</span>
       </div>
-      <p class="mt-1 hidden text-xs leading-[18px]" data-field-message></p>
+      <p class="signin-field-message" data-field-message aria-live="polite"></p>
     </div>`;
 }
 
@@ -62,12 +68,12 @@ export function renderSignupPage() {
           ${passwordField({ name: "password", placeholder: "Password" })}
           ${passwordField({ name: "confirmPassword", placeholder: "Confirm Password" })}
 
-          <div data-field="terms">
+          <div class="signin-field" data-field="terms" data-state="normal">
             <label class="flex cursor-pointer items-start gap-2 text-sm leading-5 text-neutral-600">
               <input type="checkbox" name="terms" class="mt-0.5 h-5 w-5 shrink-0 accent-primary">
               <span>Accept all terms &amp; Conditions</span>
             </label>
-            <p class="mt-1 hidden text-xs leading-[18px]" data-field-message></p>
+            <p class="signin-field-message" data-field-message aria-live="polite"></p>
           </div>
 
           <p class="hidden text-sm" data-signup-message></p>
@@ -92,53 +98,18 @@ export function bindSignupEvents(root) {
   const form = root.querySelector("[data-signup-form]");
   if (!form) return;
 
-  const stateClasses = {
-    default: ["border-neutral-100"],
-    typing: ["border-primary"],
-    filled: ["border-neutral-200"],
-    warning: ["border-warning", "bg-warning/5"],
-    error: ["border-error", "bg-error/5"],
-    success: ["border-primary", "bg-primary/5"],
-  };
-  const removableClasses = Object.values(stateClasses).flat();
-  const stateIcons = {
-    warning: iconValidationWarning,
-    error: iconValidationError,
-    success: iconValidationSuccess,
-  };
-  const stateTextClasses = {
-    warning: "text-warning",
-    error: "text-error",
-    success: "text-primary",
-  };
-
-  function setFieldState(name, state = "default", message = "") {
+  function setFieldState(name, state = "normal", message = "") {
     const field = form.querySelector(`[data-field="${name}"]`);
     const input = form.elements[name];
     const messageElement = field?.querySelector("[data-field-message]");
-    const iconElement = field?.querySelector("[data-field-icon]");
     if (!field || !input) return;
 
-    if (input.matches("input:not([type='checkbox'])")) {
-      input.classList.remove(...removableClasses);
-      input.classList.add(...stateClasses[state]);
-      input.setAttribute("aria-invalid", String(state === "error"));
-    }
-
+    field.dataset.state = state;
+    if (state === "error") field.dataset.wasInvalid = "true";
+    if (state === "success") delete field.dataset.wasInvalid;
+    input.setAttribute("aria-invalid", String(state === "error"));
     if (messageElement) {
       messageElement.textContent = message;
-      messageElement.className = `mt-1 text-xs leading-[18px] ${
-        message ? stateTextClasses[state] || "text-neutral-500" : "hidden"
-      }`;
-    }
-
-    if (iconElement) {
-      iconElement.innerHTML = stateIcons[state] || "";
-      iconElement.className = `absolute inset-y-0 items-center ${
-        name === "email" ? "right-4" : "right-11"
-      } ${stateTextClasses[state] || "text-neutral-500"} ${
-        stateIcons[state] ? "flex" : "hidden"
-      }`;
     }
   }
 
@@ -165,24 +136,38 @@ export function bindSignupEvents(root) {
       message = "Please accept the terms and conditions.";
     }
 
-    setFieldState(name, message ? (submitted ? "error" : "warning") : "success", message);
+    if (message) {
+      setFieldState(name, "error", message);
+      return false;
+    }
+
+    const warning = input.dataset.warningMessage?.trim();
+    if (warning) {
+      setFieldState(name, "warning", warning);
+      return true;
+    }
+
+    const field = input.closest("[data-field]");
+    setFieldState(
+      name,
+      submitted || field?.dataset.wasInvalid ? "success" : "filled",
+    );
     return !message;
   }
 
   ["email", "password", "confirmPassword"].forEach((name) => {
     const input = form.elements[name];
     input.addEventListener("focus", () => {
-      setFieldState(name, input.value ? "filled" : "typing");
+      setFieldState(name, "typing");
     });
     input.addEventListener("input", () => {
-      setFieldState(name, input.value ? "typing" : "default");
+      setFieldState(name, "typing");
       if (name === "password" && form.elements.confirmPassword.value) {
         setFieldState("confirmPassword", "filled");
       }
     });
     input.addEventListener("blur", () => {
-      if (!input.value) setFieldState(name, "default");
-      else validateField(name);
+      validateField(name);
     });
   });
 

@@ -85,7 +85,7 @@
 }
 
 .icon-social {
-  @apply w-10 h-10 rounded-full hover:text-primary hover:bg-neutral-100 flex items-center justify-center transition-all duration-200 text-neutral-700
+  @apply w-10 h-10 rounded-full hover:text-white hover:bg-primary flex items-center justify-center transition-all duration-200 text-neutral-700
 }
 
 .icon-social-facebook {

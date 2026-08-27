@@ -5,7 +5,7 @@ export function renderAboutUsSection() {
     <section
   class="w-full bg-white py-10 md:py-14 lg:py-[80px]" aria-labelledby="about-trusted-title">
     <div class="container-custom">
-      <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:w-[1364px] lg:grid-cols-[600px_716px] lg:gap-12">
+      <div class="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-12 min-[1500px]:w-[1364px] min-[1500px]:grid-cols-[600px_716px]">
         <!-- Cột 1: tiêu đề và nội dung -->
         <!-- tiêu đề -->
         <div class="w-full text-left space-y-2 md:space-y-4 lg:space-y-6">

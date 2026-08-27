@@ -35,7 +35,11 @@ export function renderImage(product = {}) {
 
   const rawMainImage = product?.mainImage || product?.image;
   let mainImage = resolveSrc(rawMainImage, validThumbnails[0] || largecabageSvg);
-  if (rawMainImage && rawMainImage.startsWith("/images/product/") && validThumbnails[0]) {
+  const isChineseCabbage = Number(product?.id) === 3
+    || product?.name?.trim().toLowerCase() === "chinese cabbage";
+  if (isChineseCabbage) {
+    mainImage = largecabageSvg;
+  } else if (rawMainImage && rawMainImage.startsWith("/images/product/") && validThumbnails[0]) {
     mainImage = validThumbnails[0];
   }
 
@@ -51,7 +55,7 @@ export function renderImage(product = {}) {
           data-src="${thumbSrc}"
           data-index="${index}"
           class="thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
-            isSelected ? "border-2 border-[#00B207]" : "border border-gray-200 hover:border-[#00B207]"
+            isSelected ? "border-2 border-primary" : "border border-neutral-200 hover:border-primary"
           }"
         >
           <img
@@ -68,7 +72,7 @@ export function renderImage(product = {}) {
   return /*html*/ `
     <div
       id="product-gallery"
-      class="col-span-12 lg:col-span-6 w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-4 select-none"
+      class="w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-3 select-none lg:min-w-0"
     >
       <!-- THUMBNAILS CONTAINER -->
       <div class="order-2 sm:order-1 w-full sm:w-[80px] shrink-0 flex sm:flex-col items-center justify-between gap-2 h-full max-h-[556px]">
@@ -76,7 +80,7 @@ export function renderImage(product = {}) {
         <button
           type="button"
           data-action="thumb-prev"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +97,7 @@ export function renderImage(product = {}) {
         <button
           type="button"
           data-action="thumb-next"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +108,7 @@ export function renderImage(product = {}) {
 
       <!-- MAIN IMAGE CONTAINER -->
       <div
-        class="order-1 sm:order-2 shrink-0 w-full sm:w-[556px] h-[350px] sm:h-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-2"
+        class="order-1 aspect-square h-auto w-full overflow-hidden bg-white p-2 flex items-center justify-center sm:order-2 sm:w-[calc(100%_-_92px)] min-[1400px]:w-[556px]"
       >
         <img
           id="main-product-image"
@@ -131,12 +135,12 @@ export function bindImageEvents(container = document) {
 
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
-      thumb.classList.remove("border-[#00B207]", "border-2");
-      thumb.classList.add("border-gray-200", "border");
+      thumb.classList.remove("border-primary", "border-2");
+      thumb.classList.add("border-neutral-200", "border");
     });
 
-    activeThumb.classList.remove("border-gray-200", "border");
-    activeThumb.classList.add("border-[#00B207]", "border-2");
+    activeThumb.classList.remove("border-neutral-200", "border");
+    activeThumb.classList.add("border-primary", "border-2");
   };
 
   const changeMainImage = (thumb) => {
@@ -157,7 +161,7 @@ export function bindImageEvents(container = document) {
   const prevBtn = gallery.querySelector('[data-action="thumb-prev"]');
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex <= 0) return;
       changeMainImage(thumbs[activeIndex - 1]);
     });
@@ -166,7 +170,7 @@ export function bindImageEvents(container = document) {
   const nextBtn = gallery.querySelector('[data-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex === -1 || activeIndex >= thumbs.length - 1) return;
       changeMainImage(thumbs[activeIndex + 1]);
     });
@@ -187,10 +191,10 @@ document.addEventListener("click", (e) => {
     }
     const thumbs = gallery.querySelectorAll('[data-action="select-thumb"]');
     thumbs.forEach((t) => {
-      t.classList.remove("border-[#00B207]", "border-2");
-      t.classList.add("border-gray-200", "border");
+      t.classList.remove("border-primary", "border-2");
+      t.classList.add("border-neutral-200", "border");
     });
-    thumb.classList.remove("border-gray-200", "border");
-    thumb.classList.add("border-[#00B207]", "border-2");
+    thumb.classList.remove("border-neutral-200", "border");
+    thumb.classList.add("border-primary", "border-2");
   }
 });

@@ -34,7 +34,7 @@ const CLASS = {
     transition-all
     duration-300
     hover:z-20
-    hover:border-[#2C742F]
+    hover:border-primary-dark
     hover:shadow-[0_4px_20px_rgba(0,178,7,0.18)]
   `,
 
@@ -58,7 +58,7 @@ const CLASS = {
     transition-all
     duration-300
     hover:z-20
-    hover:border-[#2C742F]
+    hover:border-primary-dark
     hover:shadow-[0_4px_20px_rgba(0,178,7,0.18)]
     xl:h-96
   `,
@@ -73,23 +73,23 @@ const CLASS = {
     "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
 
   tagSale:
-    "bg-[#EA4335] text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
+    "bg-outstock text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
 
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
+    "bg-best-tag text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
 
   actions:
     "absolute top-3 right-3 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
   actionBtn:
-    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-white shadow-md md:shadow-none md:border md:border-neutral-100 flex items-center justify-center text-neutral-700 hover:bg-[#00B307] hover:text-white transition-colors cursor-pointer",
+    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-white shadow-md md:shadow-none md:border md:border-neutral-100 flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
   body:
     "px-0.5 flex flex-col flex-1 justify-between mt-1",
 
   // TÊN SẢN PHẨM: HOVER ĐỔI MÀU XANH + GẠCH CHÂN (group-hover:underline group-hover:text-[#2C742F])
   name:
-    "font-poppins text-sm md:text-base font-normal text-neutral-800 mb-1.5 transition-colors group-hover:text-[#2C742F] group-hover:underline hover:underline block cursor-pointer line-clamp-1 leading-6",
+    "font-poppins text-sm md:text-base font-normal text-neutral-800 mb-1.5 transition-colors group-hover:text-primary-dark group-hover:underline hover:underline block cursor-pointer line-clamp-1 leading-6",
 
   priceRow:
     "flex items-center justify-between mb-1 mt-auto pt-1",
@@ -102,7 +102,7 @@ const CLASS = {
 
   // NÚT GIỎ HÀNG THỜI TRANG (Nền xanh khi hover card)
   cartBtn:
-    "w-10 h-10 md:w-11 md:h-11 rounded-full bg-neutral-100 text-neutral-800 flex items-center justify-center transition-all md:group-hover:bg-[#00B307] md:group-hover:text-white cursor-pointer shrink-0 shadow-xs",
+    "w-10 h-10 md:w-11 md:h-11 rounded-full bg-neutral-100 text-neutral-800 flex items-center justify-center transition-all md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0 shadow-xs",
 
   rating:
     "flex items-center gap-0.5 mt-1",
@@ -327,9 +327,9 @@ export function renderRelatedProducts(currentProduct = {}, allProducts = product
   const cardsHtml = finalProducts.map((product) => renderProductCard(product, "home")).join("");
 
   return `
-    <section class="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-25">
+    <section class="mt-8 mb-20 w-full">
       <div class="w-full text-center mb-6">
-        <h2 class="text-[32px] font-semibold text-zinc-900 font-poppins leading-tight inline-block">
+        <h2 class="text-[32px] font-semibold text-neutral-900 font-poppins leading-tight inline-block">
           Related Products
         </h2>
       </div>

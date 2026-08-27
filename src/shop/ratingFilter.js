@@ -61,12 +61,12 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
 
       <summary
         class="
-          flex min-w-36 cursor-pointer
+          flex min-w-44 cursor-pointer
           list-none items-center justify-between
           gap-4 rounded
           border border-neutral-200
           bg-white
-          px-3 py-2
+          px-4 py-3
           text-sm text-neutral-600
         "
       >

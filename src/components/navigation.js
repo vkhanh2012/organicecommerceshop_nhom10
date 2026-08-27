@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { label: "Blog", href: "#", dropdown: true },
   { label: "About Us", href: "./about.html" },
   { label: "Contact Us", href: "#" },
+  { label: "Shop 2", href: "./shop2.html" },
 ];
 
 const LINK_BASE_CLASS = [
@@ -30,10 +31,10 @@ const LINK_BASE_CLASS = [
   "text-sm",
   "font-medium",
   "transition-colors",
-  "md:inline-flex",
-  "md:justify-start",
-  "md:border-none",
-  "md:py-0",
+  "lg:inline-flex",
+  "lg:justify-start",
+  "lg:border-none",
+  "lg:py-0",
 ].join(" ");
 
 function getPageName(href = "") {
@@ -57,24 +58,25 @@ export function renderNavigationComponent({
   const isHome = variant
     ? variant === "home"
     : getPageName(activeHref) === "index.html";
+  const hasDarkMenu = isHome || getPageName(activeHref) === "shop2.html";
 
-  const topbarClass = isHome
+  const topbarClass = hasDarkMenu
     ? "border-b border-neutral-100 bg-white text-neutral-600"
     : "border-b border-neutral-700 bg-neutral-800 text-neutral-300";
 
-  const navPanelClass = isHome
+  const navPanelClass = hasDarkMenu
     ? "bg-neutral-800"
     : "border-b border-neutral-100 bg-white";
 
-  const normalLinkClass = isHome
+  const normalLinkClass = hasDarkMenu
     ? "border-b border-white/10 text-neutral-400 hover:text-white"
     : "border-b border-neutral-100 text-neutral-600 hover:text-primary";
 
-  const activeLinkClass = isHome
+  const activeLinkClass = hasDarkMenu
     ? "border-b border-white/10 text-white"
     : "border-b border-neutral-100 text-primary";
 
-  const phoneClass = isHome
+  const phoneClass = hasDarkMenu
     ? "text-white"
     : "text-neutral-900";
 
@@ -125,12 +127,12 @@ export function renderNavigationComponent({
 
       <!-- Main Header -->
       <div class="w-full border-b border-neutral-100 bg-white">
-        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:h-[92px] md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-0">
+        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 lg:grid lg:h-[92px] lg:grid-cols-[minmax(0,1fr)_minmax(320px,498px)_minmax(0,1fr)] lg:gap-x-8 lg:py-0">
 
           <!-- Mobile Menu Toggle -->
           <button
             type="button"
-            class="flex h-9 w-9 items-center justify-center text-neutral-900 md:hidden"
+            class="flex h-9 w-9 items-center justify-center text-neutral-900 lg:hidden"
             data-nav-toggle
             aria-label="Mở menu"
             aria-expanded="false"
@@ -141,7 +143,7 @@ export function renderNavigationComponent({
           <!-- Logo -->
           <a
             href="./index.html"
-            class="flex items-center gap-2 font-poppins text-2xl font-medium leading-none tracking-tight text-brand-wordmark md:justify-self-start md:text-[32px]"
+            class="flex items-center gap-2 font-poppins text-2xl font-medium leading-none tracking-tight text-brand-wordmark lg:justify-self-start lg:text-[32px]"
           >
             <img
               src="${getImageUrl("/images/plant-small.webp")}"
@@ -156,24 +158,24 @@ export function renderNavigationComponent({
 
           <!-- Search Bar -->
           <form
-            class="order-3 flex w-full items-stretch overflow-hidden rounded-md border border-neutral-100 md:order-none md:w-full md:max-w-[498px] md:justify-self-center"
+            class="order-3 flex w-full items-stretch overflow-hidden rounded-md border border-neutral-100 lg:order-none lg:w-full lg:max-w-[498px] lg:justify-self-center"
             role="search"
           >
             <input
               type="text"
               placeholder="Search"
-              class="h-[45px] min-w-0 flex-1 px-4 font-poppins text-sm text-neutral-500 outline-none md:text-[15px]"
+              class="h-[45px] min-w-0 flex-1 px-4 font-poppins text-sm text-neutral-500 outline-none lg:text-[15px]"
             >
             <button
               type="submit"
-              class="h-[45px] whitespace-nowrap bg-primary px-4 font-poppins text-sm font-semibold text-white transition-colors hover:bg-primary-dark md:px-6"
+              class="h-[45px] whitespace-nowrap bg-primary px-4 font-poppins text-sm font-semibold text-white transition-colors hover:bg-primary-dark lg:px-6"
             >
               Search
             </button>
           </form>
 
           <!-- Action Icons -->
-          <div class="flex items-center gap-4 md:justify-self-end">
+          <div class="flex items-center gap-4 lg:justify-self-end">
             <a
               href="./wishlist.html"
               class="relative hidden h-10 w-10 items-center justify-center text-neutral-800 transition-colors hover:text-primary sm:flex"
@@ -195,21 +197,21 @@ export function renderNavigationComponent({
             </button>
 
             <div class="hidden font-poppins leading-tight sm:block">
-              <div class="text-[11px] text-neutral-700">Shopping cart:</div>
-              <div class="text-sm font-medium text-neutral-900">${cartTotal}</div>
+              <div class="text-sm text-neutral-700">Shopping cart:</div>
+              <div class="text-base font-medium text-neutral-900">${cartTotal}</div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Navigation Panel: Home tối, trang trong trắng -->
-      <div class="hidden w-full md:block ${navPanelClass}" data-nav-panel>
-        <div class="container-custom flex flex-col items-stretch gap-2 py-2 md:h-[62px] md:flex-row md:items-center md:gap-4 md:py-0">
-          <nav class="flex flex-col items-stretch gap-0 md:flex-row md:items-center md:gap-8">
+      <div class="hidden w-full lg:block ${navPanelClass}" data-nav-panel>
+        <div class="container-custom flex flex-col items-stretch gap-2 py-2 lg:h-[62px] lg:flex-row lg:items-center lg:gap-4 lg:py-0">
+          <nav class="flex flex-col items-stretch gap-0 lg:flex-row lg:items-center lg:gap-8">
             ${linksHtml}
           </nav>
 
-          <div class="flex items-center gap-2 py-2.5 font-poppins text-sm font-medium md:ml-auto md:py-0 ${phoneClass}">
+          <div class="flex items-center gap-2 py-2.5 font-poppins text-sm font-medium lg:ml-auto lg:py-0 ${phoneClass}">
             ${iconPhone}
             <span>(219) 555-0114</span>
           </div>
