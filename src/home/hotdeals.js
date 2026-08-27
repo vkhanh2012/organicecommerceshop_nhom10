@@ -1,6 +1,7 @@
 import { renderProductCard } from "../components/productcard.js";
 import { iconStar,  iconHeart, iconEye, iconBag } from "../components/icons.js";
 import { sectionTitle } from "./sectiontitle.js";
+import { renderCountdown } from "../components/countdown.js";
 
 export function renderHotDeals(products = []) {
   if (products.length < 13) return "";
@@ -271,57 +272,8 @@ return `
     </p>
 
 
-    <!-- COUNTDOWN -->
-    <div
-      class="mt-[14px]
-             flex items-start
-             justify-center"
-    >
-      ${[
-        ["01", "Days"],
-        ["23", "Hours"],
-        ["34", "Mins"],
-        ["57", "Secs"]
-      ].map(([value, label], index) => `
-        ${
-          index
-            ? `
-              <span
-                class="pt-[1px]
-                       text-[14px]
-                       leading-[24px]
-                       text-neutral-300"
-              >
-                :
-              </span>
-            `
-            : ""
-        }
-
-        <div class="w-[60px] text-center">
-
-          <strong
-            class="block
-                   text-[18px] font-normal
-                   leading-[30px]
-                   text-neutral-900"
-          >
-            ${value}
-          </strong>
-
-          <span
-            class="mt-[1px] block
-                   text-[10px] font-normal
-                   uppercase
-                   leading-[15px]
-                   text-neutral-400"
-          >
-            ${label}
-          </span>
-
-        </div>
-      `).join("")}
-    </div>
+    <!-- COUNTDOWN: mốc kết thúc được lấy từ products.json -->
+    ${renderCountdown(mainProduct.dealEndsAt)}
 
   </div>
 </article>

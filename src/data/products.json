@@ -147,6 +147,7 @@
     "name": "Chinese Cabbage",
     "price": 12,
     "oldPrice": 24,
+    "dealEndsAt": "2026-09-30T23:59:59+07:00",
     "rating": 2,
     "saleTag": null,
     "category": "Vegetables",
