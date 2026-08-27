@@ -1,199 +1,66 @@
 // src/Quickview/quickview.js
 
 import {
-  renderImage,
-  bindImageEvents
-} from "../descriptions/Image.js";
+  renderQuickViewImage,
+  bindQuickViewImageEvents
+} from "./QuickViewImage.js";
 
 import {
-  renderProductInfo
-} from "../descriptions/ProductInfo.js";
+  renderQuickViewInfo,
+  bindQuickViewInfoEvents
+} from "./QuickViewInfo.js";
 
-import defaultProductData from "../data/productdata.json";
-
-import {
-  getCart,
-  saveCart
-} from "../shopping_cart/cartData.js";
-
-import productListJson from "../data/products.json";
-
-import {
-  attachImageUrls
-} from "../utils/assets.js";
-
+import { getCart, saveCart, addProductToCart } from "../shopping_cart/cartData.js";
 
 // =====================================================
-// PRODUCT DATA
+// DEFAULT PRODUCT FALLBACK
 // =====================================================
-
-// Xử lý trường hợp file JSON là một Object chứa nhiều Object con
-let rawProducts = productListJson;
-if (!Array.isArray(rawProducts) && typeof rawProducts === 'object') {
-  rawProducts = Object.values(rawProducts);
-}
-
-const PRODUCTS = attachImageUrls(rawProducts);
-
-
-// =====================================================
-// TÌM PRODUCT THEO ID
-// =====================================================
-
-function findProductById(id) {
-  if (id === undefined || id === null) {
-    return null;
-  }
-
-  return PRODUCTS.find(
-    product => String(product.id) === String(id)
-  ) || null;
-}
-
-
-// =====================================================
-// CHUẨN HÓA PRODUCT CHO QUICK VIEW
-// =====================================================
+const defaultProductData = {
+  id: 1,
+  name: "Chinese Cabbage",
+  inStock: true,
+  sku: "2,51,594",
+  rating: 4,
+  reviewsCount: 4,
+  originalPrice: 48.0,
+  currentPrice: 17.28,
+  discountLabel: "64% Off",
+  brand: "FarmFresh",
+  brandLogo: "/src/assets/images/brand.svg",
+  description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+  category: { name: "Vegetables", link: "#" },
+  tags: [
+    { name: "Vegetables", link: "#" },
+    { name: "Healthy", link: "#" },
+    { name: "Chinese", link: "#" },
+    { name: "Cabbage", link: "#" },
+    { name: "Green Cabbage", link: "#" }
+  ],
+  mainImage: "/src/assets/images/largecabage.svg",
+  thumbnails: [
+    "/src/assets/images/cabbage1.svg",
+    "/src/assets/images/cabbage2.svg",
+    "/src/assets/images/cabbage3.svg",
+    "/src/assets/images/cabbage4.svg"
+  ]
+};
 
 function normalizeProduct(product) {
+  if (!product) return defaultProductData;
 
-  if (!product) {
-    return normalizeProduct(defaultProductData);
-  }
-
-  const image =
-    product.image ||
-    product.mainImage ||
-    defaultProductData.mainImage ||
-    "";
-
-  const thumbnails =
-    Array.isArray(product.thumbnails) &&
-    product.thumbnails.length > 0
-      ? product.thumbnails
-      : [
-          image,
-          image,
-          image,
-          image
-        ];
-
-  // -----------------------------------------------
-  // TAGS
-  // -----------------------------------------------
-
-  const tags =
-    Array.isArray(product.tags)
-      ? product.tags
-      : (
-          Array.isArray(defaultProductData.tags)
-            ? defaultProductData.tags
-            : []
-        );
-
-  // -----------------------------------------------
-  // FEEDBACKS
-  // -----------------------------------------------
-
-  const feedbacks =
-    Array.isArray(product.feedbacks)
-      ? product.feedbacks
-      : (
-          Array.isArray(defaultProductData.feedbacks)
-            ? defaultProductData.feedbacks
-            : []
-        );
-
-  // -----------------------------------------------
-  // ADDITIONAL INFO
-  // -----------------------------------------------
-
-  const defaultAdditionalInfo =
-    defaultProductData.additionalInfo || {};
-
-  const additionalInfo = {
-    ...defaultAdditionalInfo,
-    ...(product.additionalInfo || {}),
-    tags:
-      Array.isArray(product.additionalInfo?.tags)
-        ? product.additionalInfo.tags
-        : (
-            Array.isArray(defaultAdditionalInfo.tags)
-              ? defaultAdditionalInfo.tags
-              : []
-          )
-  };
-
-  // -----------------------------------------------
-  // CATEGORY
-  // -----------------------------------------------
-
-  let category;
-
-  if (
-    typeof product.category === "object" &&
-    product.category !== null
-  ) {
-    category = {
-      name:
-        product.category.name ||
-        "Vegetables",
-      link:
-        product.category.link ||
-        "#"
-    };
-  } else {
-    category = {
-      name:
-        product.category ||
-        "Vegetables",
-      link: "#"
-    };
-  }
-
-  // -----------------------------------------------
-  // PRICE
-  // -----------------------------------------------
-
-  const currentPrice =
-    Number(
-      product.currentPrice ??
-      product.price ??
-      defaultProductData.currentPrice ??
-      0
-    );
-
-  const originalPrice =
-    product.originalPrice ??
-    product.oldPrice ??
-    defaultProductData.originalPrice ??
-    null;
-
-  // -----------------------------------------------
-  // RETURN PRODUCT
-  // -----------------------------------------------
+  const currentPrice = Number(product.currentPrice ?? product.price ?? defaultProductData.currentPrice ?? 0);
+  const originalPrice = product.originalPrice ?? product.oldPrice ?? defaultProductData.originalPrice ?? null;
+  const image = product.mainImage || product.image || defaultProductData.mainImage || "";
+  const thumbnails = Array.isArray(product.thumbnails) && product.thumbnails.length > 0
+    ? product.thumbnails
+    : [image, image, image, image];
 
   return {
     ...defaultProductData,
     ...product,
-
-    id:
-      product.id ??
-      defaultProductData.id ??
-      Date.now(),
-
-    // FIX LỖI SKU UNDEFINED Ở ĐÂY
-    sku: 
-      product.sku || 
-      defaultProductData.sku || 
-      product.id || 
-      "N/A",
-
-    name:
-      product.name ||
-      defaultProductData.name ||
-      "Product",
-
+    id: product.id ?? defaultProductData.id ?? Date.now(),
+    sku: product.sku || defaultProductData.sku || product.id || "2,51,594",
+    name: product.name || defaultProductData.name || "Product",
     currentPrice,
     originalPrice,
     price: currentPrice,
@@ -201,359 +68,164 @@ function normalizeProduct(product) {
     mainImage: image,
     image,
     thumbnails,
-    tags,
-    feedbacks,
-    additionalInfo,
-    category,
-
-    rating:
-      Number(
-        product.rating ??
-        defaultProductData.rating ??
-        4
-      ),
-
-    reviewsCount:
-      Number(
-        product.reviewsCount ??
-        defaultProductData.reviewsCount ??
-        0
-      ),
-
-    description:
-      product.description ??
-      defaultProductData.description ??
-      ""
+    tags: Array.isArray(product.tags) ? product.tags : defaultProductData.tags || [],
+    rating: Number(product.rating ?? defaultProductData.rating ?? 4),
+    reviewsCount: Number(product.reviewsCount ?? defaultProductData.reviewsCount ?? 4),
+    description: product.description ?? defaultProductData.description ?? "",
   };
 }
 
-
 // =====================================================
-// RENDER QUICK VIEW MODAL
+// RENDER QUICK VIEW MODAL (FIGMA SPECIFICATIONS)
 // =====================================================
-
 export function renderQuickViewModal(product) {
-
   const safeProduct = normalizeProduct(product);
 
   return /*html*/ `
     <div
       id="quick-view-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 sm:p-6"
     >
       <div
-        class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
+        class="container-custom bg-white rounded-2xl shadow-2xl p-6 sm:p-10 overflow-y-auto max-h-[90vh] relative"
       >
-        <!-- CLOSE BUTTON -->
+        <!-- CLOSE BUTTON FIGMA -->
         <button
           id="close-quick-view"
           type="button"
-          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-50"
+          class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-50 font-bold text-lg"
+          aria-label="Close modal"
         >
           ✕
         </button>
 
-        <!-- CONTENT -->
-        <div
-          id="quick-view-content"
-          class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
-        >
-          ${renderImage(safeProduct)}
-          ${renderProductInfo(safeProduct)}
+        <!-- CONTENT GRID FIGMA -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div class="lg:col-span-6 w-full flex justify-center">
+            ${renderQuickViewImage(safeProduct)}
+          </div>
+          <div class="lg:col-span-6 w-full">
+            ${renderQuickViewInfo(safeProduct)}
+          </div>
         </div>
       </div>
     </div>
   `;
 }
 
-
 // =====================================================
 // OPEN QUICK VIEW
 // =====================================================
-
 export function openQuickView(productDataOrId) {
-
   let targetProduct = null;
 
-  // ===================================================
-  // TRƯỜNG HỢP 1: TRUYỀN OBJECT
-  // ===================================================
-  if (
-    typeof productDataOrId === "object" &&
-    productDataOrId !== null
-  ) {
-    if (productDataOrId.id !== undefined) {
-      targetProduct = findProductById(productDataOrId.id);
-    }
-    if (!targetProduct) {
-      targetProduct = productDataOrId;
-    }
+  if (typeof productDataOrId === "object" && productDataOrId !== null) {
+    targetProduct = productDataOrId;
   }
 
-  // ===================================================
-  // TRƯỜNG HỢP 2: TRUYỀN ID
-  // ===================================================
-  else if (
-    typeof productDataOrId === "number" ||
-    typeof productDataOrId === "string"
-  ) {
-    targetProduct = findProductById(productDataOrId);
-  }
-
-  // ===================================================
-  // NẾU KHÔNG TÌM THẤY
-  // ===================================================
-  if (!targetProduct) {
-    console.warn("Không tìm thấy sản phẩm. Dùng defaultProductData.");
-    targetProduct = defaultProductData;
-  }
-
-  // ===================================================
-  // CHUẨN HÓA
-  // ===================================================
   const product = normalizeProduct(targetProduct);
 
-  console.log("QUICK VIEW PRODUCT FINAL:", product);
-
-  // ===================================================
-  // MODAL ROOT
-  // ===================================================
   let modalContainer = document.getElementById("modal-root");
-
   if (!modalContainer) {
     modalContainer = document.createElement("div");
     modalContainer.id = "modal-root";
     document.body.appendChild(modalContainer);
   }
 
-  // ===================================================
-  // RENDER MODAL
-  // ===================================================
   modalContainer.innerHTML = renderQuickViewModal(product);
 
-  // ===================================================
-  // ELEMENTS
-  // ===================================================
   const modal = modalContainer.querySelector("#quick-view-modal");
   const closeBtn = modalContainer.querySelector("#close-quick-view");
 
-  // ===================================================
-  // CLOSE MODAL
-  // ===================================================
+  const handleEscape = (event) => {
+    if (event.key === "Escape") closeModal();
+  };
+
   const closeModal = () => {
     modalContainer.innerHTML = "";
+    document.removeEventListener("keydown", handleEscape);
   };
 
   closeBtn?.addEventListener("click", closeModal);
-
   modal?.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
+    if (event.target === modal) closeModal();
   });
-
-  // ===================================================
-  // ESC ĐỂ ĐÓNG
-  // ===================================================
-  const handleEscape = (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-      document.removeEventListener("keydown", handleEscape);
-    }
-  };
-
   document.addEventListener("keydown", handleEscape);
 
-  // ===================================================
-  // IMAGE EVENTS
-  // ===================================================
-  try {
-    bindImageEvents(modalContainer);
-  } catch (error) {
-    console.warn("Không thể bind Image Events:", error);
-  }
+  // BIND ISOLATED IMAGE & INFO EVENTS
+  bindQuickViewImageEvents(modalContainer);
 
-  // ===================================================
-  // QUANTITY
-  // ===================================================
-  const qtyInput =
-    modalContainer.querySelector(".quantity-stepper-input") ||
-    modalContainer.querySelector("[data-quantity-val]");
+  bindQuickViewInfoEvents(modalContainer, ({ quantity }) => {
+    // THÊM SẢN PHẨM VÀO GIỎ HÀNG & TỰ ĐỘNG BẮN SỰ KIỆN CẬP NHẬT HEADER/POPUP
+    addProductToCart(product, quantity);
 
-  const decBtn =
-    modalContainer.querySelector('[data-action="decrement"]') ||
-    modalContainer.querySelector('[data-action="decrease-qty"]');
-
-  const incBtn =
-    modalContainer.querySelector('[data-action="increment"]') ||
-    modalContainer.querySelector('[data-action="increase-qty"]');
-
-  // DECREASE
-  if (decBtn && qtyInput) {
-    decBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
-      if (current > 1) {
-        current--;
-        if ("value" in qtyInput) {
-          qtyInput.value = current;
-        } else {
-          qtyInput.textContent = current;
-        }
-      }
-    });
-  }
-
-  // INCREASE
-  if (incBtn && qtyInput) {
-    incBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      let current = Number(qtyInput.value || qtyInput.textContent) || 1;
-      current++;
-      if ("value" in qtyInput) {
-        qtyInput.value = current;
-      } else {
-        qtyInput.textContent = current;
-      }
-    });
-  }
-
-  // ===================================================
-  // ADD TO CART
-  // ===================================================
-  const addBtn = modalContainer.querySelector('[data-action="add-to-cart"]');
-
-  if (addBtn) {
-    addBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const count = qtyInput
-        ? Number(qtyInput.value || qtyInput.textContent) || 1
-        : 1;
-
-      const cart = getCart();
-
-      const existing = cart.find(
-        item => String(item.id) === String(product.id)
-      );
-
-      if (existing) {
-        existing.quantity = Number(existing.quantity || 0) + count;
-      } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          image: product.mainImage,
-          price: Number(product.currentPrice),
-          quantity: count
-        });
-      }
-
-      saveCart(cart);
-      console.log("CART AFTER QUICK VIEW:", getCart());
-      closeModal();
-      showToast(`${product.name} added to cart.`);
-    });
-  }
+    closeModal();
+    showToast(`${product.name} added to cart (${quantity}).`);
+  });
 }
 
-
 // =====================================================
-// TOAST
+// TOAST NOTIFICATION
 // =====================================================
 function showToast(message) {
   const oldToast = document.getElementById("quick-view-toast");
-  if (oldToast) {
-    oldToast.remove();
-  }
+  if (oldToast) oldToast.remove();
 
   const toast = document.createElement("div");
   toast.id = "quick-view-toast";
   toast.className = `
     fixed bottom-6 right-6 z-[99999] bg-[#1A1A1A] text-white
-    text-sm font-medium px-5 py-3 rounded-lg shadow-xl
+    text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all
   `;
   toast.textContent = message;
 
   document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  }, 3000);
+  setTimeout(() => toast.remove(), 3000);
 }
 
-
 // =====================================================
-// QUICK VIEW EVENT - HOME + SHOP
+// QUICK VIEW GLOBAL EVENT LISTENER
 // =====================================================
 document.addEventListener("click", (event) => {
-
   const eyeBtn = event.target.closest('[data-action="quick-view"]');
   if (!eyeBtn) return;
 
   event.preventDefault();
   event.stopPropagation();
 
-  // ===================================================
-  // TÌM CARD & LẤY ID
-  // ===================================================
+  let productData = null;
+
+  if (eyeBtn.dataset.product) {
+    try {
+      productData = JSON.parse(decodeURIComponent(eyeBtn.dataset.product));
+    } catch (err) {}
+  }
+
   const card = eyeBtn.closest(".product-card");
-  if (!card) {
-    console.error("Quick View: Không tìm thấy product-card.", eyeBtn);
+  const id = eyeBtn.getAttribute("data-id") || card?.getAttribute("data-id");
+
+  if (productData) {
+    openQuickView(productData);
     return;
   }
 
-  const id =
-    eyeBtn.getAttribute("data-id") ||
-    card.getAttribute("data-product-id") ||
-    card.getAttribute("data-id");
+  if (card) {
+    const nameElement = card.querySelector(".name") || card.querySelector("a");
+    const imageElement = card.querySelector("img");
+    const priceElement = card.querySelector(".price");
 
-  console.log("=================================");
-  console.log("QUICK VIEW CLICK - FINAL ID:", id);
+    const name = nameElement?.textContent?.trim() || "Product";
+    const image = imageElement?.src || "";
+    const price = Number(priceElement?.textContent?.replace(/[^0-9.]/g, "")) || 0;
 
-  if (!id) {
-    console.error("Quick View: Card không có product ID.", card);
-    return;
+    openQuickView({
+      id: id || Date.now(),
+      name,
+      price,
+      currentPrice: price,
+      image,
+      mainImage: image,
+      thumbnails: [image, image, image, image],
+    });
   }
-
-  // ===================================================
-  // TÌM PRODUCT TRONG PRODUCTS.JSON
-  // ===================================================
-  const product = findProductById(id);
-
-  console.log("PRODUCT FOUND:", product);
-
-  if (product) {
-    openQuickView(product);
-    return;
-  }
-
-  // ===================================================
-  // FALLBACK - CHỈ CHẠY NẾU KHÔNG TÌM THẤY ID TRONG DATA
-  // ===================================================
-  const nameElement = card.querySelector("a[href*='descriptions']") || card.querySelector("a");
-  const imageElement = card.querySelector("img");
-  const priceElement = card.querySelector(".price");
-
-  const name = nameElement?.textContent?.trim() || "Product";
-  const image = imageElement?.src || "";
-  const priceText = priceElement?.textContent?.replace(/[^0-9.]/g, "") || "0";
-  const price = Number(priceText) || 0;
-
-  console.log("FALLBACK PRODUCT:", { id, name, image, price });
-
-  openQuickView({
-    id,
-    sku: id,
-    name,
-    price,
-    currentPrice: price,
-    image,
-    mainImage: image,
-    // Nếu phải fallback, do không có dữ liệu thật nên đành lặp ảnh 4 lần
-    thumbnails: [image, image, image, image]
-  });
 });

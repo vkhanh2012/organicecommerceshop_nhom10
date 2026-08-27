@@ -1,4 +1,6 @@
-export function renderCategoryFilter(products, selectedCategory = "all") {
+import { dropDown } from "../components/icons.js"
+
+export function renderCategoryFilter(products, selectedCategory = "all",layout = "sidebar") {
   const categoryCounts = {}
   //đếm số lượng sản phẩm
   products.forEach((product) => {
@@ -33,7 +35,7 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
     .map((item) => {
       const checked = selectedCategory === item.value
       return /*html*/ `
-      <li class="flex items-center justify-between text-sm text-neutral-600 cursor-pointer group">
+      <li class="flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-sm text-neutral-600 cursor-pointer">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
@@ -49,6 +51,7 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
               border-2 border-neutral-300
               bg-white
               cursor-pointer
+              ${layout === "horizontal" ? "group-hover/category:border-primary" : ""}
 
               checked:border-primary
               checked:bg-primary
@@ -63,26 +66,80 @@ export function renderCategoryFilter(products, selectedCategory = "all") {
               text-neutral-600
               peer-checked:text-primary-dark
               peer-checked:font-medium
-              group-hover:text-primary
+              ${layout === "horizontal" ? "group-hover/category:text-primary" : "group-hover:text-primary"}
               transition-colors
               font-poppins
             "
           >
             ${item.label}
           </label>
-            </div>
-
+          ${layout === "horizontal" ? "" : `
             <span class="text-neutral-400 text-xs font-poppins">
               (${item.count})
             </span>
+          `}
+            </div>
+
+            ${layout === "horizontal" ? `
+              <span class="text-neutral-400 text-xs font-poppins">
+                (${item.count})
+              </span>
+            ` : ""}
           </li>
     `
     })
     .join("")
 
+// shop2
+
+    if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-40 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Category</span>
+
+        <span
+          class="
+            transition-transform
+            group-open:rotate-180
+          "
+        >
+          ${dropDown}
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-72
+          rounded-lg
+          border border-neutral-100
+          bg-white p-4 shadow-lg
+        "
+      >
+        <ul class="space-y-3">
+          ${listItemsHtml}
+        </ul>
+      </div>
+
+    </details>
+  `
+}
+
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="section-heading">All Categories</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

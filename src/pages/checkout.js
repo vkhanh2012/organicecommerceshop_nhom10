@@ -1,9 +1,17 @@
+// src/pages/checkoutpage.js
+
+import { renderCheckout, bindCheckoutEvents } from "../checkout/checkout.js";
 import { bindLocationEvents } from "../checkout/Location.js";
-import { renderCheckout } from "../checkout/checkout.js";
+import { getCart } from "../shopping_cart/cartData.js";
 
-const checkoutContainer = document.getElementById("checkout-container");
+export function initCheckoutPage() {
+  const container = document.getElementById("checkout-container");
+  if (!container) return;
 
-if (checkoutContainer) {
-  checkoutContainer.innerHTML = renderCheckout();
-  bindLocationEvents(checkoutContainer);
+  const cart = getCart();
+  container.innerHTML = renderCheckout(cart);
+
+  // Gắn các sự kiện form validation và chuyển đổi quốc gia/tỉnh thành
+  bindCheckoutEvents(container);
+  bindLocationEvents(container);
 }

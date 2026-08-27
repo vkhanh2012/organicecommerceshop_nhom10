@@ -7,51 +7,64 @@ import {
   iconStar
 } from "../components/icons.js";
 
-import productList from "../data/products.json";
-import productData from "../data/productdata.json";
-import { getImageUrl } from "../utils/assets.js";
+import { addProductToCart } from "../shopping_cart/cartData.js";
+import { getImageUrl, attachImageUrls } from "../utils/assets.js";
+import productsData from "../data/products.json";
 
 // =====================================================
-// LẤY DATA TỪ productdata.json
+// CSS CLASSES DÀNH CHO CARD & GRID (HOVER VIỀN XANH & GẠCH CHÂN CHỮ)
 // =====================================================
-
-const {
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsicumProductData
-} = productData;
-
-
-// =====================================================
-// TẠO PRODUCTS MAP TỪ JSON
-// =====================================================
-
-const PRODUCTS_MAP = productData.PRODUCTS_MAP || {};
-
-
-// =====================================================
-// DANH SÁCH PRODUCT DATA
-// =====================================================
-
-const PRODUCTS = [
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsicumProductData
-].filter(Boolean);
-
-
-// =====================================================
-// CLASS
-// =====================================================
-
 const CLASS = {
-  card:
-    "product-card w-full h-full flex flex-col justify-between group relative bg-white border border-neutral-200 rounded-xl p-3 transition-all duration-300 hover:border-primary hover:shadow-[0_4px_20px_rgba(0,178,7,0.15)]",
+  // CARD TRANG HOME (Hover viền xanh #2C742F & shadow nhẹ)
+  cardHome: `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    justify-between
+    bg-white
+    p-3.5
+    rounded-2xl
+    border
+    border-neutral-200
+    transition-all
+    duration-300
+    hover:z-20
+    hover:border-[#2C742F]
+    hover:shadow-[0_4px_20px_rgba(0,178,7,0.18)]
+  `,
+
+  // CARD TRANG SHOP (Hover viền xanh #2C742F & shadow nhẹ)
+  cardShop: `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    justify-between
+    overflow-hidden
+    rounded-2xl
+    border
+    border-neutral-200
+    bg-white
+    p-3.5
+    transition-all
+    duration-300
+    hover:z-20
+    hover:border-[#2C742F]
+    hover:shadow-[0_4px_20px_rgba(0,178,7,0.18)]
+    xl:h-96
+  `,
 
   imageWrap:
-    "relative aspect-square w-full rounded-lg overflow-hidden bg-white flex items-center justify-center mb-3 block cursor-pointer p-2",
+    "relative aspect-square rounded-xl overflow-hidden bg-white flex items-center justify-center mb-3 block cursor-pointer shrink-0 p-2",
 
   image:
     "w-full h-full object-contain transition-transform duration-300 group-hover:scale-105",
@@ -60,424 +73,267 @@ const CLASS = {
     "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
 
   tagSale:
-    "bg-error text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded",
+    "bg-[#EA4335] text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
 
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded",
+    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-2 py-0.5 rounded-md",
 
   actions:
-    "absolute top-2 right-2 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
+    "absolute top-3 right-3 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
   actionBtn:
-    "w-8 h-8 md:w-9 md:h-9 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
+    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-white shadow-md md:shadow-none md:border md:border-neutral-100 flex items-center justify-center text-neutral-700 hover:bg-[#00B307] hover:text-white transition-colors cursor-pointer",
 
   body:
-    "px-1 flex flex-col flex-1 justify-between mt-auto",
+    "px-0.5 flex flex-col flex-1 justify-between mt-1",
 
+  // TÊN SẢN PHẨM: HOVER ĐỔI MÀU XANH + GẠCH CHÂN (group-hover:underline group-hover:text-[#2C742F])
   name:
-    "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer font-medium line-clamp-1",
+    "font-poppins text-sm md:text-base font-normal text-neutral-800 mb-1.5 transition-colors group-hover:text-[#2C742F] group-hover:underline hover:underline block cursor-pointer line-clamp-1 leading-6",
 
   priceRow:
-    "flex items-center justify-between mb-1 mt-auto pt-2",
+    "flex items-center justify-between mb-1 mt-auto pt-1",
 
   price:
-    "font-poppins text-sm md:text-base font-semibold text-neutral-900",
+    "font-poppins text-base md:text-lg font-semibold text-neutral-900",
 
   priceOld:
-    "font-poppins text-xs md:text-sm text-neutral-400 line-through ml-1.5",
+    "font-poppins text-xs md:text-sm text-neutral-400 line-through ml-1.5 font-normal",
 
+  // NÚT GIỎ HÀNG THỜI TRANG (Nền xanh khi hover card)
   cartBtn:
-    "w-10 h-10 rounded-full bg-neutral-100 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+    "w-10 h-10 md:w-11 md:h-11 rounded-full bg-neutral-100 text-neutral-800 flex items-center justify-center transition-all md:group-hover:bg-[#00B307] md:group-hover:text-white cursor-pointer shrink-0 shadow-xs",
 
   rating:
     "flex items-center gap-0.5 mt-1",
 
-  grid:
-    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch",
+  // GRID HOME (5 CỘT)
+  gridHome:
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 items-stretch w-full",
+
+  // GRID SHOP (3 CỘT)
+  gridShop:
+    "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch w-full"
 };
 
-
 // =====================================================
-// HÀM TÌM PRODUCT DATA THEO TÊN
+// TOAST NOTIFICATION GÓC PHẢI DƯỚI
 // =====================================================
-
-function findProductDataByName(name) {
-  if (!name) return null;
-
-  const nameKey = name.toLowerCase().trim();
-
-  // Tìm trong PRODUCTS
-  const found = PRODUCTS.find(
-    product =>
-      product &&
-      product.name &&
-      product.name.toLowerCase().trim() === nameKey
-  );
-
-  if (found) return found;
-
-  // Tìm thông qua PRODUCTS_MAP
-  const mapKey = Object.keys(PRODUCTS_MAP).find(
-    key => key.toLowerCase().trim() === nameKey
-  );
-
-  if (mapKey) {
-    const dataKey = PRODUCTS_MAP[mapKey];
-    if (dataKey && productData[dataKey]) {
-      return productData[dataKey];
-    }
+function showToast(message) {
+  let toast = document.getElementById("toast-notification");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-notification";
+    toast.className = `
+      fixed bottom-5 right-5 bg-neutral-900 text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none
+    `;
+    document.body.appendChild(toast);
   }
 
-  return null;
+  toast.textContent = message;
+  toast.classList.remove("opacity-0", "translate-y-2", "pointer-events-none");
+  toast.classList.add("opacity-100", "translate-y-0");
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-100", "translate-y-0");
+    toast.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
+  }, 2500);
 }
 
-
 // =====================================================
-// BẢNG Bố TRÍ ẢNH
+// XỬ LÝ ĐƯỜNG DẪN ẢNH VITE & FALLBACK
 // =====================================================
-
-const PRODUCT_IMAGE_MAP = {};
-
-// Tự động lấy ảnh từ productdata.json
-PRODUCTS.forEach(product => {
-  if (product && product.name && product.mainImage) {
-    PRODUCT_IMAGE_MAP[product.name.toLowerCase().trim()] = product.mainImage;
-  }
-});
-
-
-// =====================================================
-// BỘ GIẢI MÃ ẢNH THÔNG MINH
-// =====================================================
-
 function resolveImage(p = {}) {
-  // 1. Ưu tiên lấy ảnh trực tiếp từ đối tượng p
-  let imgPath = p.image || p.mainImage || (Array.isArray(p.thumbnails) && p.thumbnails[0]);
-
-  // 2. Nếu p không chứa đường dẫn ảnh, tìm trong productData theo tên
-  if (!imgPath) {
-    const dataProduct = findProductDataByName(p.name);
-    if (dataProduct && dataProduct.mainImage) {
-      imgPath = dataProduct.mainImage;
-    }
-  }
-
-  // 3. Tìm trong PRODUCT_IMAGE_MAP
-  if (!imgPath) {
-    const nameKey = (p.name || "").toLowerCase().trim();
-    if (PRODUCT_IMAGE_MAP[nameKey]) {
-      imgPath = PRODUCT_IMAGE_MAP[nameKey];
-    }
-  }
-
-  // 4. Nếu vẫn không có, dùng ảnh mặc định
-  if (!imgPath || typeof imgPath !== "string" || imgPath.includes("undefined")) {
-    imgPath = defaultProductData?.mainImage || "";
-  }
-
-  // 5. Chuyển đổi đường dẫn ảnh chuẩn bằng getImageUrl
-  if (imgPath.startsWith("/images/") || imgPath.startsWith("images/")) {
+  let imgPath = p.image || p.mainImage || (Array.isArray(p.thumbnails) && p.thumbnails[0]) || "";
+  if (typeof getImageUrl === "function" && (imgPath.startsWith("/images/") || imgPath.startsWith("images/"))) {
     return getImageUrl(imgPath);
   }
-
-  return imgPath;
+  return imgPath || "/src/assets/images/cabbage1.svg";
 }
 
+// =====================================================
+// HÀM TẢI DANH SÁCH SẢN PHẨM
+// =====================================================
+export async function getProducts() {
+  if (typeof attachImageUrls === "function") {
+    return attachImageUrls(productsData);
+  }
+  return productsData;
+}
 
 // =====================================================
-// PRODUCT CARD
+// RENDER PRODUCT CARD (CHUẨN HOME & SHOP)
 // =====================================================
-
-export function renderProductCard(p = {}) {
+export function renderProductCard(p = {}, page = "home") {
   const id = p.id || 1;
   const name = p.name || "Tên sản phẩm";
   const image = resolveImage(p);
 
-  const price =
-    p.price !== undefined
-      ? p.price
-      : (p.currentPrice !== undefined ? p.currentPrice : 0);
-
-  const oldPrice =
-    p.oldPrice !== undefined
-      ? p.oldPrice
-      : (p.originalPrice !== undefined ? p.originalPrice : null);
-
+  const price = p.price !== undefined ? p.price : (p.currentPrice !== undefined ? p.currentPrice : 0);
+  const oldPrice = p.oldPrice !== undefined ? p.oldPrice : (p.originalPrice !== undefined ? p.originalPrice : null);
   const rating = p.rating || 4;
   const saleTag = p.saleTag || p.discountLabel || null;
   const bestTag = p.bestTag || null;
 
-  // LINK DETAIL
   const detailUrl = `./descriptions.html?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
 
-  // DATA CHO QUICK VIEW / CART (Truyền đúng đường dẫn ảnh chuẩn)
   const productDataStr = encodeURIComponent(
-    JSON.stringify({
-      ...p,
-      id,
-      name,
-      price,
-      oldPrice,
-      image
-    })
+    JSON.stringify({ ...p, id, name, price, oldPrice, image })
   );
 
-  // RATING
-  const starsHtml = Array.from({ length: 5 })
-    .map(
-      (_, i) => `
-        <span class="${i < rating ? "text-warning" : "text-neutral-200"} text-xs">
-          ${iconStar(i < rating)}
-        </span>
-      `
-    )
-    .join("");
+  const cardClass = page === "shop" ? CLASS.cardShop : CLASS.cardHome;
 
-  // TAG
-  const tagsHtml =
-    saleTag || bestTag
-      ? `
-        <div class="${CLASS.tags}">
-          ${saleTag ? `<span class="${CLASS.tagSale}">${saleTag}</span>` : ""}
-          ${bestTag ? `<span class="${CLASS.tagBest}">${bestTag}</span>` : ""}
-        </div>
-      `
-      : "";
+  const starsHtml = Array.from({ length: 5 })
+    .map((_, i) => `
+      <span class="${i < rating ? "text-warning" : "text-neutral-200"}">
+        ${iconStar(i < rating)}
+      </span>
+    `).join("");
+
+  const tagsHtml = (saleTag || bestTag) ? `
+    <div class="${CLASS.tags}">
+      ${saleTag ? `<span class="${CLASS.tagSale}">${saleTag}</span>` : ""}
+      ${bestTag ? `<span class="${CLASS.tagBest}">${bestTag}</span>` : ""}
+    </div>
+  ` : "";
 
   return `
-    <article class="${CLASS.card}" data-id="${id}">
-
-      <!-- PRODUCT IMAGE -->
-      <a
-        href="${detailUrl}"
-        data-action="view-detail"
-        class="${CLASS.imageWrap}"
-        aria-label="Xem chi tiết ${name}"
-      >
+    <article class="${cardClass}" data-id="${id}">
+      <a href="${detailUrl}" data-action="view-detail" class="${CLASS.imageWrap}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
-        <img
-          src="${image}"
-          alt="${name}"
-          class="${CLASS.image}"
-          loading="lazy"
-          onerror="this.onerror=null; this.src='${defaultProductData?.mainImage || ""}';"
-        />
+        <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
       </a>
 
-      <!-- ACTION BUTTONS -->
       <div class="${CLASS.actions}">
-
-        <!-- Wishlist -->
-        <button
-          type="button"
-          data-action="wishlist"
-          data-id="${id}"
-          class="${CLASS.actionBtn}"
-          aria-label="Thêm vào yêu thích"
-        >
+        <button type="button" data-action="wishlist" data-id="${id}" class="${CLASS.actionBtn}" aria-label="Wishlist">
           ${iconHeart}
         </button>
-
-        <!-- Quick View -->
-        <button
-          type="button"
-          data-action="quick-view"
-          data-id="${id}"
-          data-product="${productDataStr}"
-          class="${CLASS.actionBtn}"
-          aria-label="Xem nhanh"
-        >
+        <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view">
           ${iconEye}
         </button>
-
       </div>
 
-      <!-- PRODUCT BODY -->
       <div class="${CLASS.body}">
+        <a href="${detailUrl}" data-action="view-detail" class="${CLASS.name}" title="${name}">${name}</a>
 
-        <!-- PRODUCT NAME -->
-        <a
-          href="${detailUrl}"
-          data-action="view-detail"
-          class="${CLASS.name}"
-        >
-          ${name}
-        </a>
+        <div>
+          <div class="${CLASS.priceRow}">
+            <div>
+              <span class="${CLASS.price}">$${Number(price).toFixed(2)}</span>
+              ${oldPrice !== null && oldPrice !== undefined && oldPrice !== "" ? `<span class="${CLASS.priceOld}">$${Number(oldPrice).toFixed(2)}</span>` : ""}
+            </div>
 
-        <!-- PRICE + CART -->
-        <div class="${CLASS.priceRow}">
-          <div>
-            <span class="${CLASS.price}">
-              $${Number(price).toFixed(2)}
-            </span>
-            ${
-              oldPrice !== null && oldPrice !== undefined && oldPrice !== ""
-                ? `
-                  <span class="${CLASS.priceOld}">
-                    $${Number(oldPrice).toFixed(2)}
-                  </span>
-                `
-                : ""
-            }
+            <button
+              type="button"
+              data-action="add-to-cart"
+              data-id="${id}"
+              data-product="${productDataStr}"
+              class="${CLASS.cartBtn}"
+              aria-label="Thêm ${name} vào giỏ hàng"
+            >
+              ${iconBag}
+            </button>
           </div>
 
-          <!-- Add To Cart -->
-          <button
-            type="button"
-            data-action="add-to-cart"
-            data-id="${id}"
-            data-product="${productDataStr}"
-            class="${CLASS.cartBtn}"
-            aria-label="Thêm ${name} vào giỏ hàng"
-          >
-            ${iconBag}
-          </button>
+          <div class="${CLASS.rating}">${starsHtml}</div>
         </div>
-
-        <!-- RATING -->
-        <div class="${CLASS.rating}">
-          ${starsHtml}
-        </div>
-
       </div>
-
     </article>
   `;
 }
 
-
 // =====================================================
-// TỰ ĐỘNG BẮT CLICK ĐIỀU HƯỚNG DETAIL
+// RENDER PRODUCT GRID (TỰ ĐỘNG THEO TRANG HOME / SHOP)
 // =====================================================
-
-document.addEventListener("click", (e) => {
-  const detailLink = e.target.closest('[data-action="view-detail"]');
-
-  if (!detailLink) return;
-
-  const href = detailLink.getAttribute("href");
-
-  if (
-    href &&
-    !e.target.closest('[data-action="wishlist"]') &&
-    !e.target.closest('[data-action="quick-view"]') &&
-    !e.target.closest('[data-action="add-to-cart"]')
-  ) {
-    e.preventDefault();
-    window.location.href = href;
-  }
-});
-
-
-// =====================================================
-// RENDER PRODUCT GRID
-// =====================================================
-
-export function renderProductGrid(products = []) {
-  const itemsHtml = products.map(renderProductCard).join("");
+export function renderProductGrid(products = [], page = "home") {
+  const itemsHtml = products.map((product) => renderProductCard(product, page)).join("");
+  const gridClass = page === "shop" ? CLASS.gridShop : CLASS.gridHome;
 
   return `
     <div class="w-full">
-      <div class="${CLASS.grid}">
-        ${itemsHtml}
-      </div>
+      <div class="${gridClass}">${itemsHtml}</div>
     </div>
   `;
 }
 
+// =====================================================
+// LẮNG NGHE SỰ KIỆN CLICK (THÊM GIỎ HÀNG, WISHLIST, DETAILS)
+// =====================================================
+export function bindCardEvents(container = document) {
+  container.addEventListener("click", (e) => {
+    // THÊM VÀO GIỎ HÀNG
+    const cartBtn = e.target.closest('[data-action="add-to-cart"]');
+    if (cartBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const rawData = cartBtn.getAttribute("data-product");
+      if (!rawData) return;
+
+      try {
+        const product = JSON.parse(decodeURIComponent(rawData));
+        if (typeof addProductToCart === "function") {
+          addProductToCart(product, 1);
+        }
+        showToast(`${product.name} added to cart.`);
+      } catch (err) {
+        console.error("Lỗi thêm giỏ hàng:", err);
+      }
+      return;
+    }
+
+    // YÊU THÍCH (WISHLIST)
+    const wishlistBtn = e.target.closest('[data-action="wishlist"]');
+    if (wishlistBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const card = wishlistBtn.closest(".product-card");
+      const name = card?.querySelector("a")?.textContent?.trim() || "Product";
+      showToast(`${name} added to wishlist.`);
+      return;
+    }
+
+    // XEM NHANH (QUICK VIEW)
+    const quickViewBtn = e.target.closest('[data-action="quick-view"]');
+    if (quickViewBtn) {
+      // Nút QuickView được lắng nghe bởi quickview.js
+      return;
+    }
+  });
+}
 
 // =====================================================
-// RENDER RELATED PRODUCTS
+// RENDER RELATED PRODUCTS (SẢN PHẨM LIÊN QUAN TRANG DETAIL)
 // =====================================================
-
-export function renderRelatedProducts(
-  currentProduct = {},
-  allProducts = productList
-) {
+export function renderRelatedProducts(currentProduct = {}, allProducts = productsData) {
   let displayProducts = [];
 
-  // RELATED PRODUCTS CÓ SẴN
-  if (
-    currentProduct.relatedProducts &&
-    Array.isArray(currentProduct.relatedProducts) &&
-    currentProduct.relatedProducts.length > 0
-  ) {
+  if (currentProduct.relatedProducts && Array.isArray(currentProduct.relatedProducts) && currentProduct.relatedProducts.length > 0) {
     displayProducts = [...currentProduct.relatedProducts];
-  }
-  // RELATED IDS
-  else if (
-    currentProduct.relatedIds &&
-    Array.isArray(currentProduct.relatedIds)
-  ) {
-    displayProducts = (allProducts || productList).filter(p =>
-      currentProduct.relatedIds.includes(p.id)
-    );
+  } else if (currentProduct.relatedIds && Array.isArray(currentProduct.relatedIds)) {
+    displayProducts = (allProducts || productsData).filter((product) => currentProduct.relatedIds.includes(product.id));
   }
 
-  // CHƯA ĐỦ 4 SẢN PHẨM
   if (displayProducts.length < 4) {
-    let categoryName = "";
+    const existingIds = new Set(displayProducts.map((p) => String(p.id)));
+    if (currentProduct.id) existingIds.add(String(currentProduct.id));
 
-    if (currentProduct.category) {
-      categoryName =
-        typeof currentProduct.category === "object"
-          ? currentProduct.category.name
-          : currentProduct.category;
-    }
-
-    const existingNames = new Set(
-      displayProducts.map(p => p.name?.toLowerCase())
-    );
-
-    if (currentProduct.name) {
-      existingNames.add(currentProduct.name.toLowerCase());
-    }
-
-    const sourceProducts = allProducts || productList;
-
-    const remainingCandidates = sourceProducts.filter(
-      p =>
-        p.id !== currentProduct.id &&
-        !existingNames.has(p.name?.toLowerCase())
-    );
-
-    const sameCategoryCandidates = remainingCandidates.filter(p => {
-      let category = p.category;
-      if (typeof category === "object") category = category.name;
-      return category === categoryName;
-    });
-
-    const otherCandidates = remainingCandidates.filter(p => {
-      let category = p.category;
-      if (typeof category === "object") category = category.name;
-      return category !== categoryName;
-    });
-
-    const seed = Number(currentProduct.id) || 1;
-
-    sameCategoryCandidates.sort(
-      (a, b) => ((a.id * seed * 13) % 11) - ((b.id * seed * 13) % 11)
-    );
-
-    otherCandidates.sort(
-      (a, b) => ((a.id * seed * 17) % 13) - ((b.id * seed * 17) % 13)
-    );
-
-    const pool = [...sameCategoryCandidates, ...otherCandidates];
-    const needed = 4 - displayProducts.length;
-
-    displayProducts = [...displayProducts, ...pool.slice(0, needed)];
+    const candidates = (allProducts || productsData).filter((p) => !existingIds.has(String(p.id)));
+    displayProducts = [...displayProducts, ...candidates.slice(0, 4 - displayProducts.length)];
   }
 
-  const final4Products = displayProducts.slice(0, 4);
-  const cardsHtml = final4Products.map(renderProductCard).join("");
+  const finalProducts = displayProducts.slice(0, 4);
+  const cardsHtml = finalProducts.map((product) => renderProductCard(product, "home")).join("");
 
   return `
-    <section class="w-full max-w-[1320px] mx-auto px-4 md:px-8 mt-16 mb-20">
-      <h2 class="text-2xl sm:text-[32px] font-semibold text-center text-gray-900 mb-8 font-poppins">
-        Related Products
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full items-stretch">
+    <section class="w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-25">
+      <div class="w-full text-center mb-6">
+        <h2 class="text-[32px] font-semibold text-zinc-900 font-poppins leading-tight inline-block">
+          Related Products
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full justify-center items-stretch">
         ${cardsHtml}
       </div>
     </section>

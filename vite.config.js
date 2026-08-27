@@ -16,6 +16,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         shop: resolve(__dirname, 'shop.html'),
+        shop2: resolve(__dirname, 'shop2.html'),
         cart: resolve(__dirname, 'cart.html'),
         signup: resolve(__dirname, 'signup.html'),
         signin: resolve(__dirname, 'signin.html'),

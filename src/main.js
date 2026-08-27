@@ -10,6 +10,7 @@ import { renderFooterComponent } from "./components/footer.js";
 import { renderNewsletterComponent } from "./components/newsletter.js";
 
 import { bindHeroEvents } from "./home/hero.js";
+import { bindCardEvents } from "./components/productcard.js";
 
 import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
 import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
@@ -79,7 +80,7 @@ function initNavigation() {
         location.pathname
     });
 
-  bindNavigationEvents(navigation);
+  bindNavigationEvents(navigation, cart);
 }
 
 
@@ -100,8 +101,7 @@ async function initHomepage() {
     await renderHomepageComponent();
 
   bindHeroEvents(homepage);
-
-  initNewsletterPopupPage();
+  bindCardEvents(homepage);
 }
 
 
@@ -157,7 +157,7 @@ if (
     .then(() => {
       initNewsletterPopupPage();
     });
-
+  initNewsletter();  
   initFooter();
 }
 
@@ -195,6 +195,8 @@ if (
   initNavigation();
 
   initShoppingCartPage();
+
+  initNewsletter();
 
   initFooter();
 }
@@ -319,7 +321,16 @@ if (
   initFooter();
 }
 
-// Lắng nghe sự kiện giỏ hàng thay đổi để tự động vẽ lại Navigation (Header)
-window.addEventListener("cartUpdated", () => {
+// Đồng bộ Header + Cart Popup khi giỏ hàng thay đổi
+document.addEventListener("cart:updated", (event) => {
+  const shouldKeepPopupOpen = Boolean(event.detail?.openPopup);
+
   initNavigation();
+
+  if (shouldKeepPopupOpen) {
+    requestAnimationFrame(() => {
+      document.querySelector("[data-cart-overlay]")?.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    });
+  }
 });

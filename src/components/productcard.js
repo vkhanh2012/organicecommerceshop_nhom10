@@ -7,61 +7,135 @@ import {
   iconStar
 } from "./icons.js";
 import { addProductToCart } from "../shopping_cart/cartData.js";
+import { isInWishlist, toggleWishlist } from "../wishlist/wishlistData.js";
 import { getImageUrl, attachImageUrls } from "../utils/assets.js";
 import productsData from "../data/products.json";
 
 const CLASS = {
   // Card phẳng nằm trong khung viền 1px
-  card:
-    "product-card w-full h-full group relative bg-white p-3 flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer",
+  cardHome: 
+    "product-card w-full h-full group relative bg-white flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer lg:h-[327px]",
 
-  imageWrap:
-    "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
+  cardShop: `
+    product-card
+    group
+    relative
+    flex
+    h-full
+    w-full
+    cursor-pointer
+    flex-col
+    overflow-hidden
 
-  image:
-    "w-full h-full object-cover",
+    rounded-lg
+    border
+    border-neutral-200
+    bg-white
+
+    transition-[border-color,box-shadow]
+    duration-300
+
+    hover:z-20
+    hover:border-primary
+    hover:shadow-[0_0_12px_rgba(0,178,7,0.20)]
+
+    xl:h-[407px]
+  `,
+
+  imageWrapHome:
+  "relative h-[220px] overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0 sm:h-[240px]",
+
+  imageWrapShop:
+    "relative aspect-square w-full overflow-hidden bg-white flex items-center justify-center block cursor-pointer shrink-0",
+  
+  imageHome:
+    "h-full w-full object-contain",
+
+  imageShop:
+    "h-full w-full object-cover",
 
   tags:
-    "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
+    "absolute top-4 left-4 z-10 flex gap-1 pointer-events-none",
 
   tagSale:
-    "bg-error text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
+    "bg-error text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
+    "bg-sky-500 text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   actions:
-    "absolute top-2 right-2 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
+    "absolute top-4 right-4 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
 
   actionBtn:
-    "w-8 h-8 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
+    "w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-neutral-700 hover:bg-primary hover:text-white transition-colors cursor-pointer",
 
-  body:
-    "px-0.5 flex flex-col flex-1 justify-between",
+  bodyHome:
+  "relative h-[87px] px-3 pt-[9px] pb-[7px] flex flex-col flex-none",
 
+  bodyShop:
+    "relative h-[95px] px-4 pt-[11px] pb-[9px] flex flex-col flex-none",
   name:
-    "font-poppins text-sm text-neutral-900 mb-1 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer line-clamp-1 h-5 leading-5",
+    "font-poppins text-sm font-normal leading-[27px] text-neutral-700 transition-colors md:group-hover:text-primary block hover:underline cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis",
 
   priceRow:
-    "flex items-center justify-between mb-1 mt-auto pt-1.5",
+    "flex items-center mt-[1px] leading-none",
 
   price:
-    "font-poppins text-sm md:text-base font-medium text-neutral-900",
+    "font-poppins text-base font-medium leading-[24px] text-neutral-900",
 
   priceOld:
-    "font-poppins text-xs text-neutral-400 line-through ml-1",
+    "font-poppins text-sm font-normal leading-[21px] text-neutral-400 line-through ml-1",
 
   cartBtn:
-    "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors md:group-hover:bg-primary md:group-hover:text-white cursor-pointer shrink-0",
+    "absolute right-4 top-[23px] w-10 h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors hover:bg-primary hover:text-white cursor-pointer shrink-0",
 
   rating:
-    "flex items-center gap-0.5",
+    "flex items-center gap-0 mt-[1px] h-[18px]",
 
   // 📌 LƯỚI 5 CỘT DÀNH CHO HOME (lg:grid-cols-5) VÀ NỐI VIỀN DÍNH SÁT NHAU (gap-px)
-  grid:
-    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-neutral-200 border border-neutral-200 rounded-lg overflow-hidden w-full items-stretch",
-};
+  gridHome: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-px
+  overflow-hidden
+  rounded-lg
+  border
+  border-neutral-200
+  bg-neutral-200
 
+  sm:grid-cols-3
+  md:grid-cols-4
+  lg:grid-cols-5
+`,
+
+gridShop: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-4
+
+  md:grid-cols-2
+
+  xl:grid-cols-3
+  xl:gap-6
+`,
+
+gridShop2: `
+  grid
+  w-full
+  grid-cols-2
+  items-stretch
+  gap-4
+
+  md:grid-cols-3
+
+  xl:grid-cols-4
+  xl:gap-6
+`,
+};
 // =====================================================
 // HIỂN THỊ THÔNG BÁO (TOAST) GÓC PHẢI DƯỚI
 // =====================================================
@@ -70,7 +144,7 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast-notification";
-    toast.className = "fixed bottom-5 right-5 bg-[#1a1a1a] text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none";
+    toast.className = "fixed bottom-5 right-5 bg-neutral-900 text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none";
     document.body.appendChild(toast);
   }
 
@@ -108,7 +182,8 @@ export async function getProducts() {
 // =====================================================
 // RENDER PRODUCT CARD
 // =====================================================
-export function renderProductCard(p = {}) {
+export function renderProductCard(  p = {},
+  page = "home") {
   const {
     id = 1,
     name = "Tên sản phẩm",
@@ -119,12 +194,35 @@ export function renderProductCard(p = {}) {
     bestTag = null
   } = p;
 
+  const isShop = page === "shop" || page === "shop2";
+
+  const cardClass = isShop ? CLASS.cardShop : CLASS.cardHome;
+
+  const imageWrapClass =
+  isShop
+    ? CLASS.imageWrapShop
+    : CLASS.imageWrapHome;
+
+const bodyClass =
+  isShop
+    ? CLASS.bodyShop
+    : CLASS.bodyHome;
+
+  const imageClass = isShop ? CLASS.imageShop : CLASS.imageHome;
+
   const image = resolveImage(p);
   const detailUrl = `./descriptions.html?id=${id}`;
 
   const productDataStr = encodeURIComponent(
     JSON.stringify({ ...p, id, name, price, oldPrice, image })
   );
+  const wishlistActive = isInWishlist(id);
+  const wishlistButtonClass = wishlistActive
+    ? `${CLASS.actionBtn} !bg-white !text-primary hover:!bg-white hover:!text-primary-dark`
+    : `${CLASS.actionBtn} border border-transparent hover:border-primary`;
+  const wishlistIcon = wishlistActive
+    ? iconHeart.replace('fill="none"', 'fill="currentColor"')
+    : iconHeart;
 
   const starsHtml = Array.from({ length: 5 })
     .map((_, i) => `
@@ -141,22 +239,22 @@ export function renderProductCard(p = {}) {
   ` : "";
 
   return `
-    <article class="${CLASS.card}" data-id="${id}">
-      <a href="${detailUrl}" class="${CLASS.imageWrap}" aria-label="Xem chi tiết ${name}">
+    <article class="${cardClass}" data-id="${id}">
+      <a href="${detailUrl}" class="${imageWrapClass}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
-        <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
+        <img src="${image}" alt="${name}" class="${imageClass}" loading="lazy" />
       </a>
 
       <div class="${CLASS.actions}">
-        <button type="button" data-action="wishlist" data-id="${id}" class="${CLASS.actionBtn}" aria-label="Wishlist">
-          ${iconHeart}
+        <button type="button" data-action="wishlist" data-id="${id}" data-product="${productDataStr}" class="${wishlistButtonClass}" aria-pressed="${wishlistActive}" aria-label="${wishlistActive ? "Remove" : "Add"} ${name} ${wishlistActive ? "from" : "to"} wishlist">
+          ${wishlistIcon}
         </button>
         <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view">
           ${iconEye}
         </button>
       </div>
 
-      <div class="${CLASS.body}">
+      <div class="${bodyClass}">
         <a href="${detailUrl}" class="${CLASS.name}" title="${name}">${name}</a>
 
         <div>
@@ -188,15 +286,31 @@ export function renderProductCard(p = {}) {
 // =====================================================
 // RENDER PRODUCT GRID (5 CỘT CHO HOME, 3 CỘT CHO SHOP)
 // =====================================================
-export function renderProductGrid(products = [], page = "home") {
-  const itemsHtml = products.map(renderProductCard).join("");
-  const gridClass = page === "shop"
-    ? "grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 items-stretch"
-    : CLASS.grid;
+export function renderProductGrid(
+  products = [],
+  page = "home"
+) {
+  let gridClass = CLASS.gridHome;
+
+  if (page === "shop") {
+    gridClass = CLASS.gridShop;
+  }
+
+  if (page === "shop2") {
+    gridClass = CLASS.gridShop2;
+  }
+
+  const itemsHtml = products
+    .map((product) =>
+      renderProductCard(product, page)
+    )
+    .join("");
 
   return `
     <div class="w-full">
-      <div class="${gridClass}">${itemsHtml}</div>
+      <div class="${gridClass}">
+        ${itemsHtml}
+      </div>
     </div>
   `;
 }
@@ -228,3 +342,65 @@ export function bindCardEvents(container = document) {
     }
   });
 }
+
+function updateWishlistButtons(productId, active) {
+  document.querySelectorAll('[data-action="wishlist"]').forEach((button) => {
+    if (String(button.dataset.id) !== String(productId)) return;
+
+    button.setAttribute("aria-pressed", String(active));
+    const rawData = button.getAttribute("data-product");
+    let productName = "product";
+
+    try {
+      productName = JSON.parse(decodeURIComponent(rawData)).name || productName;
+    } catch {
+      // Keep the fallback label when old card data is invalid.
+    }
+
+    button.setAttribute(
+      "aria-label",
+      `${active ? "Remove" : "Add"} ${productName} ${active ? "from" : "to"} wishlist`,
+    );
+    button.classList.toggle("!bg-white", active);
+    button.classList.toggle("!text-primary", active);
+    button.classList.toggle("hover:!bg-white", active);
+    button.classList.toggle("hover:!text-primary-dark", active);
+    button.classList.toggle("border-transparent", !active);
+    button.classList.toggle("hover:border-primary", !active);
+
+    const heartIcon = button.querySelector("svg");
+    if (heartIcon) heartIcon.setAttribute("fill", active ? "currentColor" : "none");
+  });
+}
+
+document.addEventListener("click", (event) => {
+  const wishlistButton = event.target.closest('[data-action="wishlist"]');
+  if (!wishlistButton) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const rawData = wishlistButton.getAttribute("data-product");
+  if (!rawData) return;
+
+  try {
+    const product = JSON.parse(decodeURIComponent(rawData));
+    const { added } = toggleWishlist(product);
+    updateWishlistButtons(product.id, added);
+  } catch (error) {
+    console.error("Unable to update wishlist:", error);
+  }
+});
+
+document.addEventListener("wishlist:updated", (event) => {
+  const wishlist = Array.isArray(event.detail?.wishlist)
+    ? event.detail.wishlist
+    : [];
+
+  document.querySelectorAll('[data-action="wishlist"]').forEach((button) => {
+    const active = wishlist.some(
+      (item) => String(item.id) === String(button.dataset.id),
+    );
+    updateWishlistButtons(button.dataset.id, active);
+  });
+});

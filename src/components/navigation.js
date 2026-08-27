@@ -1,50 +1,50 @@
-// src/components/navigation.js
 import {
-  iconHeart,
-  iconCart,
+  iconHeaderHeart,
+  iconHeaderCart,
   iconPhone,
   iconLocation,
   iconMenu,
   iconClose,
+  dropDown,
 } from "./icons.js";
 import { renderCartPopup } from "../pages/cartPopup.js";
 import { getImageUrl } from "../utils/assets.js";
 import { removeProduct, saveCart } from "../shopping_cart/cartData.js";
 
 const NAV_LINKS = [
-  { label: "Home", href: "./index.html" },
-  { label: "Shop", href: "./shop.html" },
-  { label: "Pages", href: "/descriptions.html" },
-  { label: "Blog", href: "/" },
+  { label: "Home", href: "./index.html", dropdown: true },
+  { label: "Shop", href: "./shop.html", dropdown: true },
+  { label: "Pages", href: "./descriptions.html", dropdown: true },
+  { label: "Blog", href: "#", dropdown: true },
   { label: "About Us", href: "./about.html" },
-  { label: "Contact Us", href: "/" },
-]
+  { label: "Contact Us", href: "#" },
+];
 
 const LINK_BASE_CLASS = [
-  "block",
-  "md:inline",
+  "flex",
+  "items-center",
+  "justify-between",
+  "gap-1.5",
+  "py-2.5",
+  "font-poppins",
   "text-sm",
   "font-medium",
-  "font-poppins",
-  "py-2.5",
-  "md:py-0",
-  "border-b",
-  "border-white/10",
-  "md:border-none",
-].join(" ");
-
-const LINK_NORMAL_CLASS = [
-  LINK_BASE_CLASS,
-  "text-neutral-400",
-  "hover:text-white",
   "transition-colors",
+  "md:inline-flex",
+  "md:justify-start",
+  "md:border-none",
+  "md:py-0",
 ].join(" ");
 
-const LINK_ACTIVE_CLASS = `${LINK_BASE_CLASS} text-white`;
+function getPageName(href = "") {
+  const cleanHref = String(href).split(/[?#]/)[0];
+  const pageName = cleanHref.split("/").pop();
+  return pageName || "index.html";
+}
 
 function checkIsActive(linkHref, currentHref) {
-  const currentPage = currentHref.split("/").pop() || "index.html";
-  return linkHref.replace("./", "") === currentPage;
+  if (!linkHref || linkHref === "#") return false;
+  return getPageName(linkHref) === getPageName(currentHref);
 }
 
 export function renderNavigationComponent({
@@ -52,147 +52,170 @@ export function renderNavigationComponent({
   cartTotal = "$0.00",
   cartItems = [],
   activeHref = "/",
+  variant,
 } = {}) {
+  const isHome = variant
+    ? variant === "home"
+    : getPageName(activeHref) === "index.html";
+
+  const topbarClass = isHome
+    ? "border-b border-neutral-100 bg-white text-neutral-600"
+    : "border-b border-neutral-700 bg-neutral-800 text-neutral-300";
+
+  const navPanelClass = isHome
+    ? "bg-neutral-800"
+    : "border-b border-neutral-100 bg-white";
+
+  const normalLinkClass = isHome
+    ? "border-b border-white/10 text-neutral-400 hover:text-white"
+    : "border-b border-neutral-100 text-neutral-600 hover:text-primary";
+
+  const activeLinkClass = isHome
+    ? "border-b border-white/10 text-white"
+    : "border-b border-neutral-100 text-primary";
+
+  const phoneClass = isHome
+    ? "text-white"
+    : "text-neutral-900";
+
   const linksHtml = NAV_LINKS.map((link) => {
     const isActive = checkIsActive(link.href, activeHref);
-
-    if (isActive) {
-      return `
-        <a 
-          href="${link.href}" 
-          class="${LINK_ACTIVE_CLASS}"
-        >
-          ${link.label}
-        </a>
-      `;
-    }
+    const stateClass = isActive ? activeLinkClass : normalLinkClass;
 
     return `
-      <a 
-        href="${link.href}" 
-        class="${LINK_NORMAL_CLASS}"
+      <a
+        href="${link.href}"
+        class="${LINK_BASE_CLASS} ${stateClass}"
+        ${isActive ? 'aria-current="page"' : ""}
       >
-        ${link.label}
+        <span>${link.label}</span>
+        ${link.dropdown ? `<span class="shrink-0">${dropDown}</span>` : ""}
       </a>
     `;
   }).join("");
 
   return `
-    <header data-nav-root>
-      <!-- Topbar -->
-      <div class="w-full bg-white border-b border-neutral-100">
-        <div class="container-custom flex items-center justify-between py-2 md:py-3 font-poppins text-xs text-neutral-600 gap-3">
-          <div class="items-center gap-2 hidden md:flex">
+    <header class="font-poppins" data-nav-root>
+      <!-- Topbar: Home trắng, các trang trong màu tối theo Figma -->
+      <div class="w-full ${topbarClass}">
+        <div class="container-custom flex h-[42px] items-center justify-between gap-3 font-poppins text-xs">
+          <div class="hidden items-center gap-2 md:flex">
             ${iconLocation}
             <span>Store location: Lincoln - 344, Illinois, Chicago, USA</span>
           </div>
-          
-          <div class="flex items-center gap-3 md:gap-4">
-            <span class="hidden sm:inline">Eng</span>
-            <span class="hidden sm:inline">USD</span>
+
+          <div class="flex items-center gap-4 md:gap-5">
+            <button type="button" class="hidden cursor-pointer items-center gap-1 transition-colors hover:text-primary sm:flex" aria-label="Choose language">
+              <span>Eng</span>
+              <span class="flex [&>svg]:h-3 [&>svg]:w-3">${dropDown}</span>
+            </button>
+            <button type="button" class="hidden cursor-pointer items-center gap-1 transition-colors hover:text-primary sm:flex" aria-label="Choose currency">
+              <span>USD</span>
+              <span class="flex [&>svg]:h-3 [&>svg]:w-3">${dropDown}</span>
+            </button>
+            <span class="hidden h-[15px] w-px bg-current opacity-25 sm:block" aria-hidden="true"></span>
             <div class="flex items-center gap-1">
-              <a href="./signin.html" class="hover:text-primary transition-colors">Sign In</a>
-              <span class="text-neutral-300">/</span>
-              <a href="./signup.html" class="hover:text-primary transition-colors">Sign Up</a>
+              <a href="./signin.html" class="transition-colors hover:text-primary">Sign In</a>
+              <span class="opacity-50">/</span>
+              <a href="./signup.html" class="transition-colors hover:text-primary">Sign Up</a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Main Header -->
-      <div class="w-full bg-white">
-        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-5">
-          
+      <div class="w-full border-b border-neutral-100 bg-white">
+        <div class="container-custom flex flex-wrap items-center justify-between gap-3 py-3 md:grid md:h-[92px] md:grid-cols-[auto_minmax(320px,498px)_auto] md:gap-x-8 md:py-0">
+
           <!-- Mobile Menu Toggle -->
-          <button 
-            type="button" 
-            class="flex items-center justify-center w-9 h-9 text-neutral-900 md:hidden" 
-            data-nav-toggle 
-            aria-label="Mở menu" 
+          <button
+            type="button"
+            class="flex h-9 w-9 items-center justify-center text-neutral-900 md:hidden"
+            data-nav-toggle
+            aria-label="Mở menu"
             aria-expanded="false"
           >
             ${iconMenu}
           </button>
 
           <!-- Logo -->
-          <a 
-            href="./index.html" 
-            class="flex items-center gap-2 font-poppins font-medium text-2xl md:text-[32px] leading-none text-brand-wordmark tracking-tight md:justify-self-start"
+          <a
+            href="./index.html"
+            class="flex items-center gap-2 font-poppins text-2xl font-medium leading-none tracking-tight text-brand-wordmark md:justify-self-start md:text-[32px]"
           >
-            <img 
-              src="${getImageUrl("/images/plant-small.webp")}" 
-              alt="Logo" 
+            <img
+              src="${getImageUrl("/images/plant-small.webp")}"
+              alt="Logo"
               width="40"
               height="40"
               decoding="async"
-              class="w-8 h-8 md:w-10 md:h-10 object-contain" 
-            /> 
+              class="h-8 w-8 object-contain"
+            >
             <span>Ecobazar</span>
           </a>
 
           <!-- Search Bar -->
-          <form 
-            class="flex items-stretch w-full border border-neutral-100 rounded-md overflow-hidden order-3 md:order-none md:w-full md:max-w-[498px] md:justify-self-center" 
+          <form
+            class="order-3 flex w-full items-stretch overflow-hidden rounded-md border border-neutral-100 md:order-none md:w-full md:max-w-[498px] md:justify-self-center"
             role="search"
           >
-            <input 
-              type="text" 
-              placeholder="Search" 
-              class="flex-1 min-w-0 h-[45px] px-4 text-sm md:text-[15px] text-neutral-500 outline-none font-poppins" 
-            />
-            <button 
+            <input
+              type="text"
+              placeholder="Search"
+              class="h-[45px] min-w-0 flex-1 px-4 font-poppins text-sm text-neutral-500 outline-none md:text-[15px]"
+            >
+            <button
               type="submit"
-              class="h-[45px] px-4 md:px-6 bg-primary text-white text-sm font-semibold font-poppins hover:bg-primary-dark transition-colors whitespace-nowrap" 
+              class="h-[45px] whitespace-nowrap bg-primary px-4 font-poppins text-sm font-semibold text-white transition-colors hover:bg-primary-dark md:px-6"
             >
               Search
             </button>
           </form>
 
-          <!-- Action Icons (Wishlist, Cart) -->
+          <!-- Action Icons -->
           <div class="flex items-center gap-4 md:justify-self-end">
             <a
               href="./wishlist.html"
-              class="relative w-8 h-8 items-center justify-center text-neutral-800 hidden sm:flex" 
-              aria-label="Wishlist" 
+              class="relative hidden h-10 w-10 items-center justify-center text-neutral-800 transition-colors hover:text-primary sm:flex"
+              aria-label="Wishlist"
             >
-              ${iconHeart}
+              ${iconHeaderHeart}
             </a>
-            
-            <button 
+
+            <button
               type="button"
-              class="relative flex h-8 w-8 cursor-pointer items-center justify-center text-neutral-800" 
-              aria-label="Mở giỏ hàng" 
+              class="relative flex h-10 w-10 cursor-pointer items-center justify-center text-neutral-800 transition-colors hover:text-primary"
+              aria-label="Mở giỏ hàng"
               data-cart-open
             >
-              ${iconCart}
+              ${iconHeaderCart}
               <span class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-white bg-primary-dark text-[10px] text-white">
                 ${cartCount}
               </span>
             </button>
-            
-            <div class="leading-tight hidden sm:block">
-              <div class="text-[11px] text-neutral-700 font-poppins">Shopping cart:</div>
-              <div class="text-sm font-medium text-neutral-900 font-poppins">${cartTotal}</div>
+
+            <div class="hidden font-poppins leading-tight sm:block">
+              <div class="text-[11px] text-neutral-700">Shopping cart:</div>
+              <div class="text-sm font-medium text-neutral-900">${cartTotal}</div>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- Navigation Panel -->
-      <div class="w-full bg-neutral-800 hidden md:block" data-nav-panel>
-        <div class="container-custom flex flex-col md:flex-row gap-2 md:gap-4 py-2 md:py-4 items-stretch md:items-center">
-          <nav class="flex flex-col md:flex-row gap-0 md:gap-8 items-stretch md:items-center">
+      <!-- Navigation Panel: Home tối, trang trong trắng -->
+      <div class="hidden w-full md:block ${navPanelClass}" data-nav-panel>
+        <div class="container-custom flex flex-col items-stretch gap-2 py-2 md:h-[62px] md:flex-row md:items-center md:gap-4 md:py-0">
+          <nav class="flex flex-col items-stretch gap-0 md:flex-row md:items-center md:gap-8">
             ${linksHtml}
           </nav>
-          
-          <div class="flex items-center gap-2 text-sm font-medium font-poppins text-white py-2.5 md:ml-auto md:py-0">
+
+          <div class="flex items-center gap-2 py-2.5 font-poppins text-sm font-medium md:ml-auto md:py-0 ${phoneClass}">
             ${iconPhone}
             <span>(219) 555-0114</span>
           </div>
         </div>
       </div>
-      
+
       ${renderCartPopup(cartItems)}
     </header>
   `;
@@ -209,7 +232,6 @@ export function bindNavigationEvents(rootEl, cartItems = []) {
 
       navPanel.classList.toggle("hidden");
       toggleBtn.setAttribute("aria-expanded", String(!isOpen));
-
       toggleBtn.innerHTML = isOpen ? iconMenu : iconClose;
     });
   }
@@ -228,7 +250,7 @@ export function bindNavigationEvents(rootEl, cartItems = []) {
   };
 
   root.querySelector("[data-cart-close]")?.addEventListener("click", closePopup);
-  
+
   overlay?.addEventListener("click", (event) => {
     if (!popup?.contains(event.target)) {
       closePopup();
@@ -239,10 +261,10 @@ export function bindNavigationEvents(rootEl, cartItems = []) {
     button.addEventListener("click", () => {
       const productId = button.dataset.popupRemove;
       const updatedCart = removeProduct(cartItems, productId);
-      
+
       saveCart(updatedCart);
       document.dispatchEvent(new CustomEvent("cart:updated", {
-        detail: { cart: updatedCart, openPopup: true }
+        detail: { cart: updatedCart, openPopup: true },
       }));
     });
   });

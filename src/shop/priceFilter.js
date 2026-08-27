@@ -9,17 +9,59 @@
 export function renderPriceFilter(
   products,
   selectedMin,
-  selectedMax
+  selectedMax,
+  layout = "sidebar"
 ) {
   const prices = products.map((product) => product.price)
 
   const minPrice = Math.floor(Math.min(...prices))
   const maxPrice = Math.ceil(Math.max(...prices))
 
+
+  // Shop2
+  if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-36 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Price</span>
+        <span class="transition-transform group-open:rotate-180">
+          ⌄
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-80
+          rounded-lg
+          border border-neutral-100
+          bg-white p-5 shadow-lg
+        "
+      >
+
+        <!-- đặt nguyên slider Price hiện tại của bạn ở đây -->
+
+      </div>
+
+    </details>
+  `
+}
+
   return /*html*/ `
     <div class="border-b border-neutral-100 pb-6 font-poppins">
 
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="text-xl font-medium text-neutral-900">
           Price
         </h3>

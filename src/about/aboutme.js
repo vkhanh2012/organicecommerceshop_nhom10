@@ -2,40 +2,72 @@ import aboutData from "../data/about.json"
 import { renderFeatureCard } from "../components/featurecard.js"
 
 export function renderAboutMeSection() {
-  //Lấy ra mảng feature từ file json
   const featuresListHtml = aboutData.features
     .map((item) => renderFeatureCard(item))
-    .join("")
+    .join("");
 
-  return /*html*/ `
-    <section class="w-full bg-white pb-[70px]">
-    <!-- thẻ chưa ảnh và nội dung (2 cột) -->
-        <div class="w-full flex flex-col md:flex-row ">
-      <!-- cột 1: hỉnh ảnh -->
-        <div class="w-full md:w-1/2 shrink-0 relative min-h-[350px] md:min-h-full">
-            <img src="${aboutData.aboutMe.image.src}" alt="${aboutData.aboutMe.image.alt}" class="absolute inset-0 w-full h-full object-cover block">
+  return `
+    <section
+      class="w-full bg-white"
+      aria-labelledby="about-features-title"
+    >
+      <div
+        class="grid grid-cols-1
+               md:grid-cols-2
+               lg:min-h-[685px]"
+      >
+
+        <!-- IMAGE -->
+        <div class="w-full overflow-hidden md:min-h-[520px] lg:min-h-[685px]">
+          <img
+            src="${aboutData.aboutMe.image.src}"
+            alt="${aboutData.aboutMe.image.alt}"
+            class="block h-[320px] w-full object-cover object-center
+                   md:h-full md:min-h-[520px]
+                   lg:min-h-[685px] lg:object-left"
+          >
         </div>
 
-      <!-- Cột 2: nội dung -->
-        <div class="w-full md:w-1/2 h-full px-6 md:pl-10 lg:pl-12 md:pr-[calc((100vw-1320px)/2+2rem)] py-8 lg:py-0 flex flex-col justify-center space-y-6">
-        <!-- Tiêu đề -->
-            <div class="space-y-3">
-            <h1 class="text-left text-lg sm:text-2xl md:text-4xl lg:text-[56px] text-title font-semibold leading-tight">
-                ${aboutData.aboutMe.title}
-            </h1>
-            <!-- Nội dung -->
-            <p
-                class="text-left text-content-500 text-xs sm:text-sm md:text-base lg:text-[16px] font-normal leading-relaxed">
-                    ${aboutData.aboutMe.description}
-            </p>
-            </div>
-            <!-- Thẻ -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                ${featuresListHtml}
-            </div>
+        <!-- CONTENT -->
+        <div
+          class="flex flex-col justify-center
+                 px-5 py-10
+                 md:px-8 md:py-12
+                 lg:py-[70px]
+                 lg:pl-4
+                 lg:pr-[calc((100vw-1320px)/2)]"
+        >
+          <h2
+            id="about-features-title"
+            class="max-w-[570px]
+                   text-[32px] font-semibold
+                   leading-[38px]
+                   text-title
+                   md:text-[40px] md:leading-[48px]
+                   lg:text-[56px] lg:leading-[67px]"
+          >
+            ${aboutData.aboutMe.title}
+          </h2>
+
+          <p
+            class="mt-5 max-w-[570px]
+                   text-[14px] leading-[21px]
+                   text-content-500
+                   md:text-[16px] md:leading-[24px]"
+          >
+            ${aboutData.aboutMe.description}
+          </p>
+
+          <div
+            class="mt-8 grid grid-cols-1
+                   gap-x-8 gap-y-6
+                   lg:grid-cols-2"
+          >
+            ${featuresListHtml}
+          </div>
         </div>
 
-    </div>
-  </section>
-    `
+      </div>
+    </section>
+  `;
 }

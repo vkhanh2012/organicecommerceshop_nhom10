@@ -1,9 +1,9 @@
 export function renderFooterComponent() {
   return /*html*/ `
-    <footer class="bg-[#1A1A1A] text-gray-400 pt-16 pb-6">
-      <div class="container-custom">
+    <footer class="bg-neutral-900 pt-14 pb-4 font-poppins text-gray-400 lg:min-h-[368px] lg:pb-0 lg:pt-[60px]">
+      <div class="container-custom lg:flex lg:min-h-[308px] lg:flex-col">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
+        <div class="grid grid-cols-1 gap-8 pb-8 md:grid-cols-2 lg:flex-1 lg:grid-cols-12 lg:gap-8 lg:pb-7" >
           
           <!-- Logo EcoBaza -->
           <div class="lg:col-span-4 flex flex-col items-start">
@@ -13,19 +13,19 @@ export function renderFooterComponent() {
                 <path d="M31.2749 2.87433C27.4022 2.87433 21.9311 3.19836 19.1352 5.99279C17.9247 7.20329 17.3202 9.17664 17.4771 11.4102C17.4975 11.7052 17.6937 11.9566 17.9756 12.0496C18.256 12.1412 18.5641 12.0554 18.7559 11.8302C20.3108 10.0006 22.2435 8.53443 24.5046 7.47215C24.6964 7.3806 24.9231 7.37331 25.1295 7.44599C25.3111 7.51138 25.4535 7.63488 25.5276 7.79332C25.6816 8.11885 25.6322 8.54751 25.1207 8.78871C25.0917 8.80322 25.0655 8.82216 25.0365 8.83524C25.0263 8.8396 25.0147 8.83817 25.006 8.84252C19.4346 11.4611 16.6954 16.0299 15.4514 20.7279C14.5446 14.8455 12.6294 11.3826 10.8202 9.25667C9.51095 7.55941 8.22341 6.65986 7.47943 6.1513C7.34136 6.05682 6.92435 5.77202 6.7514 5.59907C6.46803 5.3157 6.46803 4.85503 6.7514 4.57166C7.03477 4.28973 7.49687 4.28973 7.81218 4.60361C7.88923 4.67193 8.01272 4.75912 8.16966 4.86375L8.29902 4.95094C9.35108 5.67168 11.31 7.01004 13.0479 9.89166C13.2034 10.1489 13.5042 10.2869 13.7963 10.2317C14.0928 10.1794 14.3252 9.95126 14.3834 9.65625C14.7627 7.71921 14.5927 4.84481 12.8649 3.11703C10.069 0.324032 4.59789 1.06881e-08 0.726671 1.06881e-08C0.32553 -6.81062e-05 0 0.325462 0 0.726535C0 4.59918 0.324032 10.0703 3.11846 12.8663C4.28387 14.0317 6.08147 14.5548 7.86736 14.5548C9.32486 14.5548 10.7533 14.19 11.8476 13.5579C13.3399 16.6502 14.5316 21.2698 14.5316 28.3366C14.5316 28.7376 14.8571 29.0632 15.2582 29.0632C15.6592 29.0632 15.9848 28.7376 15.9848 28.3366C15.9848 24.3942 16.6605 19.6626 19.173 15.7682C20.18 16.752 21.9137 17.3754 23.8347 17.4335C23.9306 17.4364 24.0251 17.4379 24.1195 17.4379C26.0711 17.4379 27.796 16.8261 28.8815 15.7391C31.6773 12.9432 31.9999 7.47208 31.9999 3.59936C32.0015 3.19836 31.6774 2.87433 31.2749 2.87433Z" fill="#00B307"/>
                 </svg>
 
-              <span class="text-white text-2xl font-semibold tracking-tight">Ecobazar</span>
+              <span class="text-white text-[32px] leading-[40px] tracking-tight">Ecobazar</span>
             </div>
             <!-- Mô tả -->
-            <p class="text-sm leading-relaxed mb-6 font-light max-w-sm">
+            <p class="text-[14px] text-neutral-500 leading-[21px] mb-6 font-light max-w-[336px]">
               Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis dui, eget bibendum magna congue nec.
             </p>
             <!-- Liên hệ -->
             <div class="flex items-center gap-2.5 text-sm flex-wrap">
-              <a href="tel:2195550114" class="text-white font-medium hover:text-[#00B207] border-b border-[#00B207] pb-0.5 transition-all">
+              <a href="tel:2195550114" class="text-white font-medium hover:text-primary border-b border-primary pb-0.5 transition-all">
                 (219) 555-0114
               </a>
-              <span class="text-gray-600">or</span>
-              <a href="mailto:Proxy@gmail.com" class="text-white font-medium hover:text-[#00B207] border-b border-[#00B207] pb-0.5 transition-all">
+              <span class="text-neutral-600">or</span>
+              <a href="mailto:Proxy@gmail.com" class="text-white font-medium hover:text-primary border-b border-primary pb-0.5 transition-all">
                 Proxy@gmail.com
               </a>
             </div>
@@ -36,69 +36,69 @@ export function renderFooterComponent() {
             <div>
               <h3 class="text-white font-medium text-base mb-5">My Account</h3>
               <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">My Account</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Order History</a></li>
-                <li> <a href="#" class="hover:text-white transition-colors"> Shopping Cart</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Wishlist</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">My Account</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Order History</a></li>
+                <li> <a href="./cart.html" class="text-neutral-500 hover:text-white transition-colors"> Shopping Cart</a></li>
+                <li><a href="./wishlist.html" class="text-neutral-500 hover:text-white transition-colors">Wishlist</a></li>
               </ul>
             </div>
             <!-- Helps -->
             <div>
               <h3 class="text-white font-medium text-base mb-5">Helps</h3>
               <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Faqs</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Terms & Condition</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Faqs</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Terms & Condition</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
             <!--Proxy -->
             <div>
               <h3 class="text-white font-medium text-base mb-5">Proxy</h3>
               <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Shop</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Product</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Track Order</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">About</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Shop</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Product</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Track Order</a></li>
               </ul>
             </div>
             <!-- Categories -->
             <div>
               <h3 class="text-white font-medium text-base mb-5">Categories</h3>
               <ul class="space-y-3 text-sm">
-                <li><a href="#" class="hover:text-white transition-colors">Fruit & Vegetables</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Meat & Fish</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Bread & Bakery</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">Beauty & Health</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Fruit & Vegetables</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Meat & Fish</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Bread & Bakery</a></li>
+                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Beauty & Health</a></li>
               </ul>
             </div>
           </div>
         </div>
         <!-- Copyright và Thanh toán -->
-        <div class="container-custom border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex min-h-[80px] flex-col items-center justify-between gap-4 border-t border-neutral-800 pt-6 md:flex-row lg:pt-0">
           
           <!-- Copyright Info -->
-          <div class="text-sm font-light text-gray-500">
+          <div class="text-sm font-light text-neutral-500">
             Ecobazar eCommerce © 2021. All Rights Reserved
           </div>
           <!-- Thanh toán -->
           <div class="flex items-center gap-2">
             
             <!-- Apple Pay -->
-            <div class="w-12 h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center justify-center">
+            <div class="payment-method">
               <svg width="33" height="14" viewBox="0 0 33 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8894 1.77771C5.51169 2.24346 4.90735 2.61081 4.30302 2.55833C4.22747 1.92858 4.52335 1.25948 4.86958 0.846216C5.24729 0.36735 5.90829 0.0262392 6.44338 0C6.50633 0.655981 6.26082 1.29884 5.8894 1.77771ZM6.43629 2.68294C5.90388 2.65101 5.41807 2.84979 5.02568 3.01035C4.77316 3.11367 4.55933 3.20117 4.39665 3.20117C4.21408 3.20117 3.99142 3.10899 3.74142 3.0055C3.41384 2.8699 3.03932 2.71486 2.64658 2.7223C1.74637 2.73542 0.90911 3.26677 0.449561 4.11298C-0.494717 5.80541 0.204049 8.31126 1.11685 9.68882C1.56381 10.371 2.0989 11.1189 2.80396 11.0926C3.11415 11.0804 3.33728 10.9818 3.56819 10.8797C3.83404 10.7621 4.11021 10.64 4.54144 10.64C4.95771 10.64 5.2218 10.7589 5.47532 10.8731C5.71637 10.9816 5.94785 11.0859 6.2915 11.0795C7.02174 11.0664 7.48129 10.3973 7.92825 9.71506C8.41059 8.98285 8.62255 8.26825 8.65472 8.15981L8.65849 8.14726C8.65772 8.14646 8.65176 8.14361 8.64125 8.1386C8.48001 8.06168 7.2476 7.47377 7.23578 5.89725C7.22391 4.57399 8.21329 3.90354 8.36904 3.798C8.37852 3.79158 8.38491 3.78725 8.3878 3.78499C7.75828 2.81414 6.77623 2.70918 6.43629 2.68294ZM11.4904 11.0073V0.780595H15.1731C17.0742 0.780595 18.4025 2.14503 18.4025 4.13922C18.4025 6.1334 17.0491 7.51096 15.1227 7.51096H13.0138V11.0073H11.4904ZM13.0156 2.11883H14.7719C16.0939 2.11883 16.8493 2.85352 16.8493 4.14581C16.8493 5.43809 16.0939 6.17935 14.7656 6.17935H13.0156V2.11883ZM23.4323 9.78067C23.0294 10.581 22.1418 11.0861 21.1849 11.0861C19.7685 11.0861 18.7802 10.2071 18.7802 8.88197C18.7802 7.57001 19.737 6.81564 21.506 6.70412L23.4071 6.58604V6.0219C23.4071 5.1888 22.8846 4.73618 21.9529 4.73618C21.1849 4.73618 20.6246 5.14945 20.5113 5.77919H19.139C19.1831 4.45411 20.3791 3.48982 21.997 3.48982C23.7408 3.48982 24.8739 4.44099 24.8739 5.91694V11.0074H23.4638V9.78067H23.4323ZM21.5948 9.8725C20.7827 9.8725 20.2665 9.46579 20.2665 8.84261C20.2665 8.19975 20.7639 7.82584 21.7144 7.76681L23.4078 7.65529V8.23255C23.4078 9.19028 22.6272 9.8725 21.5948 9.8725ZM29.5532 11.4075C28.9425 13.1983 28.2438 13.7887 26.7581 13.7887C26.6448 13.7887 26.2671 13.7756 26.179 13.7493V12.5227C26.2734 12.5358 26.5063 12.5489 26.6259 12.5489C27.2995 12.5489 27.6772 12.2537 27.9101 11.4862L28.0486 11.0336L25.4676 3.58821H27.0603L28.8544 9.62979H28.8859L30.68 3.58821H32.2286L29.5532 11.4075Z" fill="white"/>
               </svg>
             </div>
             <!-- Visa -->
-            <div class="w-12 h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center justify-center">
+            <div class="payment-method">
               <svg width="32" height="11" viewBox="0 0 32 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.87533 10.2683H5.1492L3.10494 2.23991C3.00791 1.8706 2.80189 1.54412 2.49884 1.39024C1.74254 1.00354 0.909152 0.695787 0 0.540572V0.23148H4.39158C4.99768 0.23148 5.45226 0.695787 5.52802 1.23503L6.5887 7.02615L9.31349 0.23148H11.9639L7.87533 10.2683ZM13.4782 10.2683H10.9036L13.0236 0.23148H15.5982L13.4782 10.2683ZM18.9311 3.01197C19.0069 2.4714 19.4614 2.16231 19.9918 2.16231C20.8252 2.0847 21.733 2.23991 22.4906 2.62527L22.9452 0.464307C22.1876 0.155215 21.3542 0 20.5979 0C18.099 0 16.2807 1.39024 16.2807 3.31973C16.2807 4.78758 17.5687 5.5583 18.4779 6.02261C19.4614 6.48558 19.8403 6.79467 19.7645 7.25764C19.7645 7.95209 19.0069 8.26118 18.2506 8.26118C17.3414 8.26118 16.4323 8.0297 15.6002 7.643L15.1456 9.80531C16.0548 10.1907 17.0384 10.3459 17.9475 10.3459C20.7494 10.4222 22.4906 9.03325 22.4906 6.94855C22.4906 4.32327 18.9311 4.1694 18.9311 3.01197ZM31.5009 10.2683L29.4566 0.23148H27.2608C26.8063 0.23148 26.3517 0.540572 26.2002 1.00354L22.4147 10.2683H25.0651L25.5941 8.80176H28.8505L29.1536 10.2683H31.5009ZM27.6379 2.93436L28.3941 6.71706H26.2741L27.6379 2.93436Z" fill="white"/>
               </svg>
 
             </div>
             <!-- Discover -->
-            <div class="w-12 h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center justify-center">
+            <div class="payment-method">
               <svg width="40" height="19" viewBox="0 0 40 19" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.5588 18.7646L39.7059 11.1543V14.794C39.7059 16.9869 37.9282 18.7646 35.7353 18.7646H14.5588Z" fill="#FD6020"/>
               <path fill-rule="evenodd" clip-rule="evenodd" d="M34.9339 0.1467C36.3174 0.1467 37.0783 0.786682 37.0783 1.99554C37.1475 2.91996 36.5249 3.70216 35.6948 3.84438L37.5625 6.47542H36.1099L34.5189 3.91549H34.3805V6.47542H33.2046V0.1467H34.9339ZM34.3801 3.0622H34.726C35.4869 3.0622 35.8328 2.70665 35.8328 2.06667C35.8328 1.49779 35.4869 1.14225 34.726 1.14225H34.3801V3.0622ZM29.1228 6.47542H32.4432V5.40878H30.2988V3.70216H32.374V2.63552H30.2988V1.21334H32.4432V0.1467H29.1228V6.47542ZM25.6644 4.41325L24.0734 0.1467H22.8283L25.3877 6.61764H26.0103L28.5697 0.1467H27.3246L25.6644 4.41325ZM11.6222 3.34663C11.6222 5.12436 13.0057 6.61765 14.7351 6.61765C15.2885 6.61765 15.7727 6.47543 16.2569 6.2621V4.83992C15.911 5.26657 15.4268 5.55101 14.8734 5.55101C13.7666 5.55101 12.8674 4.6977 12.8674 3.55995V3.41773C12.7982 2.27999 13.6975 1.28446 14.8042 1.21335C15.3576 1.21335 15.911 1.49779 16.2569 1.92444V0.502258C15.8418 0.217821 15.2885 0.146712 14.8042 0.146712C13.0057 0.00449382 11.6222 1.49779 11.6222 3.34663ZM9.47622 2.56442C8.78448 2.27999 8.57696 2.13777 8.57696 1.78222C8.64614 1.35557 8.99201 1.00002 9.40705 1.07113C9.75292 1.07113 10.0988 1.28446 10.3755 1.56889L10.998 0.715584C10.5138 0.288929 9.89127 0.00449174 9.2687 0.00449174C8.30027 -0.0666175 7.47018 0.715584 7.40101 1.71111V1.78222C7.40101 2.63553 7.74688 3.1333 8.85366 3.48884C9.13035 3.55995 9.40705 3.70217 9.68374 3.84439C9.89127 3.98661 10.0296 4.19993 10.0296 4.48437C10.0296 4.98214 9.61457 5.40879 9.19953 5.40879H9.13035C8.57696 5.40879 8.09274 5.05325 7.88522 4.55548L7.12431 5.33768C7.53935 6.11988 8.36944 6.54654 9.19953 6.54654C10.3063 6.61765 11.2056 5.76434 11.2747 4.62659V4.41326C11.2056 3.55995 10.8597 3.1333 9.47622 2.56442ZM5.46473 6.47542H6.64068V0.1467H5.46473V6.47542ZM0 0.1467H1.72935H2.07522C3.73539 0.217809 5.04969 1.63999 4.98052 3.34661C4.98052 4.27103 4.56548 5.12435 3.87374 5.76433C3.25117 6.26209 2.49026 6.54653 1.72935 6.47542H0V0.1467ZM1.52194 5.40875C2.07533 5.47986 2.69789 5.26653 3.11294 4.91099C3.52798 4.48433 3.7355 3.91546 3.7355 3.27547C3.7355 2.7066 3.52798 2.13773 3.11294 1.71107C2.69789 1.35553 2.07533 1.1422 1.52194 1.21331H1.17607V5.40875H1.52194Z" fill="white"/>
@@ -107,14 +107,14 @@ export function renderFooterComponent() {
 
             </div>
             <!-- Mastercard -->
-            <div class="w-12 h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center justify-center">
+            <div class="payment-method">
               <div class="flex items-center -space-x-1.5">
-                <div class="w-3.5 h-3.5 rounded-full bg-[#EB001B]"></div>
-                <div class="w-3.5 h-3.5 rounded-full bg-[#F79E1B] opacity-80"></div>
+                <div class="w-3.5 h-3.5 rounded-full bg-mastercard-red"></div>
+                <div class="w-3.5 h-3.5 rounded-full bg-mastercard-yellow opacity-80"></div>
               </div>
             </div>
             <!-- Secure Payment -->
-            <div class="h-8 rounded border border-gray-800 bg-[#1A1A1A] flex items-center gap-1.5 px-2">
+            <div class="h-8 rounded border border-neutral-800 bg-neutral-900 flex items-center gap-1.5 px-2">
              <svg width="55" height="26" viewBox="0 0 55 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_460_39913)">
             <rect width="11" height="11" fill="#1A1A1A"/>

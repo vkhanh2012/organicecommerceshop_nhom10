@@ -1,4 +1,4 @@
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 import { renderImage } from "./Image.js";
 import { renderProductInfo } from "./ProductInfo.js";
 import { renderDescriptionTab } from "./descriptiontab.js";
@@ -7,57 +7,115 @@ import { renderCustomerFeedbackTab } from "./feedback.js";
 import { renderRelatedProducts } from "./RelatedProductCard.js";
 import productList from "../data/products.json";
 
-export const TAB_LINKS = [
-  { label: "Descriptions", key: "descriptions", href: "#descriptions" },
-  { label: "Additional Information", key: "information", href: "#information" },
-  { label: "Customer Feedback", key: "feedback", href: "#feedback" }
+
+// =====================================================
+// TAB LINKS
+// =====================================================
+
+const TAB_LINKS = [
+  {
+    key: "descriptions",
+    label: "Descriptions",
+    href: "#"
+  },
+  {
+    key: "information",
+    label: "Additional Information",
+    href: "#"
+  },
+  {
+    key: "feedback",
+    label: "Customer Feedback",
+    href: "#"
+  }
 ];
 
-export function renderDescription(product = defaultProductData, activeTabKey = "descriptions") {
-  // Map danh sách TAB_LINKS
+
+// =====================================================
+// RENDER DESCRIPTION
+// =====================================================
+
+export function renderDescription(
+  product = productData,
+  activeTabKey = "descriptions"
+) {
+
   const tabsHtml = TAB_LINKS.map(tab => {
-    const isActive = tab.key === activeTabKey;
+
+    const isActive =
+      tab.key === activeTabKey;
+
     return `
-      <a href="${tab.href}" data-tab="${tab.key}" class="tab-link px-2 py-4 text-base font-medium transition-all duration-200 cursor-pointer ${isActive ? 'text-gray-900 border-b-2 border-[#00B207] font-semibold' : 'text-gray-500 hover:text-gray-900'}">
+      <a
+        href="${tab.href}"
+        data-tab="${tab.key}"
+        class="tab-link pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
+          isActive
+            ? "text-zinc-900 border-b-2 border-[#20B126] font-semibold"
+            : "text-zinc-500 hover:text-zinc-900"
+        }"
+      >
         ${tab.label}
       </a>
     `;
+
   }).join("");
 
-  // Nội dung tab tương ứng
+
   let tabContentHtml = "";
+
   if (activeTabKey === "information") {
-    tabContentHtml = renderAdditionalInfoTab(product);
+
+    tabContentHtml =
+      renderAdditionalInfoTab(product);
+
   } else if (activeTabKey === "feedback") {
-    tabContentHtml = renderCustomerFeedbackTab(product);
+
+    tabContentHtml =
+      renderCustomerFeedbackTab(product);
+
   } else {
-    tabContentHtml = renderDescriptionTab(product);
+
+    tabContentHtml =
+      renderDescriptionTab(product);
+
   }
 
+
   return /*html*/ `
-    <div class="container-custom mx-auto px-4 md:px-8 pt-12">
-    
-      <!-- THÔNG TIN SẢN PHẨM PHÍA TRÊN (Ảnh bên trái, Thông tin chữ bên phải) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
-        <!-- CỘT TRÁI: KHU VỰC HÌNH ẢNH -->
+    <div class="container-custom mx-auto font-['Poppins']">
+
+      <!-- PRODUCT INFORMATION -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 pt-8">
+
         ${renderImage(product)}
-        
-        <!-- CỘT PHẢI: KHỐI THÔNG TIN -->
+
         ${renderProductInfo(product)}
+
       </div>
-      
-      <!-- THANH TABS CHUYỂN ĐỔI (Descriptions, Additional Information, Customer Feedback) -->
-      <div class="border-b border-gray-200 flex justify-center gap-10">
+
+
+      <!-- TABS -->
+      <div
+        class="border-b border-neutral-200 flex justify-center gap-10 mx-auto -mt-6 translate-x-[42px]"
+      >
         ${tabsHtml}
       </div>
 
-      <!-- VÙNG ĐỔ NỘI DUNG TƯƠNG ỨNG -->
-      <div id="tab-content-container">
+
+      <!-- TAB CONTENT -->
+      <div
+        id="tab-content-container"
+        class="pt-8 pb-12"
+      >
         ${tabContentHtml}
       </div>
 
-      <!-- 📌 PHẦN RELATED PRODUCTS (4 CỘT SẢN PHẨM LIÊN QUAN CHUẨN THIẾT KẾ) -->
-      ${renderRelatedProducts(product, productList)}
+
+      <!-- RELATED PRODUCTS -->
+      <div class="mt-16">
+        ${renderRelatedProducts(product, productList)}
+      </div>
 
     </div>
   `;

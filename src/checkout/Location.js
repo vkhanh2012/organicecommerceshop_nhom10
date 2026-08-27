@@ -63,7 +63,7 @@ export const locations = {
 // ================================
 export function renderCountryOptions() {
   return `
-    <option value="">Select</option>
+    <option value="">Select Country / Region</option>
 
     ${Object.entries(locations)
       .map(
@@ -81,15 +81,22 @@ export function renderCountryOptions() {
 // ================================
 // STATE OPTIONS
 // ================================
-export function renderStateOptions(countryCode) {
-  if (!countryCode || !locations[countryCode]) {
+export function renderStateOptions(countryKey) {
+  if (!countryKey) {
+    return `<option value="">Select country first</option>`;
+  }
+
+  // Tra cứu linh hoạt theo cả mã (VN, US) lẫn tên đầy đủ (Vietnam, United States)
+  const countryObj = locations[countryKey] || Object.values(locations).find(c => c.name.toLowerCase() === String(countryKey).toLowerCase());
+
+  if (!countryObj || !countryObj.states) {
     return `<option value="">Select country first</option>`;
   }
 
   return `
-    <option value="">Select</option>
+    <option value="">Select State / Province</option>
 
-    ${locations[countryCode].states
+    ${countryObj.states
       .map(
         (state) => `
           <option value="${state}">
@@ -106,17 +113,30 @@ export function renderStateOptions(countryCode) {
 // COUNTRY → STATE EVENT
 // ================================
 export function bindLocationEvents(container = document) {
-  const countrySelect = container.querySelector("#country-select");
-  const stateSelect = container.querySelector("#state-select");
+  const countrySelect = container.querySelector("#country-select") || container.querySelector("#country");
+  const stateSelect = container.querySelector("#state-select") || container.querySelector("#state");
 
   if (!countrySelect || !stateSelect) {
     console.warn("Không tìm thấy #country-select hoặc #state-select");
     return;
   }
 
-  countrySelect.addEventListener("change", (e) => {
-    const selectedCountryCode = e.target.value;
+  const updateStateOptions = () => {
+    const selectedValue = countrySelect.value;
+    stateSelect.innerHTML = renderStateOptions(selectedValue);
+  };
 
-    stateSelect.innerHTML = renderStateOptions(selectedCountryCode);
-  });
+  // Nếu quốc gia đã được chọn sẵn khi vào trang -> tự động đổ danh sách tỉnh thành ngay lập tức
+  if (countrySelect.value) {
+    updateStateOptions();
+  }
+
+  countrySelect.addEventListener("change", updateStateOptions);
 }
+
+export default {
+  locations,
+  renderCountryOptions,
+  renderStateOptions,
+  bindLocationEvents
+};

@@ -1,6 +1,6 @@
 import { renderImage, bindImageEvents } from "../descriptions/Image.js";
 import { renderProductInfo } from "../descriptions/ProductInfo.js";
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 import { addProductToCart } from "../shopping_cart/cartData.js";
 
 export function renderQuickViewModal(product) {
@@ -8,7 +8,7 @@ export function renderQuickViewModal(product) {
     <div id="quick-view-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fade-in">
       <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
         
-        <button id="close-quick-view" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-10">
+        <button id="close-quick-view" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-500 hover:text-neutral-900 flex items-center justify-center transition-all cursor-pointer z-10">
           ✕
         </button>
 
@@ -96,7 +96,7 @@ export function openQuickView(productData) {
       closeModal();
 
       const toast = document.createElement("div");
-      toast.className = "fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl";
+      toast.className = "fixed bottom-6 right-6 z-50 bg-neutral-900 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl";
       toast.textContent = `${product.name} added to cart.`;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);

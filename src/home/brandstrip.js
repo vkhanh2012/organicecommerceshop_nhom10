@@ -1,14 +1,59 @@
 import companyLogosData from "../data/companyLogo.json";
 import { attachImageUrls } from "../utils/assets.js";
 
-export function renderBrandStrip() {
+export function renderBrandStrip(variant = "default") {
   const logos = attachImageUrls(companyLogosData);
-  return `<section class="container-custom py-8 md:py-12">
-    <div class="grid grid-cols-3 items-center gap-6 sm:grid-cols-6">
-      ${logos.map((logo, index) => `
-        <div class="flex h-12 items-center justify-center ${index ? 'border-l border-neutral-100' : ''}">
-          <img class="max-h-9 max-w-[120px] object-contain opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0" src="${logo.image}" alt="${logo.name}">
-        </div>`).join('')}
-    </div>
-  </section>`;
+  const isAboutPage = variant === "about";
+
+  // Kích thước thật của 6 file logo đã kiểm tra
+  const logoWidths = [82, 67, 60, 83, 132, 96];
+
+  return `
+    <section
+      class="container-custom pt-8 pb-8 sm:pt-10 sm:pb-10
+             ${isAboutPage ? "lg:flex lg:min-h-[192px] lg:items-center lg:py-0" : "lg:pt-[45px] lg:pb-[58px]"}"
+    >
+      <div
+        class="relative grid w-full grid-cols-3 items-center sm:grid-cols-6 lg:flex lg:justify-between"
+      >
+        ${logos
+          .map(
+            (logo, index) => `
+              <div
+                class="brand-logo-item flex h-12 items-center
+                      ${
+                        index === 0
+                          ? "justify-start"
+                          : index === logos.length - 1
+                            ? "justify-end"
+                            : "justify-center"
+                        }
+                      sm:h-14 lg:h-[50px] lg:shrink-0 lg:border-l-0
+                      ${index !== 0 ? "border-l border-neutral-100" : ""}"
+                      
+              >
+                <span
+                  class="brand-logo-mask block"
+                  style="
+                    --logo-width: ${logoWidths[index]}px;
+                    --logo-image: url('${logo.image}');
+                  "
+                  aria-hidden="true"
+                ></span>
+
+                <span class="sr-only">
+                  ${logo.name}
+                </span>
+              </div>
+              ${
+                index < logos.length - 1
+                  ? '<span class="hidden h-[32px] w-px shrink-0 bg-neutral-100 lg:block" aria-hidden="true"></span>'
+                  : ""
+              }
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
 }

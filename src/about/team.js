@@ -6,21 +6,48 @@ export function renderTeamSection(){
     .map((item) => renderTeamCard(item))
     .join("");
     return /*html*/`
-        <section class="container-custom flex flex-col sm:flex-cols-2 items-center w-full bg-white ">
-            <!-- Tiêu đề và mô tả -->
-            <div class="flex flex-col max-w-160 text-center space-y-3">
-                <h1 class="text-title-900 font-semibold text-2xl sm:text-[28px] md:text-4xl lg:text-[48px]">
-                    ${aboutData.teamSection.title}
-                </h1>
-                <p class="text-content-600 text-center font-medium text-xs md:text-[16px]">
-                   ${aboutData.teamSection.description}
-                </p>
-            </div>
-            <!-- 4 teamcard -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                ${teamCardHtml}
-            </div>
-        </section>
+        <section
+  class="w-full bg-neutral-50/30
+         py-12
+         md:py-16
+         lg:pt-[80px]
+         lg:pb-[79px]"
+>
+  <div class="container-custom">
+
+    <div class="mx-auto max-w-[720px] text-center">
+      <h2
+        class="text-[32px] font-semibold
+               leading-[38px]
+               text-neutral-900
+               md:text-[40px] md:leading-[48px]
+               lg:text-[48px] lg:leading-[55px]"
+      >
+        ${aboutData.teamSection.title}
+      </h2>
+
+      <p
+        class="mt-3
+               text-[14px] leading-[21px]
+               text-neutral-500
+               md:text-[16px] md:leading-[24px]"
+      >
+        ${aboutData.teamSection.description}
+      </p>
+    </div>
+
+    <div
+      class="mt-16 grid grid-cols-1
+             gap-6
+             sm:grid-cols-2
+             lg:mt-[54px]
+             lg:grid-cols-4"
+    >
+      ${teamCardHtml}
+    </div>
+
+  </div>
+</section>
     
     
     `;

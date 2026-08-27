@@ -1,4 +1,6 @@
-import { ratingStar } from "../components/icons";
+import { dropDown, ratingStar } from "../components/icons.js";
+const star = 'var(--color-star)';
+const greystar = 'var(--color-greystar)';
 //Dữ liệu demo
 const RATING_DATA = [
   { stars: 5, label: "5.0" },
@@ -9,7 +11,7 @@ const RATING_DATA = [
 ]
 // tạo 1 ngôi sao
 function makeStar(filled) {
-  const color = filled ? "#FF8A00" : "#CCCCCC";
+  const color = filled ? star : greystar;
   return ratingStar(color);
 }
 
@@ -19,9 +21,9 @@ function makeStarHtml(starCount) {
 }
 
 //tạo cho 1 dòng rating (1 li)
-function renderRating(item, selectedRating) {
+function renderRating(item, selectedRating, layout = "sidebar") {
   return /*html*/ `
-    <li class = "flex items-center gap-2 cursor-pointer group">
+    <li class="flex items-center gap-2 cursor-pointer ${layout === "horizontal" ? "group/rating" : "group"}">
        <input
           type="checkbox"
           name="rating"
@@ -45,16 +47,56 @@ function renderRating(item, selectedRating) {
     </li>`;
 }
 //hàm để render ra tất cả
-export function renderRatingFilter(selectedRating =0) {
+export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
   const listItemsHtml = RATING_DATA
     .map((item) =>
-      renderRating(item, selectedRating)
+      renderRating(item, selectedRating, layout)
     )
     .join("")
 
+    // shop2
+    if (layout === "horizontal") {
+  return /*html*/ `
+    <details class="group relative">
+
+      <summary
+        class="
+          flex min-w-36 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-3 py-2
+          text-sm text-neutral-600
+        "
+      >
+        <span>Select Rating</span>
+        <span class="transition-transform group-open:rotate-180">
+          ${dropDown}
+        </span>
+      </summary>
+
+      <div
+        class="
+          absolute left-0 top-full z-40
+          mt-2 w-64
+          rounded-lg
+          border border-neutral-100
+          bg-white p-4 shadow-lg
+        "
+      >
+        <ul class="space-y-3">
+          ${listItemsHtml}
+        </ul>
+      </div>
+
+    </details>
+  `
+}
+
   return `
     <div class="border-b border-neutral-100 pb-6.5 font-poppins">
-      <div class="flex items-center justify-between cursor-pointer mb-5">
+      <div class="shop-filter-header">
         <h3 class="section-heading">Rating</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

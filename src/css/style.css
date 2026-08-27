@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @import "./components.css";
+@import "./form.css";
 
 /* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
@@ -28,20 +29,75 @@
   --font-poppins: "Poppins", sans-serif;
   --radius-pill: 43px; /* radius nút Button */
 
-  --color-title-900: #1A1A1A;
-  --color-content-600: #666666;
-  --color-content-500: #808080;
+  --color-instock: #20B526;
+  --color-text-instock: #2C742F;
+  --color-star: #FFB800;
+  --color-greystar: #E4E7E9;
+  --color-card-popup: #edfff0;
+  --color-text-discount: #FF8A00; /*tilte của discount*/
+  --color-hero: #002603; /*màu phủ của hero*/
+  --color-outstock: #EA4335;
+  --color-mastercard-red: #EB001B;
+  --color-mastercard-yellow: #F79E1B;
+  --color-hero-background: #087f3d;
 
 }
 
 /* Container dùng chung (1320px), khai báo bằng @utility để dùng được trong @apply ở components.css */
 @utility container-custom {
-  @apply mx-auto w-full max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[1384px] px-4 sm:px-6 lg:px-8;
 }
 
 
 
 input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
+input[type="password"]::-ms-clear { 
   display: none !important;
+}
+
+.brand-logo-mask {
+  width: calc(var(--logo-width) * 0.875);
+  height: 28px;
+
+  background-color: var(--color-brand-logo);
+
+  -webkit-mask-image: var(--logo-image);
+  mask-image: var(--logo-image);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  transition: background-color 0.2s ease;
+
+  --color-brand-logo: #d9d9d9;
+}
+
+.brand-logo-item:hover .brand-logo-mask {
+  background-color: var(--color-primary);
+}
+
+@media (min-width: 640px) {
+  .brand-logo-mask {
+    width: var(--logo-width);
+    height: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-page footer {
+    min-height: 368px;
+  }
+
+  .about-page footer > .container-custom {
+    display: flex;
+    min-height: 288px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

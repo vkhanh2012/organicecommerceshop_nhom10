@@ -1,8 +1,15 @@
-const WISHLIST_KEY = "shopery-wishlist";
+export const WISHLIST_KEY = "shopery-wishlist";
+
+function notifyWishlistUpdated(wishlist, source = "current-tab") {
+  document.dispatchEvent(new CustomEvent("wishlist:updated", {
+    detail: { wishlist, source },
+  }));
+}
 
 export function getWishlist() {
   try {
-    return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    const wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY));
+    return Array.isArray(wishlist) ? wishlist : [];
   } catch {
     return [];
   }
@@ -10,6 +17,7 @@ export function getWishlist() {
 
 export function saveWishlist(wishlist) {
   localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+  notifyWishlistUpdated(wishlist);
 }
 
 export function addToWishlist(product) {
@@ -32,3 +40,34 @@ export function removeFromWishlist(productId) {
   saveWishlist(wishlist);
   return wishlist;
 }
+
+export function isInWishlist(productId) {
+  return getWishlist().some(
+    (item) => String(item.id) === String(productId)
+  );
+}
+
+export function toggleWishlist(product) {
+  if (isInWishlist(product.id)) {
+    return {
+      wishlist: removeFromWishlist(product.id),
+      added: false,
+    };
+  }
+
+  return addToWishlist(product);
+}
+
+window.addEventListener("storage", (event) => {
+  if (event.key !== WISHLIST_KEY) return;
+
+  let wishlist = [];
+  try {
+    const savedWishlist = JSON.parse(event.newValue || "[]");
+    wishlist = Array.isArray(savedWishlist) ? savedWishlist : [];
+  } catch {
+    wishlist = [];
+  }
+
+  notifyWishlistUpdated(wishlist, "storage");
+});

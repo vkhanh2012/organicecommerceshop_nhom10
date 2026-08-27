@@ -1,11 +1,13 @@
+// src/Quickview/QuickViewInfo.js
+
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
 
-export function renderProductInfo(product = {}) {
+export function renderQuickViewInfo(product = {}) {
   const starsHtml = Array.from({ length: 5 }, (_, index) => {
-    return iconStar(index < (product.rating || 5));
+    return iconStar(index < (product.rating || 4));
   }).join("");
 
-  const tagsList = Array.isArray(product.tags)
+  const tagsList = Array.isArray(product.tags) && product.tags.length > 0
     ? product.tags
     : [
         { name: "Vegetables", link: "#" },
@@ -19,22 +21,30 @@ export function renderProductInfo(product = {}) {
     .map((tag) => {
       const tagName = typeof tag === "string" ? tag : tag.name;
       const tagLink = typeof tag === "string" ? "#" : tag.link || "#";
-      return `<a href="${tagLink}" class="text-stone-500 hover:text-zinc-900 transition-colors leading-5">${tagName}</a>`;
+      return `<a href="${tagLink}" class="text-zinc-500 hover:text-zinc-900 transition-colors leading-5">${tagName}</a>`;
     })
-    .join(`<span class="text-stone-500 font-normal mr-1">,</span>`);
+    .join(`<span class="text-zinc-500 font-normal mr-1">,</span>`);
+
+  const categoryName = typeof product.category === "object"
+    ? product.category?.name || "Vegetables"
+    : product.category || "Vegetables";
+
+  const categoryLink = typeof product.category === "object"
+    ? product.category?.link || "#"
+    : "#";
 
   return /*html*/ `
-    <!-- CỘT PHẢI: Đã thêm pl-[5px] để toàn bộ khối thông tin dịch sang phải 5px -->
-    <div class="lg:col-span-6 flex flex-col justify-start gap-6 font-['Poppins'] select-none pl-[20px]">
+    <!-- CỘT PHẢI FIGMA: THÔNG TIN SẢN PHẨM QUICK VIEW -->
+    <div data-qv-info-container class="w-full flex flex-col justify-start gap-6 font-['Poppins'] select-none pl-0 lg:pl-5">
 
       <!-- KHỐI 1: TÊN, ĐÁNH GIÁ & GIÁ -->
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-5 -mt-6 ml-1">
         <div class="flex flex-col gap-3">
           <!-- TÊN SẢN PHẨM + BADGE IN STOCK -->
           <div class="flex items-center gap-2 flex-wrap">
-            <h1 class="text-3xl lg:text-4xl font-semibold text-zinc-900 leading-10">
+            <h2 class="text-3xl lg:text-4xl font-semibold text-zinc-900 leading-10">
               ${product.name || "Chinese Cabbage"}
-            </h1>
+            </h2>
             ${
               product.inStock !== false
                 ? `
@@ -66,26 +76,32 @@ export function renderProductInfo(product = {}) {
           </div>
         </div>
 
-        <!-- GIÁ SẢN PHẨM & DISCOUNT BADGE -->
+        <!-- GIÁ SẢN PHẨM & DISCOUNT BADGE FIGMA -->
         <div class="flex items-center gap-3">
           <div class="flex items-center gap-1">
             ${
-              product.originalPrice || true
+              product.originalPrice || product.oldPrice
                 ? `
                   <span class="text-zinc-400 text-xl font-normal line-through leading-8 mr-1">
-                    $${Number(product.originalPrice || 48.0).toFixed(2)}
+                    $${Number(product.originalPrice || product.oldPrice).toFixed(2)}
                   </span>
                 `
                 : ""
             }
             <span class="text-green-800 text-2xl lg:text-[28px] font-medium leading-9">
-              $${Number(product.currentPrice || 17.28).toFixed(2)}
+              $${Number(product.currentPrice || product.price || 17.28).toFixed(2)}
             </span>
           </div>
 
-          <span class="bg-red-500/10 text-red-500 text-sm font-medium px-2.5 py-[3px] rounded-[30px] leading-5">
-            ${product.discountLabel || "64% Off"}
-          </span>
+          ${
+            product.discountLabel
+              ? `
+                <span class="bg-red-500/10 text-red-500 text-sm font-medium px-2.5 py-[3px] rounded-[30px] leading-5">
+                  ${product.discountLabel}
+                </span>
+              `
+              : ""
+          }
         </div>
 
         <!-- LINE DIVIDER -->
@@ -93,49 +109,53 @@ export function renderProductInfo(product = {}) {
       </div>
 
       <!-- KHỐI 2: BRAND, SHARE & DESCRIPTION -->
-      <div class="flex flex-col gap-4 -mt-4">
-        <div class="w-full flex items-center justify-between text-sm flex-wrap gap-4">
-          <!-- BRAND -->
-     <div class="flex items-center justify-between py-4 border-b border-gray-100 text-sm flex-wrap gap-4">
-  <div class="flex items-center gap-2">
-    <span class="text-gray-500">Brand:</span>
-    ${product.brandLogo ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto" />` : ''}
-  </div>
-</div>
-          <!- SHARE -->
+      <div class="flex flex-col gap-4 -mt-2 ml-0">
+        <div class="w-full flex items-center justify-between text-sm flex-wrap gap-4 pb-2 border-b border-gray-100 mt-2">
+          <!-- BRAND FIGMA -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-500 font-normal">Brand:</span>
+            ${
+              product.brandLogo
+                ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
+                : `<span class="text-zinc-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
+            }
+          </div>
+
+          <!-- SHARE ITEM FIGMA -->
           <div class="flex items-center gap-2.5">
             <span class="text-zinc-900 font-normal leading-5">Share item:</span>
             <div class="flex items-center gap-[5px]">
-               <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-500 flex items-center justify-center transition-colors" aria-label="Facebook">
+               <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-600 flex items-center justify-center transition-colors" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-500 flex items-center justify-center transition-colors" aria-label="Twitter">
+               <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-600 flex items-center justify-center transition-colors" aria-label="Twitter">
                 ${SOCIAL_ICONS.twitter}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-500 flex items-center justify-center transition-colors" aria-label="Pinterest">
+              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-600 flex items-center justify-center transition-colors" aria-label="Pinterest">
                 ${SOCIAL_ICONS.pinterest}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-100 flex items-center justify-center transition-colors" aria-label="Instagram">
+              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-600 flex items-center justify-center transition-colors" aria-label="Instagram">
                 ${SOCIAL_ICONS.instagram}
               </a>
             </div>
           </div>
         </div>
 
-        <!-- MÔ TẢ -->
-        <p class="text-sm text-zinc-500 leading-5 font-normal max-w-[568px] -mt-2">
+        <!-- MÔ TẢ FIGMA -->
+        <p class="text-sm text-zinc-500 leading-relaxed font-normal max-w-[568px] -mt-2">
           ${product.description || "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar."}
         </p>
       </div>
 
-      <!-- KHỐI 3: STEPPER, ADD TO CART, WISHLIST -->
+      <!-- KHỐI 3: STEPPER, ADD TO CART, WISHLIST FIGMA -->
       <div class="w-full py-4 border-y border-neutral-200 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <!-- BỘ TĂNG GIẢM SỐ LƯỢNG -->
+        <!-- BỘ TĂNG GIẢM SỐ LƯỢNG FIGMA -->
         <div class="flex h-[51px] w-[124px] items-center justify-between rounded-full border border-neutral-200 p-2 bg-white shrink-0">
           <button
             type="button"
             class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors shrink-0"
-            data-action="decrement"
+            data-qv-action="decrement"
+            aria-label="Decrease quantity"
           >
             <svg width="11" height="2" viewBox="0 0 11 2" fill="none">
               <path d="M0.75 0.75H10.0833" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -143,16 +163,18 @@ export function renderProductInfo(product = {}) {
           </button>
 
           <input
+            data-qv-input="quantity"
             class="quantity-stepper-input w-10 text-center font-normal text-base text-zinc-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             type="number"
             min="1"
-            value="5"
+            value="1"
           />
 
           <button
             type="button"
             class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors shrink-0"
-            data-action="increment"
+            data-qv-action="increment"
+            aria-label="Increase quantity"
           >
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
               <path d="M0.75 5.41667H10.0833M5.41667 0.75V10.0833" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -160,14 +182,14 @@ export function renderProductInfo(product = {}) {
           </button>
         </div>
 
-        <!-- NÚT ADD TO CART -->
+        <!-- NÚT ADD TO CART FIGMA -->
         <button
-          data-action="add-to-cart"
+          type="button"
+          data-qv-action="add-to-cart"
+          data-product-id="${product.id || ''}"
           class="w-full sm:w-96 h-[51px] bg-green-600 hover:bg-green-700 text-white font-semibold rounded-[43px] flex items-center justify-center gap-4 transition-colors cursor-pointer px-10"
         >
-          <span class="text-base font-semibold leading-5">
-            Add to Cart
-          </span>
+          <span class="text-base font-semibold leading-5">Add to Cart</span>
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
             <path
               d="M4.81706 6.48336H2.31706L0.650391 15.65H15.6504L13.9837 6.48336H11.4837M4.81706 6.48336V3.98336C4.81706 2.14241 6.30944 0.650024 8.15039 0.650024C9.99134 0.650024 11.4837 2.14241 11.4837 3.98336V6.48336M4.81706 6.48336H11.4837M4.81706 6.48336V8.98336M11.4837 6.48336V8.98336"
@@ -179,9 +201,11 @@ export function renderProductInfo(product = {}) {
           </svg>
         </button>
 
-        <!-- NÚT WISHLIST -->
+        <!-- NÚT WISHLIST FIGMA -->
         <button
           type="button"
+          data-qv-action="wishlist"
+          data-product-id="${product.id || ''}"
           class="w-[51px] h-[51px] rounded-full bg-green-600/10 hover:bg-green-600/20 text-green-800 flex items-center justify-center transition-all cursor-pointer shrink-0"
           aria-label="Wishlist"
         >
@@ -191,15 +215,15 @@ export function renderProductInfo(product = {}) {
         </button>
       </div>
 
-      <!-- KHỐI 4: CATEGORY & TAGS -->
+      <!-- KHỐI 4: CATEGORY & TAGS FIGMA -->
       <div class="flex flex-col gap-3 text-sm">
         <div class="flex items-center gap-1.5">
           <span class="text-zinc-900 font-medium leading-5">Category:</span>
           <a
-            href="${product.category?.link || "#"}"
+            href="${categoryLink}"
             class="text-zinc-500 font-normal hover:text-green-600 transition-colors leading-5"
           >
-            ${product.category?.name || "Vegetables"}
+            ${categoryName}
           </a>
         </div>
 
@@ -213,4 +237,46 @@ export function renderProductInfo(product = {}) {
 
     </div>
   `;
+}
+
+export function bindQuickViewInfoEvents(modalContainer, onAddToCart = null) {
+  if (!modalContainer) return;
+
+  const container = modalContainer.querySelector("[data-qv-info-container]") || modalContainer;
+  const qtyInput = container.querySelector('[data-qv-input="quantity"]');
+  const decBtn = container.querySelector('[data-qv-action="decrement"]');
+  const incBtn = container.querySelector('[data-qv-action="increment"]');
+  const addToCartBtn = container.querySelector('[data-qv-action="add-to-cart"]');
+
+  if (qtyInput) {
+    if (decBtn) {
+      decBtn.addEventListener("click", () => {
+        const currentVal = parseInt(qtyInput.value, 10) || 1;
+        if (currentVal > 1) qtyInput.value = currentVal - 1;
+      });
+    }
+
+    if (incBtn) {
+      incBtn.addEventListener("click", () => {
+        const currentVal = parseInt(qtyInput.value, 10) || 1;
+        qtyInput.value = currentVal + 1;
+      });
+    }
+
+    qtyInput.addEventListener("change", () => {
+      const val = parseInt(qtyInput.value, 10);
+      if (isNaN(val) || val < 1) qtyInput.value = 1;
+    });
+  }
+
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", () => {
+      const productId = addToCartBtn.getAttribute("data-product-id");
+      const quantity = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+
+      if (typeof onAddToCart === "function") {
+        onAddToCart({ productId, quantity, button: addToCartBtn });
+      }
+    });
+  }
 }

@@ -9,7 +9,7 @@ import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 import { renderDescription } from "../descriptions/descriptions.js";
 
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 
 import { bindImageEvents } from "../descriptions/Image.js";
 
@@ -71,7 +71,7 @@ function showToastNotification(message) {
       "toast-notification";
 
     toast.className =
-      "fixed bottom-6 right-6 z-50 bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
+      "fixed bottom-6 right-6 z-50 bg-neutral-900 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
 
     document.body.appendChild(toast);
   }
@@ -792,17 +792,47 @@ export function initDetailsPage() {
 
   const breadcrumbContainer =
     document.getElementById(
-      "breadcrumb-container"
+      "breadcrumbs-container"
     );
 
 
-  if (breadcrumbContainer) {
+if (breadcrumbContainer) {
 
-    breadcrumbContainer.innerHTML =
-      renderBreadcrumbsComponent();
+  const currentProduct = getActiveProduct();
 
-  }
+  const categoryName =
+    currentProduct?.category?.name ||
+    currentProduct?.category ||
+    "Fresh Fruit";
 
+  const productName =
+    currentProduct?.name ||
+    "Product";
+
+  const categoryUrl =
+    `./shop.html?category=${encodeURIComponent(
+      categoryName.toLowerCase()
+    )}`;
+
+  breadcrumbContainer.innerHTML =
+    renderBreadcrumbsComponent({
+      breadcrumbs: [
+        {
+          label: "Category",
+          url: "./shop.html"
+        },
+        {
+          label: categoryName,
+          url: categoryUrl
+        },
+        {
+          label: productName,
+          url: "#"
+        }
+      ]
+    });
+
+}
 
   // ===================================================
   // DESCRIPTION

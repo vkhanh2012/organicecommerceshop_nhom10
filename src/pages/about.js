@@ -3,6 +3,8 @@ import {renderAboutUsSection} from "../about/aboutus.js"
 import {renderAboutMeSection} from "../about/aboutme.js"
 import {renderDeliveredFeature} from "../about/delivered.js"
 import { renderTeamSection } from "../about/team.js"
+import { renderTestimonialComponent } from "../home/testimonial.js";
+import { renderBrandStrip } from "../home/brandstrip.js";
 
 
 export function initAboutPage() {
@@ -33,5 +35,21 @@ if(deliveredSection){
 const teamSection = document.getElementById("team-section");
 if(teamSection) {
   teamSection.innerHTML = renderTeamSection();
+}
+
+const testimonialSection =
+  document.getElementById("testiSection");
+
+if (testimonialSection) {
+  testimonialSection.innerHTML =
+    renderTestimonialComponent("about");
+}
+
+const brandStripSection =
+  document.getElementById("brand-strip-section");
+
+if (brandStripSection) {
+  brandStripSection.innerHTML =
+    renderBrandStrip("about");
 }
 }

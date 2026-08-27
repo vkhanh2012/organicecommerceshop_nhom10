@@ -7,7 +7,9 @@ export function initShoppingCartPage() {
 
   function refreshCart(cart, message = "") {
     renderCart(cart, message);
-    document.dispatchEvent(new CustomEvent("cart:updated", { detail: cart }));
+    document.dispatchEvent(new CustomEvent("cart:updated", {
+      detail: { cart, source: "cart-page" },
+    }));
   }
 
   function renderCart(cart, message = "") {
@@ -21,4 +23,9 @@ export function initShoppingCartPage() {
 
   renderCart(getCart());
   bindCartEvents(cartContainer, refreshCart);
+
+  document.addEventListener("cart:updated", (event) => {
+    if (event.detail?.source === "cart-page") return;
+    renderCart(event.detail?.cart ?? getCart());
+  });
 }

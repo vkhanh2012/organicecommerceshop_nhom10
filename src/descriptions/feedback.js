@@ -1,18 +1,21 @@
 import { iconStar } from "../components/icons.js";
 
 export function renderCustomerFeedbackTab(product) {
-
   const feedbacksHtml = (product.feedbacks || [])
     .map((item) => {
-
       const feedbackStars = Array.from({ length: 5 }, (_, i) => {
-  // Nếu vị trí i nhỏ hơn số rating của khách thì là sao vàng, ngược lại là sao xám/trống
-  const isFilled = i < item.rating;
-  const starColor = isFilled ? "#FFB800" : "#E4E7E9"; 
-  
-  return `<span style="color: ${starColor}; display: inline-flex;">${iconStar(isFilled)}</span>`;
-}).join("");
+        const isFilled = i < item.rating;
+        const starColor = isFilled ? "#FFB800" : "#D1D5DB";
 
+        return `
+          <span
+            class="inline-flex w-4 h-4 items-center justify-center"
+            style="color: ${starColor};"
+          >
+            ${iconStar(isFilled)}
+          </span>
+        `;
+      }).join("");
 
       const avatarHtml = item.avatar
         ? `
@@ -23,39 +26,42 @@ export function renderCustomerFeedbackTab(product) {
           />
         `
         : `
-          <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center shrink-0">
-            <i class="fa-solid fa-user text-sm"></i>
+          <div
+            class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center shrink-0"
+          >
+            <i class="fa-solid fa-user text-zinc-400 text-sm"></i>
           </div>
         `;
 
       return `
-        <div class="py-1 border-b border-gray-100 last:border-b-0 space-y-2">
+        <div class="w-[760px] py-4 border-b border-neutral-200 flex flex-col gap-3">
 
-          <div class="flex items-center justify-between">
+          <!-- User -->
+          <div class="flex items-start">
 
-            <div class="flex items-center gap-3">
-              ${avatarHtml}
+            ${avatarHtml}
 
-              <div>
-                <h4 class="text-sm font-semibold text-gray-900">
-                  ${item.name}
-                </h4>
+            <div class="ml-3 w-28 pb-0.5 flex flex-col gap-0.5">
+              <div class="text-zinc-900 text-sm font-medium font-['Poppins'] leading-5">
+                ${item.name}
+              </div>
 
-                <div class="flex items-center gap-1 mt-1">
-                  ${feedbackStars}
-                </div>
+              <div class="flex items-center">
+                ${feedbackStars}
               </div>
             </div>
 
-            <span class="text-xs text-gray-400">
+            <!-- Time -->
+            <div class="ml-auto text-right text-neutral-400 text-sm font-normal font-['Poppins'] leading-5">
               ${item.time}
-            </span>
+            </div>
 
           </div>
 
-          <p class="text-sm text-gray-500 leading-relaxed">
+          <!-- Comment -->
+          <div class="w-[760px] text-zinc-500 text-sm font-normal font-['Poppins'] leading-5">
             ${item.comment}
-          </p>
+          </div>
 
         </div>
       `;
@@ -63,24 +69,32 @@ export function renderCustomerFeedbackTab(product) {
     .join("");
 
   return /*html*/ `
-    <div class="container-custom">
+    <div class="w-full flex flex-col items-start">
 
-      <div
-        id="customer-feedback"
-        class="max-w-4xl pt-8 mt-8 border-t border-gray-100 space-y-6"
-      >
+      <!-- Feedback content -->
+      <div class="w-[760px] flex flex-col items-start gap-0">
 
-        <h3 class="text-xl font-semibold text-gray-900">
-          Customer Feedback
-        </h3>
+        ${feedbacksHtml}
 
-        <div class="divide-y divide-gray-100">
-          ${feedbacksHtml}
-        </div>
-
-        <div class="pt-2">
+        <!-- Load More -->
+        <div class="pt-5">
           <button
-            class="bg-[#00B207]/10 hover:bg-[#00B207]/20 text-[#00B207] font-semibold text-sm py-2.5 px-8 rounded-full transition-all duration-200 cursor-pointer"
+            class="
+              px-8 py-3.5
+              bg-green-500/10
+              hover:bg-green-500/20
+              rounded-[43px]
+              inline-flex
+              justify-center
+              items-center
+              gap-3
+              text-green-600
+              text-sm
+              font-semibold
+              font-['Poppins']
+              leading-4
+              transition
+            "
           >
             Load More
           </button>
