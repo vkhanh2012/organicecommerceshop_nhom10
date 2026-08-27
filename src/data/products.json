@@ -300,5 +300,105 @@
       "/src/assets/images/ProductImage/mango2.svg",
       "/src/assets/images/ProductImage/mango3.svg"
     ]
+  },
+  {
+    "id": 14,
+    "name": "Cooking Essentials",
+    "price": 26,
+    "oldPrice": null,
+    "rating": 4,
+    "saleTag": null,
+    "category": "Cooking",
+    "tags": [
+      "Healthy",
+      "Dinner"
+    ],
+    "image": "/images/Categories/Cooking.webp",
+    "thumbnails": [
+      "/images/Categories/Cooking.webp",
+      "/images/Categories/Cooking.webp",
+      "/images/Categories/Cooking.webp",
+      "/images/Categories/Cooking.webp"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Assorted Snacks",
+    "price": 18,
+    "oldPrice": null,
+    "rating": 4,
+    "saleTag": null,
+    "category": "Snacks",
+    "tags": [
+      "Snacks",
+      "Kid foods"
+    ],
+    "image": "/images/Categories/Snacks.webp",
+    "thumbnails": [
+      "/images/Categories/Snacks.webp",
+      "/images/Categories/Snacks.webp",
+      "/images/Categories/Snacks.webp",
+      "/images/Categories/Snacks.webp"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Assorted Beverages",
+    "price": 22,
+    "oldPrice": null,
+    "rating": 4,
+    "saleTag": null,
+    "category": "Beverages",
+    "tags": [
+      "Breackfast",
+      "Snacks"
+    ],
+    "image": "/images/Categories/Beverages.webp",
+    "thumbnails": [
+      "/images/Categories/Beverages.webp",
+      "/images/Categories/Beverages.webp",
+      "/images/Categories/Beverages.webp",
+      "/images/Categories/Beverages.webp"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Beauty & Health Essentials",
+    "price": 30,
+    "oldPrice": null,
+    "rating": 5,
+    "saleTag": null,
+    "category": "Beauty & Health",
+    "tags": [
+      "Healthy",
+      "Vitamins"
+    ],
+    "image": "/images/Categories/Beauty & Health.webp",
+    "thumbnails": [
+      "/images/Categories/Beauty & Health.webp",
+      "/images/Categories/Beauty & Health.webp",
+      "/images/Categories/Beauty & Health.webp",
+      "/images/Categories/Beauty & Health.webp"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Bread & Bakery Selection",
+    "price": 16,
+    "oldPrice": null,
+    "rating": 4,
+    "saleTag": null,
+    "category": "Bread & Bakery",
+    "tags": [
+      "Breackfast",
+      "Snacks"
+    ],
+    "image": "/images/Categories/Bread & Bakery.webp",
+    "thumbnails": [
+      "/images/Categories/Bread & Bakery.webp",
+      "/images/Categories/Bread & Bakery.webp",
+      "/images/Categories/Bread & Bakery.webp",
+      "/images/Categories/Bread & Bakery.webp"
+    ]
   }
 ]

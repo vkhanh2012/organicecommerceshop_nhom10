@@ -1,3 +1,5 @@
+import { dropDown } from "../components/icons.js"
+
 export function renderCategoryFilter(products, selectedCategory = "all",layout = "sidebar") {
   const categoryCounts = {}
   //đếm số lượng sản phẩm
@@ -33,7 +35,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
     .map((item) => {
       const checked = selectedCategory === item.value
       return /*html*/ `
-      <li class="flex items-center justify-between text-sm text-neutral-600 cursor-pointer group">
+      <li class="flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-sm text-neutral-600 cursor-pointer">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
@@ -49,6 +51,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
               border-2 border-neutral-300
               bg-white
               cursor-pointer
+              ${layout === "horizontal" ? "group-hover/category:border-primary" : ""}
 
               checked:border-primary
               checked:bg-primary
@@ -63,18 +66,25 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
               text-neutral-600
               peer-checked:text-primary-dark
               peer-checked:font-medium
-              group-hover:text-primary
+              ${layout === "horizontal" ? "group-hover/category:text-primary" : "group-hover:text-primary"}
               transition-colors
               font-poppins
             "
           >
             ${item.label}
           </label>
-            </div>
-
+          ${layout === "horizontal" ? "" : `
             <span class="text-neutral-400 text-xs font-poppins">
               (${item.count})
             </span>
+          `}
+            </div>
+
+            ${layout === "horizontal" ? `
+              <span class="text-neutral-400 text-xs font-poppins">
+                (${item.count})
+              </span>
+            ` : ""}
           </li>
     `
     })
@@ -105,7 +115,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
             group-open:rotate-180
           "
         >
-          ⌄
+          ${dropDown}
         </span>
       </summary>
 

@@ -1,4 +1,4 @@
-import { ratingStar } from "../components/icons";
+import { dropDown, ratingStar } from "../components/icons.js";
 const star = 'var(--color-star)';
 const greystar = 'var(--color-greystar)';
 //Dữ liệu demo
@@ -23,7 +23,7 @@ function makeStarHtml(starCount) {
 //tạo cho 1 dòng rating (1 li)
 function renderRating(item, selectedRating, layout = "sidebar") {
   return /*html*/ `
-    <li class = "flex items-center gap-2 cursor-pointer group">
+    <li class="flex items-center gap-2 cursor-pointer ${layout === "horizontal" ? "group/rating" : "group"}">
        <input
           type="checkbox"
           name="rating"
@@ -50,7 +50,7 @@ function renderRating(item, selectedRating, layout = "sidebar") {
 export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
   const listItemsHtml = RATING_DATA
     .map((item) =>
-      renderRating(item, selectedRating)
+      renderRating(item, selectedRating, layout)
     )
     .join("")
 
@@ -72,7 +72,7 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
       >
         <span>Select Rating</span>
         <span class="transition-transform group-open:rotate-180">
-          ⌄
+          ${dropDown}
         </span>
       </summary>
 

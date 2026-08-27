@@ -1,3 +1,5 @@
+import { dropDown } from "../components/icons.js"
+
 const TAGS_DATA = [
   { id: "tag-healthy", name: "Healthy" },
   { id: "tag-low-fat", name: "Low fat" },
@@ -64,7 +66,7 @@ export function renderPopularTags(
           </span>
 
           <span class="transition-transform group-open:rotate-180">
-            ⌄
+            ${dropDown}
           </span>
         </summary>
 

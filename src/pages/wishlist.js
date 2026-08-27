@@ -46,6 +46,8 @@ export function initWishlistPage() {
     wishlistSection.innerHTML = renderWishlistSection(items);
   }
 
+  document.addEventListener("wishlist:updated", renderWishlist);
+
   wishlistSection.addEventListener("click", (event) => {
     const addCartButton = event.target.closest("[data-add-cart]");
     if (addCartButton && !addCartButton.disabled) {
@@ -67,7 +69,6 @@ export function initWishlistPage() {
     if (!removeButton) return;
 
     removeFromWishlist(removeButton.dataset.removeWishlist);
-    renderWishlist();
   });
 
   renderWishlist();

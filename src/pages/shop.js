@@ -10,6 +10,7 @@ import { renderProductGrid, bindCardEvents } from "/src/components/productcard.j
 import productsUrl from "/src/data/products.json?url"
 import { renderPagination } from "/src/shop/pagination.js"
 import { renderQuickViewModal } from "/src/Quickview/quickview.js"
+import { dropDown } from "/src/components/icons.js"
 
 const images = import.meta.glob("../assets/images/**/*", {
   eager: true,
@@ -88,7 +89,7 @@ export async function initShopPage() {
   shopState.minPrice = minProductPrice
   shopState.maxPrice = maxProductPrice
 
-  
+
 
   //shop1
   const sideBarContainer = document.getElementById("sidebar")
@@ -100,33 +101,33 @@ export async function initShopPage() {
   const isShop2 = horizontalFilterContainer !== null
 
   const topBar =
-  document.getElementById("top-Bar")
+    document.getElementById("top-Bar")
 
-if (topBar && !isShop2) {
-  topBar.innerHTML = renderTopBar({
-    totalResults: PRODUCT_DATA.length,
-    currentSort: shopState.sortBy,
-    buttonName: "Filter",
-    sortOptions: [
-      {
-        value: "latest",
-        label: "Latest",
-      },
-      {
-        value: "price-low",
-        label: "Price: Low to High",
-      },
-      {
-        value: "price-high",
-        label: "Price: High to Low",
-      },
-      {
-        value: "rating",
-        label: "Popularity",
-      },
-    ],
-  })
-}
+  if (topBar && !isShop2) {
+    topBar.innerHTML = renderTopBar({
+      totalResults: PRODUCT_DATA.length,
+      currentSort: shopState.sortBy,
+      buttonName: "Filter",
+      sortOptions: [
+        {
+          value: "latest",
+          label: "Latest",
+        },
+        {
+          value: "price-low",
+          label: "Price: Low to High",
+        },
+        {
+          value: "price-high",
+          label: "Price: High to Low",
+        },
+        {
+          value: "rating",
+          label: "Popularity",
+        },
+      ],
+    })
+  }
 
   if (isShop2) {
     shopState.productsPerPage = 16
@@ -136,7 +137,7 @@ if (topBar && !isShop2) {
 
   // SHOP 2 - dùng lại chính các module filter của Shop 1
   if (horizontalFilterContainer) {
-  horizontalFilterContainer.innerHTML = `
+    horizontalFilterContainer.innerHTML = `
     <div
       class="
         flex
@@ -159,29 +160,34 @@ if (topBar && !isShop2) {
         "
       >
         ${renderCategoryFilter(
-          PRODUCT_DATA,
-          shopState.category,
-          "horizontal"
-        )}
+      PRODUCT_DATA,
+      shopState.category,
+      "horizontal"
+    )}
 
         <details class="group relative">
           <summary class="flex min-w-36 cursor-pointer list-none items-center justify-between gap-4 rounded border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-600">
             <span>Select Price</span>
-            <span class="transition-transform group-open:rotate-180">⌄</span>
+            <span class="transition-transform group-open:rotate-180">${dropDown}</span>
           </summary>
           <div class="absolute left-0 top-full z-40 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg">
             ${renderPriceFilter(
-              PRODUCT_DATA,
-              shopState.minPrice,
-              shopState.maxPrice
-            )}
+      PRODUCT_DATA,
+      shopState.minPrice,
+      shopState.maxPrice
+    )}
           </div>
         </details>
 
         ${renderRatingFilter(
-          shopState.rating,
-          "horizontal"
-        )}
+      shopState.rating,
+      "horizontal"
+    )}
+
+        ${renderPopularTags(
+      shopState.tag,
+      "horizontal"
+    )}
 
       </div>
 
@@ -191,7 +197,7 @@ if (topBar && !isShop2) {
           flex
           flex-wrap
           items-center
-          gap-4
+          gap-3
 
           xl:shrink-0
         "
@@ -200,18 +206,17 @@ if (topBar && !isShop2) {
         <label
           class="
             flex
+            relative
             items-center
             gap-2
             text-sm
             text-neutral-500
           "
         >
-          <span>Sort by:</span>
-
           <select
             id="sort-select"
             class="
-              min-w-40
+              w-40
               cursor-pointer
               rounded
               border
@@ -221,43 +226,48 @@ if (topBar && !isShop2) {
               py-2
               text-sm
               text-neutral-700
+              appearance-none
+              pr-10
               outline-none
               focus:border-primary
             "
           >
             <option value="latest">
-              Latest
+              Sort by: Latest
             </option>
 
             <option value="price-low">
-              Price: Low to High
+              Sort by: Price Low
             </option>
 
             <option value="price-high">
-              Price: High to Low
+              Sort by: Price High
             </option>
 
             <option value="rating">
-              Popularity
+              Sort by: Popularity
             </option>
           </select>
+          <span class="pointer-events-none absolute right-3 flex items-center" aria-hidden="true">
+            ${dropDown}
+          </span>
         </label>
 
         <!-- SHOW -->
         <label
           class="
             flex
+            relative
             items-center
             gap-2
             text-sm
             text-neutral-500
           "
         >
-          <span>Show:</span>
-
           <select
             id="products-per-page"
             class="
+              w-40
               cursor-pointer
               rounded
               border
@@ -267,30 +277,35 @@ if (topBar && !isShop2) {
               py-2
               text-sm
               text-neutral-700
+              appearance-none
+              pr-10
               outline-none
               focus:border-primary
             "
           >
             <option value="8">
-              8
+              Show: 8
             </option>
 
             <option
               value="16"
               selected
             >
-              16
+              Show: 16
             </option>
 
             <option value="24">
-              24
+              Show: 24
             </option>
           </select>
+          <span class="pointer-events-none absolute right-3 flex items-center" aria-hidden="true">
+            ${dropDown}
+          </span>
         </label>
       </div>
     </div>
   `
-}
+  }
 
   // SHOP 1 - sidebar cũ
   else if (sideBarContainer) {
@@ -310,7 +325,8 @@ if (topBar && !isShop2) {
 
     if (saleProductsContainer) {
       initSaleProducts(
-        saleProductsContainer
+        saleProductsContainer,
+        PRODUCT_DATA
       )
     }
   }
@@ -320,7 +336,7 @@ if (topBar && !isShop2) {
   )
 
   function renderActiveFilters(totalResults) {
-    if (!isShop2 || !activeFilterContainer) return
+    if (!activeFilterContainer) return
 
     const chips = []
 
@@ -345,12 +361,19 @@ if (topBar && !isShop2) {
       })
     }
 
+    if (shopState.tag !== "all") {
+      chips.push({
+        type: "tag",
+        label: shopState.tag,
+      })
+    }
+
     activeFilterContainer.innerHTML = `
       <div class="flex flex-wrap items-center gap-2 text-sm">
         <span class="text-neutral-500">Active Filters:</span>
         ${chips
-          .map(
-            (chip) => `
+        .map(
+          (chip) => `
               <span class="inline-flex items-center gap-1.5 font-medium text-neutral-900">
                 ${chip.label}
                 <button
@@ -361,8 +384,8 @@ if (topBar && !isShop2) {
                 >×</button>
               </span>
             `,
-          )
-          .join("")}
+        )
+        .join("")}
       </div>
       <p class="shrink-0 text-sm text-neutral-600">
         <span class="font-semibold text-neutral-900">${totalResults}</span> Results found.
@@ -491,43 +514,43 @@ if (topBar && !isShop2) {
     }
 
     if (filterContainer) {
-  filterContainer.addEventListener(
-    "click",
-    (event) => {
-      const tagButton =
-        event.target.closest(
-          "[data-tag-value]"
-        )
+      filterContainer.addEventListener(
+        "click",
+        (event) => {
+          const tagButton =
+            event.target.closest(
+              "[data-tag-value]"
+            )
 
-      if (!tagButton) return
+          if (!tagButton) return
 
-      const selectedTag =
-        tagButton.dataset.tagValue
+          const selectedTag =
+            tagButton.dataset.tagValue
 
-      // Click lại tag đang chọn -> bỏ lọc
-      shopState.tag =
-        shopState.tag === selectedTag
-          ? "all"
-          : selectedTag
+          // Click lại tag đang chọn -> bỏ lọc
+          shopState.tag =
+            shopState.tag === selectedTag
+              ? "all"
+              : selectedTag
 
-      shopState.currentPage = 1
+          shopState.currentPage = 1
 
-      setTagButtonState(
-        filterContainer,
-        shopState.tag
+          setTagButtonState(
+            filterContainer,
+            shopState.tag
+          )
+
+          renderShopProducts()
+
+          // Shop2: chọn xong đóng dropdown
+          if (isShop2) {
+            tagButton
+              .closest("details")
+              ?.removeAttribute("open")
+          }
+        }
       )
-
-      renderShopProducts()
-
-      // Shop2: chọn xong đóng dropdown
-      if (isShop2) {
-        tagButton
-          .closest("details")
-          ?.removeAttribute("open")
-      }
     }
-  )
-}
 
     const sortSelect = document.getElementById("sort-select")
     if (sortSelect) {
@@ -539,23 +562,23 @@ if (topBar && !isShop2) {
     }
 
     const productsPerPageSelect =
-  document.getElementById(
-    "products-per-page"
-  )
+      document.getElementById(
+        "products-per-page"
+      )
 
-if (productsPerPageSelect) {
-  productsPerPageSelect.addEventListener(
-    "change",
-    (event) => {
-      shopState.productsPerPage =
-        Number(event.target.value)
+    if (productsPerPageSelect) {
+      productsPerPageSelect.addEventListener(
+        "change",
+        (event) => {
+          shopState.productsPerPage =
+            Number(event.target.value)
 
-      shopState.currentPage = 1
+          shopState.currentPage = 1
 
-      renderShopProducts()
+          renderShopProducts()
+        }
+      )
     }
-  )
-}
 
     if (filterContainer) {
       filterContainer.addEventListener("change", (event) => {
@@ -615,7 +638,11 @@ if (productsPerPageSelect) {
           "afterend",
           `
             <span
-              class="pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded border border-neutral-300 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.18)] transition-colors group-hover:border-primary peer-checked:border-primary peer-checked:bg-primary"
+              class="pointer-events-none flex h-5 w-5 shrink-0 items-center justify-center rounded border bg-white transition-colors ${
+                isShop2
+                  ? "border-neutral-200 group-hover/rating:border-primary peer-hover:border-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/20 peer-checked:border-primary peer-checked:bg-primary"
+                  : "border-neutral-300 shadow-[0_1px_3px_rgba(0,0,0,0.18)] group-hover:border-primary peer-checked:border-primary peer-checked:bg-primary"
+              }"
               aria-hidden="true"
             >
               <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -626,22 +653,22 @@ if (productsPerPageSelect) {
         )
       })
 
-    ;[minPriceInput, maxPriceInput].forEach((input) => {
-      if (!input) return
+      ;[minPriceInput, maxPriceInput].forEach((input) => {
+        if (!input) return
 
-      input.classList.remove(
-        "[&::-webkit-slider-thumb]:bg-primary",
-        "[&::-webkit-slider-thumb]:border-white",
-      )
-      input.classList.add(
-        "[&::-webkit-slider-thumb]:bg-white",
-        "[&::-webkit-slider-thumb]:border-2",
-        "[&::-webkit-slider-thumb]:border-primary",
-        "[&::-moz-range-thumb]:bg-white",
-        "[&::-moz-range-thumb]:border-2",
-        "[&::-moz-range-thumb]:border-primary",
-      )
-    })
+        input.classList.remove(
+          "[&::-webkit-slider-thumb]:bg-primary",
+          "[&::-webkit-slider-thumb]:border-white",
+        )
+        input.classList.add(
+          "[&::-webkit-slider-thumb]:bg-white",
+          "[&::-webkit-slider-thumb]:border-2",
+          "[&::-webkit-slider-thumb]:border-primary",
+          "[&::-moz-range-thumb]:bg-white",
+          "[&::-moz-range-thumb]:border-2",
+          "[&::-moz-range-thumb]:border-primary",
+        )
+      })
 
     function updatePriceFilter() {
       let minValue = Number(minPriceInput.value)
@@ -694,7 +721,7 @@ if (productsPerPageSelect) {
       }
     }
 
-    if (isShop2 && activeFilterContainer) {
+    if (activeFilterContainer) {
       activeFilterContainer.addEventListener("click", (event) => {
         const removeButton = event.target.closest("[data-remove-filter]")
         if (!removeButton) return
@@ -725,6 +752,11 @@ if (productsPerPageSelect) {
             .forEach((input) => {
               input.checked = false
             })
+        }
+
+        if (filterType === "tag") {
+          shopState.tag = "all"
+          setTagButtonState(filterContainer, shopState.tag)
         }
 
         shopState.currentPage = 1
