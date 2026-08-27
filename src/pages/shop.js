@@ -76,8 +76,30 @@ function setTagButtonState(
 }
 
 export async function initShopPage() {
-  const response = await fetch(productsUrl)
-  let PRODUCT_DATA = await response.json()
+  let PRODUCT_DATA
+
+  try {
+    const response = await fetch(productsUrl)
+
+    if (!response.ok) {
+      throw new Error(`Không thể tải dữ liệu sản phẩm: ${response.status}`)
+    }
+
+    PRODUCT_DATA = await response.json()
+  } catch (error) {
+    console.error("Lỗi tải dữ liệu sản phẩm:", error)
+
+    const productGridContainer = document.getElementById("product-grid-container")
+    if (productGridContainer) {
+      productGridContainer.innerHTML = `
+        <p class="col-span-full py-10 text-center text-neutral-500">
+          Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.
+        </p>
+      `
+    }
+
+    return
+  }
 
   PRODUCT_DATA = attachImageUrls(PRODUCT_DATA)
 
