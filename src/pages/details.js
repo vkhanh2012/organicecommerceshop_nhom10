@@ -9,7 +9,7 @@ import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 import { renderDescription } from "../descriptions/descriptions.js";
 
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 
 import { bindImageEvents } from "../descriptions/Image.js";
 
@@ -796,24 +796,43 @@ export function initDetailsPage() {
     );
 
 
-  if (breadcrumbContainer) {
+if (breadcrumbContainer) {
 
-    const currentProduct = getActiveProduct();
-    const categoryLabel =
-      currentProduct?.category?.name ||
-      currentProduct?.category ||
-      "Categories";
+  const currentProduct = getActiveProduct();
 
-    breadcrumbContainer.innerHTML =
-      renderBreadcrumbsComponent({
-        breadcrumbs: [
-          { label: categoryLabel, url: "./shop.html" },
-          { label: currentProduct?.name || "Product", url: window.location.href },
-        ],
-      });
+  const categoryName =
+    currentProduct?.category?.name ||
+    currentProduct?.category ||
+    "Fresh Fruit";
 
-  }
+  const productName =
+    currentProduct?.name ||
+    "Product";
 
+  const categoryUrl =
+    `./shop.html?category=${encodeURIComponent(
+      categoryName.toLowerCase()
+    )}`;
+
+  breadcrumbContainer.innerHTML =
+    renderBreadcrumbsComponent({
+      breadcrumbs: [
+        {
+          label: "Category",
+          url: "./shop.html"
+        },
+        {
+          label: categoryName,
+          url: categoryUrl
+        },
+        {
+          label: productName,
+          url: "#"
+        }
+      ]
+    });
+
+}
 
   // ===================================================
   // DESCRIPTION

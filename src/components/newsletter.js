@@ -1,3 +1,5 @@
+// src/components/newsletter.js
+
 import { SOCIAL_ICONS } from "./icons.js";
 
 export function renderNewsletterComponent() {
@@ -90,8 +92,12 @@ export function renderNewsletterComponent() {
 
           </div>
 
+
         </div>
+
       </div>
+    </section>
+  `;
     </section>
   `;
 }

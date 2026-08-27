@@ -1,13 +1,9 @@
 
-import {
-  iconHeart,
-  iconEye,
-  iconBag,
-  iconStar
-} from "./icons.js";
-import { addProductToCart } from "../shopping_cart/cartData.js";
-import { getImageUrl, attachImageUrls } from "../utils/assets.js";
-import productsData from "../data/products.json";
+import { iconHeart, iconEye, iconBag, iconStar } from "../components/icons.js"
+import { addProductToCart } from "../shopping_cart/cartData.js"
+import { getImageUrl, attachImageUrls } from "../utils/assets.js"
+import productsData from "../data/products.json"
+// import { renderPagination } from "./pagination.js"
 
 const CLASS = {
  cardHome:
@@ -59,17 +55,11 @@ cardShop:
   `,
 
   imageWrap:
-    "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-2.5 block cursor-pointer shrink-0",
-
-  image:
-    "w-full h-full object-cover",
-
-  tags:
-    "absolute top-2 left-2 z-10 flex gap-1 pointer-events-none",
-
+    "relative aspect-square rounded-md overflow-hidden bg-white flex items-center justify-center mb-3",
+  image: "w-full h-full object-cover",
+  tags: "absolute top-2 left-2 z-10 flex gap-1",
   tagSale:
-    "bg-error text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
-
+    "bg-error text-white text-[11px] font-semibold font-poppins px-2 py-1 rounded",
   tagBest:
     "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
 
@@ -97,10 +87,7 @@ cardShop:
   cartBtn: 
   "w-9 h-9 md:w-10 md:h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors hover:bg-primary hover:text-white cursor-pointer shrink-0",
 
-  rating:
-    "flex items-center gap-0.5",
-
-  // CLASS DÀNH CHO HOME: 5 CỘT TRÊN MH LỚN (lg:grid-cols-5)
+  // Bổ sung cho Home / Shop nhưng không ảnh hưởng grid cũ
   gridHome:
     "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-stretch w-full",
 
@@ -113,7 +100,8 @@ cardShop:
 // HIỂN THỊ THÔNG BÁO (TOAST) GÓC PHẢI DƯỚI
 // =====================================================
 function showToast(message) {
-  let toast = document.getElementById("toast-notification");
+  let toast = document.getElementById("toast-notification")
+
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast-notification";
@@ -121,40 +109,69 @@ function showToast(message) {
     document.body.appendChild(toast);
   }
 
-  toast.textContent = message;
-  toast.classList.remove("opacity-0", "translate-y-2", "pointer-events-none");
-  toast.classList.add("opacity-100", "translate-y-0");
+  toast.textContent = message
+
+  toast.classList.remove(
+    "opacity-0",
+    "translate-y-2",
+    "pointer-events-none",
+  )
+
+  toast.classList.add("opacity-100", "translate-y-0")
 
   setTimeout(() => {
-    toast.classList.remove("opacity-100", "translate-y-0");
-    toast.classList.add("opacity-0", "translate-y-2", "pointer-events-none");
-  }, 2500);
+    toast.classList.remove("opacity-100", "translate-y-0")
+
+    toast.classList.add(
+      "opacity-0",
+      "translate-y-2",
+      "pointer-events-none",
+    )
+  }, 2500)
 }
 
-// =====================================================
-// XỬ LÝ ẢNH CHUẨN
-// =====================================================
+/**
+ * Xử lý ảnh sản phẩm
+ */
 function resolveImage(p = {}) {
-  let imgPath = p.image || p.mainImage || (Array.isArray(p.thumbnails) && p.thumbnails[0]) || "";
-  if (typeof getImageUrl === "function" && (imgPath.startsWith("/images/") || imgPath.startsWith("images/"))) {
-    return getImageUrl(imgPath);
+  let imgPath =
+    p.image ||
+    p.mainImage ||
+    (Array.isArray(p.thumbnails) && p.thumbnails[0]) ||
+    ""
+
+  if (
+    typeof getImageUrl === "function" &&
+    (imgPath.startsWith("/images/") || imgPath.startsWith("images/"))
+  ) {
+    return getImageUrl(imgPath)
   }
-  return imgPath;
+
+  return imgPath
 }
 
-// =====================================================
-// HÀM TẢI DANH SÁCH SẢN PHẨM (CHO HOMEPAGE)
-// =====================================================
+/**
+ * Hàm tải danh sách sản phẩm
+ */
 export async function getProducts() {
   if (typeof attachImageUrls === "function") {
-    return attachImageUrls(productsData);
+    return attachImageUrls(productsData)
   }
-  return productsData;
+
+  return productsData
 }
 
-// =====================================================
-// RENDER PRODUCT CARD
-// =====================================================
+/**
+ * @param {Object} p
+ * @param {number|string} p.id
+ * @param {string} p.name
+ * @param {number} p.price
+ * @param {number|null} p.oldPrice
+ * @param {string} p.image
+ * @param {number} p.rating
+ * @param {string|null} p.saleTag
+ * @param {string|null} p.bestTag
+ */
 export function renderProductCard(p = {}) {
   const {
     id = 1,
@@ -163,115 +180,252 @@ export function renderProductCard(p = {}) {
     oldPrice = null,
     rating = 4,
     saleTag = null,
-    bestTag = null
-  } = p;
+    bestTag = null,
+  } = p
 
-  const image = resolveImage(p);
-  const detailUrl = `./descriptions.html?id=${id}`;
+  const image = resolveImage(p)
 
+  const detailUrl = `./descriptions.html?id=${id}`
+
+  /**
+   * Đóng gói dữ liệu sản phẩm để sử dụng cho:
+   * - Quick view
+   * - Add to cart
+   */
   const productDataStr = encodeURIComponent(
-    JSON.stringify({ ...p, id, name, price, oldPrice, image })
-  );
+    JSON.stringify({
+      ...p,
+      id,
+      name,
+      price,
+      oldPrice,
+      image,
+    }),
+  )
 
   const starsHtml = Array.from({ length: 5 })
-    .map((_, i) => `
-      <span class="${i < rating ? "text-warning" : "text-neutral-200"}">
-        ${iconStar(i < rating)}
-      </span>
-    `).join("");
+    .map(
+      (_, i) =>
+        `<span class="${i < rating ? "text-warning" : "text-neutral-200"}">${iconStar(i < rating)}</span>`,
+    )
+    .join("")
 
-  const tagsHtml = (saleTag || bestTag) ? `
-    <div class="${CLASS.tags}">
-      ${saleTag ? `<span class="${CLASS.tagSale}">${saleTag}</span>` : ""}
-      ${bestTag ? `<span class="${CLASS.tagBest}">${bestTag}</span>` : ""}
-    </div>
-  ` : "";
+  const tagsHtml =
+    saleTag || bestTag
+      ? `<div class="${CLASS.tags}">
+        ${saleTag ? `<span class="${CLASS.tagSale}">${saleTag}</span>` : ""}
+        ${bestTag ? `<span class="${CLASS.tagBest}">${bestTag}</span>` : ""}
+      </div>`
+      : ""
 
   return `
-    <article class="${CLASS.card}" data-id="${id}">
-      <a href="${detailUrl}" class="${CLASS.imageWrap}" aria-label="Xem chi tiết ${name}">
+  <article class="${CLASS.card}" data-id="${id}">
+    <div class="${CLASS.imageWrap}">
+
+      <a href="${detailUrl}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
-        <img src="${image}" alt="${name}" class="${CLASS.image}" loading="lazy" />
+        <img
+          src="${image}"
+          alt="${name}"
+          class="${CLASS.image}"
+          loading="lazy"
+        />
       </a>
 
       <div class="${CLASS.actions}">
-        <button type="button" data-action="wishlist" data-id="${id}" class="${CLASS.actionBtn}" aria-label="Wishlist">
+        <button
+          type="button"
+          data-action="wishlist"
+          data-id="${id}"
+          class="${CLASS.actionBtn}"
+          aria-label="Thêm vào yêu thích"
+        >
           ${iconHeart}
         </button>
-        <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view">
+
+        <button
+          type="button"
+          data-action="quick-view"
+          data-id="${id}"
+          data-product="${productDataStr}"
+          class="${CLASS.actionBtn}"
+          aria-label="Xem nhanh"
+        >
           ${iconEye}
         </button>
       </div>
 
-      <div class="${CLASS.body}">
-        <a href="${detailUrl}" class="${CLASS.name}" title="${name}">${name}</a>
+    </div>
 
+    <div class="${CLASS.body}">
+
+      <a
+        href="${detailUrl}"
+        class="${CLASS.name}"
+        title="${name}"
+      >
+        ${name}
+      </a>
+
+      <div class="${CLASS.priceRow}">
         <div>
-          <div class="${CLASS.priceRow}">
-            <div>
-              <span class="${CLASS.price}">$${Number(price).toFixed(2)}</span>
-              ${oldPrice ? `<span class="${CLASS.priceOld}">$${Number(oldPrice).toFixed(2)}</span>` : ""}
-            </div>
+          <span class="${CLASS.price}">
+            $${Number(price).toFixed(2)}
+          </span>
 
-            <button
-              type="button"
-              data-action="add-to-cart"
-              data-id="${id}"
-              data-product="${productDataStr}"
-              class="${CLASS.cartBtn}"
-              aria-label="Thêm ${name} vào giỏ hàng"
-            >
-              ${iconBag}
-            </button>
-          </div>
-
-          <div class="${CLASS.rating}">${starsHtml}</div>
+          ${
+            oldPrice
+              ? `<span class="${CLASS.priceOld}">
+                  $${Number(oldPrice).toFixed(2)}
+                </span>`
+              : ""
+          }
         </div>
+
+        <button
+          type="button"
+          data-action="add-to-cart"
+          data-id="${id}"
+          data-product="${productDataStr}"
+          class="${CLASS.cartBtn}"
+          aria-label="Thêm ${name} vào giỏ hàng"
+        >
+          ${iconBag}
+        </button>
       </div>
-    </article>
-  `;
+
+      <div class="${CLASS.rating}">
+        ${starsHtml}
+      </div>
+
+    </div>
+  </article>
+  `
 }
 
-// =====================================================
-// RENDER PRODUCT GRID (TỰ ĐỘNG THEO TRANG HOME / SHOP)
-// =====================================================
-export function renderProductGrid(products = [], page = "home") {
-  const itemsHtml = products.map(renderProductCard).join("");
-  
-  // Kiểm tra tham số page để trả về 5 cột (Home) hoặc 3 cột (Shop)
-  const gridClass = page === "shop" ? CLASS.gridShop : CLASS.gridHome;
+/**
+ * Render 1 lưới sản phẩm
+ *
+ * Mặc định giữ nguyên grid của code 1:
+ * mobile 2 cột -> sm 2 -> lg 3
+ *
+ * page = "home" hoặc "shop" sẽ dùng grid tương ứng.
+ */
+export function renderProductGrid(products = [], page = "shop") {
+  const itemsHtml = products
+    .map(renderProductCard)
+    .join("")
+
+  const gridClass =
+    page === "home"
+      ? CLASS.gridHome
+      : page === "shop"
+        ? CLASS.gridShop
+        : CLASS.grid
 
   return `
     <div class="w-full">
-      <div class="${gridClass}">${itemsHtml}</div>
+      <div class="${gridClass}">
+        ${itemsHtml}
+      </div>
     </div>
-  `;
+  `
 }
 
-// =====================================================
-// LẮNG NGHE SỰ KIỆN CLICK (THÊM GIỎ HÀNG & THÔNG BÁO)
-// =====================================================
+/**
+ * Lắng nghe sự kiện click:
+ * - Add to cart
+ * - Quick view
+ * - Wishlist
+ */
 export function bindCardEvents(container = document) {
   container.addEventListener("click", (e) => {
-    const btn = e.target.closest('[data-action="add-to-cart"]');
-    if (!btn) return;
 
-    e.preventDefault();
-    e.stopPropagation();
+    // ==========================================
+    // ADD TO CART
+    // ==========================================
+    const cartBtn = e.target.closest(
+      '[data-action="add-to-cart"]',
+    )
 
-    const rawData = btn.getAttribute("data-product");
-    if (!rawData) return;
+    if (cartBtn) {
+      e.preventDefault()
+      e.stopPropagation()
 
-    try {
-      const product = JSON.parse(decodeURIComponent(rawData));
-      
-      if (typeof addProductToCart === "function") {
-        addProductToCart(product, 1);
+      const rawData = cartBtn.getAttribute("data-product")
+
+      if (!rawData) return
+
+      try {
+        const product = JSON.parse(
+          decodeURIComponent(rawData),
+        )
+
+        if (typeof addProductToCart === "function") {
+          addProductToCart(product, 1)
+        }
+
+        showToast(`${product.name} added to cart.`)
+      } catch (err) {
+        console.error("Lỗi thêm giỏ hàng:", err)
       }
 
-      showToast(`${product.name} added to cart.`);
-    } catch (err) {
-      console.error("Lỗi thêm giỏ hàng:", err);
+      return
     }
-  });
+
+    // ==========================================
+    // WISHLIST
+    // ==========================================
+    const wishlistBtn = e.target.closest(
+      '[data-action="wishlist"]',
+    )
+
+    if (wishlistBtn) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      showToast("Added to wishlist.")
+      return
+    }
+
+    // ==========================================
+    // QUICK VIEW
+    // ==========================================
+    const quickViewBtn = e.target.closest(
+      '[data-action="quick-view"]',
+    )
+
+    if (quickViewBtn) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const rawData =
+        quickViewBtn.getAttribute("data-product")
+
+      if (!rawData) return
+
+      try {
+        const product = JSON.parse(
+          decodeURIComponent(rawData),
+        )
+
+        /**
+         * Nếu project đã có hàm quick-view riêng,
+         * có thể bắt event này ở file khác.
+         *
+         * Dispatch custom event để không làm
+         * thay đổi kiến trúc code hiện tại.
+         */
+        document.dispatchEvent(
+          new CustomEvent("product:quick-view", {
+            detail: product,
+          }),
+        )
+      } catch (err) {
+        console.error("Lỗi quick view:", err)
+      }
+
+      return
+    }
+  })
 }

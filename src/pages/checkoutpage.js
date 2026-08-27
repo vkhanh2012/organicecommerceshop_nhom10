@@ -1,20 +1,14 @@
-import { renderCheckout } from "../checkout/checkout.js";
-import { getCart, getCartSummary } from "../shopping_cart/cartData.js";
+// src/pages/checkoutpage.js
+
+import { renderCheckout, bindCheckoutEvents } from "../checkout/checkout.js";
+import { getCart } from "../shopping_cart/cartData.js";
 
 export function initCheckoutPage() {
   const container = document.getElementById("checkout-container");
   if (!container) return;
 
-  const cart = getCart();
-  const summary = getCartSummary(cart);
+  const cart = getCart(); // Đảm bảo luôn truyền MẢNG giỏ hàng
+  container.innerHTML = renderCheckout(cart);
 
-  container.innerHTML = renderCheckout({
-    cartItems: cart.map((item) => ({
-      ...item,
-      price: item.price * item.quantity,
-    })),
-    subtotal: summary.total,
-    shipping: 0,
-    total: summary.total,
-  });
+  bindCheckoutEvents(container);
 }
