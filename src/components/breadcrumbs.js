@@ -96,3 +96,8 @@ export function renderBreadcrumbsComponent(input = {}) {
   </div>
   `
 };
+
+// Backward-compatible name used by the checkout module.
+export function renderBreadCrumb(breadcrumbs = []) {
+  return renderBreadcrumbsComponent(breadcrumbs);
+}

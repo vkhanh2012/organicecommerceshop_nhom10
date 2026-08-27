@@ -86,8 +86,7 @@ export function addProduct(cart, product) {
 
   if (existingItem) existingItem.quantity += newProduct.quantity;
   else updatedCart.push(newProduct);
-  
-  saveCart(updatedCart);
+
   return updatedCart;
 }
 
@@ -107,4 +106,39 @@ export function addProductToCart(product, quantity = 1) {
   );
 
   return savedCart;
+}
+
+export function getCartSummary(cart = getCart()) {
+  const safeCart = Array.isArray(cart) ? cart : [];
+
+  return {
+    count: safeCart.reduce(
+      (sum, item) => sum + (Number(item.quantity) || 0),
+      0,
+    ),
+    total: safeCart.reduce(
+      (sum, item) =>
+        sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+      0,
+    ),
+  };
+}
+
+export function changeQuantity(cart, productId, change) {
+  const updatedCart = normalizeCart(cart);
+  const item = updatedCart.find(
+    (product) => String(product.id) === String(productId),
+  );
+
+  if (item) {
+    item.quantity = Math.max(1, item.quantity + (Number(change) || 0));
+  }
+
+  return updatedCart;
+}
+
+export function removeProduct(cart, productId) {
+  return normalizeCart(cart).filter(
+    (product) => String(product.id) !== String(productId),
+  );
 }
