@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @import "./components.css";
+@import "./form.css";
 
 /* ==== Design tokens lấy từ Figma (Shopery) — thay cho tailwind.config.js ở v4 ==== */
 @theme {
