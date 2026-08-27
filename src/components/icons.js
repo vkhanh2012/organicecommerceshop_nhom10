@@ -43,21 +43,6 @@ export const iconCart = `
   <circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/>
 </svg>`
 
-export const iconValidationWarning = `
-<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-  <circle cx="10" cy="10" r="7.25"/><path d="M10 6.2v4.6"/><circle cx="10" cy="13.8" r=".7" fill="currentColor" stroke="none"/>
-</svg>`
-
-export const iconValidationError = `
-<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <path d="M8.45 3.7 2.7 13.65A1.6 1.6 0 0 0 4.08 16h11.84a1.6 1.6 0 0 0 1.38-2.35L11.55 3.7a1.79 1.79 0 0 0-3.1 0Z"/><path d="M10 7v4"/><path d="M10 13.5h.01"/>
-</svg>`
-
-export const iconValidationSuccess = `
-<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <path d="m5 10.25 3.1 3.1L15.5 6"/>
-</svg>`
-
 // Header actions use the 32px variants from the Navigation component in Figma.
 // Product cards keep the compact 20px icons above.
 export const iconHeaderHeart = `
