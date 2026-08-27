@@ -9,7 +9,7 @@ import { renderBreadcrumbsComponent } from "../components/breadcrumbs.js";
 
 import { renderDescription } from "../descriptions/descriptions.js";
 
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 
 import { bindImageEvents } from "../descriptions/Image.js";
 

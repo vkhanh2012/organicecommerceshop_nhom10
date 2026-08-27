@@ -1,4 +1,4 @@
-import productData from "../data/productdata.json";
+import productData from "../data/products.json";
 import { renderImage } from "./Image.js";
 import { renderProductInfo } from "./ProductInfo.js";
 import { renderDescriptionTab } from "./descriptiontab.js";
