@@ -29,8 +29,11 @@ const CLASS = {
   transition-shadow
   duration-300
 
+  
   hover:z-20
-  hover:shadow-[0_0_15px_rgba(0,0,0,0.12)]
+  hover:border-primary
+  hover:shadow-[0_0_12px_rgba(0,178,7,0.20)]
+
 `,
 
 cardShop: `
