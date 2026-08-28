@@ -82,8 +82,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-prev"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,8 +99,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-next"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,12 +139,8 @@ export function bindQuickViewImageEvents(container = document) {
     thumbs.forEach((thumb) => {
       thumb.classList.remove("border-primary", "border-2");
       thumb.classList.add("border-neutral-200", "border");
-      thumb.classList.remove("border-primary", "border-2");
-      thumb.classList.add("border-neutral-200", "border");
     });
 
-    activeThumb.classList.remove("border-neutral-200", "border");
-    activeThumb.classList.add("border-primary", "border-2");
     activeThumb.classList.remove("border-neutral-200", "border");
     activeThumb.classList.add("border-primary", "border-2");
   };
@@ -170,7 +164,6 @@ export function bindQuickViewImageEvents(container = document) {
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex <= 0) return;
       changeMainImage(thumbs[activeIndex - 1]);
     });
@@ -179,7 +172,6 @@ export function bindQuickViewImageEvents(container = document) {
   const nextBtn = gallery.querySelector('[data-qv-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex === -1 || activeIndex >= thumbs.length - 1) return;
       changeMainImage(thumbs[activeIndex + 1]);

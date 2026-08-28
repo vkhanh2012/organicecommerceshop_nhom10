@@ -22,9 +22,7 @@ export function renderQuickViewInfo(product = {}) {
       const tagName = typeof tag === "string" ? tag : tag.name;
       const tagLink = typeof tag === "string" ? "#" : tag.link || "#";
       return `<a href="${tagLink}" class="text-neutral-500 hover:text-neutral-900 transition-colors leading-5">${tagName}</a>`;
-      return `<a href="${tagLink}" class="text-neutral-500 hover:text-neutral-900 transition-colors leading-5">${tagName}</a>`;
     })
-    .join(`<span class="text-neutral-500 font-normal mr-1">,</span>`);
     .join(`<span class="text-neutral-500 font-normal mr-1">,</span>`);
 
   const categoryName = typeof product.category === "object"
@@ -44,7 +42,6 @@ export function renderQuickViewInfo(product = {}) {
         <div class="flex flex-col gap-3">
           <!-- TÊN SẢN PHẨM + BADGE IN STOCK -->
           <div class="flex items-center gap-2 flex-wrap">
-            <h2 class="text-3xl lg:text-4xl font-semibold text-neutral-900 leading-10">
             <h2 class="text-3xl lg:text-4xl font-semibold text-neutral-900 leading-10">
               ${product.name || "Chinese Cabbage"}
             </h2>
@@ -70,7 +67,6 @@ export function renderQuickViewInfo(product = {}) {
               </span>
             </div>
 
-            <span class="text-neutral-400 font-medium leading-5">•</span>
             <span class="text-neutral-400 font-medium leading-5">•</span>
 
             <div class="flex items-center gap-1 text-sm">
@@ -122,13 +118,11 @@ export function renderQuickViewInfo(product = {}) {
               product.brandLogo
                 ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
                 : `<span class="text-neutral-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
-                : `<span class="text-neutral-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
             }
           </div>
 
           <!-- SHARE ITEM FIGMA -->
           <div class="flex items-center gap-2.5">
-            <span class="text-neutral-900 font-normal leading-5">Share item:</span>
             <span class="text-neutral-900 font-normal leading-5">Share item:</span>
             <div class="flex items-center gap-[5px]">
                <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Facebook">
@@ -160,7 +154,6 @@ export function renderQuickViewInfo(product = {}) {
           <button
             type="button"
             class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
             data-qv-action="decrement"
             aria-label="Decrease quantity"
           >
@@ -172,7 +165,6 @@ export function renderQuickViewInfo(product = {}) {
           <input
             data-qv-input="quantity"
             class="quantity-stepper-input w-10 text-center font-normal text-base text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-            class="quantity-stepper-input w-10 text-center font-normal text-base text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             type="number"
             min="1"
             value="1"
@@ -180,7 +172,6 @@ export function renderQuickViewInfo(product = {}) {
 
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
             class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
             data-qv-action="increment"
             aria-label="Increase quantity"
@@ -228,7 +219,6 @@ export function renderQuickViewInfo(product = {}) {
       <div class="flex flex-col gap-3 text-sm">
         <div class="flex items-center gap-1.5">
           <span class="text-neutral-900 font-medium leading-5">Category:</span>
-          <span class="text-neutral-900 font-medium leading-5">Category:</span>
           <a
             href="${categoryLink}"
             class="text-neutral-500 font-normal hover:text-primary transition-colors leading-5"
@@ -238,7 +228,6 @@ export function renderQuickViewInfo(product = {}) {
         </div>
 
         <div class="flex items-start gap-1.5 flex-wrap">
-          <span class="text-neutral-900 font-medium leading-5">Tag:</span>
           <span class="text-neutral-900 font-medium leading-5">Tag:</span>
           <div class="flex items-center gap-1 flex-wrap">
             ${tagsHtml}
