@@ -59,10 +59,10 @@ export function renderPriceFilter(
 }
 
   return /*html*/ `
-    <div class="border-b border-neutral-100 pb-6 font-poppins">
+    <div class="flex w-full max-w-80 flex-col items-start gap-4 border-b border-neutral-100 pb-6 font-poppins">
 
-      <div class="shop-filter-header">
-        <h3 class="text-xl font-medium text-neutral-900">
+      <div class="flex w-full items-center justify-between pb-1 pt-5">
+        <h3 class="text-xl font-medium leading-8 text-neutral-900">
           Price
         </h3>
 
@@ -78,34 +78,12 @@ export function renderPriceFilter(
       </div>
 
 
-      <!-- Thanh giá -->
-      <div class="relative h-5">
+      <div class="relative h-4 w-full">
+        <div class="absolute left-0 top-1/2 h-1.5 w-full -translate-y-1/2 rounded-2xl bg-neutral-200"></div>
 
-        <!-- Thanh nền màu xám -->
-        <div
-          class="
-            absolute
-            top-1/2
-            left-0
-            w-full
-            h-1
-            -translate-y-1/2
-            rounded-full
-            bg-neutral-200
-          "
-        ></div>
-
-        <!-- Phần giá đang được chọn -->
         <div
           id="price-progress"
-          class="
-            absolute
-            top-1/2
-            h-1
-            -translate-y-1/2
-            rounded-full
-            bg-primary
-          "
+          class="absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-2xl bg-primary"
         ></div>
 
 
@@ -131,12 +109,12 @@ export function renderPriceFilter(
             [&::-webkit-slider-runnable-track]:bg-transparent
 
             [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:w-5
-            [&::-webkit-slider-thumb]:h-5
+            [&::-webkit-slider-thumb]:w-4
+            [&::-webkit-slider-thumb]:h-4
             [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-primary
+            [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border-2
-            [&::-webkit-slider-thumb]:border-white
+            [&::-webkit-slider-thumb]:border-primary
             [&::-webkit-slider-thumb]:shadow
             [&::-webkit-slider-thumb]:cursor-pointer
             [&::-webkit-slider-thumb]:pointer-events-auto
@@ -166,12 +144,12 @@ export function renderPriceFilter(
             [&::-webkit-slider-runnable-track]:bg-transparent
 
             [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:w-5
-            [&::-webkit-slider-thumb]:h-5
+            [&::-webkit-slider-thumb]:w-4
+            [&::-webkit-slider-thumb]:h-4
             [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-primary
+            [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border-2
-            [&::-webkit-slider-thumb]:border-white
+            [&::-webkit-slider-thumb]:border-primary
             [&::-webkit-slider-thumb]:shadow
             [&::-webkit-slider-thumb]:cursor-pointer
             [&::-webkit-slider-thumb]:pointer-events-auto
@@ -181,12 +159,12 @@ export function renderPriceFilter(
       </div>
 
 
-      <div class="mt-3 text-sm text-neutral-600">
-        Price:
+      <div class="text-sm leading-5 text-neutral-600">
+        <span>Price:</span>
 
         <span
           id="price-value"
-          class="font-medium text-neutral-900"
+          class="font-medium leading-5 text-neutral-900"
         >
           $${selectedMin} — $${selectedMax}
         </span>

@@ -32,10 +32,17 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
   ]
 
   const listItemsHtml = categories
-    .map((item) => {
+    .map((item, index) => {
       const checked = selectedCategory === item.value
+      const rowSpacing = layout === "horizontal"
+        ? ""
+        : index === 0
+          ? "pb-2.5"
+          : index === categories.length - 1
+            ? "pt-2.5 pb-6"
+            : "py-2.5"
       return /*html*/ `
-      <li class="flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-[14px] text-neutral-600 cursor-pointer">
+      <li class="${rowSpacing} flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-[14px] text-neutral-600 cursor-pointer">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
@@ -145,7 +152,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <ul class="space-y-4">
+      <ul>
         ${listItemsHtml}
       </ul>
     </div>
