@@ -48,7 +48,7 @@ export function renderImage(product) {
   const thumbnailsHtml = thumbnails
     .map((thumb, index) => {
       const fullSrc = fullImages[index] || thumb;
-      const isSelected = fullSrc === mainImage || (index === 0 && !product?.mainImage);
+      const isSelected = index === 0;
 
       return `
         <div
@@ -135,10 +135,10 @@ export function bindImageEvents(container = document) {
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
       thumb.classList.remove("border-primary", "border-2");
-      thumb.classList.add("border-neutral-200", "border");
+      thumb.classList.add("border-neutral-200", "border", "hover:border-primary");
     });
 
-    activeThumb.classList.remove("border-neutral-200", "border");
+    activeThumb.classList.remove("border-neutral-200", "border", "hover:border-primary");
     activeThumb.classList.add("border-primary", "border-2");
   };
 

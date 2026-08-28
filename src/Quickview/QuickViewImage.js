@@ -55,9 +55,7 @@ export function renderQuickViewImage(product) {
           class="qv-thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
             isSelected
               ? "border-2 border-primary"
-              : "border border-neutral-200 hover:border-primary"
-              ? "border-2 border-primary"
-              : "border border-neutral-200 hover:border-primary"
+              : "border-2 border-transparent hover:border-neutral-200"
           }"
         >
           <img
@@ -137,11 +135,15 @@ export function bindQuickViewImageEvents(container = document) {
 
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
-      thumb.classList.remove("border-primary", "border-2");
-      thumb.classList.add("border-neutral-200", "border");
+      thumb.classList.remove("border-primary", "border-neutral-200", "hover:border-primary");
+      thumb.classList.add("border-2", "border-transparent", "hover:border-neutral-200");
     });
 
-    activeThumb.classList.remove("border-neutral-200", "border");
+    activeThumb.classList.remove(
+      "border-transparent",
+      "border-neutral-200",
+      "hover:border-neutral-200",
+    );
     activeThumb.classList.add("border-primary", "border-2");
   };
 

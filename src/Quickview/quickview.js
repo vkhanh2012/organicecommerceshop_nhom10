@@ -11,6 +11,7 @@ import {
 } from "./QuickViewInfo.js";
 
 import { getCart, saveCart, addProductToCart } from "../shopping_cart/cartData.js";
+import { toggleWishlist } from "../wishlist/wishlistData.js";
 
 // =====================================================
 // DEFAULT PRODUCT FALLBACK
@@ -165,6 +166,12 @@ export function openQuickView(productDataOrId) {
 
     closeModal();
     showToast(`${product.name} added to cart (${quantity}).`);
+  }, () => {
+    const { added } = toggleWishlist(product);
+    showToast(
+      `${product.name} ${added ? "added to" : "removed from"} wishlist.`,
+    );
+    return added;
   });
 }
 

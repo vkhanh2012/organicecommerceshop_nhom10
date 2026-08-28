@@ -1,8 +1,10 @@
 // src/Quickview/QuickViewInfo.js
 
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
+import { isInWishlist } from "../wishlist/wishlistData.js";
 
 export function renderQuickViewInfo(product = {}) {
+  const productInWishlist = isInWishlist(product.id);
   const starsHtml = Array.from({ length: 5 }, (_, index) => {
     return iconStar(index < (product.rating || 4));
   }).join("");
@@ -207,9 +209,10 @@ export function renderQuickViewInfo(product = {}) {
           data-qv-action="wishlist"
           data-product-id="${product.id || ''}"
           class="w-[51px] h-[51px] rounded-full bg-primary/10 hover:bg-primary/20 text-primary-dark flex items-center justify-center transition-all cursor-pointer shrink-0"
-          aria-label="Wishlist"
+          aria-pressed="${productInWishlist}"
+          aria-label="${productInWishlist ? "Remove" : "Add"} ${product.name || "product"} ${productInWishlist ? "from" : "to"} wishlist"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2C742F" stroke-width="1.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="${productInWishlist ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.5">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
           </svg>
         </button>
@@ -239,7 +242,11 @@ export function renderQuickViewInfo(product = {}) {
   `;
 }
 
-export function bindQuickViewInfoEvents(modalContainer, onAddToCart = null) {
+export function bindQuickViewInfoEvents(
+  modalContainer,
+  onAddToCart = null,
+  onToggleWishlist = null,
+) {
   if (!modalContainer) return;
 
   const container = modalContainer.querySelector("[data-qv-info-container]") || modalContainer;
@@ -247,6 +254,7 @@ export function bindQuickViewInfoEvents(modalContainer, onAddToCart = null) {
   const decBtn = container.querySelector('[data-qv-action="decrement"]');
   const incBtn = container.querySelector('[data-qv-action="increment"]');
   const addToCartBtn = container.querySelector('[data-qv-action="add-to-cart"]');
+  const wishlistBtn = container.querySelector('[data-qv-action="wishlist"]');
 
   if (qtyInput) {
     if (decBtn) {
@@ -276,6 +284,24 @@ export function bindQuickViewInfoEvents(modalContainer, onAddToCart = null) {
 
       if (typeof onAddToCart === "function") {
         onAddToCart({ productId, quantity, button: addToCartBtn });
+      }
+    });
+  }
+
+  if (wishlistBtn) {
+    wishlistBtn.addEventListener("click", () => {
+      if (typeof onToggleWishlist !== "function") return;
+
+      const added = onToggleWishlist({
+        productId: wishlistBtn.getAttribute("data-product-id"),
+        button: wishlistBtn,
+      });
+      if (typeof added !== "boolean") return;
+
+      wishlistBtn.setAttribute("aria-pressed", String(added));
+      const heartIcon = wishlistBtn.querySelector("svg");
+      if (heartIcon) {
+        heartIcon.setAttribute("fill", added ? "currentColor" : "none");
       }
     });
   }

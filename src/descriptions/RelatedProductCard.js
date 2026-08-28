@@ -55,5 +55,15 @@ export function renderRelatedProducts(
     relatedProducts = [...relatedProducts, ...remainingProducts].slice(0, 4);
   }
 
-  return renderProductGrid(relatedProducts, "shop2");
+  return /*html*/ `
+    <section class="pb-16 md:pb-20" aria-labelledby="related-products-heading">
+      <h2
+        id="related-products-heading"
+        class="mb-6 text-center text-2xl font-semibold leading-tight text-neutral-900 md:mb-8 md:text-[32px]"
+      >
+        Related Products
+      </h2>
+      ${renderProductGrid(relatedProducts, "shop2")}
+    </section>
+  `;
 }

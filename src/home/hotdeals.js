@@ -2,6 +2,7 @@ import { renderProductCard } from "../components/productcard.js";
 import { iconStar,  iconHeart, iconEye, iconBag } from "../components/icons.js";
 import { sectionTitle } from "./sectiontitle.js";
 import { renderCountdown } from "../components/countdown.js";
+import { isInWishlist } from "../wishlist/wishlistData.js";
 
 export function renderHotDeals(products = []) {
   if (products.length < 13) return "";
@@ -17,6 +18,7 @@ export function renderHotDeals(products = []) {
       image: mainProduct.image,
     }),
   );
+  const mainProductInWishlist = isInWishlist(mainProduct.id);
   const smallProducts = products
     .filter((product) => String(product.id) !== String(mainProduct.id))
     .slice(0, 11);
@@ -119,7 +121,11 @@ return `
     <!-- HEART -->
     <button
       type="button"
-      aria-label="Wishlist"
+      data-action="wishlist"
+      data-id="${mainProduct.id}"
+      data-product="${mainProductData}"
+      aria-pressed="${mainProductInWishlist}"
+      aria-label="${mainProductInWishlist ? "Remove" : "Add"} ${mainProduct.name} ${mainProductInWishlist ? "from" : "to"} wishlist"
       class="flex h-10 w-10 shrink-0
              items-center justify-center
              rounded-full
@@ -133,7 +139,7 @@ return `
              hover:bg-primary
              hover:text-white"
     >
-      ${iconHeart}
+      ${iconHeart.replace('fill="none"', `fill="${mainProductInWishlist ? "currentColor" : "none"}"`)}
     </button>
 
 
@@ -169,7 +175,10 @@ return `
     <!-- EYE -->
     <button
       type="button"
-      aria-label="Quick view"
+      data-action="quick-view"
+      data-id="${mainProduct.id}"
+      data-product="${mainProductData}"
+      aria-label="Quick view ${mainProduct.name}"
       class="flex h-10 w-10 shrink-0
              items-center justify-center
              rounded-full

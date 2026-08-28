@@ -1,8 +1,11 @@
 // src/descriptions/ProductInfo.js
 
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
+import { isInWishlist } from "../wishlist/wishlistData.js";
 
 export function renderProductInfo(product = {}) {
+  const productData = encodeURIComponent(JSON.stringify(product));
+  const productInWishlist = isInWishlist(product.id);
   const starsHtml = Array.from({ length: 5 }, (_, index) => {
     return iconStar(index < (product.rating || 5));
   }).join("");
@@ -189,10 +192,14 @@ export function renderProductInfo(product = {}) {
         <!-- NÚT WISHLIST -->
         <button
           type="button"
+          data-action="wishlist"
+          data-id="${product.id || ""}"
+          data-product="${productData}"
           class="w-[51px] h-[51px] rounded-full bg-primary/10 hover:bg-primary/20 text-primary-dark flex items-center justify-center transition-all cursor-pointer shrink-0"
-          aria-label="Wishlist"
+          aria-pressed="${productInWishlist}"
+          aria-label="${productInWishlist ? "Remove" : "Add"} ${product.name || "product"} ${productInWishlist ? "from" : "to"} wishlist"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="${productInWishlist ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.5">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
           </svg>
         </button>
