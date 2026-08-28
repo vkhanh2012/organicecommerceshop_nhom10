@@ -5,8 +5,8 @@ export function renderAdditionalInfoTab(product) {
         <span
           class="cursor-pointer transition-colors duration-200 ${
             tag.toLowerCase() === "chinese"
-              ? "text-zinc-900 underline font-medium"
-              : "text-zinc-500"
+              ? "text-neutral-900 underline font-medium"
+              : "text-neutral-500"
           }"
         >
           ${tag}
@@ -24,7 +24,7 @@ export function renderAdditionalInfoTab(product) {
           
           <!-- Weight -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Weight:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Weight:</span>
             <span class="text-stone-500 leading-5">
               ${product.additionalInfo?.weight || "03"}
             </span>
@@ -32,7 +32,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Color -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Color:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Color:</span>
             <span class="text-stone-500 leading-5">
               ${product.additionalInfo?.color || "Green"}
             </span>
@@ -40,7 +40,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Type -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Type:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Type:</span>
             <span class="text-stone-500 leading-5">
               ${product.additionalInfo?.type || "Organic"}
             </span>
@@ -48,7 +48,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Category -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Category:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Category:</span>
             <span class="text-stone-500 leading-5">
               ${product.additionalInfo?.category || "Vegetables"}
             </span>
@@ -56,7 +56,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Stock Status -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Stock Status:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Stock Status:</span>
             <span class="text-stone-500 leading-5">
               ${product.additionalInfo?.stockStatus || "Available"}
               ${
@@ -69,7 +69,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Tags -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Tags:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Tags:</span>
             <div class="leading-5">
               ${addInfoTagsHtml}
             </div>
@@ -82,7 +82,7 @@ export function renderAdditionalInfoTab(product) {
         <div class="lg:col-span-5 space-y-6">
 
           <!-- Video Container -->
-          <div class="relative w-[536px] h-[300px] rounded-md overflow-hidden bg-gray-100 -mt-4 ml-4">
+          <div class="relative w-full max-w-[536px] h-[220px] sm:h-[300px] rounded-md overflow-hidden bg-gray-100 mt-0 lg:-mt-4 lg:ml-4">
             <img
               src="${product.videoImage}"
               alt="video"

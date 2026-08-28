@@ -53,7 +53,7 @@ export function renderWishlistSection(items = []) {
                             ${SOCIAL_ICONS?.facebook || ""}
                         </a>
                         <a href="${socials.twitter || "#"}"
-                            class="icon-social">
+                            class="icon-social"> 
                             ${SOCIAL_ICONS?.twitter || ""}
                         </a>
                         <a href="${socials.pinterest || "#"}"

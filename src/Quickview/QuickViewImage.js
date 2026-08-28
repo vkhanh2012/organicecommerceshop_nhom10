@@ -24,8 +24,8 @@ export function renderQuickViewImage(product) {
           data-index="${index}"
           class="qv-thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
             isSelected
-              ? "border-2 border-[#00B207]"
-              : "border border-gray-200 hover:border-[#00B207]"
+              ? "border-2 border-primary"
+              : "border border-neutral-200 hover:border-primary"
           }"
         >
           <img
@@ -49,7 +49,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-prev"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-next"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+          class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +77,7 @@ export function renderQuickViewImage(product) {
 
       <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
-        class="order-1 sm:order-2 flex-1 w-full max-w-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-4"
+        class="order-1 sm:order-2 flex-1 w-full max-w-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-neutral-200 p-4"
       >
         <img
           id="qv-main-product-image"
@@ -103,12 +103,12 @@ export function bindQuickViewImageEvents(container = document) {
 
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
-      thumb.classList.remove("border-[#00B207]", "border-2");
-      thumb.classList.add("border-gray-200", "border");
+      thumb.classList.remove("border-primary", "border-2");
+      thumb.classList.add("border-neutral-200", "border");
     });
 
-    activeThumb.classList.remove("border-gray-200", "border");
-    activeThumb.classList.add("border-[#00B207]", "border-2");
+    activeThumb.classList.remove("border-neutral-200", "border");
+    activeThumb.classList.add("border-primary", "border-2");
   };
 
   const changeMainImage = (thumb) => {
@@ -129,7 +129,7 @@ export function bindQuickViewImageEvents(container = document) {
   const prevBtn = gallery.querySelector('[data-qv-action="thumb-prev"]');
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex <= 0) return;
       changeMainImage(thumbs[activeIndex - 1]);
     });
@@ -138,7 +138,7 @@ export function bindQuickViewImageEvents(container = document) {
   const nextBtn = gallery.querySelector('[data-qv-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex === -1 || activeIndex >= thumbs.length - 1) return;
       changeMainImage(thumbs[activeIndex + 1]);
     });

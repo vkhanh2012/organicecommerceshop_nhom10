@@ -21,9 +21,9 @@ export function renderQuickViewInfo(product = {}) {
     .map((tag) => {
       const tagName = typeof tag === "string" ? tag : tag.name;
       const tagLink = typeof tag === "string" ? "#" : tag.link || "#";
-      return `<a href="${tagLink}" class="text-zinc-500 hover:text-zinc-900 transition-colors leading-5">${tagName}</a>`;
+      return `<a href="${tagLink}" class="text-neutral-500 hover:text-neutral-900 transition-colors leading-5">${tagName}</a>`;
     })
-    .join(`<span class="text-zinc-500 font-normal mr-1">,</span>`);
+    .join(`<span class="text-neutral-500 font-normal mr-1">,</span>`);
 
   const categoryName = typeof product.category === "object"
     ? product.category?.name || "Vegetables"
@@ -42,7 +42,7 @@ export function renderQuickViewInfo(product = {}) {
         <div class="flex flex-col gap-3">
           <!-- TÊN SẢN PHẨM + BADGE IN STOCK -->
           <div class="flex items-center gap-2 flex-wrap">
-            <h2 class="text-3xl lg:text-4xl font-semibold text-zinc-900 leading-10">
+            <h2 class="text-3xl lg:text-4xl font-semibold text-neutral-900 leading-10">
               ${product.name || "Chinese Cabbage"}
             </h2>
             ${
@@ -67,10 +67,10 @@ export function renderQuickViewInfo(product = {}) {
               </span>
             </div>
 
-            <span class="text-zinc-400 font-medium leading-5">•</span>
+            <span class="text-neutral-400 font-medium leading-5">•</span>
 
             <div class="flex items-center gap-1 text-sm">
-              <span class="text-zinc-800 font-medium leading-5">SKU:</span>
+              <span class="text-neutral-800 font-medium leading-5">SKU:</span>
               <span class="text-stone-500 font-normal leading-5">${product.sku || "2,51,594"}</span>
             </div>
           </div>
@@ -82,7 +82,7 @@ export function renderQuickViewInfo(product = {}) {
             ${
               product.originalPrice || product.oldPrice
                 ? `
-                  <span class="text-zinc-400 text-xl font-normal line-through leading-8 mr-1">
+                  <span class="text-neutral-400 text-xl font-normal line-through leading-8 mr-1">
                     $${Number(product.originalPrice || product.oldPrice).toFixed(2)}
                   </span>
                 `
@@ -117,13 +117,13 @@ export function renderQuickViewInfo(product = {}) {
             ${
               product.brandLogo
                 ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
-                : `<span class="text-zinc-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
+                : `<span class="text-neutral-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
             }
           </div>
 
           <!-- SHARE ITEM FIGMA -->
           <div class="flex items-center gap-2.5">
-            <span class="text-zinc-900 font-normal leading-5">Share item:</span>
+            <span class="text-neutral-900 font-normal leading-5">Share item:</span>
             <div class="flex items-center gap-[5px]">
                <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-green-600 flex items-center justify-center transition-colors" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
@@ -142,7 +142,7 @@ export function renderQuickViewInfo(product = {}) {
         </div>
 
         <!-- MÔ TẢ FIGMA -->
-        <p class="text-sm text-zinc-500 leading-relaxed font-normal max-w-[568px] -mt-2">
+        <p class="text-sm text-neutral-500 leading-relaxed font-normal max-w-[568px] -mt-2">
           ${product.description || "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar."}
         </p>
       </div>
@@ -153,7 +153,7 @@ export function renderQuickViewInfo(product = {}) {
         <div class="flex h-[51px] w-[124px] items-center justify-between rounded-full border border-neutral-200 p-2 bg-white shrink-0">
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors shrink-0"
+            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
             data-qv-action="decrement"
             aria-label="Decrease quantity"
           >
@@ -164,7 +164,7 @@ export function renderQuickViewInfo(product = {}) {
 
           <input
             data-qv-input="quantity"
-            class="quantity-stepper-input w-10 text-center font-normal text-base text-zinc-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            class="quantity-stepper-input w-10 text-center font-normal text-base text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             type="number"
             min="1"
             value="1"
@@ -172,7 +172,7 @@ export function renderQuickViewInfo(product = {}) {
 
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors shrink-0"
+            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
             data-qv-action="increment"
             aria-label="Increase quantity"
           >
@@ -218,17 +218,17 @@ export function renderQuickViewInfo(product = {}) {
       <!-- KHỐI 4: CATEGORY & TAGS FIGMA -->
       <div class="flex flex-col gap-3 text-sm">
         <div class="flex items-center gap-1.5">
-          <span class="text-zinc-900 font-medium leading-5">Category:</span>
+          <span class="text-neutral-900 font-medium leading-5">Category:</span>
           <a
             href="${categoryLink}"
-            class="text-zinc-500 font-normal hover:text-green-600 transition-colors leading-5"
+            class="text-neutral-500 font-normal hover:text-green-600 transition-colors leading-5"
           >
             ${categoryName}
           </a>
         </div>
 
         <div class="flex items-start gap-1.5 flex-wrap">
-          <span class="text-zinc-900 font-medium leading-5">Tag:</span>
+          <span class="text-neutral-900 font-medium leading-5">Tag:</span>
           <div class="flex items-center gap-1 flex-wrap">
             ${tagsHtml}
           </div>

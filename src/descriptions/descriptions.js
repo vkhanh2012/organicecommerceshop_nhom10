@@ -49,10 +49,10 @@ export function renderDescription(
       <a
         href="${tab.href}"
         data-tab="${tab.key}"
-        class="tab-link pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
+        class="tab-link shrink-0 pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
           isActive
-            ? "text-zinc-900 border-b-2 border-[#20B126] font-semibold"
-            : "text-zinc-500 hover:text-zinc-900"
+            ? "text-neutral-900 border-b-2 border-[#20B126] font-semibold"
+            : "text-neutral-500 hover:text-neutral-900"
         }"
       >
         ${tab.label}
@@ -97,7 +97,7 @@ export function renderDescription(
 
       <!-- TABS -->
       <div
-        class="border-b border-neutral-200 flex justify-center gap-10 mx-auto -mt-6 translate-x-[42px]"
+        class="border-b border-neutral-200 flex w-full justify-start gap-5 overflow-x-auto mx-auto -mt-6 sm:justify-center sm:gap-10 sm:translate-x-[42px]"
       >
         ${tabsHtml}
       </div>

@@ -23,31 +23,20 @@ import {
   saveCart
 } from "../shopping_cart/cartData.js";
 
-import productList from "../data/products.json";
 
 
 // =====================================================
 // LẤY DATA TỪ JSON
 // =====================================================
 
-const {
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-} = productData;
+const PRODUCTS_LIST = Array.isArray(productData) ? productData : [];
+const defaultProductData = PRODUCTS_LIST[0] || {};
 
 
 // =====================================================
 // DANH SÁCH SẢN PHẨM CHI TIẾT
 // =====================================================
 
-const PRODUCTS_LIST = [
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-];
 
 
 // =====================================================
@@ -163,7 +152,7 @@ function getActiveProduct() {
   if (id) {
 
     const foundProduct =
-      productList.find(
+      PRODUCTS_LIST.find(
         product =>
           String(product.id) ===
           String(id)
@@ -172,61 +161,7 @@ function getActiveProduct() {
 
     if (foundProduct) {
 
-      const foundDetail =
-        PRODUCTS_LIST.find(
-          product =>
-            product?.name?.toLowerCase() ===
-            foundProduct?.name?.toLowerCase()
-        );
-
-
-      if (foundDetail) {
-
-        return {
-          ...foundDetail,
-          id: foundProduct.id
-        };
-
-      }
-
-
-      return {
-
-        ...defaultProductData,
-
-        id:
-          foundProduct.id,
-
-        name:
-          foundProduct.name,
-
-        currentPrice:
-          foundProduct.price,
-
-        originalPrice:
-          foundProduct.oldPrice,
-
-        rating:
-          foundProduct.rating,
-
-        mainImage:
-          foundProduct.image,
-
-        thumbnails: [
-          foundProduct.image,
-          foundProduct.image,
-          foundProduct.image
-        ],
-
-        category: {
-          name:
-            foundProduct.category ||
-            "Fresh Fruit",
-
-          link: "#"
-        }
-
-      };
+      return foundProduct;
 
     }
   }
@@ -691,7 +626,7 @@ document.addEventListener(
 
 
     const product =
-      productList.find(
+      PRODUCTS_LIST.find(
         item =>
           String(item.id) ===
           String(productId)

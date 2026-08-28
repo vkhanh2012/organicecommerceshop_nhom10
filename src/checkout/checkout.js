@@ -48,9 +48,9 @@ export function renderCheckout(rawCart = getCart()) {
       <div class="w-full flex justify-between items-center py-2.5 border-b border-gray-100 last:border-none">
         <div class="flex items-center gap-3">
           <img class="w-[60px] h-[60px] object-cover rounded-md shrink-0 border border-neutral-200" src="${item.image || '/src/assets/images/cabbage1.svg'}" alt="${item.name}" />
-          <span class="text-zinc-900 text-sm font-normal leading-5">${item.name} <span class="text-zinc-900 font-semibold">x${item.quantity}</span></span>
+          <span class="text-neutral-900 text-sm font-normal leading-5">${item.name} <span class="text-neutral-900 font-semibold">x${item.quantity}</span></span>
         </div>
-        <div class="text-zinc-900 text-sm font-medium leading-5">$${(item.price * item.quantity).toFixed(2)}</div>
+        <div class="text-neutral-900 text-sm font-medium leading-5">$${(item.price * item.quantity).toFixed(2)}</div>
       </div>
     `).join("")
     : `<p class="text-sm text-neutral-400 py-4">Your cart is empty.</p>`;
@@ -70,14 +70,14 @@ export function renderCheckout(rawCart = getCart()) {
           <!-- CỘT TRÁI: BILLING INFORMATION -->
           <div class="w-full lg:w-[872px] shrink-0 flex flex-col gap-8">
             <div class="flex flex-col gap-6">
-              <h2 class="text-zinc-900 text-2xl font-medium leading-9">Billing Information</h2>
+              <h2 class="text-neutral-900 text-2xl font-medium leading-9">Billing Information</h2>
               
               <div class="flex flex-col gap-5">
                 <!-- Hàng 1: First name / Last name / Company Name -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <!-- First Name -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="firstName" class="text-zinc-900 text-sm font-normal leading-5">First name <span class="text-red-500">*</span></label>
+                    <label for="firstName" class="text-neutral-900 text-sm font-normal leading-5">First name <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="text" 
@@ -87,7 +87,7 @@ export function renderCheckout(rawCart = getCart()) {
                         aria-invalid="false"
                         aria-describedby="firstName-message"
                         placeholder="Your first name" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -98,7 +98,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                   <!-- Last Name -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="lastName" class="text-zinc-900 text-sm font-normal leading-5">Last name <span class="text-red-500">*</span></label>
+                    <label for="lastName" class="text-neutral-900 text-sm font-normal leading-5">Last name <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="text" 
@@ -108,7 +108,7 @@ export function renderCheckout(rawCart = getCart()) {
                         aria-invalid="false"
                         aria-describedby="lastName-message"
                         placeholder="Your last name" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -119,7 +119,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                   <!-- Company Name (Optional) -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="companyName" class="text-zinc-900 text-sm font-normal leading-5">Company Name <span class="text-zinc-400 font-normal">(optional)</span></label>
+                    <label for="companyName" class="text-neutral-900 text-sm font-normal leading-5">Company Name <span class="text-neutral-400 font-normal">(optional)</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="text" 
@@ -127,7 +127,7 @@ export function renderCheckout(rawCart = getCart()) {
                         name="companyName" 
                         aria-invalid="false"
                         placeholder="Company name" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -139,7 +139,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                 <!-- Hàng 2: Street Address -->
                 <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                  <label for="streetAddress" class="text-zinc-900 text-sm font-normal leading-5">Street Address <span class="text-red-500">*</span></label>
+                  <label for="streetAddress" class="text-neutral-900 text-sm font-normal leading-5">Street Address <span class="text-red-500">*</span></label>
                   <div class="signin-input-control relative flex items-center">
                     <input 
                       type="text" 
@@ -149,7 +149,7 @@ export function renderCheckout(rawCart = getCart()) {
                       aria-invalid="false"
                       aria-describedby="streetAddress-message"
                       placeholder="House number and street name" 
-                      class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                      class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                     />
                     <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                       ${validationIcons()}
@@ -162,7 +162,7 @@ export function renderCheckout(rawCart = getCart()) {
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <!-- Country / Region -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="country-select" class="text-zinc-900 text-sm font-normal leading-5">Country / Region <span class="text-red-500">*</span></label>
+                    <label for="country-select" class="text-neutral-900 text-sm font-normal leading-5">Country / Region <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <select 
                         id="country-select" 
@@ -183,7 +183,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                   <!-- States -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="state-select" class="text-zinc-900 text-sm font-normal leading-5">States <span class="text-red-500">*</span></label>
+                    <label for="state-select" class="text-neutral-900 text-sm font-normal leading-5">States <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <select 
                         id="state-select" 
@@ -204,7 +204,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                   <!-- Zip Code -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="zipCode" class="text-zinc-900 text-sm font-normal leading-5">Zip Code <span class="text-red-500">*</span></label>
+                    <label for="zipCode" class="text-neutral-900 text-sm font-normal leading-5">Zip Code <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="text" 
@@ -214,7 +214,7 @@ export function renderCheckout(rawCart = getCart()) {
                         aria-invalid="false"
                         aria-describedby="zipCode-message"
                         placeholder="Zip Code" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -228,7 +228,7 @@ export function renderCheckout(rawCart = getCart()) {
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <!-- Email -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="email" class="text-zinc-900 text-sm font-normal leading-5">Email <span class="text-red-500">*</span></label>
+                    <label for="email" class="text-neutral-900 text-sm font-normal leading-5">Email <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="email" 
@@ -238,7 +238,7 @@ export function renderCheckout(rawCart = getCart()) {
                         aria-invalid="false"
                         aria-describedby="email-message"
                         placeholder="Email Address" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -249,7 +249,7 @@ export function renderCheckout(rawCart = getCart()) {
 
                   <!-- Phone -->
                   <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                    <label for="phone" class="text-zinc-900 text-sm font-normal leading-5">Phone <span class="text-red-500">*</span></label>
+                    <label for="phone" class="text-neutral-900 text-sm font-normal leading-5">Phone <span class="text-red-500">*</span></label>
                     <div class="signin-input-control relative flex items-center">
                       <input 
                         type="tel" 
@@ -259,7 +259,7 @@ export function renderCheckout(rawCart = getCart()) {
                         aria-invalid="false"
                         aria-describedby="phone-message"
                         placeholder="Phone number" 
-                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 transition-colors" 
+                        class="signin-input w-full h-12 px-4 pr-10 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 transition-colors" 
                       />
                       <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
                         ${validationIcons()}
@@ -282,9 +282,9 @@ export function renderCheckout(rawCart = getCart()) {
 
             <!-- ADDITIONAL INFO -->
             <div class="flex flex-col gap-5">
-              <h3 class="text-zinc-900 text-2xl font-medium leading-9">Additional Info</h3>
+              <h3 class="text-neutral-900 text-2xl font-medium leading-9">Additional Info</h3>
               <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
-                <label for="orderNotes" class="text-zinc-900 text-sm font-normal leading-5">Order Notes (Optional)</label>
+                <label for="orderNotes" class="text-neutral-900 text-sm font-normal leading-5">Order Notes (Optional)</label>
                 <div class="signin-input-control relative flex items-start">
                   <textarea 
                     id="orderNotes" 
@@ -292,7 +292,7 @@ export function renderCheckout(rawCart = getCart()) {
                     aria-invalid="false"
                     rows="3" 
                     placeholder="Notes about your order, e.g. special notes for delivery" 
-                    class="signin-input w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-zinc-900 placeholder:text-neutral-400 resize-none transition-colors"
+                    class="signin-input w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 resize-none transition-colors"
                   ></textarea>
                 </div>
               </div>
@@ -304,7 +304,7 @@ export function renderCheckout(rawCart = getCart()) {
             <div class="p-6 md:p-8 bg-white rounded-2xl border border-neutral-200 flex flex-col gap-6 shadow-xs">
               
               <div class="flex flex-col gap-4">
-                <h3 class="text-zinc-900 text-xl font-medium leading-8">Order Summery</h3>
+                <h3 class="text-neutral-900 text-xl font-medium leading-8">Order Summery</h3>
                 
                 <!-- Danh sách sản phẩm từ giỏ hàng -->
                 <div class="flex flex-col max-h-[260px] overflow-y-auto pr-1">
@@ -315,26 +315,26 @@ export function renderCheckout(rawCart = getCart()) {
                 <div class="flex flex-col pt-2">
                   <div class="py-3 flex justify-between items-center text-sm">
                     <span class="text-neutral-600 font-normal leading-5">Subtotal:</span>
-                    <span class="text-zinc-900 font-medium leading-5">$${total.toFixed(2)}</span>
+                    <span class="text-neutral-900 font-medium leading-5">$${total.toFixed(2)}</span>
                   </div>
                   <div class="w-full h-px bg-neutral-200"></div>
                   
                   <div class="py-3 flex justify-between items-center text-sm">
                     <span class="text-neutral-600 font-normal leading-5">Shipping:</span>
-                    <span class="text-zinc-900 font-medium leading-5">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
+                    <span class="text-neutral-900 font-medium leading-5">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
                   </div>
                   <div class="w-full h-px bg-neutral-200"></div>
                   
                   <div class="pt-3 flex justify-between items-center text-base">
                     <span class="text-neutral-600 font-normal leading-6">Total:</span>
-                    <span class="text-zinc-900 text-lg font-semibold leading-5">$${grandTotal.toFixed(2)}</span>
+                    <span class="text-neutral-900 text-lg font-semibold leading-5">$${grandTotal.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
               <!-- Payment Method -->
               <div class="flex flex-col gap-3 pt-2 border-t border-neutral-200">
-                <h4 class="text-zinc-900 text-lg font-medium leading-7">Payment Method</h4>
+                <h4 class="text-neutral-900 text-lg font-medium leading-7">Payment Method</h4>
                 <div class="flex flex-col gap-2.5">
                   <label class="inline-flex items-center gap-2.5 cursor-pointer">
                     <input type="radio" name="paymentMethod" value="cod" checked class="w-5 h-5 accent-green-600 cursor-pointer" />
@@ -346,7 +346,7 @@ export function renderCheckout(rawCart = getCart()) {
                   </label>
                   <label class="inline-flex items-center gap-2.5 cursor-pointer">
                     <input type="radio" name="paymentMethod" value="amazon" class="w-5 h-5 accent-green-600 cursor-pointer" />
-                    <span class="text-zinc-900 text-sm font-normal leading-5">Amazon Pay</span>
+                    <span class="text-neutral-900 text-sm font-normal leading-5">Amazon Pay</span>
                   </label>
                 </div>
               </div>

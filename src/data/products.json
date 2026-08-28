@@ -7,16 +7,6 @@
     "rating": 4,
     "saleTag": "Sale 25%",
     "category": "Fresh Fruit",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Kid foods",
-      "Vitamins",
-      "Snacks",
-      "Breackfast",
-      "Fruit"
-    ],
     "image": "/images/product/green-apple.webp",
     "thumbnails": [
       "/images/product/green-apple.webp",
@@ -33,6 +23,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Fresh, crisp Green Apples sourced directly from organic orchards. High in dietary fiber, Vitamin C, and antioxidants that promote heart health and digestive wellness.",
+      "Perfect for daily snacking, baking delicious apple pies, blending into fresh green juices, or adding a juicy crunch to your fresh morning salads."
+    ],
+    "features": [
+      "100% Organic certified green apples harvested daily.",
+      "Rich in dietary fiber, Vitamin C, and natural antioxidants.",
+      "Low-calorie, cholesterol-free healthy snack option.",
+      "Crisp texture with a refreshing tart and sweet taste balance."
+    ],
+    "closingText": "Enjoy nature's crispness with our premium selected green apples, packed carefully for maximum freshness and flavor.",
     "tags": [
       {
         "name": "Fresh Fruit",
@@ -75,7 +76,6 @@
     ],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 2,
     "name": "Fresh Indian Malta",
@@ -84,14 +84,6 @@
     "rating": 1,
     "saleTag": null,
     "category": "Fresh Fruit",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Kid foods",
-      "Vitamins",
-      "Fruit"
-    ],
     "image": "/images/product/fresh-indian-malta.webp",
     "thumbnails": [
       "/images/product/fresh-indian-malta.webp",
@@ -108,6 +100,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Juicy and sweet Fresh Indian Malta oranges, packed with natural Vitamin C and immunity-boosting nutrients grown under sunshine.",
+      "Ideal for squeezing into freshly made citrus juice, fruit bowls, or enjoying as a refreshing daytime snack for hydration."
+    ],
+    "features": [
+      "Sun-ripened Indian Malta oranges with sweet citrus flavor.",
+      "High concentration of Vitamin C and vital antioxidants.",
+      "Great for natural juicing and healthy family fruit salads.",
+      "Hand-picked from certified sustainable citrus farms."
+    ],
+    "closingText": "Refresh your day with the citrusy goodness of our fresh Indian Malta oranges, packed with pure natural energy.",
     "tags": [
       {
         "name": "Fresh Fruit",
@@ -141,7 +144,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 3,
     "name": "Chinese Cabbage",
@@ -150,13 +152,6 @@
     "rating": 2,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Dinner"
-    ],
     "image": "/images/product/chinese-cabbage.webp",
     "thumbnails": [
       "/src/assets/images/cabbage1.svg",
@@ -173,6 +168,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Crisp Chinese Cabbage with tender green leaves and sweet crunchy stalks, perfect for stir-fries, soups, and traditional kimchi recipes.",
+      "Low in calories and loaded with essential vitamins K, C, and dietary folate for balanced nutrition."
+    ],
+    "features": [
+      "Freshly harvested Chinese Cabbage with tender crisp leaves.",
+      "Rich source of Vitamin K, Vitamin C, and plant fiber.",
+      "Ideal for Asian stir-fry, hotpot, and healthy wraps.",
+      "Free from harmful synthetic pesticides and chemicals."
+    ],
+    "closingText": "Bring farm-fresh crunch to your daily meals with our carefully hand-selected Chinese Cabbage heads.",
     "tags": [
       {
         "name": "Vegetables",
@@ -225,7 +231,6 @@
     ],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 4,
     "name": "Green Lettuce",
@@ -234,13 +239,6 @@
     "rating": 3,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Dinner"
-    ],
     "image": "/images/product/green-lecctuce.webp",
     "thumbnails": [
       "/images/product/green-lecctuce.webp",
@@ -257,6 +255,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum.",
+    "descriptionParagraphs": [
+      "Tender and crunchy Green Lettuce heads grown organically in optimal soil conditions. Ideal base for fresh Caesar and Mediterranean salads.",
+      "Contains high water content and essential micronutrients that keep you hydrated and nourished throughout the day."
+    ],
+    "features": [
+      "Ultra-fresh green lettuce leaves with crisp texture.",
+      "Low-calorie staple rich in Vitamin A and Folate.",
+      "Perfect for burgers, sandwich toppings, and green salads.",
+      "Washed and quality-inspected before packaging."
+    ],
+    "closingText": "Elevate your salads with vibrant, crisp green lettuce leaves freshly packed for ultimate farm-to-plate quality.",
     "tags": [
       {
         "name": "Vegetables",
@@ -285,7 +294,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 5,
     "name": "Eggplant",
@@ -294,12 +302,6 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Dinner"
-    ],
     "image": "/images/product/eggplant.webp",
     "thumbnails": [
       "/images/product/eggplant.webp",
@@ -316,6 +318,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    "descriptionParagraphs": [
+      "Glossy, deep purple Eggplants with a smooth texture and rich flavor. Excellent for roasting, grilling, curry dishes, or Italian Parmigiana.",
+      "Packed with nasunin antioxidant and dietary fiber supporting heart health and weight management."
+    ],
+    "features": [
+      "Farm-fresh dark purple eggplants with firm flesh.",
+      "High in antioxidants, potassium, and dietary fiber.",
+      "Versatile vegetable for grilling, baking, and stewing.",
+      "Sustainably grown without synthetic agro-chemicals."
+    ],
+    "closingText": "Cook savory family dishes with our fresh, firm eggplants harvested at peak maturity.",
     "tags": [
       {
         "name": "Vegetables",
@@ -344,7 +357,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 6,
     "name": "Big Potatoes",
@@ -353,12 +365,6 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Vegetarian",
-      "Tiffin",
-      "Launch",
-      "Dinner"
-    ],
     "image": "/images/product/big-potatoes.webp",
     "thumbnails": [
       "/images/product/big-potatoes.webp",
@@ -375,6 +381,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    "descriptionParagraphs": [
+      "Large, farm-fresh Potatoes with smooth skin and creamy texture. The ultimate pantry staple for mashing, roasting, boiling, and frying.",
+      "A nutritious source of complex carbohydrates, Vitamin B6, potassium, and essential dietary energy."
+    ],
+    "features": [
+      "Premium quality large potatoes with clean smooth skin.",
+      "Rich in potassium, Vitamin B6, and wholesome energy.",
+      "Perfect for mashed potatoes, french fries, and hearty roasts.",
+      "Long shelf life when stored in a cool dry area."
+    ],
+    "closingText": "Stock up your kitchen pantry with our versatile, nutritious large potatoes grown in rich fertile soil.",
     "tags": [
       {
         "name": "Vegetables",
@@ -403,7 +420,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 7,
     "name": "Corn",
@@ -412,13 +428,6 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Vegetarian",
-      "Kid foods",
-      "Tiffin",
-      "Dinner"
-    ],
     "image": "/images/product/corn.webp",
     "thumbnails": [
       "/images/product/corn.webp",
@@ -435,6 +444,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Sweet and juicy fresh corn on the cob, harvested daily.",
+    "descriptionParagraphs": [
+      "Sweet and juicy Corn cobs filled with tender, golden yellow kernels harvested at peak sweetness.",
+      "Delicious boiled, grilled on the barbecue with butter, or cut into fresh summer corn salads."
+    ],
+    "features": [
+      "Golden yellow sweet corn with juicy tender kernels.",
+      "Naturally rich in lutein, dietary fiber, and B vitamins.",
+      "Great for barbecuing, boiling, or making corn soup.",
+      "Sourced daily from local organic cornfields."
+    ],
+    "closingText": "Enjoy the golden sweetness of fresh corn on the cob, a delightful treat for adults and children alike.",
     "tags": [
       {
         "name": "Vegetables",
@@ -463,7 +483,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 8,
     "name": "Fresh Cauliflower",
@@ -472,13 +491,6 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Dinner"
-    ],
     "image": "/images/product/fresh-cauliflower.webp",
     "thumbnails": [
       "/images/product/fresh-cauliflower.webp",
@@ -495,6 +507,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Fresh cauliflower packed with vitamins and minerals.",
+    "descriptionParagraphs": [
+      "Compact, snow-white Fresh Cauliflower florets packed with vitamins C, K, and beneficial plant compounds.",
+      "Perfect for low-carb cauliflower rice, creamy cauliflour soup, roasting with spices, or vegetable curries."
+    ],
+    "features": [
+      "Tightly packed white cauliflower heads with crisp florets.",
+      "High in Vitamin C, Vitamin K, and sulforaphane.",
+      "Popular healthy alternative for low-carb and keto diets.",
+      "Grown organically without chemical fertilizers."
+    ],
+    "closingText": "Create nutritious keto-friendly meals with our fresh white cauliflower heads picked at top quality.",
     "tags": [
       {
         "name": "Vegetables",
@@ -523,7 +546,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 9,
     "name": "Green Capsicum",
@@ -532,13 +554,6 @@
     "rating": 4,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Dinner"
-    ],
     "image": "/images/product/green-capsicum.webp",
     "thumbnails": [
       "/images/product/green-capsicum.webp",
@@ -555,6 +570,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Fresh green capsicum, crisp and crunchy for salads and cooking.",
+    "descriptionParagraphs": [
+      "Crisp Green Capsicums with a vibrant green shade and mild sweet flavor. Great for pizza toppings, fajitas, and stir-fries.",
+      "Loaded with Vitamin C, Vitamin A, and beneficial antioxidants for immune support and skin radiance."
+    ],
+    "features": [
+      "Vibrant green bell peppers with thick crunchy walls.",
+      "Exceptionally high content of natural Vitamin C.",
+      "Enhances flavor in stir-fries, salads, and pasta dishes.",
+      "Harvested fresh to maintain crisp texture and color."
+    ],
+    "closingText": "Add color and crunchy taste to your daily stir-fries with our fresh green capsicums.",
     "tags": [
       {
         "name": "Vegetables",
@@ -583,7 +609,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 10,
     "name": "Green Chilli",
@@ -592,12 +617,6 @@
     "rating": 4,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins"
-    ],
     "image": "/images/product/green-chilli.webp",
     "thumbnails": [
       "/images/product/green-chilli.webp",
@@ -614,6 +633,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Spicy organic green chillies for your culinary dishes.",
+    "descriptionParagraphs": [
+      "Spicy, aromatic Green Chillies harvested fresh to add zest, heat, and bold flavor to your favourite dishes.",
+      "Contains capsaicin which boosts metabolism, aids digestion, and provides a kick to salsas and curries."
+    ],
+    "features": [
+      "Pungent green chillies with intense fiery aroma.",
+      "Contains natural capsaicin and dietary antioxidants.",
+      "Essential ingredient for spicy curries, salsas, and pickles.",
+      "Hand-picked daily for maximum heat and freshness."
+    ],
+    "closingText": "Spice up your cooking with our fresh organic green chillies delivered straight from the farm.",
     "tags": [
       {
         "name": "Vegetables",
@@ -642,7 +672,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 11,
     "name": "Red Capsicum",
@@ -651,13 +680,6 @@
     "rating": 5,
     "saleTag": null,
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Dinner"
-    ],
     "image": "/images/product/red-capsicum.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/redcapsicum.png",
@@ -674,6 +696,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Sweet and juicy Red Capsicums with a brilliant red color and rich antioxidant profile including beta-carotene.",
+      "Awesome for stuffing, roasting with olive oil, slicing into fresh salads, or sautéing with garlic."
+    ],
+    "features": [
+      "Ripe red bell peppers with sweet juicy flavor.",
+      "Abundant in Vitamin A, Vitamin C, and Lycopene.",
+      "Ideal for Mediterranean recipes, stuffing, and salads.",
+      "Organically cultivated and carefully hand-picked."
+    ],
+    "closingText": "Bring sweet vibrant red peppers to your dinner table with our premium farm-fresh Red Capsicums.",
     "tags": [
       {
         "name": "Vegetables",
@@ -707,7 +740,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 12,
     "name": "Fresh Tomato",
@@ -716,14 +748,6 @@
     "rating": 5,
     "saleTag": "Sale 50%",
     "category": "Vegetables",
-    "tags": [
-      "Healthy",
-      "Low fat",
-      "Vegetarian",
-      "Vitamins",
-      "Launch",
-      "Dinner"
-    ],
     "image": "/images/product/red-tomatos.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/tomato.png",
@@ -740,6 +764,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Plump and juicy Fresh Red Tomatoes bursting with natural lycopene, rich flavor, and garden-fresh sweetness.",
+      "Essential for tomato sauce, caprese salads, pasta dishes, bruschetta, and everyday home cooking."
+    ],
+    "features": [
+      "Vine-ripened red tomatoes with sweet tangy flavor.",
+      "Rich in lycopene, potassium, and Vitamin C.",
+      "Great for cooking sauces, fresh salsas, and salads.",
+      "Sustainably grown in organic soil conditions."
+    ],
+    "closingText": "Savor authentic garden flavor with our vine-ripened fresh red tomatoes packed with lycopene goodness.",
     "tags": [
       {
         "name": "Vegetables",
@@ -773,7 +808,6 @@
     "feedbacks": [],
     "videoImage": "/src/assets/images/video.svg"
   },
-
   {
     "id": 13,
     "name": "Surjapur Mango",
@@ -782,14 +816,6 @@
     "rating": 4,
     "saleTag": null,
     "category": "Fresh Fruit",
-    "tags": [
-      "Healthy",
-      "Vegetarian",
-      "Kid foods",
-      "Vitamins",
-      "Snacks",
-      "Fruit"
-    ],
     "image": "/images/product/surjapur-mango.webp",
     "thumbnails": [
       "/src/assets/images/ProductImage/mango.png",
@@ -806,6 +832,17 @@
     "brand": "FarmFresh",
     "brandLogo": "/src/assets/images/brand.svg",
     "description": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
+    "descriptionParagraphs": [
+      "Famous Surjapur Mangoes known for their luscious golden flesh, rich tropical aroma, and honey-sweet taste.",
+      "Enjoy fresh slices, blend into thick tropical smoothies, or prepare decadent mango desserts and ice cream."
+    ],
+    "features": [
+      "Premium Surjapur Mangoes with irresistible sweet aroma.",
+      "Rich source of Vitamin A, Vitamin C, and fiber.",
+      "Smooth fiberless golden pulp ideal for smoothies.",
+      "Naturally tree-ripened without artificial chemicals."
+    ],
+    "closingText": "Indulge in the king of fruits with our naturally tree-ripened Surjapur Mangoes delivered to your door.",
     "tags": [
       {
         "name": "Fresh Fruit",
@@ -847,17 +884,24 @@
     "rating": 4,
     "saleTag": null,
     "category": "Cooking",
-    "tags": [
-      "Healthy",
-      "Dinner"
-    ],
     "image": "/images/Categories/Cooking.webp",
     "thumbnails": [
       "/images/Categories/Cooking.webp",
       "/images/Categories/Cooking.webp",
       "/images/Categories/Cooking.webp",
       "/images/Categories/Cooking.webp"
-    ]
+    ],
+    "descriptionParagraphs": [
+      "Complete pantry set of premium Cooking Essentials including cold-pressed oils, organic grains, and natural seasonings.",
+      "Specially curated to enhance the flavor and nutritional value of your everyday home-cooked meals."
+    ],
+    "features": [
+      "Curated selection of essential cooking ingredients.",
+      "Free from artificial additives, preservatives, and GMOs.",
+      "Ideal for daily healthy cooking for the whole family.",
+      "Sealed carefully to preserve maximum shelf life."
+    ],
+    "closingText": "Equip your kitchen with high-quality organic cooking essentials for wholesome homemade meals."
   },
   {
     "id": 15,
@@ -867,17 +911,24 @@
     "rating": 4,
     "saleTag": null,
     "category": "Snacks",
-    "tags": [
-      "Snacks",
-      "Kid foods"
-    ],
     "image": "/images/Categories/Snacks.webp",
     "thumbnails": [
       "/images/Categories/Snacks.webp",
       "/images/Categories/Snacks.webp",
       "/images/Categories/Snacks.webp",
       "/images/Categories/Snacks.webp"
-    ]
+    ],
+    "descriptionParagraphs": [
+      "A delicious assortment of healthy, crunchy Snacks made from whole grains, nuts, and natural dehydrated fruits.",
+      "The ultimate guilt-free snack combo for office breaks, school lunches, or weekend movie nights."
+    ],
+    "features": [
+      "Varied assortment of natural crunchy snacks.",
+      "Low in sodium, zero trans fat, and fiber rich.",
+      "Convenient healthy snack packs for on-the-go.",
+      "Made with natural ingredients and zero preservatives."
+    ],
+    "closingText": "Satisfy your cravings with our wholesome snack assortment packed with crunch and nutrition."
   },
   {
     "id": 16,
@@ -887,17 +938,24 @@
     "rating": 4,
     "saleTag": null,
     "category": "Beverages",
-    "tags": [
-      "Breackfast",
-      "Snacks"
-    ],
     "image": "/images/Categories/Beverages.webp",
     "thumbnails": [
       "/images/Categories/Beverages.webp",
       "/images/Categories/Beverages.webp",
       "/images/Categories/Beverages.webp",
       "/images/Categories/Beverages.webp"
-    ]
+    ],
+    "descriptionParagraphs": [
+      "Refreshing collection of Assorted Beverages including 100% cold-pressed fruit juices and herbal botanical teas.",
+      "Hydrate naturally with zero added refined sugars, artificial flavorings, or synthetic colors."
+    ],
+    "features": [
+      "Natural cold-pressed juices and herbal teas.",
+      "Zero added refined sugar or artificial colorings.",
+      "Packed with natural vitamins and electrolytes.",
+      "Refreshing choices for breakfast and workout recovery."
+    ],
+    "closingText": "Quench your thirst with our healthy, refreshing beverage selection made from pure natural ingredients."
   },
   {
     "id": 17,
@@ -907,17 +965,24 @@
     "rating": 5,
     "saleTag": null,
     "category": "Beauty & Health",
-    "tags": [
-      "Healthy",
-      "Vitamins"
-    ],
     "image": "/images/Categories/Beauty & Health.webp",
     "thumbnails": [
       "/images/Categories/Beauty & Health.webp",
       "/images/Categories/Beauty & Health.webp",
       "/images/Categories/Beauty & Health.webp",
       "/images/Categories/Beauty & Health.webp"
-    ]
+    ],
+    "descriptionParagraphs": [
+      "Nourishing Beauty & Health Essentials crafted with organic botanical extracts, plant oils, and vitamins.",
+      "Designed to gently hydrate skin, fortify wellness, and promote a radiant natural glow every day."
+    ],
+    "features": [
+      "Pure botanical ingredients for skin and health wellness.",
+      "Dermatologically tested, cruelty-free, and paraben-free.",
+      "Rich in antioxidant oils and natural vitamin E.",
+      "Promotes skin hydration and radiant health."
+    ],
+    "closingText": "Pamper your body and skin with our eco-friendly organic beauty & health care essentials."
   },
   {
     "id": 18,
@@ -927,16 +992,23 @@
     "rating": 4,
     "saleTag": null,
     "category": "Bread & Bakery",
-    "tags": [
-      "Breackfast",
-      "Snacks"
-    ],
     "image": "/images/Categories/Bread & Bakery.webp",
     "thumbnails": [
       "/images/Categories/Bread & Bakery.webp",
       "/images/Categories/Bread & Bakery.webp",
       "/images/Categories/Bread & Bakery.webp",
       "/images/Categories/Bread & Bakery.webp"
-    ]
+    ],
+    "descriptionParagraphs": [
+      "Artisanal Bread & Bakery Selection baked fresh daily using traditional sourdough fermentation and organic whole wheat flour.",
+      "Soft crust, airy texture, and wholesome flavor perfect for breakfast toast, gourmet sandwiches, and morning coffee."
+    ],
+    "features": [
+      "Baked fresh daily with organic whole grain flour.",
+      "No artificial preservatives, dough softeners, or bleach.",
+      "Delicious soft texture with natural sourdough aroma.",
+      "Pairs wonderfully with organic butter and fruit jams."
+    ],
+    "closingText": "Start your morning with warm, wholesome artisanal bread baked fresh from our organic oven."
   }
 ]
