@@ -23,7 +23,6 @@ import {
   saveCart
 } from "../shopping_cart/cartData.js";
 
-import productList from "../data/products.json";
 
 
 // =====================================================
@@ -40,12 +39,6 @@ const redcapsiumProductData = productData.find((product) => Number(product.id) =
 // DANH SÁCH SẢN PHẨM CHI TIẾT
 // =====================================================
 
-const PRODUCTS_LIST = [
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-];
 
 
 // =====================================================
@@ -161,7 +154,7 @@ function getActiveProduct() {
   if (id) {
 
     const foundProduct =
-      productList.find(
+      PRODUCTS_LIST.find(
         product =>
           String(product.id) ===
           String(id)
@@ -661,7 +654,7 @@ document.addEventListener(
 
 
     const product =
-      productList.find(
+      PRODUCTS_LIST.find(
         item =>
           String(item.id) ===
           String(productId)
@@ -827,3 +820,4 @@ if (breadcrumbContainer) {
   initFooter();
 
 }
+

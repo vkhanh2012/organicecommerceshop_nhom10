@@ -7,6 +7,8 @@ export function renderAdditionalInfoTab(product) {
             tag.toLowerCase() === "chinese"
               ? "text-neutral-900 underline font-medium"
               : "text-neutral-500"
+              ? "text-neutral-900 underline font-medium"
+              : "text-neutral-500"
           }"
         >
           ${tag}
@@ -69,6 +71,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Tags -->
           <div class="flex items-start">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Tags:</span>
             <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Tags:</span>
             <div class="leading-5">
               ${addInfoTagsHtml}
@@ -149,3 +152,4 @@ export function renderAdditionalInfoTab(product) {
     </div>
   `;
 }
+

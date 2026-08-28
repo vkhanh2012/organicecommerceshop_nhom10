@@ -1,19 +1,25 @@
+
+import defaultTabContent from "../data/products.json";
+
 export function renderDescriptionTab(product = {}) {
-  const paragraphs = product.descriptionParagraphs || [
-    "Sed commodo aliquam dui ac porta. Fusce ipsum felis, imperdiet at posuere ac, viverra at mauris. Maecenas tincidunt ligula a sem vestibulum pharetra. Maecenas auctor tortor lacus, nec laoreet nisi porttitor vel. Etiam tincidunt metus vel dui interdum sollicitudin. Mauris sem ante, vestibulum nec orci vitae, aliquam mollis lacus. Sed et condimentum arcu, id molestie tellus. Nulla facilisi. Nam scelerisque vitae justo a convallis. Morbi urna ipsum, placerat quis commodo quis, egestas elementum leo. Donec convallis mollis enim. Aliquam id mi quam. Phasellus nec fringilla elit.",
-    "Nulla mauris tellus, feugiat quis pharetra sed, gravida ac dui. Sed iaculis, metus faucibus elementum tincidunt, turpis mi viverra velit, pellentesque tristique neque mi eget nulla. Proin luctus elementum neque et pharetra."
-  ];
+  const fallbackProduct =
+    defaultTabContent?.default ||
+    (Array.isArray(defaultTabContent) ? defaultTabContent[0] : {}) ||
+    {};
+
+  const paragraphs =
+    product?.descriptionParagraphs ??
+    fallbackProduct?.descriptionParagraphs ??
+    [];
 
   const paragraphsHtml = paragraphs
     .map(pText => `<p class="w-full text-neutral-500 text-sm font-normal leading-[21px]">${pText}</p>`)
     .join("");
 
-  const featureList = product.features || [
-    "100 g of fresh leaves provides.",
-    "Aliquam ac est at augue volutpat elementum.",
-    "Quisque nec enim eget sapien molestie.",
-    "Proin convallis odio volutpat finibus posuere."
-  ];
+  const featureList =
+    product?.features ??
+    fallbackProduct?.features ??
+    [];
 
   const featuresHtml = featureList.map(feat => `
     <div class="flex items-center gap-2 py-0.5">
@@ -26,7 +32,37 @@ export function renderDescriptionTab(product = {}) {
     </div>
   `).join("");
 
-  const sideImage = product.videoImage || product.mainImage || product.image || "https://placehold.co/536x300";
+  const closingText =
+    product?.closingText ??
+    fallbackProduct?.closingText ??
+    "";
+
+  const sideImage =
+    product?.videoImage ||
+    product?.mainImage ||
+    product?.image ||
+    "/src/assets/images/video.svg";
+
+  const discountTitle =
+    product?.additionalInfo?.discount ||
+    product?.discountLabel ||
+    fallbackProduct?.discount?.title ||
+    "";
+
+  const discountSub =
+    product?.additionalInfo?.discountSub ||
+    fallbackProduct?.discount?.subTitle ||
+    "";
+
+  const organicTitle =
+    product?.additionalInfo?.organic ||
+    fallbackProduct?.organic?.title ||
+    "";
+
+  const organicSub =
+    product?.additionalInfo?.organicSub ||
+    fallbackProduct?.organic?.subTitle ||
+    "";
 
   return /*html*/ `
     <div class="grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.83fr)] lg:gap-8 min-[1400px]:grid-cols-[648px_536px] min-[1400px]:justify-between">
@@ -44,6 +80,7 @@ export function renderDescriptionTab(product = {}) {
         <p class="w-full text-neutral-500 text-sm font-normal leading-[21px]">
           Cras et diam maximus, accumsan sapien et, sollicitudin velit. Nulla blandit eros non turpis lobortis iaculis at ut massa.
         </p>
+
       </div>
 
       <!-- CỘT PHẢI: Rộng 536px, Gap 24px (gap-6) -->
@@ -56,8 +93,10 @@ export function renderDescriptionTab(product = {}) {
               <path d="M13 8L1 15V1L13 8Z" fill="white" stroke="white" stroke-width="2" stroke-linejoin="round"/>
             </svg>
           </button>
+
         </div>
 
+        <!-- 2 BANNER -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- Banner: 64% Discount -->
           <div class="flex items-center gap-3 p-4 border border-neutral-200/80 rounded-xl bg-white shadow-xs">
@@ -70,10 +109,12 @@ export function renderDescriptionTab(product = {}) {
                 <path d="M22.5039 24.9375H22.5664C23.6864 24.9375 24.5977 24.0262 24.5977 22.9062C24.5977 21.7862 23.6864 20.875 22.5664 20.875H22.5039C21.3839 20.875 20.4727 21.7862 20.4727 22.9062C20.4727 24.0262 21.3839 24.9375 22.5039 24.9375ZM22.5039 21.8125H22.5664C23.1695 21.8125 23.6602 22.3032 23.6602 22.9062C23.6602 23.5093 23.1695 24 22.5664 24H22.5039C21.9008 24 21.4102 23.5093 21.4102 22.9062C21.4102 22.3032 21.9008 21.8125 22.5039 21.8125Z" fill="#00B307"/>
               </svg>
             </div>
+
             <div class="flex flex-col text-left">
               <span class="text-sm font-semibold text-neutral-900">64% Discount</span>
               <span class="text-[11px] text-neutral-400 mt-0.5">Save your 64% money with us</span>
             </div>
+
           </div>
           
           <!-- Banner: 100% Organic -->
@@ -84,14 +125,19 @@ export function renderDescriptionTab(product = {}) {
                 <path d="M31.9759 0.871204C31.9127 0.678579 31.7368 0.545392 31.5343 0.536954C30.5147 0.494517 27.7279 0.501829 23.8822 1.4852C20.3025 2.40064 16.9433 3.90533 14.1675 5.8367C13.9472 5.99002 13.893 6.29283 14.0462 6.51314C14.1994 6.73345 14.5022 6.78777 14.7226 6.63452C17.4039 4.7687 20.6546 3.31377 24.1229 2.42683C25.4189 2.09545 26.7587 1.84389 28.029 1.68627C27.5082 1.9112 26.95 2.17439 26.369 2.48289C22.4401 4.56858 20.245 7.23552 19.032 9.3792C18.8726 8.66395 18.8289 7.84189 18.8286 7.47552C18.8285 7.2072 18.611 6.98977 18.3427 6.98977C18.0743 6.98977 17.8567 7.20733 17.8567 7.4757C17.8567 7.69077 17.8739 9.48302 18.4167 10.5878C17.6686 12.1852 16.9689 13.7821 16.2918 15.3286C16.0042 15.9855 15.7211 16.632 15.4404 17.2649C15.0026 16.4405 14.4256 14.9479 14.5839 12.9956C14.6055 12.7282 14.4063 12.4937 14.1387 12.472C13.872 12.4508 13.6368 12.6496 13.6151 12.9171C13.3877 15.7219 14.503 17.6801 14.9555 18.348C14.1074 20.2223 13.271 21.9484 12.3902 23.4217C11.9367 22.395 11.2263 20.4387 11.2263 18.2604C11.2263 17.992 11.0087 17.7745 10.7404 17.7745C10.472 17.7745 10.2544 17.992 10.2544 18.2604C10.2544 21.1498 11.372 23.6069 11.7742 24.3975C10.8119 25.8353 9.78436 26.9596 8.62367 27.6438C5.08779 23.8037 4.74292 16.5988 10.9201 9.92739C11.6223 9.16902 12.3929 8.44508 13.2107 7.77577C13.4184 7.60577 13.4489 7.29964 13.2789 7.09195C13.1089 6.88427 12.8027 6.85377 12.5951 7.0237C11.7429 7.72133 10.9394 8.47614 10.207 9.26708C3.69104 16.3043 4.05817 23.9746 7.79436 28.1765C4.54073 30.3661 0.514981 30.5029 0.472856 30.5041C0.204731 30.5113 -0.00683118 30.7344 0.000168815 31.0026C0.00710632 31.2665 0.223231 31.4758 0.485731 31.4758C0.490044 31.4758 0.494419 31.4757 0.498731 31.4756C0.685231 31.4707 4.97954 31.33 8.49723 28.8732C9.56311 29.7429 11.235 30.272 13.2621 30.272C15.557 30.272 18.3072 29.5937 21.148 27.9638C23.7798 26.4538 25.6666 24.1438 26.7561 21.0981C27.6891 18.4901 28.0037 15.3521 27.666 12.0234C27.0639 6.08933 29.3056 3.41164 31.8177 1.40202C31.9759 1.27533 32.0389 1.06383 31.9759 0.871204ZM27.6832 4.84633C26.7273 6.84727 26.4054 9.22702 26.699 12.1214C27.0222 15.3071 26.7255 18.298 25.8409 20.7707C24.8315 23.5926 23.0898 25.729 20.6643 27.1208C17.6035 28.877 15.0344 29.2749 13.418 29.2995C11.7655 29.3254 10.3365 28.9726 9.37767 28.3195C10.1757 27.8018 10.9084 27.1075 11.5969 26.2693C11.6348 26.2696 11.6757 26.2698 11.7214 26.2698C12.1986 26.2698 13.0877 26.2493 14.1367 26.1268C16.2354 25.8815 17.8898 25.3636 19.0541 24.5875C19.2774 24.4386 19.3377 24.1369 19.1889 23.9136C19.04 23.6904 18.7383 23.6301 18.515 23.7789C16.7214 24.9746 13.8324 25.2343 12.3412 25.2856C13.2865 23.9374 14.1572 22.3185 15.0159 20.5255C15.8609 20.5234 18.104 20.3406 20.2367 18.6404C20.4465 18.4731 20.481 18.1673 20.3137 17.9575C20.1464 17.7476 19.8407 17.7132 19.6309 17.8805C18.0646 19.1291 16.407 19.4518 15.4841 19.5291C16.0444 18.3166 16.6045 17.0374 17.182 15.7185C17.48 15.0377 17.7827 14.3468 18.0915 13.6512C18.1248 13.652 18.16 13.6525 18.197 13.6525C18.9295 13.6525 20.3882 13.4738 21.9912 12.2861C22.2068 12.1264 22.2521 11.822 22.0923 11.6064C21.9325 11.3908 21.6282 11.3455 21.4125 11.5053C20.4235 12.238 19.5133 12.5133 18.9238 12.6152C18.7809 12.64 18.6501 12.6556 18.5319 12.6656C18.8151 12.0371 19.1042 11.4065 19.401 10.7768C21.2114 6.93527 24.423 4.62058 26.7985 3.35527C27.8283 2.80677 28.7948 2.40214 29.5879 2.11302C28.8911 2.84727 28.2111 3.74133 27.6832 4.84633Z" fill="#00B307"/>
               </svg>
             </div>
+
             <div class="flex flex-col text-left">
               <span class="text-sm font-semibold text-neutral-900">100% Organic</span>
               <span class="text-[11px] text-neutral-400 mt-0.5">100% Organic Vegetables</span>
             </div>
+
           </div>
+
         </div>
+
       </div>
 
     </div>
   `;
 }
+

@@ -1,7 +1,14 @@
-// src/checkout/checkout.js
-
 import { renderBreadCrumb } from "../components/breadcrumbs.js";
-import { renderCountryOptions, renderStateOptions, bindLocationEvents } from "./Location.js";
+import {
+  iconValidationError,
+  iconValidationSuccess,
+  iconValidationWarning,
+} from "../components/icons.js";
+import {
+  renderCountryOptions,
+  renderStateOptions,
+  bindLocationEvents,
+} from "./Location.js";
 import { getCart, getCartSummary, saveCart } from "../shopping_cart/cartData.js";
 
 // =====================================================
@@ -13,9 +20,15 @@ const svgSuccess = /*html*/ `<svg class="w-4 h-4 text-primary" viewBox="0 0 20 2
 
 function validationIcons() {
   return /*html*/ `
-    <span class="signin-state-icon signin-error-icon pointer-events-none" aria-hidden="true">${svgError}</span>
-    <span class="signin-state-icon signin-warning-icon pointer-events-none" aria-hidden="true">${svgWarning}</span>
-    <span class="signin-state-icon signin-success-icon pointer-events-none" aria-hidden="true">${svgSuccess}</span>
+    <span class="signin-state-icon signin-error-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationError}
+    </span>
+    <span class="signin-state-icon signin-warning-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationWarning}
+    </span>
+    <span class="signin-state-icon signin-success-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationSuccess}
+    </span>
   `;
 }
 
@@ -294,6 +307,7 @@ export function renderCheckout(rawCart = getCart()) {
                     placeholder="Notes about your order, e.g. special notes for delivery" 
                     class="signin-input w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:border-primary focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 resize-none transition-colors"
                   ></textarea>
+                  ${validationIcons()}
                 </div>
               </div>
             </div>
@@ -304,6 +318,7 @@ export function renderCheckout(rawCart = getCart()) {
             <div class="flex flex-col gap-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
               
               <div class="flex flex-col gap-4">
+                <h3 class="text-neutral-900 text-xl font-medium leading-8">Order Summery</h3>
                 <h3 class="text-neutral-900 text-xl font-medium leading-8">Order Summery</h3>
                 
                 <!-- Danh sách sản phẩm từ giỏ hàng -->
@@ -436,7 +451,7 @@ export function bindCheckoutEvents(container = document) {
     return true;
   };
 
-  const inputs = form.querySelectorAll("input[required], select[required]");
+  const inputs = form.querySelectorAll("input[required], select[required], textarea[name=\"orderNotes\"]");
   inputs.forEach(input => {
     input.addEventListener("focus", () => updateFieldState(input, "typing"));
     input.addEventListener("input", () => updateFieldState(input, "typing"));
@@ -467,3 +482,4 @@ export function bindCheckoutEvents(container = document) {
     window.location.href = "./index.html";
   });
 }
+

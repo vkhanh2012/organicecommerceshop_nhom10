@@ -18,16 +18,17 @@ export function renderCustomerFeedbackTab(product) {
 
       const avatarHtml = item.avatar
         ? `
-          <img
-            src="${item.avatar}"
-            alt="${item.name}"
-            class="w-10 h-10 rounded-full object-cover shrink-0"
+          <img 
+            src="${item.avatar}" 
+            alt="${item.name}" 
+            class="w-10 h-10 rounded-full object-cover shrink-0" 
           />
         `
         : `
-          <div
+          <div 
             class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center shrink-0"
           >
+            <i class="fa-solid fa-user text-neutral-400 text-sm"></i>
             <i class="fa-solid fa-user text-neutral-400 text-sm"></i>
           </div>
         `;
@@ -35,8 +36,8 @@ export function renderCustomerFeedbackTab(product) {
       return `
         <div class="flex w-full max-w-[760px] flex-col gap-3 border-b border-neutral-200 py-4">
 
-          <!-- User -->
-          <div class="flex items-start">
+          <!-- User --> 
+          <div class="flex items-start gap-3">
 
             ${avatarHtml}
 
@@ -50,8 +51,8 @@ export function renderCustomerFeedbackTab(product) {
               </div>
             </div>
 
-            <!-- Time -->
-            <div class="ml-auto text-right text-neutral-400 text-sm font-normal font-['Poppins'] leading-5">
+            <!-- Time --> 
+            <div class="shrink-0 text-right text-neutral-400 text-xs sm:text-sm font-normal font-['Poppins'] leading-5">
               ${item.time}
             </div>
 
@@ -75,9 +76,9 @@ export function renderCustomerFeedbackTab(product) {
 
         ${feedbacksHtml}
 
-        <!-- Load More -->
+        <!-- Load More --> 
         <div class="pt-5">
-          <button
+          <button 
             class="
               px-8 py-3.5
               bg-primary/10
@@ -104,3 +105,4 @@ export function renderCustomerFeedbackTab(product) {
     </div>
   `;
 }
+

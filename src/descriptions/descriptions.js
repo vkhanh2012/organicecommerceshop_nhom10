@@ -49,7 +49,7 @@ export function renderDescription(
       <a
         href="${tab.href}"
         data-tab="${tab.key}"
-        class="tab-link pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
+        class="tab-link shrink-0 pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
           isActive
             ? "border-b-2 border-primary font-semibold text-neutral-900"
             : "text-neutral-500 hover:text-neutral-900"
@@ -120,3 +120,4 @@ export function renderDescription(
     </div>
   `;
 }
+
