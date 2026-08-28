@@ -15,7 +15,7 @@ export function renderSaleProducts(productsData = []) {
     .map(
       (items) => /*html*/ `
     <!-- Khung của sale products -->
-    <div class="flex items-center rounded-md bg-white border transition-all cursor-pointer group ${
+    <div class="flex items-center rounded-md bg-white border pt-5 transition-all cursor-pointer group ${
       items.active
         ? " border-primary shadow-sm ring-1 ring-primary/20"
         : "border-neutral-100 hover:border-primary/50 hover:shadow-sm"
