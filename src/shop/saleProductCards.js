@@ -50,7 +50,7 @@ export function renderSaleProducts(productsData = []) {
 
   // Khung của tất cả sản phẩm
   return /*html*/ `
-    <div class="pt-5 gap-3">
+    <div class="gap-3">
         <h3 class="text-[20px] font-medium text-neutral-900 mb-4">Sale Products</h3>
         <div class="space-y-3">
             ${productsHtml}

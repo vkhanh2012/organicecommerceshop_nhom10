@@ -91,8 +91,8 @@ export function renderPopularTags(
 
   // Shop 1
   return /*html*/ `
-    <div class="border-b border-neutral-100">
-      <div class="flex items-center justify-between cursor-pointer py-5">
+    <div>
+      <div class="flex items-center justify-between cursor-pointer pb-[26px]">
         <h3 class="section-heading">Popular Tag</h3>
 
         <svg
