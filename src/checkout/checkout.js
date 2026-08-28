@@ -1,21 +1,27 @@
-// src/checkout/checkout.js
-
 import { renderBreadCrumb } from "../components/breadcrumbs.js";
-import { renderCountryOptions, renderStateOptions, bindLocationEvents } from "./Location.js";
+import {
+  iconValidationError,
+  iconValidationSuccess,
+  iconValidationWarning,
+} from "../components/icons.js";
+import {
+  renderCountryOptions,
+  renderStateOptions,
+  bindLocationEvents,
+} from "./Location.js";
 import { getCart, getCartSummary, saveCart } from "../shopping_cart/cartData.js";
-
-// =====================================================
-// HELPER VALIDATION ICONS (INLINE SVG CHUẨN CODE 1)
-// =====================================================
-const svgError = /*html*/ `<svg class="w-4 h-4 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>`;
-const svgWarning = /*html*/ `<svg class="w-4 h-4 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>`;
-const svgSuccess = /*html*/ `<svg class="w-4 h-4 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`;
 
 function validationIcons() {
   return /*html*/ `
-    <span class="signin-state-icon signin-error-icon text-red-500 pointer-events-none hidden" aria-hidden="true">${svgError}</span>
-    <span class="signin-state-icon signin-warning-icon text-yellow-500 pointer-events-none hidden" aria-hidden="true">${svgWarning}</span>
-    <span class="signin-state-icon signin-success-icon text-green-500 pointer-events-none hidden" aria-hidden="true">${svgSuccess}</span>
+    <span class="signin-state-icon signin-error-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationError}
+    </span>
+    <span class="signin-state-icon signin-warning-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationWarning}
+    </span>
+    <span class="signin-state-icon signin-success-icon pointer-events-none hidden" aria-hidden="true">
+      ${iconValidationSuccess}
+    </span>
   `;
 }
 
@@ -294,6 +300,7 @@ export function renderCheckout(rawCart = getCart()) {
                     placeholder="Notes about your order, e.g. special notes for delivery" 
                     class="signin-input w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:border-green-600 focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 resize-none transition-colors"
                   ></textarea>
+                  ${validationIcons()}
                 </div>
               </div>
             </div>
@@ -420,7 +427,7 @@ export function bindCheckoutEvents(container = document) {
       if (fieldGroup) fieldGroup.setAttribute("data-state", "error");
       input.setAttribute("aria-invalid", "true");
       input.classList.add("border-red-500", "focus:border-red-500");
-      input.classList.remove("border-neutral-200", "focus:border-green-600");
+      input.classList.remove("border-neutral-200", "border-primary", "bg-primary/5", "focus:border-green-600");
 
       if (errIcon) errIcon.classList.remove("hidden");
       if (warnIcon) warnIcon.classList.add("hidden");
@@ -433,8 +440,8 @@ export function bindCheckoutEvents(container = document) {
     } else if (value) {
       if (fieldGroup) fieldGroup.setAttribute("data-state", "success");
       input.setAttribute("aria-invalid", "false");
-      input.classList.remove("border-red-500", "focus:border-red-500");
-      input.classList.add("border-neutral-200", "focus:border-green-600");
+      input.classList.remove("border-red-500", "focus:border-red-500", "border-neutral-200");
+      input.classList.add("border-primary", "bg-primary/5", "focus:border-green-600");
 
       if (errIcon) errIcon.classList.add("hidden");
       if (warnIcon) warnIcon.classList.add("hidden");
@@ -446,7 +453,7 @@ export function bindCheckoutEvents(container = document) {
     } else {
       if (fieldGroup) fieldGroup.setAttribute("data-state", "normal");
       input.setAttribute("aria-invalid", "false");
-      input.classList.remove("border-red-500", "focus:border-red-500");
+      input.classList.remove("border-red-500", "focus:border-red-500", "border-primary", "bg-primary/5");
       input.classList.add("border-neutral-200", "focus:border-green-600");
 
       if (errIcon) errIcon.classList.add("hidden");
@@ -461,14 +468,23 @@ export function bindCheckoutEvents(container = document) {
     return isValid;
   };
 
-  const inputs = form.querySelectorAll("input[required], select[required]");
+  const inputs = form.querySelectorAll("input[required], select[required], textarea[name=\"orderNotes\"]");
   inputs.forEach(input => {
     input.addEventListener("blur", () => validateField(input));
     input.addEventListener("input", () => {
       if (input.getAttribute("aria-invalid") === "true") {
         validateField(input);
+        return;
+      }
+
+      const fieldGroup = input.closest("[data-field]");
+      if (input.value.trim() && fieldGroup) {
+        fieldGroup.setAttribute("data-state", "typing");
+        input.classList.remove("border-neutral-200", "border-red-500", "bg-primary/5");
+        input.classList.add("border-primary");
       }
     });
+    input.addEventListener("change", () => validateField(input));
   });
 
   form.addEventListener("submit", (e) => {
