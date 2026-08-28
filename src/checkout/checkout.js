@@ -55,12 +55,14 @@ export function renderCheckout(rawCart = getCart()) {
 
   const cartItemsHtml = safeCart.length > 0 
     ? safeCart.map(item => `
-      <div class="w-full flex justify-between items-center py-2.5 border-b border-neutral-100 last:border-none">
-        <div class="flex items-center gap-3">
-          <img class="w-[60px] h-[60px] object-cover rounded-md shrink-0 border border-neutral-200" src="${item.image || '/src/assets/images/cabbage1.svg'}" alt="${item.name}" />
-          <span class="text-neutral-900 text-sm font-normal leading-5">${item.name} <span class="text-neutral-900 font-semibold">x${item.quantity}</span></span>
+      <div class="flex w-full items-center justify-between gap-4">
+        <div class="flex min-w-0 items-center gap-2">
+          <span class="flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-lg">
+            <img class="h-full w-full rounded-lg object-contain" src="${item.image || '/src/assets/images/cabbage1.svg'}" alt="${item.name}" />
+          </span>
+          <span class="min-w-0 text-sm font-normal leading-5 text-neutral-900">${item.name} <span class="whitespace-nowrap text-neutral-900">x${item.quantity}</span></span>
         </div>
-        <div class="text-neutral-900 text-sm font-medium leading-5">$${(item.price * item.quantity).toFixed(2)}</div>
+        <div class="shrink-0 text-sm font-medium leading-5 text-neutral-900">$${(item.price * item.quantity).toFixed(2)}</div>
       </div>
     `).join("")
     : `<p class="text-sm text-neutral-400 py-4">Your cart is empty.</p>`;
@@ -75,11 +77,11 @@ export function renderCheckout(rawCart = getCart()) {
 
       <!-- MAIN CONTAINER (1320px chuẩn Figma) -->
       <div class="container-custom pb-10 pt-8">
-        <form id="checkout-form" class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)] lg:gap-6 min-[1400px]:grid-cols-[872px_424px] [&_h2]:text-neutral-900 [&_h3]:text-neutral-900 [&_h4]:text-neutral-900 [&_label]:text-neutral-900 [&_.signin-input]:text-neutral-900 [&_.signin-input]:focus:border-primary [&_.signin-field-message]:text-error" novalidate>
+        <form id="checkout-form" class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,424px)] lg:gap-6 min-[1400px]:grid-cols-[872px_424px] [&_h2]:text-neutral-900 [&_h3]:text-neutral-900 [&_h4]:text-neutral-900 [&_label]:text-neutral-900 [&_.signin-input]:text-neutral-900 [&_.signin-input]:focus:border-primary [&_.signin-field-message]:text-error" novalidate>
           
           <!-- CỘT TRÁI: BILLING INFORMATION -->
           <div class="flex w-full min-w-0 flex-col gap-8">
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-5">
               <h2 class="text-neutral-900 text-2xl font-medium leading-9">Billing Information</h2>
               
               <div class="flex flex-col gap-5">
@@ -302,7 +304,7 @@ export function renderCheckout(rawCart = getCart()) {
                     aria-invalid="false"
                     rows="3" 
                     placeholder="Notes about your order, e.g. special notes for delivery" 
-                    class="signin-input w-full h-24 p-4 bg-white rounded-md border border-neutral-200 focus:border-primary focus:outline-none text-base text-neutral-900 placeholder:text-neutral-400 resize-none transition-colors"
+                    class="signin-input !h-[120px] w-full resize-none rounded-md border border-neutral-200 bg-white !p-4 text-base text-neutral-900 placeholder:text-neutral-400 transition-colors focus:border-primary focus:outline-none"
                   ></textarea>
                   ${validationIcons()}
                 </div>
@@ -311,30 +313,28 @@ export function renderCheckout(rawCart = getCart()) {
           </div>
 
           <!-- CỘT PHẢI: ORDER SUMMARY -->
-          <div class="w-full min-w-0 lg:-mt-2">
-            <div class="flex flex-col gap-6 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs">
+          <div class="w-full min-w-0 lg:max-w-[424px] lg:justify-self-end">
+            <div class="flex w-full flex-col gap-6 rounded-lg border border-neutral-200 bg-white p-6 shadow-xs">
               
-              <div class="flex flex-col gap-4">
-                <h3 class="text-neutral-900 text-xl font-medium leading-8">Order Summery</h3>
+              <div class="flex flex-col gap-0">
+                <h3 class="text-xl font-medium leading-8 text-neutral-900">Order Summary</h3>
                 
                 <!-- Danh sách sản phẩm từ giỏ hàng -->
-                <div class="flex max-h-[260px] flex-col overflow-y-auto">
+                <div class="flex max-h-[260px] flex-col gap-1 overflow-y-auto">
                   ${cartItemsHtml}
                 </div>
 
                 <!-- Bảng giá tính toán động -->
-                <div class="flex flex-col pt-2">
+                <div class="flex flex-col pt-4">
                   <div class="py-3 flex justify-between items-center text-sm">
                     <span class="text-neutral-600 font-normal leading-5">Subtotal:</span>
                     <span class="text-neutral-900 font-medium leading-5">$${total.toFixed(2)}</span>
                   </div>
-                  <div class="w-full h-px bg-neutral-200"></div>
-                  
                   <div class="py-3 flex justify-between items-center text-sm">
                     <span class="text-neutral-600 font-normal leading-5">Shipping:</span>
                     <span class="text-neutral-900 font-medium leading-5">${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
                   </div>
-                  <div class="w-full h-px bg-neutral-200"></div>
+                  <div class="w-full border-t border-neutral-200"></div>
                   
                   <div class="pt-3 flex justify-between items-center text-base">
                     <span class="text-neutral-600 font-normal leading-6">Total:</span>
@@ -344,19 +344,22 @@ export function renderCheckout(rawCart = getCart()) {
               </div>
 
               <!-- Payment Method -->
-              <div class="flex flex-col gap-3 pt-2 border-t border-neutral-200">
-                <h4 class="text-neutral-900 text-lg font-medium leading-7">Payment Method</h4>
-                <div class="flex flex-col gap-2.5">
-                  <label class="inline-flex items-center gap-2.5 cursor-pointer">
-                    <input type="radio" name="paymentMethod" value="cod" checked class="w-5 h-5 accent-primary cursor-pointer" />
+              <div class="flex flex-col gap-4">
+                <h4 class="text-xl font-medium leading-8 text-neutral-900">Payment Method</h4>
+                <div class="flex flex-col gap-3">
+                  <label class="inline-flex min-h-5 cursor-pointer items-center gap-3">
+                    <input type="radio" name="paymentMethod" value="cod" checked class="peer sr-only" />
+                    <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-white transition-colors after:h-2.5 after:w-2.5 after:rounded-full after:bg-transparent after:content-[''] peer-checked:border-primary peer-checked:after:bg-primary"></span>
                     <span class="text-neutral-600 text-sm font-normal leading-5">Cash on Delivery</span>
                   </label>
-                  <label class="inline-flex items-center gap-2.5 cursor-pointer">
-                    <input type="radio" name="paymentMethod" value="paypal" class="w-5 h-5 accent-primary cursor-pointer" />
+                  <label class="inline-flex min-h-5 cursor-pointer items-center gap-3">
+                    <input type="radio" name="paymentMethod" value="paypal" class="peer sr-only" />
+                    <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-white transition-colors after:h-2.5 after:w-2.5 after:rounded-full after:bg-transparent after:content-[''] peer-checked:border-primary peer-checked:after:bg-primary"></span>
                     <span class="text-neutral-600 text-sm font-normal leading-5">Paypal</span>
                   </label>
-                  <label class="inline-flex items-center gap-2.5 cursor-pointer">
-                    <input type="radio" name="paymentMethod" value="amazon" class="w-5 h-5 accent-primary cursor-pointer" />
+                  <label class="inline-flex min-h-5 cursor-pointer items-center gap-3">
+                    <input type="radio" name="paymentMethod" value="amazon" class="peer sr-only" />
+                    <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-white transition-colors after:h-2.5 after:w-2.5 after:rounded-full after:bg-transparent after:content-[''] peer-checked:border-primary peer-checked:after:bg-primary"></span>
                     <span class="text-neutral-900 text-sm font-normal leading-5">Amazon Pay</span>
                   </label>
                 </div>
