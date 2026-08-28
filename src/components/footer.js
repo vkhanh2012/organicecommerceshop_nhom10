@@ -34,42 +34,42 @@ export function renderFooterComponent() {
             
             <!-- My Account -->
             <div>
-              <h3 class="text-white font-medium text-base mb-5">My Account</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">My Account</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Order History</a></li>
-                <li> <a href="./cart.html" class="text-neutral-500 hover:text-white transition-colors"> Shopping Cart</a></li>
-                <li><a href="./wishlist.html" class="text-neutral-500 hover:text-white transition-colors">Wishlist</a></li>
+              <h3 class="footer-heading">My Account</h3>
+              <ul class="footer-list">
+                <li><a href="#" class="footer-link">My Account</a></li>
+                <li><a href="#" class="footer-link">Order History</a></li>
+                <li><a href="./cart.html" class="footer-link">Shopping Cart</a></li>
+                <li><a href="./wishlist.html" class="footer-link">Wishlist</a></li>
               </ul>
             </div>
             <!-- Helps -->
             <div>
-              <h3 class="text-white font-medium text-base mb-5">Helps</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Faqs</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Terms & Condition</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Privacy Policy</a></li>
+              <h3 class="footer-heading">Helps</h3>
+              <ul class="footer-list">
+                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="#" class="footer-link">Faqs</a></li>
+                <li><a href="#" class="footer-link">Terms & Condition</a></li>
+                <li><a href="#" class="footer-link">Privacy Policy</a></li>
               </ul>
             </div>
             <!--Proxy -->
             <div>
-              <h3 class="text-white font-medium text-base mb-5">Proxy</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Shop</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Product</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Track Order</a></li>
+              <h3 class="footer-heading">Proxy</h3>
+              <ul class="footer-list">
+                <li><a href="#" class="footer-link">About</a></li>
+                <li><a href="#" class="footer-link">Shop</a></li>
+                <li><a href="#" class="footer-link">Product</a></li>
+                <li><a href="#" class="footer-link">Track Order</a></li>
               </ul>
             </div>
             <!-- Categories -->
             <div>
-              <h3 class="text-white font-medium text-base mb-5">Categories</h3>
-              <ul class="space-y-3 text-sm">
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Fruit & Vegetables</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Meat & Fish</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Bread & Bakery</a></li>
-                <li><a href="#" class="text-neutral-500 hover:text-white transition-colors">Beauty & Health</a></li>
+              <h3 class="footer-heading">Categories</h3>
+              <ul class="footer-list">
+                <li><a href="#" class="footer-link">Fruit & Vegetables</a></li>
+                <li><a href="#" class="footer-link">Meat & Fish</a></li>
+                <li><a href="#" class="footer-link">Bread & Bakery</a></li>
+                <li><a href="#" class="footer-link">Beauty & Health</a></li>
               </ul>
             </div>
           </div>

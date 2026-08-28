@@ -55,7 +55,7 @@ export function renderWishlistSection(items = []) {
                     </span>
                     <div class="flex items-center gap-2">
                         <a href="${socials.facebook || "#"}"
-                            class="icon-social-facebook">
+                            class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-sm transition-all duration-200 hover:bg-primary-dark">
                             ${SOCIAL_ICONS?.facebook || ""}
                         </a>
                         <a href="${socials.twitter || "#"}"
