@@ -10,20 +10,20 @@ const BANNER_DATA = {
 
 export function renderDiscountBanner(data = BANNER_DATA) {
   return /*html*/ `
-    <div class="relative overflow-hidden rounded-[8px] bg-neutral-50 text-center">
-        <div class="flex min-h-[104px] flex-col items-center justify-center px-4 py-4">
-            <div class="text-[28px] font-medium leading-8 text-neutral-900">
-                <span class="font-bold text-text-discount">${data.discountPercentage}%</span> Discount
+    <div class="relative flex flex-col items-center gap-3 overflow-hidden rounded-[10px] bg-neutral-50 pb-0 text-center">
+        <div class="flex flex-col items-center justify-center gap-0.5 px-4 pt-5">
+            <div class="w-full text-center text-2xl font-normal leading-9 text-neutral-900">
+                <span class="text-3xl font-semibold leading-10 text-text-discount">${data.discountPercentage}%</span> Discount
             </div>
-            <p class="mt-1 text-sm leading-5 text-neutral-700">${data.description}</p>
-            <a href="${data.link || "./shop.html"}"
-                class="group mt-2 inline-flex items-center justify-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark">
-                <span>${data.buttonText || "Shop Now"}</span>
-                <span class="transition-transform group-hover:translate-x-1 [&_path]:stroke-current">
-                    ${nextArrow}
-                </span>
-            </a>
+            <p class="w-full text-center text-base font-normal leading-6 text-neutral-600">${data.description}</p>
         </div>
+        <a href="${data.link || "./shop.html"}"
+            class="group inline-flex items-center justify-center gap-3 rounded-[43px] text-base font-semibold leading-5 text-primary hover:text-primary-dark">
+            <span>${data.buttonText || "Shop Now"}</span>
+            <span class="transition-transform group-hover:translate-x-1 [&_path]:stroke-current">
+                ${nextArrow}
+            </span>
+        </a>
         <img src="${data.imageUrl}" alt="${data.title || "Discount Banner"}"
             class="block h-[164px] w-full object-cover object-center">
     </div>

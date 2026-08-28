@@ -11,11 +11,15 @@ export function renderSidebarComponent(products, selectedCategory,
   return /*html*/ `
         <aside class="lg:block space-y-6">
             ${renderCategoryFilter(products, selectedCategory)}
-            ${renderPriceFilter(products, selectedMinPrice,selectedMaxPrice)}
-            ${renderRatingFilter(selectedRating)}
+            <div class="flex flex-col">
+                ${renderPriceFilter(products, selectedMinPrice,selectedMaxPrice)}
+                ${renderRatingFilter(selectedRating)}
+            </div>
             ${renderPopularTags(selectedTag)}
-            ${renderDiscountBanner()}
-            <div id="sale-products-wrapper"></div>
+            <div class="mt-6">
+                ${renderDiscountBanner()}
+                <div id="sale-products-wrapper" class="mt-5"></div>
+            </div>
         </aside>
     `
 }

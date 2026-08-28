@@ -61,7 +61,7 @@ export function renderPriceFilter(
   return /*html*/ `
     <div class="flex w-full max-w-80 flex-col items-start gap-4 border-b border-neutral-100 pb-6 font-poppins">
 
-      <div class="flex w-full items-center justify-between pb-1 pt-5">
+      <div class="flex w-full items-center justify-between">
         <h3 class="text-xl font-medium leading-8 text-neutral-900">
           Price
         </h3>

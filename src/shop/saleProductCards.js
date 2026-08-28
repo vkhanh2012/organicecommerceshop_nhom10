@@ -15,31 +15,28 @@ export function renderSaleProducts(productsData = []) {
     .map(
       (items) => /*html*/ `
     <!-- Khung của sale products -->
-    <div class="flex items-center rounded-md bg-white border pt-5 transition-all cursor-pointer group ${
+    <div class="flex w-full items-start rounded-md border border-neutral-200 bg-white transition-all cursor-pointer group ${
       items.active
-        ? " border-primary shadow-sm ring-1 ring-primary/20"
-        : "border-neutral-100 hover:border-primary/50 hover:shadow-sm"
+      ? "border-primary shadow-sm ring-1 ring-primary/20"
+      : "hover:border-primary/50 hover:shadow-sm"
     }">
-        <!-- Khung hình nền -->
-        <div class="w-28 h-28 p-1.25 flex items-center justify-center bg-white rounded-sm ">
-            <img src="${items.image}" alt="${items.name}" class="w-full h-full object-contain transition-colors"/>
+      <div class="flex size-24 shrink-0 items-start p-[5px]">
+        <img src="${items.image}" alt="${items.name}" class="size-24 object-contain transition-colors"/>
         </div>
 
-        <!--Khung Thông tin -->
-        <div class="flex-1 min-w-0">
-            <!-- Tên -->
-            <h4 class="text-sm text-neutral-700 truncate group-hover:text-primary transition-colors">
+      <div class="flex min-w-0 flex-1 flex-col items-start justify-center gap-1.5 px-3 py-6">
+        <div class="flex w-full flex-col items-start">
+        <h4 class="w-full truncate text-sm leading-5 text-neutral-600 transition-colors group-hover:text-primary">
                 ${items.name}
             </h4>
-            <!-- Giá -->
-            <div class="flex items-center gap-0.5 mt-0.5">
-                <span class="text-[16px] font-medium text-neutral-900">$${Number(items.price).toFixed(2)}</span>
+        <div class="flex items-start gap-0.5">
+          <span class="text-base font-medium leading-6 text-neutral-900">$${Number(items.price).toFixed(2)}</span>
                 ${items.oldPrice !== null && items.oldPrice !== undefined
-                  ? `<span class="text-sm text-neutral-400 line-through">$${Number(items.oldPrice).toFixed(2)}</span>`
+            ? `<span class="text-base leading-6 text-neutral-400 line-through">$${Number(items.oldPrice).toFixed(2)}</span>`
                   : ""}
             </div>
-            <!-- Sao -->
-            <div class="flex items-center gap-0.5 mt-1">
+        </div>
+        <div class="inline-flex items-start">
                 ${renderMiniStars(items.rating)}
             </div>
         </div>
@@ -51,7 +48,7 @@ export function renderSaleProducts(productsData = []) {
   // Khung của tất cả sản phẩm
   return /*html*/ `
     <div class="gap-3">
-        <h3 class="text-[20px] font-medium text-neutral-900 mb-4">Sale Products</h3>
+        <h3 class="text-[20px] font-medium text-neutral-900 pb-3 pt-[20px]">Sale Products</h3>
         <div class="space-y-3">
             ${productsHtml}
         </div>
