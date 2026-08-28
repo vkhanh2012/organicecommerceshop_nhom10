@@ -49,19 +49,20 @@ export function renderPopularTags(
   // Shop 2 - dropdown ngang
   if (layout === "horizontal") {
     return /*html*/ `
-      <details class="group relative">
+      <details class="group relative min-w-0 max-w-full">
         <summary
           class="
-            flex min-w-32 cursor-pointer
+            flex min-w-0 w-full cursor-pointer
             list-none items-center justify-between
             gap-4 rounded
             border border-neutral-200
             bg-white
             px-3 py-2
             text-sm text-neutral-600
+            sm:min-w-32 sm:w-auto
           "
         >
-          <span>
+          <span class="min-w-0 truncate">
             ${selectedTag === "all" ? "Select Tag" : selectedTag}
           </span>
 
@@ -72,8 +73,9 @@ export function renderPopularTags(
 
         <div
           class="
-            absolute left-0 top-full z-40
-            mt-2 w-80
+            absolute left-auto right-0 top-full z-40
+            mt-2 w-[min(20rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)]
+            sm:left-0 sm:right-auto
             rounded-lg
             border border-neutral-100
             bg-white p-4 shadow-lg

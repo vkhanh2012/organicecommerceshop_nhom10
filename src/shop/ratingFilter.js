@@ -79,7 +79,7 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
       <div
         class="
           absolute left-0 top-full z-40
-          mt-2 w-64
+          mt-2 w-[min(16rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)]
           rounded-lg
           border border-neutral-100
           bg-white p-4 shadow-lg
