@@ -1,23 +1,46 @@
 // src/descriptions/Image.js
+import largeCabbageImage from "../assets/images/largecabage.svg";
 import { getImageUrl } from "../utils/assets.js";
 
-export function renderImage(product) {
-  const resolveImage = (path = "") =>
-    getImageUrl(String(path).replace(/^\/src\/assets/, ""));
+function resolveDescriptionImage(path, fallback = largeCabbageImage) {
+  if (!path || typeof path !== "string") return fallback;
 
-  const thumbnails = (Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("data:") ||
+    path.startsWith("blob:")
+  ) {
+    return path;
+  }
+
+  const normalizedPath = path.startsWith("/src/assets/")
+    ? path.replace("/src/assets", "")
+    : path;
+
+  return getImageUrl(normalizedPath) || fallback;
+}
+
+export function renderImage(product) {
+  const rawThumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
     ? product.thumbnails
-    : [product?.mainImage || product?.image || ""])
-    .map(resolveImage);
+    : [product?.mainImage || product?.image || ""];
+  const rawFullImages = Array.isArray(product?.images) && product.images.length > 0
+    ? product.images
+    : rawThumbnails;
+
+  const thumbnails = rawThumbnails.map((image) => resolveDescriptionImage(image));
+  const fullImages = rawFullImages.map((image) => resolveDescriptionImage(image));
 
   const rawMainImage = product?.mainImage || product?.image;
-  let mainImage = resolveSrc(rawMainImage, validThumbnails[0] || largecabageSvg);
+  let mainImage = resolveDescriptionImage(
+    rawMainImage || fullImages[0] || thumbnails[0],
+    thumbnails[0] || largeCabbageImage,
+  );
   const isChineseCabbage = Number(product?.id) === 3
     || product?.name?.trim().toLowerCase() === "chinese cabbage";
   if (isChineseCabbage) {
-    mainImage = largecabageSvg;
-  } else if (rawMainImage && rawMainImage.startsWith("/images/product/") && validThumbnails[0]) {
-    mainImage = validThumbnails[0];
+    mainImage = largeCabbageImage;
   }
 
   const productName = product?.name || "Product";

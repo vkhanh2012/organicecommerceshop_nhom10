@@ -132,7 +132,7 @@ function getActiveProduct() {
   if (name) {
 
     const foundByName =
-      PRODUCTS_LIST.find(
+      productData.find(
         product =>
           product?.name?.toLowerCase() ===
           name.toLowerCase()
@@ -154,7 +154,7 @@ function getActiveProduct() {
   if (id) {
 
     const foundProduct =
-      PRODUCTS_LIST.find(
+      productData.find(
         product =>
           String(product.id) ===
           String(id)
@@ -164,7 +164,7 @@ function getActiveProduct() {
     if (foundProduct) {
 
       const foundDetail =
-        PRODUCTS_LIST.find(
+        productData.find(
           product =>
             product?.name?.toLowerCase() ===
             foundProduct?.name?.toLowerCase()
@@ -654,7 +654,7 @@ document.addEventListener(
 
 
     const product =
-      PRODUCTS_LIST.find(
+      productData.find(
         item =>
           String(item.id) ===
           String(productId)

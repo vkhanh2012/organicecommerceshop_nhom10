@@ -11,7 +11,7 @@
     "rating": 4,
     "reviewsCount": 4,
     "category": "Fresh Fruit",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -44,31 +44,12 @@
       "Crisp texture with a refreshing tart and sweet taste balance."
     ],
     "closingText": "Enjoy nature's crispness with our premium selected green apples, packed carefully for maximum freshness and flavor.",
-    "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Apple",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.5",
       "color": "Green",
       "type": "Organic",
       "category": "Fresh Fruit",
       "stockStatus": "Available (5,413)",
-      "tags": [
-        "Fresh Fruit",
-        "Healthy",
-        "Apple"
-      ],
       "discount": "25% Discount",
       "discountSub": "Save your 25% money with us",
       "organic": "100% Organic",
@@ -98,7 +79,7 @@
     "rating": 1,
     "reviewsCount": 2,
     "category": "Fresh Fruit",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -129,31 +110,12 @@
       "Hand-picked from certified sustainable citrus farms."
     ],
     "closingText": "Refresh your day with the citrusy goodness of our fresh Indian Malta oranges, packed with pure natural energy.",
-    "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Malta",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.4",
       "color": "Orange",
       "type": "Organic",
       "category": "Fresh Fruit",
       "stockStatus": "Available (3,200)",
-      "tags": [
-        "Fresh Fruit",
-        "Healthy",
-        "Malta"
-      ],
       "discount": "0% Discount",
       "discountSub": "Best market price",
       "organic": "100% Organic",
@@ -175,7 +137,7 @@
     "rating": 2,
     "reviewsCount": 4,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -205,41 +167,12 @@
       "Free from harmful synthetic pesticides and chemicals."
     ],
     "closingText": "Bring farm-fresh crunch to your daily meals with our carefully hand-selected Chinese Cabbage heads.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Chinese",
-        "link": "#"
-      },
-      {
-        "name": "Cabbage",
-        "link": "#"
-      },
-      {
-        "name": "Green Cabbage",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.3",
       "color": "Green",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (5,413)",
-      "tags": [
-        "Vegetables",
-        "Healthy",
-        "Chinese",
-        "Cabbage",
-        "Green Cabbage"
-      ],
       "discount": "64% Discount",
       "discountSub": "Save your 64% money with us",
       "organic": "100% Organic",
@@ -269,7 +202,7 @@
     "rating": 3,
     "reviewsCount": 5,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -299,26 +232,12 @@
       "Washed and quality-inspected before packaging."
     ],
     "closingText": "Elevate your salads with vibrant, crisp green lettuce leaves freshly packed for ultimate farm-to-plate quality.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Lettuce",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.2",
       "color": "Green",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (1,200)",
-      "tags": [
-        "Vegetables",
-        "Lettuce"
-      ],
       "discount": "0%",
       "discountSub": "Best price",
       "organic": "100% Organic",
@@ -339,7 +258,7 @@
     "rating": 4,
     "reviewsCount": 8,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -368,26 +287,12 @@
       "Sustainably grown without synthetic agro-chemicals."
     ],
     "closingText": "Cook savory family dishes with our fresh, firm eggplants harvested at peak maturity.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Eggplant",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.5",
       "color": "Purple",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (850)",
-      "tags": [
-        "Vegetables",
-        "Eggplant"
-      ],
       "discount": "0%",
       "discountSub": "Fresh from farm",
       "organic": "100% Organic",
@@ -408,7 +313,7 @@
     "rating": 4,
     "reviewsCount": 12,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Vegetarian",
       "Tiffin",
       "Launch",
@@ -437,26 +342,12 @@
       "Long shelf life when stored in a cool dry area."
     ],
     "closingText": "Stock up your kitchen pantry with our versatile, nutritious large potatoes grown in rich fertile soil.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Potatoes",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "1.0",
       "color": "Brown",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (2,400)",
-      "tags": [
-        "Vegetables",
-        "Potatoes"
-      ],
       "discount": "0%",
       "discountSub": "Farm fresh",
       "organic": "100% Organic",
@@ -477,7 +368,7 @@
     "rating": 5,
     "reviewsCount": 15,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Vegetarian",
       "Kid foods",
@@ -507,26 +398,12 @@
       "Sourced daily from local organic cornfields."
     ],
     "closingText": "Enjoy the golden sweetness of fresh corn on the cob, a delightful treat for adults and children alike.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Corn",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.4",
       "color": "Yellow",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (1,800)",
-      "tags": [
-        "Vegetables",
-        "Corn"
-      ],
       "discount": "0%",
       "discountSub": "Sweet corn",
       "organic": "100% Organic",
@@ -547,7 +424,7 @@
     "rating": 4,
     "reviewsCount": 6,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -577,26 +454,12 @@
       "Grown organically without chemical fertilizers."
     ],
     "closingText": "Create nutritious keto-friendly meals with our fresh white cauliflower heads picked at top quality.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Cauliflower",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.6",
       "color": "White",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (950)",
-      "tags": [
-        "Vegetables",
-        "Cauliflower"
-      ],
       "discount": "0%",
       "discountSub": "Healthy choice",
       "organic": "100% Organic",
@@ -617,7 +480,7 @@
     "rating": 4,
     "reviewsCount": 10,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -647,26 +510,12 @@
       "Harvested fresh to maintain crisp texture and color."
     ],
     "closingText": "Add color and crunchy taste to your daily stir-fries with our fresh green capsicums.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Capsicum",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.3",
       "color": "Green",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (1,400)",
-      "tags": [
-        "Vegetables",
-        "Capsicum"
-      ],
       "discount": "50% Discount",
       "discountSub": "Save 50% today",
       "organic": "100% Organic",
@@ -687,7 +536,7 @@
     "rating": 4,
     "reviewsCount": 3,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -716,26 +565,12 @@
       "Hand-picked daily for maximum heat and freshness."
     ],
     "closingText": "Spice up your cooking with our fresh organic green chillies delivered straight from the farm.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Chilli",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.1",
       "color": "Green",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (600)",
-      "tags": [
-        "Vegetables",
-        "Chilli"
-      ],
       "discount": "0%",
       "discountSub": "Spicy & Fresh",
       "organic": "100% Organic",
@@ -756,7 +591,7 @@
     "rating": 5,
     "reviewsCount": 4,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -786,31 +621,12 @@
       "Organically cultivated and carefully hand-picked."
     ],
     "closingText": "Bring sweet vibrant red peppers to your dinner table with our premium farm-fresh Red Capsicums.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Red Capsicum",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.3",
       "color": "Red",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (2,100)",
-      "tags": [
-        "Vegetables",
-        "Healthy",
-        "Red Capsicum"
-      ],
       "discount": "0%",
       "discountSub": "Fresh harvest",
       "organic": "100% Organic",
@@ -831,7 +647,7 @@
     "rating": 5,
     "reviewsCount": 4,
     "category": "Vegetables",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Low fat",
       "Vegetarian",
@@ -862,31 +678,12 @@
       "Sustainably grown in organic soil conditions."
     ],
     "closingText": "Savor authentic garden flavor with our vine-ripened fresh red tomatoes packed with lycopene goodness.",
-    "tags": [
-      {
-        "name": "Vegetables",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Tomato",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "0.5",
       "color": "Red",
       "type": "Organic",
       "category": "Vegetables",
       "stockStatus": "Available (4,500)",
-      "tags": [
-        "Vegetables",
-        "Healthy",
-        "Tomato"
-      ],
       "discount": "50% Discount",
       "discountSub": "Save 50% today",
       "organic": "100% Organic",
@@ -907,7 +704,7 @@
     "rating": 4,
     "reviewsCount": 4,
     "category": "Fresh Fruit",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Vegetarian",
       "Kid foods",
@@ -938,31 +735,12 @@
       "Naturally tree-ripened without artificial chemicals."
     ],
     "closingText": "Indulge in the king of fruits with our naturally tree-ripened Surjapur Mangoes delivered to your door.",
-    "tags": [
-      {
-        "name": "Fresh Fruit",
-        "link": "#"
-      },
-      {
-        "name": "Healthy",
-        "link": "#"
-      },
-      {
-        "name": "Mango",
-        "link": "#"
-      }
-    ],
     "additionalInfo": {
       "weight": "1.0",
       "color": "Yellow",
       "type": "Organic",
       "category": "Fresh Fruit",
       "stockStatus": "Available (1,500)",
-      "tags": [
-        "Fresh Fruit",
-        "Healthy",
-        "Mango"
-      ],
       "discount": "64% Discount",
       "discountSub": "Special deal",
       "organic": "100% Organic",
@@ -979,7 +757,7 @@
     "saleTag": null,
     "rating": 4,
     "category": "Cooking",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Dinner"
     ],
@@ -1010,7 +788,7 @@
     "saleTag": null,
     "rating": 4,
     "category": "Snacks",
-    "filterTags": [
+    "tags": [
       "Snacks",
       "Kid foods"
     ],
@@ -1041,7 +819,7 @@
     "saleTag": null,
     "rating": 4,
     "category": "Beverages",
-    "filterTags": [
+    "tags": [
       "Breackfast",
       "Snacks"
     ],
@@ -1072,7 +850,7 @@
     "saleTag": null,
     "rating": 5,
     "category": "Beauty & Health",
-    "filterTags": [
+    "tags": [
       "Healthy",
       "Vitamins"
     ],
@@ -1123,4 +901,3 @@
     "closingText": "Start your morning with warm, wholesome artisanal bread baked fresh from our organic oven."
   }
 ]
-
