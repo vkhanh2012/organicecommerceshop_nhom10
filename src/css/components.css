@@ -1,3 +1,14 @@
+/* Ảnh nằm gọn bên trong khung */
+.image-contain {
+  @apply h-full w-full object-contain;
+}
+
+/* Ảnh phủ toàn bộ khung */
+.image-cover {
+  @apply h-full w-full object-cover;
+}
+
+/* Tiêu đề section */
 .section-heading {
   @apply text-xl font-medium text-neutral-900;
 }
@@ -5,6 +16,8 @@
 .section-container {
   @apply container-custom pb-12 md:pb-16;
 }
+
+/* Nút hành động nền xám */
 
 .action-button {
   @apply cursor-pointer rounded-full bg-neutral-50 px-6 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-800 hover:text-white;
@@ -33,3 +46,6 @@
 .icon-social {
   @apply flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-all duration-200 hover:bg-primary hover:text-white;
 }
+
+
+

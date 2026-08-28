@@ -154,6 +154,7 @@ export async function initShopPage() {
       <div
         class="
           flex
+          min-w-0
           flex-wrap
           items-center
           gap-3
@@ -170,7 +171,7 @@ export async function initShopPage() {
             <span>Select Price</span>
             <span class="transition-transform group-open:rotate-180">${dropDown}</span>
           </summary>
-          <div class="absolute left-0 top-full z-40 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg">
+          <div class="absolute left-auto right-0 top-full z-40 mt-2 w-[min(18rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg sm:left-0 sm:right-auto">
             ${renderPriceFilter(
       PRODUCT_DATA,
       shopState.minPrice,
@@ -190,6 +191,7 @@ export async function initShopPage() {
       <div
         class="
           flex
+          min-w-0
           flex-wrap
           items-center
           gap-3
@@ -211,7 +213,8 @@ export async function initShopPage() {
           <select
             id="sort-select"
             class="
-              w-44
+              w-full
+              min-w-0
               cursor-pointer
               rounded
               border
@@ -225,6 +228,7 @@ export async function initShopPage() {
               pr-10
               outline-none
               focus:border-primary
+              sm:w-40
             "
           >
             <option value="latest">
@@ -262,7 +266,8 @@ export async function initShopPage() {
           <select
             id="products-per-page"
             class="
-              w-44
+              w-full
+              min-w-0
               cursor-pointer
               rounded
               border
@@ -276,6 +281,7 @@ export async function initShopPage() {
               pr-10
               outline-none
               focus:border-primary
+              sm:w-40
             "
           >
             <option value="8">
