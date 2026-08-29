@@ -21,13 +21,24 @@ function resolveDescriptionImage(path, fallback = largeCabbageImage) {
   return getImageUrl(normalizedPath) || fallback;
 }
 
+function isVideoPlaceholder(path) {
+  return typeof path === "string" && /(?:^|\/)video\.svg(?:[?#].*)?$/i.test(path);
+}
+
 export function renderImage(product) {
-  const rawThumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
-    ? product.thumbnails
-    : [product?.mainImage || product?.image || ""];
-  const rawFullImages = Array.isArray(product?.images) && product.images.length > 0
-    ? product.images
-    : rawThumbnails;
+  const productImage = isVideoPlaceholder(product?.image) ? "" : product?.image;
+  const productMainImage = isVideoPlaceholder(product?.mainImage) ? "" : product?.mainImage;
+  const validThumbnails = Array.isArray(product?.thumbnails)
+    ? product.thumbnails.filter((image) => !isVideoPlaceholder(image))
+    : [];
+  const validFullImages = Array.isArray(product?.images)
+    ? product.images.filter((image) => !isVideoPlaceholder(image))
+    : [];
+
+  const rawThumbnails = validThumbnails.length > 0
+    ? validThumbnails
+    : [productMainImage || productImage || ""];
+  const rawFullImages = validFullImages.length > 0 ? validFullImages : rawThumbnails;
 
   const thumbnails = rawThumbnails.map((image) => resolveDescriptionImage(image));
   const fullImages = rawFullImages.map((image) => resolveDescriptionImage(image));
@@ -35,7 +46,7 @@ export function renderImage(product) {
   // The detail gallery should open with the same resolved source as its first
   // thumbnail. Product `image` is the smaller catalogue card image and is not
   // always suitable (or available) as the detail image after deployment.
-  const rawMainImage = product?.mainImage || rawThumbnails[0] || product?.image;
+  const rawMainImage = productMainImage || rawThumbnails[0] || productImage;
   const mainImage = resolveDescriptionImage(
     rawMainImage || fullImages[0] || thumbnails[0],
     thumbnails[0] || largeCabbageImage,

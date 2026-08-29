@@ -22,20 +22,31 @@ function resolveQuickViewImage(path, fallback = largeCabbageImage) {
   return getImageUrl(normalizedPath) || fallback;
 }
 
-export function renderQuickViewImage(product) {
-  const rawThumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
-    ? product.thumbnails
-    : [product?.mainImage || product?.image || ""];
+function isVideoPlaceholder(path) {
+  return typeof path === "string" && /(?:^|\/)video\.svg(?:[?#].*)?$/i.test(path);
+}
 
-  const rawFullImages = Array.isArray(product?.images) && product.images.length > 0
-    ? product.images
-    : rawThumbnails;
+export function renderQuickViewImage(product) {
+  const productImage = isVideoPlaceholder(product?.image) ? "" : product?.image;
+  const productMainImage = isVideoPlaceholder(product?.mainImage) ? "" : product?.mainImage;
+  const validThumbnails = Array.isArray(product?.thumbnails)
+    ? product.thumbnails.filter((image) => !isVideoPlaceholder(image))
+    : [];
+  const validFullImages = Array.isArray(product?.images)
+    ? product.images.filter((image) => !isVideoPlaceholder(image))
+    : [];
+
+  const rawThumbnails = validThumbnails.length > 0
+    ? validThumbnails
+    : [productMainImage || productImage || ""];
+
+  const rawFullImages = validFullImages.length > 0 ? validFullImages : rawThumbnails;
 
   const thumbnails = rawThumbnails.map((image) => resolveQuickViewImage(image));
   const fullImages = rawFullImages.map((image) => resolveQuickViewImage(image));
 
   const mainImage = resolveQuickViewImage(
-    product?.mainImage || rawThumbnails[0] || product?.image || fullImages[0] || thumbnails[0],
+    productMainImage || rawThumbnails[0] || productImage || fullImages[0] || thumbnails[0],
     thumbnails[0] || largeCabbageImage
   );
   const productName = product?.name || "Product";

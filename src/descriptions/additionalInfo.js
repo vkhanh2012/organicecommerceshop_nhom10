@@ -1,3 +1,5 @@
+import { getImageUrl } from "../utils/assets.js";
+
 export function renderAdditionalInfoTab(product) {
   const addInfoTagsHtml = (product.tags || [])
     .map(
@@ -86,8 +88,8 @@ export function renderAdditionalInfoTab(product) {
           <!-- Video Container -->
           <div class="relative mx-auto aspect-[536/300] w-full max-w-[536px] overflow-hidden rounded-md bg-neutral-100 lg:-mt-4 lg:ml-auto min-[1400px]:ml-4">
             <img
-              src="${product.videoImage}"
-              alt="video"
+              src="${getImageUrl(product.videoImage || product.image || "")}"
+              alt="${product.name || "Product"} video preview"
               class="w-full h-full object-cover"
             />
             
