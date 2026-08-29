@@ -28,7 +28,7 @@ export function attachImageUrls(items = []) {
 
 const shopState = {
   currentPage: 1,
-  productsPerPage: 6,
+  productsPerPage: 15,
   sortBy: "latest",
   category: "all",
   minPrice: null,
