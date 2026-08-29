@@ -73,6 +73,15 @@ function setTagButtonState(
       !active
     )
   })
+
+  const selectedTagLabel = container.querySelector(
+    "[data-selected-tag-label]",
+  )
+
+  if (selectedTagLabel) {
+    selectedTagLabel.textContent =
+      selectedTag === "all" ? "Select Tag" : selectedTag
+  }
 }
 
 export async function initShopPage() {
@@ -204,6 +213,11 @@ export async function initShopPage() {
 
         ${renderRatingFilter(
       shopState.rating,
+      "horizontal"
+    )}
+
+        ${renderPopularTags(
+      shopState.tag,
       "horizontal"
     )}
 

@@ -52,17 +52,17 @@ export function renderPopularTags(
       <details class="group relative min-w-0 max-w-full">
         <summary
           class="
-            flex min-w-0 w-full cursor-pointer
-            list-none items-center justify-between
-            gap-4 rounded
-            border border-neutral-200
-            bg-white
-            px-3 py-2
-            text-sm text-neutral-600
-            sm:min-w-32 sm:w-auto
+           flex min-w-44 cursor-pointer
+          list-none items-center justify-between
+          gap-4 rounded
+          border border-neutral-200
+          bg-white
+          px-4 py-3
+          text-sm text-neutral-600
+
           "
         >
-          <span class="min-w-0 truncate">
+          <span data-selected-tag-label class="min-w-0 truncate">
             ${selectedTag === "all" ? "Select Tag" : selectedTag}
           </span>
 
