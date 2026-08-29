@@ -15,10 +15,12 @@ export function renderSidebarComponent(products, selectedCategory,
                 ${renderPriceFilter(products, selectedMinPrice,selectedMaxPrice)}
                 ${renderRatingFilter(selectedRating)}
             </div>
-            ${renderPopularTags(selectedTag)}
-            <div class="mt-6">
-                ${renderDiscountBanner()}
-                <div id="sale-products-wrapper" class="mt-5"></div>
+            <div>
+                ${renderPopularTags(selectedTag)}
+                <div class="mt-8 flex flex-col gap-6">
+                    ${renderDiscountBanner()}
+                    <div id="sale-products-wrapper"></div>
+                </div>
             </div>
         </aside>
     `
