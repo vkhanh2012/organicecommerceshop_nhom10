@@ -14,22 +14,13 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
   })
 
   //tạo mảng cate từ dữ liệu của sản phẩm
-  const categories = [
-    {
-      id: "all-categories",
-      label: "All Categories",
-      value: "all",
-      count: products.length,
-    },
-
-    ...Object.entries(categoryCounts).map(([category, count]) => ({
+  const categories = Object.entries(categoryCounts).map(([category, count]) => ({
       id: category.toLowerCase().replaceAll(" ", "-"),
 
       label: category,
       value: category,
       count: count,
-    })),
-  ]
+    }))
 
   const listItemsHtml = categories
     .map((item, index) => {

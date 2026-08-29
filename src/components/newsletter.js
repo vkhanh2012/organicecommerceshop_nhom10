@@ -17,7 +17,7 @@ export function renderNewsletterComponent() {
           <h2
             class="font-poppins text-[20px] font-semibold leading-[30px] text-neutral-900 sm:text-[24px] sm:leading-[35px]"
           >
-            Subscribe our Newsletter
+            Subcribe our Newsletter
           </h2>
 
           <p
