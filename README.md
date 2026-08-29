@@ -12,9 +12,9 @@
 
 | STT | Thành viên | MSSV | Trang phụ trách | Chức năng phụ trách |
 | --- | --- | --- | --- | --- |
-| 1 | Nguyễn Thị Vân Khánh | 2354050051 | About, Wishlist, Sign In, Shop, Shop 2 | Hiển thị các section About; hiển thị và xóa sản phẩm yêu thích; đăng nhập và kiểm tra dữ liệu biểu mẫu; hiển thị danh sách sản phẩm; lọc theo danh mục, khoảng giá, đánh giá và tag; sắp xếp sản phẩm; phân trang; trạng thái Product Card và responsive cho Shop/Shop 2. |
-| 2 | Trần Ngọc Lan Hương | 2354050048 | Trang chủ, Shopping Cart, Newsletter Popup, Sign Up | Hiển thị Homepage, Hero, danh mục và sản phẩm; Hot Deals/Popular Products với đồng hồ đếm ngược từ dữ liệu và trạng thái “Đã kết thúc”; Newsletter Popup; kiểm tra dữ liệu đăng ký theo từng trường; lưu giỏ hàng bằng `localStorage`; đồng bộ badge và tổng tiền Header, Cart Popup và Shopping Cart; tăng/giảm số lượng, xóa sản phẩm và tính Subtotal, Shipping, Total theo thời gian thực. |
-| 3 | Phạm Hữu Dũng | 2551050041 | Product Details, Checkout, Quick View, Description | Chọn ảnh và chuyển ảnh chính trong thư viện sản phẩm; hiển thị thông tin, số lượng và thêm vào giỏ; Wishlist tại trang chi tiết/Quick View; mở và đóng Quick View; chuyển tab Description, Additional Information và Customer Feedback; hiển thị Related Products; kiểm tra Billing Information; ghi chú đơn hàng; Order Summary; chọn phương thức thanh toán và đặt hàng. |
+| 1 | Nguyễn Thị Vân Khánh | 2354050051 | About, Wishlist, Sign In, Shop, Shop 2 | Xây dựng trang About; xử lý đăng nhập và Wishlist; hiển thị Product Card; lọc, sắp xếp và phân trang sản phẩm trên Shop/Shop 2. |
+| 2 | Trần Ngọc Lan Hương | 2354050048 | Trang chủ, Shopping Cart, Newsletter Popup, Sign Up | Xây dựng Homepage và Newsletter Popup; kiểm tra form đăng ký; xử lý đếm ngược; lưu và đồng bộ giỏ hàng bằng `localStorage`, cập nhật số lượng và tổng tiền theo thời gian thực. |
+| 3 | Phạm Hữu Dũng | 2551050041 | Product Details, Checkout, Quick View, Description | Xây dựng Quick View và Product Details; xử lý thư viện ảnh, các tab mô tả, thêm vào giỏ; hiển thị Order Summary, chọn phương thức thanh toán và đặt hàng. |
 
 ## Chức năng chính
 
