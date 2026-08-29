@@ -1,7 +1,7 @@
 import { iconStar, quoteIcon } from "../components/icons.js";
-import client1Image from "src/assets/images/client1.jpg";
-import client2Image from "src/assets/images/client2.jpg";
-import client3Image from "src/assets/images/client3.jpg";
+import client1Image from "../assets/images/client1.jpg";
+import client2Image from "../assets/images/client2.jpg";
+import client3Image from "../assets/images/client3.jpg";
 
 export const TESTIMONIALS_DATA = [
   {

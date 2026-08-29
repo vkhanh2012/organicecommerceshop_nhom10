@@ -1,7 +1,0 @@
-
-added 1 package, and audited 32 packages in 7s
-
-9 packages are looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
