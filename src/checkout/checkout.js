@@ -76,7 +76,7 @@ export function renderCheckout(rawCart = getCart()) {
       ])}
 
       <!-- MAIN CONTAINER (1320px chuẩn Figma) -->
-      <div class="container-custom pb-10 pt-8">
+      <div class="container-custom pb-14 pt-8">
         <form id="checkout-form" class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,424px)] lg:gap-6 min-[1400px]:grid-cols-[872px_424px] [&_h2]:text-neutral-900 [&_h3]:text-neutral-900 [&_h4]:text-neutral-900 [&_label]:text-neutral-900 [&_.signin-input]:text-neutral-900 [&_.signin-input]:focus:border-primary [&_.signin-field-message]:text-error" novalidate>
           
           <!-- CỘT TRÁI: BILLING INFORMATION -->
