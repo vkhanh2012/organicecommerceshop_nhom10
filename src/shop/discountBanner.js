@@ -25,7 +25,7 @@ export function renderDiscountBanner(data = BANNER_DATA) {
             </span>
         </a>
         <img src="${data.imageUrl}" alt="${data.title || "Discount Banner"}"
-            class="block h-[180px] w-full object-cover object-center">
+            class="block h-[164px] w-full object-cover object-center">
     </div>
     `;
 }
