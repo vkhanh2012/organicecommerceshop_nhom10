@@ -62,9 +62,10 @@ export function renderProductInfo(product = {}) {
           <!-- RATING + REVIEWS + SKU -->
           <div class="flex items-center gap-3 text-sm flex-wrap">
             <div class="flex items-center gap-1">
-              <div class="flex items-center gap-0.5 text-warning [&>svg]:h-4 [&>svg]:w-4">
+              <div class="flex items-center gap-0.5 text-warning [&>svg]:h-4 [&>svg]:w-4" aria-hidden="true">
                 ${starsHtml}
               </div>
+              <span class="sr-only">Rated ${product.rating || 5} out of 5 stars.</span>
               <span class="text-neutral-500 ml-1 text-sm font-normal leading-6">
                 ${product.reviewsCount || 4} Review
               </span>
@@ -147,6 +148,7 @@ export function renderProductInfo(product = {}) {
             type="button"
             class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-action="decrement"
+            aria-label="Decrease quantity"
           >
             <svg width="11" height="2" viewBox="0 0 11 2" fill="none">
               <path d="M0.75 0.75H10.0833" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -158,12 +160,14 @@ export function renderProductInfo(product = {}) {
             type="number"
             min="1"
             value="1"
+            aria-label="Product quantity"
           />
 
           <button
             type="button"
             class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-action="increment"
+            aria-label="Increase quantity"
           >
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
               <path d="M0.75 5.41667H10.0833M5.41667 0.75V10.0833" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

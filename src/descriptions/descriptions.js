@@ -48,7 +48,11 @@ export function renderDescription(
     return `
       <a
         href="${tab.href}"
+        id="description-tab-${tab.key}"
         data-tab="${tab.key}"
+        role="tab"
+        aria-controls="tab-content-container"
+        aria-selected="${isActive}"
         class="tab-link shrink-0 whitespace-nowrap pb-3 text-sm font-medium transition-all duration-200 cursor-pointer sm:text-base ${
           isActive
             ? "border-b-2 border-primary font-semibold text-neutral-900"
@@ -98,6 +102,8 @@ export function renderDescription(
       <!-- TABS -->
       <div
         class="flex w-full justify-start gap-6 overflow-x-auto border-b border-neutral-200 sm:justify-center sm:gap-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        role="tablist"
+        aria-label="Product information"
       >
         ${tabsHtml}
       </div>
@@ -107,6 +113,9 @@ export function renderDescription(
       <div
         id="tab-content-container"
         class="pb-10 pt-6 sm:pb-12 sm:pt-8"
+        role="tabpanel"
+        aria-labelledby="description-tab-${activeTabKey}"
+        tabindex="0"
       >
         ${tabContentHtml}
       </div>
