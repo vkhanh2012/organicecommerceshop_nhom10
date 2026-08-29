@@ -1,4 +1,7 @@
 import { iconStar, quoteIcon } from "../components/icons.js";
+import client1Image from "src/assets/images/client1.jpg";
+import client2Image from "src/assets/images/client2.jpg";
+import client3Image from "src/assets/images/client3.jpg";
 
 export const TESTIMONIALS_DATA = [
   {
@@ -8,7 +11,7 @@ export const TESTIMONIALS_DATA = [
     author: {
       name: "Robert Fox",
       role: "Customer",
-      avatar: "./src/assets/images/client1.jpg",
+      avatar: client1Image,
     },
     rating: 5,
   },
@@ -19,7 +22,7 @@ export const TESTIMONIALS_DATA = [
     author: {
       name: "Dianne Russell",
       role: "Customer",
-      avatar: "./src/assets/images/client2.jpg",
+      avatar: client2Image,
     },
     rating: 5,
   },
@@ -30,7 +33,7 @@ export const TESTIMONIALS_DATA = [
     author: {
       name: "Eleanor Pena",
       role: "Customer",
-      avatar: "./src/assets/images/client3.jpg",
+      avatar: client3Image,
     },
     rating: 5,
   },
