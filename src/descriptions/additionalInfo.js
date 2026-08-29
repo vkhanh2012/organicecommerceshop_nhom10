@@ -94,7 +94,9 @@ export function renderAdditionalInfoTab(product) {
             />
             
             <!-- Play Button -->
-            <div
+            <button
+              type="button"
+              aria-label="Play ${product.name || "product"} video"
               class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primary-dark transition-colors"
             >
               <svg
@@ -109,7 +111,7 @@ export function renderAdditionalInfoTab(product) {
                   fill="white"
                 />
               </svg>
-            </div>
+            </button>
           </div>
 
 

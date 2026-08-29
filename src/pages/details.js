@@ -61,6 +61,9 @@ function showToastNotification(message) {
     toast.id =
       "toast-notification";
 
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+
     toast.className =
       "fixed bottom-6 right-6 z-50 bg-neutral-900 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none flex items-center gap-2";
 

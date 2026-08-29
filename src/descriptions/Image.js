@@ -60,10 +60,13 @@ export function renderImage(product) {
       const isSelected = index === 0;
 
       return `
-        <div
+        <button
+          type="button"
           data-action="select-thumb"
           data-src="${fullSrc}"
           data-index="${index}"
+          aria-label="Show ${productName} image ${index + 1}"
+          aria-pressed="${isSelected}"
           class="thumbnail-item flex h-20 w-[72px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-[4px] bg-white transition-all duration-200 sm:h-[90px] sm:w-[80px] ${
             isSelected ? "border-2 border-primary" : "border border-neutral-200 hover:border-primary"
           }"
@@ -77,7 +80,7 @@ export function renderImage(product) {
             decoding="async"
             class="w-full h-full object-contain p-1 pointer-events-none select-none"
           />
-        </div>
+        </button>
       `;
     })
     .join("");
@@ -157,10 +160,12 @@ export function bindImageEvents(container = document) {
     thumbs.forEach((thumb) => {
       thumb.classList.remove("border-primary", "border-2");
       thumb.classList.add("border-neutral-200", "border", "hover:border-primary");
+      thumb.setAttribute("aria-pressed", "false");
     });
 
     activeThumb.classList.remove("border-neutral-200", "border", "hover:border-primary");
     activeThumb.classList.add("border-primary", "border-2");
+    activeThumb.setAttribute("aria-pressed", "true");
   };
 
   const changeMainImage = (thumb) => {
@@ -220,8 +225,10 @@ document.addEventListener("click", (e) => {
     thumbs.forEach((t) => {
       t.classList.remove("border-primary", "border-2");
       t.classList.add("border-neutral-200", "border");
+      t.setAttribute("aria-pressed", "false");
     });
     thumb.classList.remove("border-neutral-200", "border");
     thumb.classList.add("border-primary", "border-2");
+    thumb.setAttribute("aria-pressed", "true");
   }
 });

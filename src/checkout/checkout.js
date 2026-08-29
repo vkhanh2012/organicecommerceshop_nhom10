@@ -295,7 +295,7 @@ export function renderCheckout(rawCart = getCart()) {
 
             <!-- ADDITIONAL INFO -->
             <div class="flex flex-col gap-5">
-              <h3 class="text-neutral-900 text-2xl font-medium leading-9">Additional Info</h3>
+              <h2 class="text-neutral-900 text-2xl font-medium leading-9">Additional Info</h2>
               <div class="signin-field flex flex-col gap-1.5" data-field data-state="normal">
                 <label for="orderNotes" class="text-neutral-900 text-sm font-normal leading-5">Order Notes (Optional)</label>
                 <div class="signin-input-control relative flex items-start">
@@ -318,7 +318,7 @@ export function renderCheckout(rawCart = getCart()) {
             <div class="flex w-full flex-col gap-6 rounded-lg border border-neutral-200 bg-white p-6 shadow-xs">
               
               <div class="flex flex-col gap-0">
-                <h3 class="text-xl font-medium leading-8 text-neutral-900">Order Summary</h3>
+                <h2 class="text-xl font-medium leading-8 text-neutral-900">Order Summary</h2>
                 
                 <!-- Danh sách sản phẩm từ giỏ hàng -->
                 <div class="flex max-h-[260px] flex-col gap-1 overflow-y-auto">
@@ -346,7 +346,7 @@ export function renderCheckout(rawCart = getCart()) {
 
               <!-- Payment Method -->
               <div class="flex flex-col gap-4">
-                <h4 class="text-xl font-medium leading-8 text-neutral-900">Payment Method</h4>
+                <h3 class="text-xl font-medium leading-8 text-neutral-900">Payment Method</h3>
                 <div class="flex flex-col gap-3">
                   <label class="inline-flex min-h-5 cursor-pointer items-center gap-3">
                     <input type="radio" name="paymentMethod" value="cod" checked class="peer sr-only" />
