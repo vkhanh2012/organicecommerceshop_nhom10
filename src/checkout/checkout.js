@@ -70,7 +70,7 @@ export function renderCheckout(rawCart = getCart()) {
           <!-- CỘT TRÁI: BILLING INFORMATION -->
           <div class="w-full lg:w-[872px] shrink-0 flex flex-col gap-8">
             <div class="flex flex-col gap-6">
-              <h2 class="text-zinc-900 text-2xl font-medium leading-9">Billing Information</h2>
+              <h1 class="text-zinc-900 text-2xl font-medium leading-9">Billing Information</h1>
               
               <div class="flex flex-col gap-5">
                 <!-- Hàng 1: First name / Last name / Company Name -->
