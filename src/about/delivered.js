@@ -8,10 +8,10 @@ export function renderDeliveredFeature() {
   return /*html*/ `
   <section class="w-full bg-white py-10 md:py-14 lg:min-h-[685px] lg:py-0" aria-labelledby="about-delivery-title">
       <div class="container-custom">
-        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:min-h-[685px] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-10 min-[1400px]:grid-cols-[536px_minmax(0,1fr)] min-[1400px]:gap-[68px]">
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:min-h-[685px] lg:grid-cols-[536px_minmax(0,1fr)] lg:items-start lg:gap-[52px]">
           <!-- Cột 1: tiêu đề và nội dung -->
           <!-- tiêu đề -->
-          <div class="w-full text-left space-y-2 md:space-y-4 lg:space-y-6">
+          <div class="w-full text-left space-y-2 md:space-y-4 lg:space-y-6 lg:pt-[160px]">
             <h2 id="about-delivery-title" class="text-[32px] sm:text-[40px] lg:text-[48px] text-neutral-900 font-semibold leading-[1.2]">
               ${aboutData.delivered.title}
             </h2>
@@ -20,7 +20,7 @@ export function renderDeliveredFeature() {
             ${aboutData.delivered.description}
             </p>
             <!-- 3 feature -->
-            <div class="flex flex-col space-y-3">
+            <div class="flex flex-col space-y-4">
               ${deliveredFeatureHtml}
             </div>
             <!-- Button Shop Now -->
@@ -32,7 +32,7 @@ export function renderDeliveredFeature() {
           <!-- Cột 2: hình ảnh -->
           <div class="flex w-full items-end self-stretch overflow-visible">
             <img src="${aboutData.delivered.image.src}" alt="${aboutData.delivered.image.alt}"
-              class="block h-auto w-full object-contain md:max-w-full min-[1400px]:h-[606px] min-[1400px]:w-[895px] min-[1400px]:max-w-none">
+              class="block h-auto w-full object-contain md:max-w-full lg:h-[606px] lg:w-[895px] lg:max-w-none">
           </div>
         </div>
       </div>
