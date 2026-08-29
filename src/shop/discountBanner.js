@@ -25,7 +25,8 @@ export function renderDiscountBanner(data = BANNER_DATA) {
                 ${nextArrow}
             </span>
         </a>
-        <img src="${data.imageUrl}" alt="${data.title || "Discount Banner"}"
+        <img src="${data.imageUrl}" alt=""
+            aria-hidden="true"
             class="block h-[164px] w-full object-cover object-center">
     </div>
     `;

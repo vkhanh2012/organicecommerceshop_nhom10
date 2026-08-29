@@ -36,14 +36,17 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
   const pagesHtml = pages
     .map((page) => {
       if (page === "...") {
-        return /*html*/ `<span class="px-1 md:px-2 text-neutral-400 text-xs md:text-sm select-none">...</span>`
+        return /*html*/ `<span class="select-none px-1 text-xs text-neutral-600 md:px-2 md:text-sm" aria-hidden="true">...</span>`
       }
 
       const isActive = page === currentPage
 
       return /*html*/ `
         <button 
+          type="button"
           data-page="${page}"
+          aria-label="Page ${page}"
+          ${isActive ? 'aria-current="page"' : ""}
           class="js-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-xs md:text-sm font-medium transition-all duration-200 cursor-pointer ${
             isActive
               ? "bg-primary text-white shadow-sm scale-105"
@@ -57,9 +60,10 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
     .join("")
 
   return /*html*/ `
-    <div class="flex items-center justify-center gap-1 sm:gap-2 mt-8 md:mt-10 font-poppins w-full select-none">
+    <nav class="flex w-full select-none items-center justify-center gap-1 mt-8 font-poppins sm:gap-2 md:mt-10" aria-label="Product pagination">
       <!-- Nút Prev (<) -->
       <button 
+        type="button"
         data-page="${currentPage - 1}"
         class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
         ${currentPage === 1 ? "disabled" : ""}
@@ -77,6 +81,7 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
 
       <!-- Nút Next (>) -->
       <button 
+        type="button"
         data-page="${currentPage + 1}"
         class="js-page-btn w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 hover:bg-primary hover:text-white hover:border-primary transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-neutral-600 disabled:hover:border-neutral-200"
         ${currentPage === totalPages ? "disabled" : ""}
@@ -86,6 +91,6 @@ export function renderPagination(paginationData = DEMO_PAGINATION_DATA) {
           <path d="M1.5 1L6.5 6L1.5 11"/>
         </svg>
       </button>
-    </div>
+    </nav>
   `
 }

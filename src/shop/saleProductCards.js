@@ -32,7 +32,7 @@ export function renderSaleProducts(productsData = []) {
         <div class="flex items-start gap-0.5">
           <span class="text-base font-medium leading-6 text-neutral-900">$${Number(items.price).toFixed(2)}</span>
                 ${items.oldPrice !== null && items.oldPrice !== undefined
-            ? `<span class="text-base leading-6 text-neutral-400 line-through">$${Number(items.oldPrice).toFixed(2)}</span>`
+                  ? `<span class="text-base leading-6 text-neutral-600 line-through">$${Number(items.oldPrice).toFixed(2)}</span>`
                   : ""}
             </div>
         </div>
@@ -48,7 +48,7 @@ export function renderSaleProducts(productsData = []) {
   // Khung của tất cả sản phẩm
   return /*html*/ `
     <div class="gap-3">
-        <h3 class="pb-3 text-[20px] font-medium text-neutral-900">Sale Products</h3>
+        <h2 class="pb-3 text-[20px] font-medium text-neutral-900">Sale Products</h2>
         <div class="space-y-3">
             ${productsHtml}
         </div>

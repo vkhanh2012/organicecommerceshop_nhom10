@@ -84,7 +84,7 @@ const CLASS = {
     "font-poppins text-base font-medium leading-[24px] text-neutral-900",
 
   priceOld:
-    "font-poppins text-sm font-normal leading-[21px] text-neutral-400 line-through ml-1",
+    "font-poppins text-sm font-normal leading-[21px] text-neutral-600 line-through ml-1",
 
   cartBtn:
     "absolute right-4 top-[23px] w-10 h-10 rounded-full bg-neutral-50 text-neutral-700 flex items-center justify-center transition-colors hover:bg-primary hover:text-white cursor-pointer shrink-0",
@@ -144,6 +144,8 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast-notification";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
     toast.className = "fixed bottom-5 right-5 bg-neutral-900 text-white px-5 py-3 rounded-lg shadow-lg font-poppins text-sm font-semibold z-50 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none";
     document.body.appendChild(toast);
   }
@@ -252,7 +254,7 @@ const bodyClass =
         <button type="button" data-action="wishlist" data-id="${id}" data-product="${productDataStr}" class="${wishlistButtonClass}" aria-pressed="${wishlistActive}" aria-label="${wishlistActive ? "Remove" : "Add"} ${name} ${wishlistActive ? "from" : "to"} wishlist">
           ${wishlistIcon}
         </button>
-        <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view">
+        <button type="button" data-action="quick-view" data-id="${id}" data-product="${productDataStr}" class="${CLASS.actionBtn}" aria-label="Quick view ${name}">
           ${iconEye}
         </button>
       </div>
@@ -279,7 +281,8 @@ const bodyClass =
             </button>
           </div>
 
-          <div class="${CLASS.rating}">${starsHtml}</div>
+          <div class="${CLASS.rating}" aria-hidden="true">${starsHtml}</div>
+          <span class="sr-only">Rated ${rating} out of 5 stars</span>
         </div>
       </div>
     </article>

@@ -48,6 +48,8 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
         <button
           id="open-filter-btn"
           type="button"
+          aria-controls="mobile-filter-drawer"
+          aria-expanded="false"
           class="flex h-[45px]
                  w-[135px]
                  cursor-pointer
@@ -77,14 +79,15 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
                items-center
                gap-3"
       >
-        <span
+        <label
+          for="sort-select"
           class="shrink-0
                  text-[13px]
                  leading-[20px]
-                 text-neutral-500"
+                 text-neutral-600"
         >
           Sort by:
-        </span>
+        </label>
 
         <div
           class="relative
@@ -133,7 +136,7 @@ export function renderTopBar(topBarData = SHOP_TOPBAR_DATA) {
         class="text-left
                text-[13px]
                leading-[20px]
-               text-neutral-500
+               text-neutral-600
 
                md:text-right
 

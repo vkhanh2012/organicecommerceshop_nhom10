@@ -72,6 +72,8 @@ function setTagButtonState(
       "text-neutral-900",
       !active
     )
+
+    button.setAttribute("aria-pressed", String(active))
   })
 
   const selectedTagLabel = container.querySelector(
@@ -434,8 +436,20 @@ export async function initShopPage() {
   const filterDrawer = document.getElementById("mobile-filter-drawer")
 
   if (openBtn && filterDrawer) {
+    openBtn.setAttribute(
+      "aria-expanded",
+      String(
+        window.matchMedia("(min-width: 1024px)").matches ||
+        !filterDrawer.classList.contains("hidden"),
+      ),
+    )
+
     openBtn.addEventListener("click", () => {
       filterDrawer.classList.toggle("hidden")
+      openBtn.setAttribute(
+        "aria-expanded",
+        String(!filterDrawer.classList.contains("hidden")),
+      )
     })
   }
 
@@ -741,6 +755,9 @@ export async function initShopPage() {
           ? `$${minValue} — $${maxValue}`
           : `${minValue} — ${maxValue}`
       }
+
+      minPriceInput.setAttribute("aria-valuetext", `$${minValue}`)
+      maxPriceInput.setAttribute("aria-valuetext", `$${maxValue}`)
 
       const min = Number(minPriceInput.min)
       const max = Number(minPriceInput.max)

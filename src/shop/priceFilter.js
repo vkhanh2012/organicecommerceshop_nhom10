@@ -62,9 +62,9 @@ export function renderPriceFilter(
     <div class="flex w-full max-w-80 flex-col items-start gap-4 border-b border-neutral-100 pb-6 font-poppins">
 
       <div class="flex w-full items-center justify-between">
-        <h3 class="text-xl font-medium leading-8 text-neutral-900">
+        <h2 class="text-xl font-medium leading-8 text-neutral-900">
           Price
-        </h3>
+        </h2>
 
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path
@@ -91,6 +91,8 @@ export function renderPriceFilter(
         <input
           id="min-price"
           type="range"
+          aria-label="Minimum price"
+          aria-valuetext="$${selectedMin}"
           min="${minPrice}"
           max="${maxPrice}"
           value="${selectedMin}"
@@ -126,6 +128,8 @@ export function renderPriceFilter(
         <input
           id="max-price"
           type="range"
+          aria-label="Maximum price"
+          aria-valuetext="$${selectedMax}"
           min="${minPrice}"
           max="${maxPrice}"
           value="${selectedMax}"
@@ -164,6 +168,7 @@ export function renderPriceFilter(
 
         <span
           id="price-value"
+          aria-live="polite"
           class="font-medium leading-5 text-neutral-900"
         >
           $${selectedMin} — $${selectedMax}

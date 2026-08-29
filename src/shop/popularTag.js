@@ -28,6 +28,7 @@ export function renderPopularTags(
         type="button"
         id="${tag.id}"
         data-tag-value="${tag.name}"
+        aria-pressed="${active}"
         class="
           px-4 py-1.5
           text-sm
@@ -93,7 +94,7 @@ export function renderPopularTags(
   return /*html*/ `
     <div>
       <div class="flex items-center justify-between cursor-pointer pb-5">
-        <h3 class="section-heading">Popular Tag</h3>
+        <h2 class="section-heading">Popular Tag</h2>
 
         <svg
           width="14"

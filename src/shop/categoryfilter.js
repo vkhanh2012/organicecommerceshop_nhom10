@@ -72,14 +72,14 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
             ${item.label}
           </label>
           ${layout === "horizontal" ? "" : `
-            <span class="text-neutral-400 text-xs font-poppins">
+            <span class="text-neutral-600 text-xs font-poppins">
               (${item.count})
             </span>
           `}
             </div>
 
             ${layout === "horizontal" ? `
-              <span class="text-neutral-400 text-xs font-poppins">
+              <span class="text-neutral-600 text-xs font-poppins">
                 (${item.count})
               </span>
             ` : ""}
@@ -138,7 +138,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
   return /*html*/ `
     <div class="border-b border-neutral-100 font-poppins">
       <div class="shop-filter-header">
-        <h3 class="section-heading">All Categories</h3>
+        <h2 class="section-heading">All Categories</h2>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
