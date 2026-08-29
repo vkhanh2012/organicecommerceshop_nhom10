@@ -67,10 +67,10 @@ export function renderDescriptionTab(product = {}) {
     "";
 
   return /*html*/ `
-    <div class="grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.83fr)] lg:gap-8 min-[1400px]:grid-cols-[648px_536px] min-[1400px]:justify-between">
+    <div class="grid w-full grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.83fr)] lg:gap-8 min-[1400px]:grid-cols-[648px_536px] min-[1400px]:justify-between">
 
       <!-- CỘT TRÁI: Rộng 648px, Gap các khối 16px (gap-4) -->
-      <div class="w-full max-w-[648px] flex flex-col gap-4">
+      <div class="mx-auto flex w-full max-w-[648px] min-w-0 flex-col gap-4 lg:mx-0">
         <div class="flex flex-col gap-3">
           ${paragraphsHtml}
         </div>
@@ -86,11 +86,11 @@ export function renderDescriptionTab(product = {}) {
       </div>
 
       <!-- CỘT PHẢI: Rộng 536px, Gap 24px (gap-6) -->
-      <div class="w-full max-w-[536px] flex flex-col gap-6 lg:justify-self-end">
+      <div class="mx-auto flex w-full max-w-[536px] min-w-0 flex-col gap-6 lg:mx-0 lg:justify-self-end">
         <!-- Khung Video: 536px x 300px -->
         <div class="relative aspect-[536/300] w-full overflow-hidden rounded-lg bg-neutral-100 group">
           <img src="${sideImage}" alt="${product.name || 'Product Image'}" class="w-full h-full object-cover" />
-          <button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-primary hover:bg-primary-dark transition-colors rounded-full flex items-center justify-center shadow-md">
+          <button type="button" aria-label="Play product video" class="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary shadow-md transition-colors hover:bg-primary-dark">
             <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 8L1 15V1L13 8Z" fill="white" stroke="white" stroke-width="2" stroke-linejoin="round"/>
             </svg>
@@ -101,7 +101,7 @@ export function renderDescriptionTab(product = {}) {
         <!-- 2 BANNER -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- Banner: 64% Discount -->
-          <div class="flex items-center gap-3 p-4 border border-neutral-200/80 rounded-xl bg-white shadow-xs">
+          <div class="flex min-w-0 items-center gap-3 rounded-xl border border-neutral-200/80 bg-white p-3 shadow-xs sm:p-4">
             <div class="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
               <!-- SVG Icon Giá -->
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +112,7 @@ export function renderDescriptionTab(product = {}) {
               </svg>
             </div>
 
-            <div class="flex flex-col text-left">
+            <div class="flex min-w-0 flex-col text-left">
               <span class="text-sm font-semibold text-neutral-900">64% Discount</span>
               <span class="text-[11px] text-neutral-400 mt-0.5">Save your 64% money with us</span>
             </div>
@@ -120,7 +120,7 @@ export function renderDescriptionTab(product = {}) {
           </div>
           
           <!-- Banner: 100% Organic -->
-          <div class="flex items-center gap-3 p-4 border border-neutral-200/80 rounded-xl bg-white shadow-xs">
+          <div class="flex min-w-0 items-center gap-3 rounded-xl border border-neutral-200/80 bg-white p-3 shadow-xs sm:p-4">
             <!-- SVG Lá xanh -->
             <div class="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@ export function renderDescriptionTab(product = {}) {
               </svg>
             </div>
 
-            <div class="flex flex-col text-left">
+            <div class="flex min-w-0 flex-col text-left">
               <span class="text-sm font-semibold text-neutral-900">100% Organic</span>
               <span class="text-[11px] text-neutral-400 mt-0.5">100% Organic Vegetables</span>
             </div>

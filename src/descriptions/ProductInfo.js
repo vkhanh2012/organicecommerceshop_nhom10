@@ -38,14 +38,14 @@ export function renderProductInfo(product = {}) {
 
   return /*html*/ `
     <!-- CỘT PHẢI: Đã thêm pl-[5px] để toàn bộ khối thông tin dịch sang phải 5px -->
-    <div class="flex w-full flex-col justify-start gap-6 font-['Poppins'] select-none">
+    <div class="flex w-full min-w-0 flex-col justify-start gap-5 font-['Poppins'] select-none sm:gap-6">
 
       <!-- KHỐI 1: TÊN, ĐÁNH GIÁ & GIÁ -->
       <div class="flex flex-col gap-5">
         <div class="flex flex-col gap-3">
           <!-- TÊN SẢN PHẨM + BADGE IN STOCK -->
           <div class="flex items-center gap-2 flex-wrap">
-            <h1 class="text-3xl lg:text-4xl font-semibold text-neutral-900 leading-10">
+            <h1 class="min-w-0 break-words text-2xl font-semibold leading-8 text-neutral-900 sm:text-3xl sm:leading-10 lg:text-4xl">
               ${product.name || "Chinese Cabbage"}
             </h1>
             ${
@@ -80,7 +80,7 @@ export function renderProductInfo(product = {}) {
         </div>
 
         <!-- GIÁ SẢN PHẨM & DISCOUNT BADGE -->
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-3">
           <div class="flex items-center gap-1">
             ${
               product.originalPrice || product.oldPrice
@@ -105,7 +105,7 @@ export function renderProductInfo(product = {}) {
 
       <!-- KHỐI 2: BRAND, SHARE & DESCRIPTION -->
       <div class="flex flex-col gap-4 -mt-1">
-        <div class="w-full flex items-center justify-between text-sm flex-wrap gap-4">
+        <div class="flex w-full flex-col items-start gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
           <!-- BRAND -->
           <div class="flex items-center gap-2">
             <span class="text-neutral-500">Brand:</span>
@@ -114,19 +114,19 @@ export function renderProductInfo(product = {}) {
               : `<span class="font-medium text-neutral-900">${product.brand || "Farm Fresh"}</span>`}
           </div>
           <!-- SHARE -->
-          <div class="flex items-center gap-2.5">
+          <div class="flex w-full min-w-0 flex-wrap items-center gap-2.5 sm:w-auto sm:flex-nowrap">
             <span class="text-neutral-900 font-normal leading-5">Share item:</span>
-            <div class="flex items-center gap-[5px]">
-               <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+            <div class="flex min-w-0 items-center gap-1 sm:gap-[5px]">
+               <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full text-neutral-600 transition-colors hover:bg-primary hover:text-white sm:h-10 sm:w-10" aria-label="Facebook">
                 ${SOCIAL_ICONS.facebook}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Twitter">
+              <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full text-neutral-600 transition-colors hover:bg-primary hover:text-white sm:h-10 sm:w-10" aria-label="Twitter">
                 ${SOCIAL_ICONS.twitter}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Pinterest">
+              <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full text-neutral-600 transition-colors hover:bg-primary hover:text-white sm:h-10 sm:w-10" aria-label="Pinterest">
                 ${SOCIAL_ICONS.pinterest}
               </a>
-              <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Instagram">
+              <a href="#" class="flex h-9 w-9 items-center justify-center rounded-full text-neutral-600 transition-colors hover:bg-primary hover:text-white sm:h-10 sm:w-10" aria-label="Instagram">
                 ${SOCIAL_ICONS.instagram}
               </a>
             </div>
@@ -140,12 +140,12 @@ export function renderProductInfo(product = {}) {
       </div>
 
       <!-- KHỐI 3: STEPPER, ADD TO CART, WISHLIST -->
-      <div class="relative top-1 w-full py-4 border-y border-neutral-200 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div class="relative top-1 grid w-full grid-cols-[88px_minmax(0,1fr)_44px] items-center gap-2 border-y border-neutral-200 py-4 sm:grid-cols-[124px_minmax(0,1fr)_51px] sm:gap-3">
         <!-- BỘ TĂNG GIẢM SỐ LƯỢNG -->
-        <div class="flex h-[51px] w-[124px] items-center justify-between rounded-pill border border-neutral-200 p-2 bg-white shrink-0">
+        <div class="flex h-11 w-[88px] min-w-0 items-center justify-between rounded-pill border border-neutral-200 bg-white p-1 sm:h-[51px] sm:w-[124px] sm:p-2">
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-action="decrement"
           >
             <svg width="11" height="2" viewBox="0 0 11 2" fill="none">
@@ -154,7 +154,7 @@ export function renderProductInfo(product = {}) {
           </button>
 
           <input
-            class="quantity-stepper-input w-10 text-center font-normal text-base text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            class="quantity-stepper-input min-w-0 w-6 bg-transparent p-0 text-center text-sm font-normal text-neutral-900 outline-none [appearance:textfield] sm:w-10 sm:text-base [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             type="number"
             min="1"
             value="1"
@@ -162,7 +162,7 @@ export function renderProductInfo(product = {}) {
 
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-action="increment"
           >
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -174,9 +174,9 @@ export function renderProductInfo(product = {}) {
         <!-- NÚT ADD TO CART -->
         <button
           data-action="add-to-cart"
-          class="h-[51px] w-full min-w-0 flex-1 bg-primary hover:bg-primary-dark text-white font-semibold rounded-[43px] flex items-center justify-center gap-4 transition-colors cursor-pointer px-10"
+          class="flex h-11 min-h-11 w-full min-w-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[43px] bg-primary px-2 font-semibold text-white transition-colors hover:bg-primary-dark sm:h-[51px] sm:min-h-[51px] sm:gap-4 sm:px-6"
         >
-          <span class="text-base font-semibold leading-5">
+          <span class="text-sm font-semibold leading-5 sm:text-base">
             Add to Cart
           </span>
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -196,7 +196,7 @@ export function renderProductInfo(product = {}) {
           data-action="wishlist"
           data-id="${product.id || ""}"
           data-product="${productData}"
-          class="w-[51px] h-[51px] rounded-full bg-primary/10 hover:bg-primary/20 text-primary-dark flex items-center justify-center transition-all cursor-pointer shrink-0"
+          class="flex h-11 min-h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-primary/10 text-primary-dark transition-all hover:bg-primary/20 sm:h-[51px] sm:min-h-[51px] sm:w-[51px]"
           aria-pressed="${productInWishlist}"
           aria-label="${productInWishlist ? "Remove" : "Add"} ${product.name || "product"} ${productInWishlist ? "from" : "to"} wishlist"
         >
@@ -207,7 +207,7 @@ export function renderProductInfo(product = {}) {
       </div>
 
       <!-- KHỐI 4: CATEGORY & TAGS -->
-      <div class="relative top-2 flex flex-col gap-3 text-sm">
+      <div class="relative flex min-w-0 flex-col gap-3 text-sm sm:top-2">
         <div class="flex items-center gap-1.5">
           <span class="text-neutral-900 font-medium leading-5">Category:</span>
           <a

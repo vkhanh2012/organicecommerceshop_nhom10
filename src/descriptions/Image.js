@@ -32,16 +32,14 @@ export function renderImage(product) {
   const thumbnails = rawThumbnails.map((image) => resolveDescriptionImage(image));
   const fullImages = rawFullImages.map((image) => resolveDescriptionImage(image));
 
-  const rawMainImage = product?.mainImage || product?.image;
-  let mainImage = resolveDescriptionImage(
+  // The detail gallery should open with the same resolved source as its first
+  // thumbnail. Product `image` is the smaller catalogue card image and is not
+  // always suitable (or available) as the detail image after deployment.
+  const rawMainImage = product?.mainImage || rawThumbnails[0] || product?.image;
+  const mainImage = resolveDescriptionImage(
     rawMainImage || fullImages[0] || thumbnails[0],
     thumbnails[0] || largeCabbageImage,
   );
-  const isChineseCabbage = Number(product?.id) === 3
-    || product?.name?.trim().toLowerCase() === "chinese cabbage";
-  if (isChineseCabbage) {
-    mainImage = largeCabbageImage;
-  }
 
   const productName = product?.name || "Product";
 
@@ -55,7 +53,7 @@ export function renderImage(product) {
           data-action="select-thumb"
           data-src="${fullSrc}"
           data-index="${index}"
-          class="thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
+          class="thumbnail-item flex h-20 w-[72px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-[4px] bg-white transition-all duration-200 sm:h-[90px] sm:w-[80px] ${
             isSelected ? "border-2 border-primary" : "border border-neutral-200 hover:border-primary"
           }"
         >
@@ -76,15 +74,15 @@ export function renderImage(product) {
   return /*html*/ `
     <div
       id="product-gallery"
-      class="w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-3 select-none lg:min-w-0"
+      class="flex w-full max-w-[648px] min-w-0 flex-col items-center gap-3 select-none sm:flex-row sm:items-start"
     >
       <!-- DANH SÁCH THUMBNAIL DỌC BÊN TRÁI FIGMA -->
-      <div class="order-2 sm:order-1 w-full sm:w-[80px] shrink-0 flex sm:flex-col items-center justify-between gap-2 h-full max-h-[556px]">
+      <div class="order-2 flex h-full max-h-[556px] w-full min-w-0 shrink-0 items-center justify-between gap-2 overflow-hidden sm:order-1 sm:w-[80px] sm:flex-col">
         <!-- MŨI TÊN LÊN -->
         <button
           type="button"
           data-action="thumb-prev"
-            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center text-neutral-400 transition-colors hover:text-neutral-900 [&>svg]:-rotate-90 sm:[&>svg]:rotate-0"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +91,7 @@ export function renderImage(product) {
         </button>
 
         <!-- THUMBNAIL LIST -->
-        <div id="thumbnail-list" class="flex w-full min-w-0 items-center gap-3 overflow-x-auto scroll-smooth sm:w-auto sm:flex-col sm:overflow-hidden sm:max-h-[460px]">
+        <div id="thumbnail-list" class="flex w-full min-w-0 items-center gap-2 overflow-x-auto scroll-smooth pb-1 sm:max-h-[460px] sm:w-auto sm:flex-col sm:gap-3 sm:overflow-hidden sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           ${thumbnailsHtml}
         </div>
 
@@ -101,7 +99,7 @@ export function renderImage(product) {
         <button
           type="button"
           data-action="thumb-next"
-            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center text-neutral-400 transition-colors hover:text-neutral-900 [&>svg]:-rotate-90 sm:[&>svg]:rotate-0"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +110,7 @@ export function renderImage(product) {
 
       <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
-        class="order-1 aspect-square h-auto w-full overflow-hidden bg-white p-2 flex items-center justify-center sm:order-2 sm:w-[calc(100%_-_92px)] min-[1400px]:w-[556px]"
+        class="order-1 flex h-60 w-full items-center justify-center overflow-hidden bg-white p-2 sm:order-2 sm:h-auto sm:aspect-square sm:w-[calc(100%_-_92px)] min-[1400px]:w-[556px]"
       >
         <img
           id="main-product-image"
@@ -123,7 +121,7 @@ export function renderImage(product) {
           loading="eager"
           decoding="async"
           fetchpriority="high"
-          class="block h-auto max-h-full w-full object-contain transition-all duration-200 select-none"
+          class="block h-full w-full object-contain object-center transition-all duration-200 select-none"
         />
       </div>
     </div>

@@ -30,7 +30,6 @@ export function renderCustomerFeedbackTab(product) {
             class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center shrink-0"
           >
             <i class="fa-solid fa-user text-neutral-400 text-sm"></i>
-            <i class="fa-solid fa-user text-neutral-400 text-sm"></i>
           </div>
         `;
 
@@ -38,11 +37,11 @@ export function renderCustomerFeedbackTab(product) {
         <div class="flex w-full max-w-[760px] flex-col gap-3 border-b border-neutral-200 py-4">
 
           <!-- User --> 
-          <div class="flex items-start gap-3">
+          <div class="flex flex-wrap items-start gap-3 sm:flex-nowrap">
 
             ${avatarHtml}
 
-            <div class="ml-3 w-28 pb-0.5 flex flex-col gap-0.5">
+            <div class="min-w-0 flex-1 pb-0.5 flex flex-col gap-0.5">
               <div class="text-neutral-900 text-sm font-medium font-['Poppins'] leading-5">
                 ${item.name}
               </div>
@@ -53,7 +52,7 @@ export function renderCustomerFeedbackTab(product) {
             </div>
 
             <!-- Time --> 
-            <div class="shrink-0 text-right text-neutral-400 text-xs sm:text-sm font-normal font-['Poppins'] leading-5">
+            <div class="ml-[52px] w-full shrink-0 text-left text-xs font-normal leading-5 text-neutral-400 sm:ml-auto sm:w-auto sm:text-right sm:text-sm">
               ${item.time}
             </div>
 

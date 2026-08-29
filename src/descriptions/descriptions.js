@@ -49,7 +49,7 @@ export function renderDescription(
       <a
         href="${tab.href}"
         data-tab="${tab.key}"
-        class="tab-link shrink-0 pb-3 text-base font-medium transition-all duration-200 cursor-pointer ${
+        class="tab-link shrink-0 whitespace-nowrap pb-3 text-sm font-medium transition-all duration-200 cursor-pointer sm:text-base ${
           isActive
             ? "border-b-2 border-primary font-semibold text-neutral-900"
             : "text-neutral-500 hover:text-neutral-900"
@@ -86,7 +86,7 @@ export function renderDescription(
     <div class="container-custom font-['Poppins']">
 
       <!-- PRODUCT INFORMATION -->
-      <div class="grid grid-cols-1 gap-8 pb-4 pt-8 lg:grid-cols-2 lg:gap-8 min-[1400px]:grid-cols-[648px_648px] min-[1400px]:gap-6">
+      <div class="grid grid-cols-1 gap-6 pb-4 pt-6 sm:pt-8 lg:grid-cols-2 lg:gap-8 min-[1400px]:grid-cols-[648px_648px] min-[1400px]:gap-6">
 
         ${renderImage(product)}
 
@@ -97,7 +97,7 @@ export function renderDescription(
 
       <!-- TABS -->
       <div
-        class="mx-auto flex justify-center gap-10 border-b border-neutral-200"
+        class="flex w-full justify-start gap-6 overflow-x-auto border-b border-neutral-200 sm:justify-center sm:gap-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         ${tabsHtml}
       </div>
@@ -106,14 +106,14 @@ export function renderDescription(
       <!-- TAB CONTENT -->
       <div
         id="tab-content-container"
-        class="pb-12 pt-8"
+        class="pb-10 pt-6 sm:pb-12 sm:pt-8"
       >
         ${tabContentHtml}
       </div>
 
 
       <!-- RELATED PRODUCTS -->
-      <div class="mt-10">
+      <div class="mt-6 sm:mt-10">
         ${renderRelatedProducts(product, productList)}
       </div>
 

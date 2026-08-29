@@ -89,16 +89,16 @@ export function renderQuickViewModal(product) {
   return /*html*/ `
     <div
       id="quick-view-modal"
-      class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 pt-12 sm:p-6 sm:pt-12 lg:items-center lg:pt-6"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/70 p-2 sm:p-6"
     >
       <div
-        class="relative w-full max-w-[1320px] max-h-[calc(100vh-48px)] overflow-visible rounded-lg bg-white p-5 shadow-2xl sm:p-8 lg:px-10 lg:pb-10 lg:pt-8"
+        class="relative max-h-[calc(100dvh-16px)] w-full max-w-[1320px] overflow-y-auto overscroll-contain rounded-lg bg-white p-4 shadow-2xl sm:max-h-[calc(100dvh-48px)] sm:p-8 lg:px-10 lg:pb-10 lg:pt-8"
       >
         <!-- CLOSE BUTTON FIGMA -->
         <button
           id="close-quick-view"
           type="button"
-          class="absolute right-2 top-2 z-50 flex h-8 w-8 cursor-pointer items-center justify-center text-xl font-normal text-neutral-500 transition-colors hover:text-primary sm:-right-1 sm:-top-10 sm:text-white"
+          class="sticky left-full top-0 z-50 -mb-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white/90 text-xl font-normal text-neutral-500 shadow-sm transition-colors hover:text-primary"
           aria-label="Close modal"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -107,11 +107,11 @@ export function renderQuickViewModal(product) {
         </button>
 
         <!-- CONTENT GRID FIGMA -->
-        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-6 min-[1400px]:grid-cols-[648px_minmax(0,568px)]">
-          <div class="w-full flex justify-center">
+        <div class="grid grid-cols-1 items-start gap-6 pt-1 lg:grid-cols-2 lg:gap-6 lg:pt-0 min-[1400px]:grid-cols-[648px_minmax(0,568px)]">
+          <div class="flex w-full min-w-0 justify-center">
             ${renderQuickViewImage(safeProduct)}
           </div>
-          <div class="w-full pt-2">
+          <div class="w-full min-w-0 pt-0 lg:pt-2">
             ${renderQuickViewInfo(safeProduct)}
           </div>
         </div>
@@ -140,6 +140,7 @@ export function openQuickView(productDataOrId) {
   }
 
   modalContainer.innerHTML = renderQuickViewModal(product);
+  document.body.classList.add("overflow-hidden");
 
   const modal = modalContainer.querySelector("#quick-view-modal");
   const closeBtn = modalContainer.querySelector("#close-quick-view");
@@ -150,6 +151,7 @@ export function openQuickView(productDataOrId) {
 
   const closeModal = () => {
     modalContainer.innerHTML = "";
+    document.body.classList.remove("overflow-hidden");
     document.removeEventListener("keydown", handleEscape);
   };
 

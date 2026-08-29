@@ -38,14 +38,14 @@ export function renderQuickViewInfo(product = {}) {
 
   return /*html*/ `
     <!-- CỘT PHẢI FIGMA: THÔNG TIN SẢN PHẨM QUICK VIEW -->
-    <div data-qv-info-container class="w-full flex flex-col justify-start gap-6 font-['Poppins'] select-none">
+    <div data-qv-info-container class="flex w-full min-w-0 flex-col justify-start gap-5 font-['Poppins'] select-none sm:gap-6">
 
       <!-- KHỐI 1: TÊN, ĐÁNH GIÁ & GIÁ -->
       <div class="flex flex-col gap-5">
         <div class="flex flex-col gap-3">
           <!-- TÊN SẢN PHẨM + BADGE IN STOCK -->
           <div class="flex items-center gap-2 flex-wrap">
-            <h2 class="text-3xl lg:text-4xl font-semibold text-neutral-900 leading-10">
+            <h2 class="min-w-0 break-words text-2xl font-semibold leading-8 text-neutral-900 sm:text-3xl sm:leading-10 lg:text-4xl">
               ${product.name || "Chinese Cabbage"}
             </h2>
             ${
@@ -113,7 +113,7 @@ export function renderQuickViewInfo(product = {}) {
 
       <!-- KHỐI 2: BRAND, SHARE & DESCRIPTION -->
       <div class="flex flex-col gap-4">
-        <div class="w-full flex items-center justify-between text-sm flex-wrap gap-4 pb-3">
+        <div class="flex w-full flex-col items-start gap-4 pb-3 text-sm sm:flex-row sm:items-center sm:justify-between">
           <!-- BRAND FIGMA -->
           <div class="flex items-center gap-2">
             <span class="text-neutral-500 font-normal">Brand:</span>
@@ -125,7 +125,7 @@ export function renderQuickViewInfo(product = {}) {
           </div>
 
           <!-- SHARE ITEM FIGMA -->
-          <div class="flex items-center gap-2.5">
+          <div class="flex w-full min-w-0 flex-wrap items-center gap-2.5 sm:w-auto sm:flex-nowrap">
             <span class="text-neutral-900 font-normal leading-5">Share item:</span>
             <div class="flex items-center gap-[5px]">
                <a href="#" class="w-10 h-10 rounded-full text-neutral-600 hover:bg-primary hover:text-white flex items-center justify-center transition-colors" aria-label="Facebook">
@@ -151,12 +151,12 @@ export function renderQuickViewInfo(product = {}) {
       </div>
 
       <!-- KHỐI 3: STEPPER, ADD TO CART, WISHLIST FIGMA -->
-      <div class="relative -top-1 w-full border-b border-neutral-200 py-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div class="relative -top-1 grid w-full grid-cols-[88px_minmax(0,1fr)_44px] items-center gap-2 border-b border-neutral-200 py-4 sm:grid-cols-[124px_minmax(0,1fr)_51px] sm:gap-3">
         <!-- BỘ TĂNG GIẢM SỐ LƯỢNG FIGMA -->
-        <div class="flex h-[51px] w-[124px] items-center justify-between rounded-full border border-neutral-200 p-2 bg-white shrink-0">
+        <div class="flex h-11 w-[88px] min-w-0 items-center justify-between rounded-full border border-neutral-200 bg-white p-1 sm:h-[51px] sm:w-[124px] sm:p-2">
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-qv-action="decrement"
             aria-label="Decrease quantity"
           >
@@ -167,7 +167,7 @@ export function renderQuickViewInfo(product = {}) {
 
           <input
             data-qv-input="quantity"
-            class="quantity-stepper-input w-10 text-center font-normal text-base text-neutral-900 bg-transparent outline-none border-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            class="quantity-stepper-input min-w-0 w-6 bg-transparent p-0 text-center text-sm font-normal text-neutral-900 outline-none [appearance:textfield] sm:w-10 sm:text-base [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             type="number"
             min="1"
             value="1"
@@ -175,7 +175,7 @@ export function renderQuickViewInfo(product = {}) {
 
           <button
             type="button"
-            class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-700 transition-colors shrink-0"
+            class="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200 sm:h-8 sm:w-8"
             data-qv-action="increment"
             aria-label="Increase quantity"
           >
@@ -190,9 +190,9 @@ export function renderQuickViewInfo(product = {}) {
           type="button"
           data-qv-action="add-to-cart"
           data-product-id="${product.id || ''}"
-          class="h-[51px] w-full min-w-0 flex-1 bg-primary hover:bg-primary-dark text-white font-semibold rounded-[43px] flex items-center justify-center gap-4 transition-colors cursor-pointer px-10"
+          class="flex h-11 min-h-11 w-full min-w-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[43px] bg-primary px-2 font-semibold text-white transition-colors hover:bg-primary-dark sm:h-[51px] sm:min-h-[51px] sm:gap-4 sm:px-6"
         >
-          <span class="text-base font-semibold leading-5">Add to Cart</span>
+          <span class="text-sm font-semibold leading-5 sm:text-base">Add to Cart</span>
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
             <path
               d="M4.81706 6.48336H2.31706L0.650391 15.65H15.6504L13.9837 6.48336H11.4837M4.81706 6.48336V3.98336C4.81706 2.14241 6.30944 0.650024 8.15039 0.650024C9.99134 0.650024 11.4837 2.14241 11.4837 3.98336V6.48336M4.81706 6.48336H11.4837M4.81706 6.48336V8.98336M11.4837 6.48336V8.98336"
@@ -209,7 +209,7 @@ export function renderQuickViewInfo(product = {}) {
           type="button"
           data-qv-action="wishlist"
           data-product-id="${product.id || ''}"
-          class="w-[51px] h-[51px] rounded-full bg-primary/10 hover:bg-primary/20 text-primary-dark flex items-center justify-center transition-all cursor-pointer shrink-0"
+          class="flex h-11 min-h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-primary/10 text-primary-dark transition-all hover:bg-primary/20 sm:h-[51px] sm:min-h-[51px] sm:w-[51px]"
           aria-pressed="${productInWishlist}"
           aria-label="${productInWishlist ? "Remove" : "Add"} ${product.name || "product"} ${productInWishlist ? "from" : "to"} wishlist"
         >
