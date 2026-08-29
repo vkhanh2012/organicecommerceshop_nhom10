@@ -62,6 +62,10 @@ export function renderImage(product) {
           <img
             src="${thumb}"
             alt="${productName} Thumbnail ${index + 1}"
+            width="80"
+            height="90"
+            loading="lazy"
+            decoding="async"
             class="w-full h-full object-contain p-1 pointer-events-none select-none"
           />
         </div>
@@ -114,7 +118,12 @@ export function renderImage(product) {
           id="main-product-image"
           src="${mainImage}"
           alt="${productName} img main"
-          class="w-full h-full object-contain transition-all duration-200 select-none"
+          width="556"
+          height="556"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          class="block h-auto max-h-full w-full object-contain transition-all duration-200 select-none"
         />
       </div>
     </div>

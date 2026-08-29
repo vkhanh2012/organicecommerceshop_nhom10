@@ -117,6 +117,7 @@ export function renderTestimonialCardComponent(
                 width="60"
                 height="60"
                 loading="lazy"
+                decoding="async"
                 class="h-15 w-15
                        shrink-0
                        rounded-full

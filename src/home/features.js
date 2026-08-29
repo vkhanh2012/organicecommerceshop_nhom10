@@ -49,6 +49,8 @@ export function renderFeatures() {
               alt="${title}"
               width="40"
               height="40"
+              loading="lazy"
+              decoding="async"
               class="h-10 w-10 shrink-0 object-contain"
             >
 

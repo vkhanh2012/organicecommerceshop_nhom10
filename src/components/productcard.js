@@ -182,8 +182,11 @@ export async function getProducts() {
 // =====================================================
 // RENDER PRODUCT CARD
 // =====================================================
-export function renderProductCard(  p = {},
-  page = "home") {
+export function renderProductCard(
+  p = {},
+  page = "home",
+  prioritizeImage = false,
+) {
   const {
     id = 1,
     name = "Tên sản phẩm",
@@ -242,7 +245,7 @@ const bodyClass =
     <article class="${cardClass}" data-id="${id}">
       <a href="${detailUrl}" class="${imageWrapClass}" aria-label="Xem chi tiết ${name}">
         ${tagsHtml}
-        <img src="${image}" alt="${name}" class="${imageClass}" loading="lazy" />
+        <img src="${image}" alt="${name}" width="300" height="300" class="${imageClass}" loading="${prioritizeImage ? "eager" : "lazy"}" decoding="async" ${prioritizeImage ? 'fetchpriority="high"' : ""} />
       </a>
 
       <div class="${CLASS.actions}">
@@ -301,8 +304,12 @@ export function renderProductGrid(
   }
 
   const itemsHtml = products
-    .map((product) =>
-      renderProductCard(product, page)
+    .map((product, index) =>
+      renderProductCard(
+        product,
+        page,
+        (page === "shop" || page === "shop2") && index < 3,
+      )
     )
     .join("");
 

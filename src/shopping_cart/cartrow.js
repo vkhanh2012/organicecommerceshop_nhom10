@@ -4,7 +4,7 @@ export function cartRow(item) {
   return `
     <div class="grid grid-cols-[minmax(0,1fr)_100px] items-center gap-3 border-t border-neutral-100 px-5 py-3 sm:px-6 lg:grid-cols-[minmax(260px,1fr)_100px_150px_100px_24px] lg:py-[9px] xl:grid-cols-[371px_102px_174px_100px_24px] xl:px-5">
       <div class="flex min-w-0 items-center gap-3">
-        <img class="h-[84px] w-[84px] shrink-0 object-contain lg:h-[100px] lg:w-[100px]" src="${item.image}" alt="${item.name}">
+        <img class="h-[84px] w-[84px] shrink-0 object-contain lg:h-[100px] lg:w-[100px]" src="${item.image}" alt="${item.name}" width="100" height="100" loading="lazy" decoding="async">
         <span class="truncate text-base leading-6 text-neutral-900">${item.name}</span>
       </div>
       <span class="hidden text-base leading-6 text-neutral-900 lg:block">${money(item.price)}</span>

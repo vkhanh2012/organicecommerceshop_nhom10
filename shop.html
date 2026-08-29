@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product</title>
+  <title>Shop Organic Products | Ecobazar</title>
+  <meta name="description" content="Browse, filter, and sort fresh organic fruit, vegetables, and groceries at Ecobazar.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Shop Organic Products | Shopery">
   <meta property="og:description" content="Browse and filter Shopery's selection of fresh organic products.">
@@ -12,17 +13,19 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 </head>
 
 <body class="font-['Poppins'] bg-white">
   <div id="navigation-container"></div>
 
-  <div id="breadcrumbs-container"></div>
+  <div id="breadcrumbs-container" class="min-h-24 sm:min-h-[120px]"></div>
 
 
   <!-- Products -->
   <section class="bg-white pt-8 pb-12 md:pt-10 md:pb-14 lg:pt-[32px] lg:pb-16">
+    <h1 class="sr-only">Shop Organic Products</h1>
     <div class="container-custom mx-auto">
       <!-- Lưới filter và sản phẩm -->
       <div id="top-Bar" class="mb-5 flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between lg:mb-6"></div>

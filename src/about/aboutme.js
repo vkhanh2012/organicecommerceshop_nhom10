@@ -22,6 +22,10 @@ export function renderAboutMeSection() {
           <img
             src="${aboutData.aboutMe.image.src}"
             alt="${aboutData.aboutMe.image.alt}"
+            width="960"
+            height="685"
+            loading="lazy"
+            decoding="async"
             class="block h-[320px] w-full object-cover object-center
                    md:h-full md:min-h-[520px]
                    lg:min-h-[685px] lg:object-left"

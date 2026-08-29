@@ -1,4 +1,4 @@
-import breadcrumbsImage from "../assets/images/breadcrumbs.svg";
+import breadcrumbsImage from "../assets/images/breadcrumbs-optimized.jpg";
 
 const homeIcon = `
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="h-[20px] w-[20px] md:h-[22px] md:w-[22px] lg:h-[24px] lg:w-[24px]" >
@@ -53,6 +53,10 @@ export function renderBreadcrumbsComponent(input = {}) {
     <img
       src="${breadcrumbsImage}"
       alt=""
+      width="1920"
+      height="120"
+      decoding="async"
+      fetchpriority="high"
       class="absolute inset-0
              h-full w-full
              object-cover"

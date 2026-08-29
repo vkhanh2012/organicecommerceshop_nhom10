@@ -4,7 +4,7 @@ import { iconClose } from "../components/icons.js";
 function popupProduct(item) {
   return `
     <div class="grid grid-cols-[100px_minmax(0,1fr)_24px] items-center gap-[27px] border-b border-neutral-100 py-3">
-      <img class="h-[100px] w-[100px] object-contain" src="${item.image}" alt="${item.name}">
+      <img class="h-[100px] w-[100px] object-contain" src="${item.image}" alt="${item.name}" width="100" height="100" loading="lazy" decoding="async">
       <div class="min-w-0">
         <p class="truncate text-sm text-neutral-900">${item.name}</p>
         <p class="mt-1 text-sm"><span class="text-neutral-500">${item.quantity} × </span><strong class="font-semibold">$${item.price.toFixed(2)}</strong></p>

@@ -31,7 +31,7 @@ export function renderDeliveredFeature() {
             </div>
           <!-- Cột 2: hình ảnh -->
           <div class="flex w-full items-end self-stretch overflow-visible">
-            <img src="${aboutData.delivered.image.src}" alt="${aboutData.delivered.image.alt}"
+            <img src="${aboutData.delivered.image.src}" alt="${aboutData.delivered.image.alt}" width="895" height="606" loading="lazy" decoding="async"
               class="block h-auto w-full object-contain md:max-w-full lg:h-[606px] lg:w-[895px] lg:max-w-none">
           </div>
         </div>
