@@ -7,7 +7,7 @@ import { renderTopBar } from "/src/shop/topBar.js"
 import { initSaleProducts } from "/src/shop/saleProductCards.js"
 import { renderBreadcrumbsComponent } from "/src/components/breadcrumbs.js"
 import { renderProductGrid, bindCardEvents } from "/src/components/productcard.js"
-import productsUrl from "/src/data/products.json?url"
+import productsData from "/src/data/products.json"
 import { renderPagination } from "/src/shop/pagination.js"
 import { renderQuickViewModal } from "/src/Quickview/quickview.js"
 import { dropDown } from "/src/components/icons.js"
@@ -79,7 +79,7 @@ export async function initShopPage() {
   let PRODUCT_DATA
 
   try {
-    const response = await fetch(productsUrl)
+    const response = { ok: true, json: async () => productsData }
 
     if (!response.ok) {
       throw new Error(`Không thể tải dữ liệu sản phẩm: ${response.status}`)

@@ -73,6 +73,7 @@ const smallBannersHtml = `
       alt="${hero3.title}"
       width="423"
       height="288"
+      loading="lazy"
       decoding="async"
       class="absolute inset-0 h-full w-full object-cover"
     >

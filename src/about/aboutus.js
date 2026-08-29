@@ -18,7 +18,7 @@ export function renderAboutUsSection() {
         </div>
         <!-- Cột 2: hình ảnh -->
         <div class="w-full">
-          <img src="${aboutData.aboutUs.image.src}" alt="${aboutData.aboutUs.image.alt}" class="block aspect-[716/492] w-full rounded-lg object-cover">
+          <img src="${aboutData.aboutUs.image.src}" alt="${aboutData.aboutUs.image.alt}" width="716" height="492" decoding="async" fetchpriority="high" class="block aspect-[716/492] w-full rounded-lg object-cover">
         </div>
       </div>
     </div>
