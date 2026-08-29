@@ -9,7 +9,7 @@ export function renderWishlistSection(items = []) {
   const tableHeadersHtml = tableHeaders
     .map(
       (header, index) => `
-      <th scope="col" class="h-12 px-5 md:px-6 font-medium text-neutral-400 text-xs tracking-wide uppercase ${index === 3 ? "text-right" : ""}">
+      <th scope="col" class="h-[46px] px-6 text-sm font-medium uppercase leading-4 tracking-wide text-neutral-500 ${index === 3 ? "text-right" : ""}">
         ${header}
       </th>
     `,
@@ -29,12 +29,12 @@ export function renderWishlistSection(items = []) {
             <!-- Khung của các sản phẩm -->
             <div class="mt-6 w-full overflow-hidden rounded-lg border border-neutral-200 bg-white">
                 <div class="overflow-x-auto">
-                    <table class="w-full min-w-[1227px] table-fixed border-collapse text-left">
+                    <table class="w-full min-w-[1318px] table-fixed border-collapse text-left">
                         <colgroup>
-                            <col class="w-[40%]">
-                            <col class="w-[25%]">
-                            <col class="w-[18%]">
-                            <col class="w-[17%]">
+                            <col class="w-[40.53%]">
+                            <col class="w-[25.45%]">
+                            <col class="w-[15.68%]">
+                            <col class="w-[18.34%]">
                         </colgroup>
                         <thead>
                             <tr class="border-b border-neutral-200 bg-white">
@@ -42,14 +42,14 @@ export function renderWishlistSection(items = []) {
                             </tr>
                         </thead>
 
-                        <tbody class="divide-y divide-neutral-100">
+                        <tbody class="divide-y divide-neutral-200">
                             ${rowsHtml}
                         </tbody>
                     </table>
                 </div>
                 
                 <!-- Share Footer -->
-                <div class="flex min-h-[100px] border-t border-neutral-100 px-5 md:px-6 py-4 items-center gap-3 bg-white">
+                <div class="flex min-h-[87px] items-center gap-2.5 border-t border-neutral-200 bg-white px-6 py-3">
                     <span class="text-neutral-900 text-sm font-normal">
                         Share:
                     </span>

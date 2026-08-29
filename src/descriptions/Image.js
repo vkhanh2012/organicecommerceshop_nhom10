@@ -121,7 +121,9 @@ export function renderImage(product) {
 
       <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
+        id="product-main-image-frame"
         class="order-1 flex h-60 w-full items-center justify-center overflow-hidden bg-white p-2 sm:order-2 sm:h-auto sm:aspect-square sm:w-[calc(100%_-_92px)] min-[1400px]:w-[556px]"
+        style="background-image: url('${mainImage}'); background-position: center; background-repeat: no-repeat; background-size: contain;"
       >
         <img
           id="main-product-image"
@@ -132,7 +134,7 @@ export function renderImage(product) {
           loading="eager"
           decoding="async"
           fetchpriority="high"
-          class="block h-full w-full object-contain object-center transition-all duration-200 select-none"
+          class="sr-only"
         />
       </div>
     </div>
@@ -146,6 +148,7 @@ export function bindImageEvents(container = document) {
 
   const mainImg = gallery.querySelector("#main-product-image");
   if (!mainImg) return;
+  const mainImageFrame = gallery.querySelector("#product-main-image-frame");
 
   const thumbs = Array.from(gallery.querySelectorAll('[data-action="select-thumb"]'));
   if (!thumbs.length) return;
@@ -166,6 +169,9 @@ export function bindImageEvents(container = document) {
     if (!newSrc) return;
 
     mainImg.src = newSrc;
+    if (mainImageFrame) {
+      mainImageFrame.style.backgroundImage = `url(${JSON.stringify(newSrc)})`;
+    }
     setActiveThumbnail(thumb);
   };
 
@@ -205,6 +211,10 @@ document.addEventListener("click", (e) => {
     const mainImg = gallery.querySelector("#main-product-image");
     if (mainImg) {
       mainImg.src = newSrc;
+    }
+    const mainImageFrame = gallery.querySelector("#product-main-image-frame");
+    if (mainImageFrame) {
+      mainImageFrame.style.backgroundImage = `url(${JSON.stringify(newSrc)})`;
     }
     const thumbs = gallery.querySelectorAll('[data-action="select-thumb"]');
     thumbs.forEach((t) => {

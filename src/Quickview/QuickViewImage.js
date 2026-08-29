@@ -119,13 +119,15 @@ export function renderQuickViewImage(product) {
 
       <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
+        id="qv-main-product-image-frame"
         class="order-1 flex h-60 w-full max-w-[556px] flex-none items-center justify-center overflow-hidden bg-white p-2 sm:order-2 sm:h-auto sm:aspect-square sm:flex-1"
+        style="background-image: url('${mainImage}'); background-position: center; background-repeat: no-repeat; background-size: contain;"
       >
         <img
           id="qv-main-product-image"
           src="${mainImage}"
           alt="${productName} img main"
-          class="h-full w-full object-contain object-center transition-all duration-200 select-none"
+          class="sr-only"
           onerror="this.onerror=null; this.src='${thumbnails[0] || largeCabbageImage}';"
         />
       </div>
@@ -140,6 +142,7 @@ export function bindQuickViewImageEvents(container = document) {
 
   const mainImg = gallery.querySelector("#qv-main-product-image");
   if (!mainImg) return;
+  const mainImageFrame = gallery.querySelector("#qv-main-product-image-frame");
 
   const thumbs = Array.from(gallery.querySelectorAll('[data-qv-action="select-thumb"]'));
   if (!thumbs.length) return;
@@ -164,6 +167,9 @@ export function bindQuickViewImageEvents(container = document) {
     if (!newSrc) return;
 
     mainImg.src = newSrc;
+    if (mainImageFrame) {
+      mainImageFrame.style.backgroundImage = `url(${JSON.stringify(newSrc)})`;
+    }
     setActiveThumbnail(thumb);
   };
 

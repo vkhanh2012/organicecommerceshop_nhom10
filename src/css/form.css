@@ -7,7 +7,7 @@
 }
 
 .signin-input {
-  @apply box-border h-12 w-full rounded-md border border-neutral-100 bg-white py-0 pl-4 pr-11 font-poppins text-base leading-6 text-neutral-800 outline-none transition-colors duration-150 ease-in-out;
+  @apply box-border h-12 w-full rounded-md border border-neutral-200 bg-white px-4 py-3.5 pr-11 font-poppins text-base leading-5 text-neutral-800 outline-none transition-colors duration-150 ease-in-out;
 }
 
 .signin-input::placeholder {
@@ -19,7 +19,7 @@
 }
 
 .signin-field[data-state="filled"] .signin-input {
-  @apply border-neutral-100;
+  @apply border-neutral-200;
 }
 
 .signin-field[data-state="error"] .signin-input {
