@@ -1,4 +1,5 @@
 import { iconStar } from "../components/icons.js";
+import { getImageUrl } from "../utils/assets.js";
 
 export function renderCustomerFeedbackTab(product) {
   const feedbacksHtml = (product.feedbacks || [])
@@ -19,7 +20,7 @@ export function renderCustomerFeedbackTab(product) {
       const avatarHtml = item.avatar
         ? `
           <img 
-            src="${item.avatar}" 
+            src="${getImageUrl(item.avatar)}" 
             alt="${item.name}" 
             class="w-10 h-10 rounded-full object-cover shrink-0" 
           />

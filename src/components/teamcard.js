@@ -6,7 +6,7 @@ export function renderTeamCard(item){
        <div class="group flex flex-col overflow-hidden rounded-lg bg-white shadow-sm">
         <!-- Hình ảnh -->
             <div class="relative w-full overflow-hidden rounded-t-lg">
-                <img src="${item.image.src}" alt="${item.image.alt}" width="312" height="280" loading="lazy" decoding="async" class="block aspect-[312/280] w-full object-cover">
+                <img src="${getImageUrl(item.image.src)}" alt="${item.image.alt}" width="312" height="280" loading="lazy" decoding="async" class="block aspect-[312/280] w-full object-cover">
                 <div class="absolute inset-0 flex items-center justify-center gap-2 bg-black/0 text-white opacity-0 transition-all duration-300 md:group-hover:bg-black/30 md:group-hover:opacity-100">
                  <a 
                     href="${item.socials.facebook}" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary text-white transition-colors gap-1">
@@ -43,3 +43,4 @@ export function renderTeamCard(item){
        </div>
     `
 }
+import { getImageUrl } from "../utils/assets.js"

@@ -1,5 +1,6 @@
 
 import defaultTabContent from "../data/products.json";
+import { getImageUrl } from "../utils/assets.js";
 
 export function renderDescriptionTab(product = {}) {
   const fallbackProduct =
@@ -37,11 +38,12 @@ export function renderDescriptionTab(product = {}) {
     fallbackProduct?.closingText ??
     "";
 
-  const sideImage =
+  const sideImage = getImageUrl(
     product?.videoImage ||
     product?.mainImage ||
     product?.image ||
-    "/src/assets/images/video.svg";
+    "/images/video.svg"
+  );
 
   const discountTitle =
     product?.additionalInfo?.discount ||

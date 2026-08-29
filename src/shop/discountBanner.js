@@ -1,11 +1,12 @@
 import { nextArrow } from "../components/icons.js";
+import discountBannerImage from "../assets/images/discountBanner.jpg";
 
 const BANNER_DATA = {
   discountPercentage: 79,
   description: "on your first order",
   buttonText: "Shop Now",
   link: "./shop.html",
-  imageUrl: "./src/assets/images/discountBanner.jpg",
+  imageUrl: discountBannerImage,
 };
 
 export function renderDiscountBanner(data = BANNER_DATA) {

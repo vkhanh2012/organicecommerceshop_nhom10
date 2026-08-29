@@ -1,5 +1,6 @@
 import aboutData from "../data/about.json"
 import { renderFeatureCard } from "../components/featurecard.js"
+import { getImageUrl } from "../utils/assets.js"
 
 export function renderAboutMeSection() {
   const featuresListHtml = aboutData.features
@@ -20,7 +21,7 @@ export function renderAboutMeSection() {
         <!-- IMAGE -->
         <div class="w-full overflow-hidden md:min-h-[520px] lg:min-h-[685px]">
           <img
-            src="${aboutData.aboutMe.image.src}"
+            src="${getImageUrl(aboutData.aboutMe.image.src)}"
             alt="${aboutData.aboutMe.image.alt}"
             width="960"
             height="685"

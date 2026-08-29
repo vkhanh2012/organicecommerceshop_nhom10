@@ -2,6 +2,7 @@
 
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
 import { isInWishlist } from "../wishlist/wishlistData.js";
+import { getImageUrl } from "../utils/assets.js";
 
 export function renderProductInfo(product = {}) {
   const productData = encodeURIComponent(JSON.stringify(product));
@@ -109,7 +110,7 @@ export function renderProductInfo(product = {}) {
           <div class="flex items-center gap-2">
             <span class="text-neutral-500">Brand:</span>
             ${product.brandLogo
-              ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
+              ? `<img src="${getImageUrl(product.brandLogo)}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
               : `<span class="font-medium text-neutral-900">${product.brand || "Farm Fresh"}</span>`}
           </div>
           <!-- SHARE -->

@@ -2,6 +2,7 @@
 
 import { SOCIAL_ICONS, iconStar } from "../components/icons.js";
 import { isInWishlist } from "../wishlist/wishlistData.js";
+import { getImageUrl } from "../utils/assets.js";
 
 export function renderQuickViewInfo(product = {}) {
   const productInWishlist = isInWishlist(product.id);
@@ -118,7 +119,7 @@ export function renderQuickViewInfo(product = {}) {
             <span class="text-neutral-500 font-normal">Brand:</span>
             ${
               product.brandLogo
-                ? `<img src="${product.brandLogo}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
+                ? `<img src="${getImageUrl(product.brandLogo)}" alt="${product.brand || 'Brand'}" class="h-14 w-auto object-contain" />`
                 : `<span class="text-neutral-900 font-medium text-sm">${product.brand || 'Farm Fresh'}</span>`
             }
           </div>

@@ -12,6 +12,7 @@ import {
 
 import { getCart, saveCart, addProductToCart } from "../shopping_cart/cartData.js";
 import { toggleWishlist } from "../wishlist/wishlistData.js";
+import { getImageUrl } from "../utils/assets.js";
 
 // =====================================================
 // DEFAULT PRODUCT FALLBACK
@@ -27,7 +28,7 @@ const defaultProductData = {
   currentPrice: 17.28,
   discountLabel: "64% Off",
   brand: "FarmFresh",
-  brandLogo: "/src/assets/images/brand.svg",
+  brandLogo: getImageUrl("/images/brand.svg"),
   description: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar.",
   category: { name: "Vegetables", link: "#" },
   tags: [
@@ -37,12 +38,12 @@ const defaultProductData = {
     { name: "Cabbage", link: "#" },
     { name: "Green Cabbage", link: "#" }
   ],
-  mainImage: "/src/assets/images/largecabage.svg",
+  mainImage: getImageUrl("/images/largecabage.svg"),
   thumbnails: [
-    "/src/assets/images/cabbage1.svg",
-    "/src/assets/images/cabbage2.svg",
-    "/src/assets/images/cabbage3.svg",
-    "/src/assets/images/cabbage4.svg"
+    getImageUrl("/images/cabbage1.svg"),
+    getImageUrl("/images/cabbage2.svg"),
+    getImageUrl("/images/cabbage3.svg"),
+    getImageUrl("/images/cabbage4.svg")
   ]
 };
 
@@ -53,9 +54,9 @@ function normalizeProduct(product) {
   const originalPrice = product.originalPrice ?? product.oldPrice ?? defaultProductData.originalPrice ?? null;
   // `image` is the product card/catalog image. Prefer it over a stale
   // `mainImage` that may have been inherited from the fallback product.
-  const image = product.image || product.mainImage || defaultProductData.mainImage || "";
+  const image = getImageUrl(product.image || product.mainImage || defaultProductData.mainImage || "");
   const thumbnails = Array.isArray(product.thumbnails) && product.thumbnails.length > 0
-    ? product.thumbnails
+    ? product.thumbnails.map(getImageUrl)
     : [image, image, image, image];
 
   return {
@@ -71,6 +72,7 @@ function normalizeProduct(product) {
     mainImage: image,
     image,
     thumbnails,
+    brandLogo: getImageUrl(product.brandLogo || defaultProductData.brandLogo),
     tags: Array.isArray(product.tags) ? product.tags : defaultProductData.tags || [],
     rating: Number(product.rating ?? defaultProductData.rating ?? 4),
     reviewsCount: Number(product.reviewsCount ?? defaultProductData.reviewsCount ?? 4),

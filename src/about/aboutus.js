@@ -1,4 +1,5 @@
 import aboutData from "../data/about.json"
+import { getImageUrl } from "../utils/assets.js"
 
 export function renderAboutUsSection() {
   return /*html*/ `
@@ -18,7 +19,7 @@ export function renderAboutUsSection() {
         </div>
         <!-- Cột 2: hình ảnh -->
         <div class="w-full">
-          <img src="${aboutData.aboutUs.image.src}" alt="${aboutData.aboutUs.image.alt}" width="716" height="492" decoding="async" fetchpriority="high" class="block aspect-[716/492] w-full rounded-lg object-cover">
+          <img src="${getImageUrl(aboutData.aboutUs.image.src)}" alt="${aboutData.aboutUs.image.alt}" width="716" height="492" decoding="async" fetchpriority="high" class="block aspect-[716/492] w-full rounded-lg object-cover">
         </div>
       </div>
     </div>

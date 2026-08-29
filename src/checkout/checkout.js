@@ -10,6 +10,7 @@ import {
   bindLocationEvents,
 } from "./Location.js";
 import { getCart, getCartSummary, saveCart } from "../shopping_cart/cartData.js";
+import { getImageUrl } from "../utils/assets.js";
 
 // =====================================================
 // HELPER VALIDATION ICONS (INLINE SVG CHUẨN CODE 1)
@@ -58,7 +59,7 @@ export function renderCheckout(rawCart = getCart()) {
       <div class="flex w-full items-center justify-between gap-4">
         <div class="flex min-w-0 items-center gap-2">
           <span class="flex h-[60px] w-[60px] shrink-0 items-center justify-center overflow-hidden rounded-lg">
-            <img class="h-full w-full rounded-lg object-contain" src="${item.image || '/src/assets/images/cabbage1.svg'}" alt="${item.name}" width="60" height="60" loading="lazy" decoding="async" />
+            <img class="h-full w-full rounded-lg object-contain" src="${item.image || getImageUrl('/images/cabbage1.svg')}" alt="${item.name}" width="60" height="60" loading="lazy" decoding="async" />
           </span>
           <span class="min-w-0 text-sm font-normal leading-5 text-neutral-900">${item.name} <span class="whitespace-nowrap text-neutral-900">x${item.quantity}</span></span>
         </div>

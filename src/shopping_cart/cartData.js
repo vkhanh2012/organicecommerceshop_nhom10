@@ -28,7 +28,7 @@ export function normalizeCart(cart = []) {
       name: catalogProduct?.name ?? rawItem.name ?? "Product",
       image: catalogProduct?.image
         ?? (rawItem.image?.startsWith("/images/") ? getImageUrl(rawItem.image) : rawItem.image)
-        ?? "/src/assets/images/cabbage1.svg",
+        ?? getImageUrl("/images/cabbage1.svg"),
       price: Number(catalogProduct?.price ?? rawItem.currentPrice ?? rawItem.price) || 0,
       quantity: Math.max(1, Number(rawItem.quantity) || 1),
     };

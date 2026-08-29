@@ -5,7 +5,16 @@ const images = import.meta.glob("../assets/images/**/*", {
 });
 
 export function getImageUrl(path = "") {
-  return images[`../assets${path}`] || path;
+  if (!path || typeof path !== "string") return path;
+
+  const normalizedPath = path
+    .replace(/^\.\/src\/assets/, "")
+    .replace(/^\/src\/assets/, "");
+  const assetPath = normalizedPath.startsWith("/")
+    ? normalizedPath
+    : `/${normalizedPath}`;
+
+  return images[`../assets${assetPath}`] || path;
 }
 
 export function attachImageUrls(items = []) {

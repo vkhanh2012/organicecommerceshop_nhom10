@@ -1,7 +1,11 @@
+import blogcard1Image from "../assets/images/blogcard1.svg";
+import blogcard2Image from "../assets/images/blogcard2.svg";
+import blogcard3Image from "../assets/images/blogcard3.svg";
+
 const LATEST_NEWS_DATA = [
   {
     id: "news-1",
-    image: "./src/assets/images/blogcard1.svg",
+    image: blogcard1Image,
     category: "Food",
     author: "Admin",
     commentsCount: 65,
@@ -16,7 +20,7 @@ const LATEST_NEWS_DATA = [
   },
   {
     id: "news-2",
-    image: "./src/assets/images/blogcard2.svg",
+    image: blogcard2Image,
     category: "Food",
     author: "Admin",
     commentsCount: 65,
@@ -30,7 +34,7 @@ const LATEST_NEWS_DATA = [
   },
   {
     id: "news-3",
-    image: "./src/assets/images/blogcard3.svg",
+    image: blogcard3Image,
     category: "Food",
     author: "Admin",
     commentsCount: 65,
