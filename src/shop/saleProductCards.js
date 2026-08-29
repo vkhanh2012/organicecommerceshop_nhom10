@@ -26,9 +26,9 @@ export function renderSaleProducts(productsData = []) {
 
       <div class="flex min-w-0 flex-1 flex-col items-start justify-center gap-1.5 px-3 py-6">
         <div class="flex w-full flex-col items-start">
-        <h4 class="w-full truncate text-sm leading-5 text-neutral-600 transition-colors group-hover:text-primary">
+        <h3 class="w-full truncate text-sm leading-5 text-neutral-600 transition-colors group-hover:text-primary">
                 ${items.name}
-            </h4>
+            </h3>
         <div class="flex items-start gap-0.5">
           <span class="text-base font-medium leading-6 text-neutral-900">$${Number(items.price).toFixed(2)}</span>
                 ${items.oldPrice !== null && items.oldPrice !== undefined
