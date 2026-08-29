@@ -32,10 +32,17 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
   ]
 
   const listItemsHtml = categories
-    .map((item) => {
+    .map((item, index) => {
       const checked = selectedCategory === item.value
+      const rowSpacing = layout === "horizontal"
+        ? ""
+        : index === 0
+          ? "pb-2.5"
+          : index === categories.length - 1
+            ? "pt-2.5 pb-6"
+            : "py-2.5"
       return /*html*/ `
-      <li class="flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-sm text-neutral-600 cursor-pointer">
+      <li class="${rowSpacing} flex items-center ${layout === "horizontal" ? "justify-between group/category" : "group"} text-[14px] text-neutral-600 cursor-pointer">
         <div class="flex items-center gap-2">
           <input 
             type="radio" 
@@ -98,12 +105,12 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
 
       <summary
         class="
-          flex min-w-40 cursor-pointer
+          flex min-w-44 cursor-pointer
           list-none items-center justify-between
           gap-4 rounded
           border border-neutral-200
           bg-white
-          px-3 py-2
+          px-4 py-3
           text-sm text-neutral-600
         "
       >
@@ -122,7 +129,7 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
       <div
         class="
           absolute left-0 top-full z-40
-          mt-2 w-72
+          mt-2 w-[min(18rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)]
           rounded-lg
           border border-neutral-100
           bg-white p-4 shadow-lg
@@ -138,14 +145,14 @@ export function renderCategoryFilter(products, selectedCategory = "all",layout =
 }
 
   return /*html*/ `
-    <div class="border-b border-neutral-100 pb-6 font-poppins">
+    <div class="border-b border-neutral-100 font-poppins">
       <div class="shop-filter-header">
         <h3 class="section-heading">All Categories</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <ul class="space-y-4">
+      <ul>
         ${listItemsHtml}
       </ul>
     </div>

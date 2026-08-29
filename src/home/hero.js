@@ -77,7 +77,7 @@ const smallBannersHtml = `
       class="absolute inset-0 h-full w-full object-cover"
     >
 
-    <div class="absolute inset-0 bg-[#002603]/72"></div>
+    <div class="absolute inset-0 bg-hero/72"></div>
 
     <div
       class="relative z-10 flex h-full min-h-[240px] flex-col items-center justify-center px-7 py-8 text-center lg:min-h-[288px] lg:px-8 lg:py-0 lg:-translate-y-[4px]"
@@ -110,7 +110,7 @@ const smallBannersHtml = `
     <section class="bg-white pt-4 md:pt-6" data-hero-root>
       <div class="container-custom">
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,872px)_minmax(320px,423px)] lg:gap-6">
-          <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-[#087f3d] sm:min-h-[520px] lg:h-[600px]">
+          <article class="relative min-h-[440px] overflow-hidden rounded-[10px] bg-hero-background sm:min-h-[520px] lg:h-[600px]">
             <img
               src="${mainBanner.image}"
               alt="${mainBanner.title}"

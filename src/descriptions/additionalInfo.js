@@ -1,12 +1,14 @@
 export function renderAdditionalInfoTab(product) {
-  const addInfoTagsHtml = (product.additionalInfo?.tags || [])
+  const addInfoTagsHtml = (product.tags || [])
     .map(
       (tag) => `
         <span
           class="cursor-pointer transition-colors duration-200 ${
             tag.toLowerCase() === "chinese"
-              ? "text-zinc-900 underline font-medium"
-              : "text-zinc-500"
+              ? "text-neutral-900 underline font-medium"
+              : "text-neutral-500"
+              ? "text-neutral-900 underline font-medium"
+              : "text-neutral-500"
           }"
         >
           ${tag}
@@ -24,40 +26,40 @@ export function renderAdditionalInfoTab(product) {
           
           <!-- Weight -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Weight:</span>
-            <span class="text-stone-500 leading-5">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Weight:</span>
+            <span class="text-neutral-500 leading-5">
               ${product.additionalInfo?.weight || "03"}
             </span>
           </div>
 
           <!-- Color -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Color:</span>
-            <span class="text-stone-500 leading-5">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Color:</span>
+            <span class="text-neutral-500 leading-5">
               ${product.additionalInfo?.color || "Green"}
             </span>
           </div>
 
           <!-- Type -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Type:</span>
-            <span class="text-stone-500 leading-5">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Type:</span>
+            <span class="text-neutral-500 leading-5">
               ${product.additionalInfo?.type || "Organic"}
             </span>
           </div>
 
           <!-- Category -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Category:</span>
-            <span class="text-stone-500 leading-5">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Category:</span>
+            <span class="text-neutral-500 leading-5">
               ${product.additionalInfo?.category || "Vegetables"}
             </span>
           </div>
 
           <!-- Stock Status -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Stock Status:</span>
-            <span class="text-stone-500 leading-5">
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Stock Status:</span>
+            <span class="text-neutral-500 leading-5">
               ${product.additionalInfo?.stockStatus || "Available"}
               ${
                 product.additionalInfo?.stock
@@ -69,7 +71,7 @@ export function renderAdditionalInfoTab(product) {
 
           <!-- Tags -->
           <div class="flex items-start">
-            <span class="w-28 text-zinc-900 font-normal leading-5 shrink-0">Tags:</span>
+            <span class="w-28 text-neutral-900 font-normal leading-5 shrink-0">Tags:</span>
             <div class="leading-5">
               ${addInfoTagsHtml}
             </div>
@@ -82,7 +84,7 @@ export function renderAdditionalInfoTab(product) {
         <div class="lg:col-span-5 space-y-6">
 
           <!-- Video Container -->
-          <div class="relative w-[536px] h-[300px] rounded-md overflow-hidden bg-gray-100 -mt-4 ml-4">
+          <div class="relative -mt-4 aspect-[536/300] w-full max-w-[536px] overflow-hidden rounded-md bg-neutral-100 lg:ml-auto min-[1400px]:ml-4">
             <img
               src="${product.videoImage}"
               alt="video"
@@ -91,7 +93,7 @@ export function renderAdditionalInfoTab(product) {
             
             <!-- Play Button -->
             <div
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-700 transition-colors"
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primary-dark transition-colors"
             >
               <svg
                 width="14"
@@ -149,3 +151,4 @@ export function renderAdditionalInfoTab(product) {
     </div>
   `;
 }
+

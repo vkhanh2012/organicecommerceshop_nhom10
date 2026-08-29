@@ -176,6 +176,7 @@ export async function initShopPage() {
       <div
         class="
           flex
+          min-w-0
           flex-wrap
           items-center
           gap-3
@@ -188,11 +189,11 @@ export async function initShopPage() {
     )}
 
         <details class="group relative">
-          <summary class="flex min-w-36 cursor-pointer list-none items-center justify-between gap-4 rounded border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-600">
+          <summary class="flex min-w-44 cursor-pointer list-none items-center justify-between gap-4 rounded border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-600">
             <span>Select Price</span>
             <span class="transition-transform group-open:rotate-180">${dropDown}</span>
           </summary>
-          <div class="absolute left-0 top-full z-40 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg">
+          <div class="absolute left-auto right-0 top-full z-40 mt-2 w-[min(18rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-lg border border-neutral-100 bg-white p-5 shadow-lg sm:left-0 sm:right-auto">
             ${renderPriceFilter(
       PRODUCT_DATA,
       shopState.minPrice,
@@ -206,17 +207,13 @@ export async function initShopPage() {
       "horizontal"
     )}
 
-        ${renderPopularTags(
-      shopState.tag,
-      "horizontal"
-    )}
-
       </div>
 
       <!-- RIGHT: SORT + SHOW -->
       <div
         class="
           flex
+          min-w-0
           flex-wrap
           items-center
           gap-3
@@ -238,20 +235,22 @@ export async function initShopPage() {
           <select
             id="sort-select"
             class="
-              w-40
+              w-full
+              min-w-0
               cursor-pointer
               rounded
               border
               border-neutral-200
               bg-white
               px-3
-              py-2
+              py-3
               text-sm
               text-neutral-700
               appearance-none
               pr-10
               outline-none
               focus:border-primary
+              sm:w-40
             "
           >
             <option value="latest">
@@ -289,20 +288,22 @@ export async function initShopPage() {
           <select
             id="products-per-page"
             class="
-              w-40
+              w-full
+              min-w-0
               cursor-pointer
               rounded
               border
               border-neutral-200
               bg-white
               px-3
-              py-2
+              py-3
               text-sm
               text-neutral-700
               appearance-none
               pr-10
               outline-none
               focus:border-primary
+              sm:w-40
             "
           >
             <option value="8">
@@ -427,12 +428,28 @@ export async function initShopPage() {
   const breadcrumbs = document.getElementById("breadcrumbs-container")
 
   if (breadcrumbs) {
-    breadcrumbs.innerHTML = renderBreadcrumbsComponent({
-      breadcrumbs: [
-        { label: "Categories", url: "./shop.html" },
-        { label: "Vegetables", url: "./shop.html" },
-      ],
-    })
+    breadcrumbs.innerHTML = isShop2
+      ? `
+        <div class="container-custom flex h-[72px] items-center">
+          <nav class="flex items-center gap-3 text-base" aria-label="Breadcrumb">
+            <a href="./index.html" class="text-neutral-400 transition-colors hover:text-primary" aria-label="Home">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 10L12 3L20 10V20H15V16C15 14.34 13.66 13 12 13C10.34 13 9 14.34 9 16V20H4V10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <span class="text-neutral-300">›</span>
+            <a href="./shop.html" class="text-neutral-500 transition-colors hover:text-primary">Categories</a>
+            <span class="text-neutral-300">›</span>
+            <span class="font-medium text-primary" aria-current="page">Vegetables</span>
+          </nav>
+        </div>
+      `
+      : renderBreadcrumbsComponent({
+        breadcrumbs: [
+          { label: "Categories", url: "./shop.html" },
+          { label: "Vegetables", url: "./shop.html" },
+        ],
+      })
   }
 
   const productGridContainer = document.getElementById("product-grid-container")

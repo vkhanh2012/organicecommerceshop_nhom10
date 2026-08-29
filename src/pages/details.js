@@ -23,31 +23,22 @@ import {
   saveCart
 } from "../shopping_cart/cartData.js";
 
-import productList from "../data/products.json";
 
 
 // =====================================================
 // LẤY DATA TỪ JSON
 // =====================================================
 
-const {
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-} = productData;
+const defaultProductData = productData.find((product) => Number(product.id) === 3) || productData[0];
+const mangoProductData = productData.find((product) => Number(product.id) === 13);
+const tomatoProductData = productData.find((product) => Number(product.id) === 12);
+const redcapsiumProductData = productData.find((product) => Number(product.id) === 11);
 
 
 // =====================================================
 // DANH SÁCH SẢN PHẨM CHI TIẾT
 // =====================================================
 
-const PRODUCTS_LIST = [
-  defaultProductData,
-  mangoProductData,
-  tomatoProductData,
-  redcapsiumProductData
-];
 
 
 // =====================================================
@@ -141,7 +132,7 @@ function getActiveProduct() {
   if (name) {
 
     const foundByName =
-      PRODUCTS_LIST.find(
+      productData.find(
         product =>
           product?.name?.toLowerCase() ===
           name.toLowerCase()
@@ -163,7 +154,7 @@ function getActiveProduct() {
   if (id) {
 
     const foundProduct =
-      productList.find(
+      productData.find(
         product =>
           String(product.id) ===
           String(id)
@@ -173,7 +164,7 @@ function getActiveProduct() {
     if (foundProduct) {
 
       const foundDetail =
-        PRODUCTS_LIST.find(
+        productData.find(
           product =>
             product?.name?.toLowerCase() ===
             foundProduct?.name?.toLowerCase()
@@ -191,41 +182,13 @@ function getActiveProduct() {
 
 
       return {
-
-        ...defaultProductData,
-
-        id:
-          foundProduct.id,
-
-        name:
-          foundProduct.name,
-
-        currentPrice:
-          foundProduct.price,
-
-        originalPrice:
-          foundProduct.oldPrice,
-
-        rating:
-          foundProduct.rating,
-
-        mainImage:
-          foundProduct.image,
-
-        thumbnails: [
-          foundProduct.image,
-          foundProduct.image,
-          foundProduct.image
-        ],
-
-        category: {
-          name:
-            foundProduct.category ||
-            "Fresh Fruit",
-
-          link: "#"
-        }
-
+        ...foundProduct,
+        currentPrice: foundProduct.currentPrice ?? foundProduct.price,
+        originalPrice: foundProduct.originalPrice ?? foundProduct.oldPrice,
+        mainImage: foundProduct.mainImage || foundProduct.image,
+        thumbnails: Array.isArray(foundProduct.thumbnails)
+          ? foundProduct.thumbnails
+          : [foundProduct.image],
       };
 
     }
@@ -691,7 +654,7 @@ document.addEventListener(
 
 
     const product =
-      productList.find(
+      productData.find(
         item =>
           String(item.id) ===
           String(productId)
@@ -857,3 +820,4 @@ if (breadcrumbContainer) {
   initFooter();
 
 }
+

@@ -1,6 +1,8 @@
 import { renderProductCard } from "../components/productcard.js";
 import { iconStar,  iconHeart, iconEye, iconBag } from "../components/icons.js";
 import { sectionTitle } from "./sectiontitle.js";
+import { renderCountdown } from "../components/countdown.js";
+import { isInWishlist } from "../wishlist/wishlistData.js";
 
 export function renderHotDeals(products = []) {
   if (products.length < 13) return "";
@@ -16,6 +18,7 @@ export function renderHotDeals(products = []) {
       image: mainProduct.image,
     }),
   );
+  const mainProductInWishlist = isInWishlist(mainProduct.id);
   const smallProducts = products
     .filter((product) => String(product.id) !== String(mainProduct.id))
     .slice(0, 11);
@@ -118,7 +121,11 @@ return `
     <!-- HEART -->
     <button
       type="button"
-      aria-label="Wishlist"
+      data-action="wishlist"
+      data-id="${mainProduct.id}"
+      data-product="${mainProductData}"
+      aria-pressed="${mainProductInWishlist}"
+      aria-label="${mainProductInWishlist ? "Remove" : "Add"} ${mainProduct.name} ${mainProductInWishlist ? "from" : "to"} wishlist"
       class="flex h-10 w-10 shrink-0
              items-center justify-center
              rounded-full
@@ -132,7 +139,7 @@ return `
              hover:bg-primary
              hover:text-white"
     >
-      ${iconHeart}
+      ${iconHeart.replace('fill="none"', `fill="${mainProductInWishlist ? "currentColor" : "none"}"`)}
     </button>
 
 
@@ -168,7 +175,10 @@ return `
     <!-- EYE -->
     <button
       type="button"
-      aria-label="Quick view"
+      data-action="quick-view"
+      data-id="${mainProduct.id}"
+      data-product="${mainProductData}"
+      aria-label="Quick view ${mainProduct.name}"
       class="flex h-10 w-10 shrink-0
              items-center justify-center
              rounded-full
@@ -271,57 +281,8 @@ return `
     </p>
 
 
-    <!-- COUNTDOWN -->
-    <div
-      class="mt-[14px]
-             flex items-start
-             justify-center"
-    >
-      ${[
-        ["01", "Days"],
-        ["23", "Hours"],
-        ["34", "Mins"],
-        ["57", "Secs"]
-      ].map(([value, label], index) => `
-        ${
-          index
-            ? `
-              <span
-                class="pt-[1px]
-                       text-[14px]
-                       leading-[24px]
-                       text-neutral-300"
-              >
-                :
-              </span>
-            `
-            : ""
-        }
-
-        <div class="w-[60px] text-center">
-
-          <strong
-            class="block
-                   text-[18px] font-normal
-                   leading-[30px]
-                   text-neutral-900"
-          >
-            ${value}
-          </strong>
-
-          <span
-            class="mt-[1px] block
-                   text-[10px] font-normal
-                   uppercase
-                   leading-[15px]
-                   text-neutral-400"
-          >
-            ${label}
-          </span>
-
-        </div>
-      `).join("")}
-    </div>
+    <!-- COUNTDOWN: mốc kết thúc được lấy từ products.json -->
+    ${renderCountdown(mainProduct.dealEndsAt)}
 
   </div>
 </article>

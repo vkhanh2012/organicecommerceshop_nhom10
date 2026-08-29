@@ -33,7 +33,8 @@ export function renderAboutMeSection() {
           class="flex flex-col justify-center
                  px-5 py-10
                  md:px-8 md:py-12
-                 lg:py-[70px]
+                 lg:justify-start
+                 lg:pb-0 lg:pt-[72px]
                  lg:pl-4
                  lg:pr-[calc((100vw-1320px)/2)]"
         >
@@ -44,7 +45,7 @@ export function renderAboutMeSection() {
                    leading-[38px]
                    text-title
                    md:text-[40px] md:leading-[48px]
-                   lg:text-[56px] lg:leading-[67px]"
+                   lg:text-[56px] lg:leading-[65px]"
           >
             ${aboutData.aboutMe.title}
           </h2>
@@ -61,7 +62,7 @@ export function renderAboutMeSection() {
           <div
             class="mt-8 grid grid-cols-1
                    gap-x-8 gap-y-6
-                   lg:grid-cols-2"
+                   lg:mt-6 lg:grid-cols-2 lg:pl-4"
           >
             ${featuresListHtml}
           </div>

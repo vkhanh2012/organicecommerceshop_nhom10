@@ -1,64 +1,68 @@
 // src/descriptions/Image.js
-
-import cabbage1Svg from "../assets/images/cabbage1.svg";
-import cabbage2Svg from "../assets/images/cabbage2.svg";
-import cabbage3Svg from "../assets/images/cabbage3.svg";
-import cabbage4Svg from "../assets/images/cabbage4.svg";
-import largecabageSvg from "../assets/images/largecabage.svg";
+import largeCabbageImage from "../assets/images/largecabage.svg";
 import { getImageUrl } from "../utils/assets.js";
 
-const DEFAULT_THUMBS = [cabbage1Svg, cabbage2Svg, cabbage3Svg, cabbage4Svg];
+function resolveDescriptionImage(path, fallback = largeCabbageImage) {
+  if (!path || typeof path !== "string") return fallback;
 
-function resolveSrc(src, fallback = largecabageSvg) {
-  if (!src || typeof src !== "string" || src.includes("undefined")) {
-    return fallback;
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("data:") ||
+    path.startsWith("blob:")
+  ) {
+    return path;
   }
-  if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:") || src.startsWith("/src/") || src.startsWith("src/")) {
-    return src;
-  }
-  if (typeof getImageUrl === "function") {
-    const resolved = getImageUrl(src);
-    if (resolved && resolved !== src) return resolved;
-  }
-  if (src.startsWith("/images/") || src.startsWith("images/")) {
-    return fallback;
-  }
-  return src || fallback;
+
+  const normalizedPath = path.startsWith("/src/assets/")
+    ? path.replace("/src/assets", "")
+    : path;
+
+  return getImageUrl(normalizedPath) || fallback;
 }
 
-export function renderImage(product = {}) {
+export function renderImage(product) {
   const rawThumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
     ? product.thumbnails
-    : DEFAULT_THUMBS;
+    : [product?.mainImage || product?.image || ""];
+  const rawFullImages = Array.isArray(product?.images) && product.images.length > 0
+    ? product.images
+    : rawThumbnails;
 
-  const validThumbnails = rawThumbnails.map((thumb, i) => resolveSrc(thumb, DEFAULT_THUMBS[i % DEFAULT_THUMBS.length]));
+  const thumbnails = rawThumbnails.map((image) => resolveDescriptionImage(image));
+  const fullImages = rawFullImages.map((image) => resolveDescriptionImage(image));
 
   const rawMainImage = product?.mainImage || product?.image;
-  let mainImage = resolveSrc(rawMainImage, validThumbnails[0] || largecabageSvg);
-  if (rawMainImage && rawMainImage.startsWith("/images/product/") && validThumbnails[0]) {
-    mainImage = validThumbnails[0];
+  let mainImage = resolveDescriptionImage(
+    rawMainImage || fullImages[0] || thumbnails[0],
+    thumbnails[0] || largeCabbageImage,
+  );
+  const isChineseCabbage = Number(product?.id) === 3
+    || product?.name?.trim().toLowerCase() === "chinese cabbage";
+  if (isChineseCabbage) {
+    mainImage = largeCabbageImage;
   }
 
   const productName = product?.name || "Product";
 
-  const thumbnailsHtml = validThumbnails
-    .map((thumbSrc, index) => {
+  const thumbnailsHtml = thumbnails
+    .map((thumb, index) => {
+      const fullSrc = fullImages[index] || thumb;
       const isSelected = index === 0;
 
       return `
         <div
           data-action="select-thumb"
-          data-src="${thumbSrc}"
+          data-src="${fullSrc}"
           data-index="${index}"
           class="thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
-            isSelected ? "border-2 border-[#00B207]" : "border border-gray-200 hover:border-[#00B207]"
+            isSelected ? "border-2 border-primary" : "border border-neutral-200 hover:border-primary"
           }"
         >
           <img
-            src="${thumbSrc}"
+            src="${thumb}"
             alt="${productName} Thumbnail ${index + 1}"
             class="w-full h-full object-contain p-1 pointer-events-none select-none"
-            onerror="this.onerror=null; this.src='${DEFAULT_THUMBS[index % DEFAULT_THUMBS.length]}';"
           />
         </div>
       `;
@@ -68,15 +72,15 @@ export function renderImage(product = {}) {
   return /*html*/ `
     <div
       id="product-gallery"
-      class="col-span-12 lg:col-span-6 w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-4 select-none"
+      class="w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-3 select-none lg:min-w-0"
     >
-      <!-- THUMBNAILS CONTAINER -->
+      <!-- DANH SÁCH THUMBNAIL DỌC BÊN TRÁI FIGMA -->
       <div class="order-2 sm:order-1 w-full sm:w-[80px] shrink-0 flex sm:flex-col items-center justify-between gap-2 h-full max-h-[556px]">
         <!-- MŨI TÊN LÊN -->
         <button
           type="button"
           data-action="thumb-prev"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,8 +88,8 @@ export function renderImage(product = {}) {
           </svg>
         </button>
 
-        <!-- DANH SÁCH THUMBNAIL -->
-        <div id="thumbnail-list" class="flex sm:flex-col items-center gap-3 overflow-hidden mt-1">
+        <!-- THUMBNAIL LIST -->
+        <div id="thumbnail-list" class="flex w-full min-w-0 items-center gap-3 overflow-x-auto scroll-smooth sm:w-auto sm:flex-col sm:overflow-hidden sm:max-h-[460px]">
           ${thumbnailsHtml}
         </div>
 
@@ -93,7 +97,7 @@ export function renderImage(product = {}) {
         <button
           type="button"
           data-action="thumb-next"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,16 +106,15 @@ export function renderImage(product = {}) {
         </button>
       </div>
 
-      <!-- MAIN IMAGE CONTAINER -->
+      <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
-        class="order-1 sm:order-2 shrink-0 w-full sm:w-[556px] h-[350px] sm:h-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-2"
+        class="order-1 aspect-square h-auto w-full overflow-hidden bg-white p-2 flex items-center justify-center sm:order-2 sm:w-[calc(100%_-_92px)] min-[1400px]:w-[556px]"
       >
         <img
           id="main-product-image"
           src="${mainImage}"
           alt="${productName} img main"
           class="w-full h-full object-contain transition-all duration-200 select-none"
-          onerror="this.onerror=null; this.src='${largecabageSvg}';"
         />
       </div>
     </div>
@@ -131,12 +134,12 @@ export function bindImageEvents(container = document) {
 
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
-      thumb.classList.remove("border-[#00B207]", "border-2");
-      thumb.classList.add("border-gray-200", "border");
+      thumb.classList.remove("border-primary", "border-2");
+      thumb.classList.add("border-neutral-200", "border", "hover:border-primary");
     });
 
-    activeThumb.classList.remove("border-gray-200", "border");
-    activeThumb.classList.add("border-[#00B207]", "border-2");
+    activeThumb.classList.remove("border-neutral-200", "border", "hover:border-primary");
+    activeThumb.classList.add("border-primary", "border-2");
   };
 
   const changeMainImage = (thumb) => {
@@ -157,7 +160,7 @@ export function bindImageEvents(container = document) {
   const prevBtn = gallery.querySelector('[data-action="thumb-prev"]');
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex <= 0) return;
       changeMainImage(thumbs[activeIndex - 1]);
     });
@@ -166,7 +169,7 @@ export function bindImageEvents(container = document) {
   const nextBtn = gallery.querySelector('[data-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex === -1 || activeIndex >= thumbs.length - 1) return;
       changeMainImage(thumbs[activeIndex + 1]);
     });
@@ -187,10 +190,10 @@ document.addEventListener("click", (e) => {
     }
     const thumbs = gallery.querySelectorAll('[data-action="select-thumb"]');
     thumbs.forEach((t) => {
-      t.classList.remove("border-[#00B207]", "border-2");
-      t.classList.add("border-gray-200", "border");
+      t.classList.remove("border-primary", "border-2");
+      t.classList.add("border-neutral-200", "border");
     });
-    thumb.classList.remove("border-gray-200", "border");
-    thumb.classList.add("border-[#00B207]", "border-2");
+    thumb.classList.remove("border-neutral-200", "border");
+    thumb.classList.add("border-primary", "border-2");
   }
 });

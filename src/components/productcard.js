@@ -13,8 +13,8 @@ import productsData from "../data/products.json";
 
 const CLASS = {
   // Card phẳng nằm trong khung viền 1px
-  cardHome: 
-    "product-card w-full h-full group relative bg-white flex flex-col justify-between transition-all duration-300 hover:z-20 hover:shadow-[0_0_15px_rgba(0,0,0,0.12)] cursor-pointer lg:h-[327px]",
+  cardHome:
+    "product-card w-full h-full group relative border border-transparent bg-white flex flex-col justify-between transition-[border-color,box-shadow] duration-300 hover:z-20 hover:border-primary hover:shadow-[0_0_12px_rgba(0,178,7,0.20)] cursor-pointer lg:h-[327px]",
 
   cardShop: `
     product-card
@@ -61,7 +61,7 @@ const CLASS = {
     "bg-error text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   tagBest:
-    "bg-sky-500 text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
+    "bg-best-tag text-white text-sm font-medium font-poppins px-2 py-1 leading-[21px] rounded",
 
   actions:
     "absolute top-4 right-4 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",

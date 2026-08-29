@@ -11,7 +11,7 @@ export function cartTable(cart) {
 
   return `
     <div class="overflow-hidden rounded-lg border border-neutral-100 bg-white">
-      <div class="hidden grid-cols-[minmax(260px,1fr)_100px_150px_100px_24px] gap-3 px-6 py-4 text-sm font-medium uppercase leading-[21px] tracking-wide text-neutral-500 sm:grid xl:grid-cols-[371px_102px_174px_100px_24px] xl:px-5">
+      <div class="hidden grid-cols-[minmax(260px,1fr)_100px_150px_100px_24px] gap-3 px-6 py-4 text-sm font-medium uppercase leading-[21px] tracking-wide text-neutral-500 lg:grid xl:grid-cols-[371px_102px_174px_100px_24px] xl:px-5">
         <span>Product</span><span>Price</span><span>Quantity</span><span>Subtotal</span><span></span>
       </div>
       ${cart.map(cartRow).join("")}

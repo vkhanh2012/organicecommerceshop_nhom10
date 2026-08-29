@@ -1,21 +1,51 @@
 // src/Quickview/QuickViewImage.js
 
+import largeCabbageImage from "../assets/images/largecabage.svg";
+import { getImageUrl } from "../utils/assets.js";
+
+function resolveQuickViewImage(path, fallback = largeCabbageImage) {
+  if (!path || typeof path !== "string") return fallback;
+
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("data:") ||
+    path.startsWith("blob:")
+  ) {
+    return path;
+  }
+
+  const normalizedPath = path.startsWith("/src/assets/")
+    ? path.replace("/src/assets", "")
+    : path;
+
+  return getImageUrl(normalizedPath) || fallback;
+}
+
 export function renderQuickViewImage(product) {
-  const thumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
+  const rawThumbnails = Array.isArray(product?.thumbnails) && product.thumbnails.length > 0
     ? product.thumbnails
     : [product?.mainImage || product?.image || ""];
 
-  const fullImages = Array.isArray(product?.images) && product.images.length > 0
+  const rawFullImages = Array.isArray(product?.images) && product.images.length > 0
     ? product.images
-    : thumbnails;
+    : rawThumbnails;
 
-  const mainImage = product?.mainImage || fullImages[0] || thumbnails[0] || "";
+  const thumbnails = rawThumbnails.map((image) => resolveQuickViewImage(image));
+  const fullImages = rawFullImages.map((image) => resolveQuickViewImage(image));
+
+  const mainImage = resolveQuickViewImage(
+    product?.image || product?.mainImage || fullImages[0] || thumbnails[0],
+    thumbnails[0] || largeCabbageImage
+  );
   const productName = product?.name || "Product";
 
   const thumbnailsHtml = thumbnails
     .map((thumb, index) => {
       const fullSrc = fullImages[index] || thumb;
-      const isSelected = fullSrc === mainImage || (index === 0 && !product?.mainImage);
+      // Several products intentionally reuse one image for every thumbnail.
+      // Selection is positional, so identical URLs must not activate every item.
+      const isSelected = index === 0;
 
       return `
         <div
@@ -24,14 +54,15 @@ export function renderQuickViewImage(product) {
           data-index="${index}"
           class="qv-thumbnail-item w-[80px] h-[90px] shrink-0 cursor-pointer overflow-hidden bg-white rounded-[4px] flex items-center justify-center transition-all duration-200 ${
             isSelected
-              ? "border-2 border-[#00B207]"
-              : "border border-gray-200 hover:border-[#00B207]"
+              ? "border-2 border-primary"
+              : "border-2 border-transparent hover:border-neutral-200"
           }"
         >
           <img
             src="${thumb}"
             alt="${productName} Thumbnail ${index + 1}"
             class="w-full h-full object-contain p-1 pointer-events-none select-none"
+            onerror="this.onerror=null; this.src='${mainImage}';"
           />
         </div>
       `;
@@ -41,7 +72,7 @@ export function renderQuickViewImage(product) {
   return /*html*/ `
     <div
       id="qv-product-gallery"
-      class="w-full max-w-[648px] flex flex-col sm:flex-row items-center sm:items-start gap-4 select-none"
+      class="flex w-full max-w-[648px] min-w-0 flex-col items-center gap-3 select-none sm:flex-row sm:items-start"
     >
       <!-- DANH SÁCH THUMBNAIL DỌC BÊN TRÁI FIGMA -->
       <div class="order-2 sm:order-1 w-full sm:w-[80px] shrink-0 flex sm:flex-col items-center justify-between gap-2 h-full max-h-[556px]">
@@ -49,7 +80,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-prev"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Previous image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +97,7 @@ export function renderQuickViewImage(product) {
         <button
           type="button"
           data-qv-action="thumb-next"
-          class="w-6 h-6 shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+            class="w-6 h-6 shrink-0 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           aria-label="Next image"
         >
           <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,13 +108,14 @@ export function renderQuickViewImage(product) {
 
       <!-- MAIN IMAGE CONTAINER FIGMA (556x556 SQUARE) -->
       <div
-        class="order-1 sm:order-2 flex-1 w-full max-w-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden rounded-lg border border-gray-200 p-4"
+        class="order-1 sm:order-2 flex-1 w-full max-w-[556px] aspect-square bg-white flex items-center justify-center overflow-hidden p-2"
       >
         <img
           id="qv-main-product-image"
           src="${mainImage}"
           alt="${productName} img main"
           class="w-full h-full object-contain transition-all duration-200 select-none"
+          onerror="this.onerror=null; this.src='${thumbnails[0] || largeCabbageImage}';"
         />
       </div>
     </div>
@@ -103,12 +135,16 @@ export function bindQuickViewImageEvents(container = document) {
 
   const setActiveThumbnail = (activeThumb) => {
     thumbs.forEach((thumb) => {
-      thumb.classList.remove("border-[#00B207]", "border-2");
-      thumb.classList.add("border-gray-200", "border");
+      thumb.classList.remove("border-primary", "border-neutral-200", "hover:border-primary");
+      thumb.classList.add("border-2", "border-transparent", "hover:border-neutral-200");
     });
 
-    activeThumb.classList.remove("border-gray-200", "border");
-    activeThumb.classList.add("border-[#00B207]", "border-2");
+    activeThumb.classList.remove(
+      "border-transparent",
+      "border-neutral-200",
+      "hover:border-neutral-200",
+    );
+    activeThumb.classList.add("border-primary", "border-2");
   };
 
   const changeMainImage = (thumb) => {
@@ -129,7 +165,7 @@ export function bindQuickViewImageEvents(container = document) {
   const prevBtn = gallery.querySelector('[data-qv-action="thumb-prev"]');
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex <= 0) return;
       changeMainImage(thumbs[activeIndex - 1]);
     });
@@ -138,7 +174,7 @@ export function bindQuickViewImageEvents(container = document) {
   const nextBtn = gallery.querySelector('[data-qv-action="thumb-next"]');
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-[#00B207]"));
+      const activeIndex = thumbs.findIndex((thumb) => thumb.classList.contains("border-primary"));
       if (activeIndex === -1 || activeIndex >= thumbs.length - 1) return;
       changeMainImage(thumbs[activeIndex + 1]);
     });

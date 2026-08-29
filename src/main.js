@@ -11,6 +11,7 @@ import { renderNewsletterComponent } from "./components/newsletter.js";
 
 import { bindHeroEvents } from "./home/hero.js";
 import { bindCardEvents } from "./components/productcard.js";
+import { bindCountdowns } from "./components/countdown.js";
 
 import { initShoppingCartPage } from "./pages/shoppingcardpage.js";
 import { initNewsletterPopupPage } from "./pages/newsletterpopup.js";
@@ -102,6 +103,7 @@ async function initHomepage() {
 
   bindHeroEvents(homepage);
   bindCardEvents(homepage);
+  bindCountdowns(homepage);
 }
 
 

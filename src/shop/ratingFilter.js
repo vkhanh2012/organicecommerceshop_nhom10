@@ -1,5 +1,5 @@
 import { dropDown, ratingStar } from "../components/icons.js";
-const star = 'var(--color-star)';
+const star = 'var(--color-warning)';
 const greystar = 'var(--color-greystar)';
 //Dữ liệu demo
 const RATING_DATA = [
@@ -21,9 +21,9 @@ function makeStarHtml(starCount) {
 }
 
 //tạo cho 1 dòng rating (1 li)
-function renderRating(item, selectedRating, layout = "sidebar") {
+function renderRating(item, selectedRating, layout = "sidebar", rowSpacing = "") {
   return /*html*/ `
-    <li class="flex items-center gap-2 cursor-pointer ${layout === "horizontal" ? "group/rating" : "group"}">
+    <li class="${rowSpacing} flex items-center gap-2 cursor-pointer ${layout === "horizontal" ? "group/rating" : "group"}">
        <input
           type="checkbox"
           name="rating"
@@ -36,6 +36,7 @@ function renderRating(item, selectedRating, layout = "sidebar") {
             rounded
             border-neutral-300
             cursor-pointer
+            py-[10px]
           "
         >
         <label for = "rating-${item.stars}" class="flex items-center gap-1 cursor-pointer">
@@ -49,9 +50,15 @@ function renderRating(item, selectedRating, layout = "sidebar") {
 //hàm để render ra tất cả
 export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
   const listItemsHtml = RATING_DATA
-    .map((item) =>
-      renderRating(item, selectedRating, layout)
-    )
+    .map((item, index) => {
+      const rowSpacing = layout === "horizontal"
+        ? ""
+        : index === RATING_DATA.length - 1
+          ? "pt-2.5 pb-[26px]"
+          : "py-2.5"
+
+      return renderRating(item, selectedRating, layout, rowSpacing)
+    })
     .join("")
 
     // shop2
@@ -61,12 +68,12 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
 
       <summary
         class="
-          flex min-w-36 cursor-pointer
+          flex min-w-44 cursor-pointer
           list-none items-center justify-between
           gap-4 rounded
           border border-neutral-200
           bg-white
-          px-3 py-2
+          px-4 py-3
           text-sm text-neutral-600
         "
       >
@@ -79,7 +86,7 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
       <div
         class="
           absolute left-0 top-full z-40
-          mt-2 w-64
+          mt-2 w-[min(16rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)]
           rounded-lg
           border border-neutral-100
           bg-white p-4 shadow-lg
@@ -95,14 +102,14 @@ export function renderRatingFilter(selectedRating =0,  layout = "sidebar") {
 }
 
   return `
-    <div class="border-b border-neutral-100 pb-6.5 font-poppins">
+    <div class="border-b border-neutral-100 font-poppins">
       <div class="shop-filter-header">
-        <h3 class="section-heading">Rating</h3>
+        <h3 class="section-heading pt-[20px]">Rating</h3>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-neutral-900">
           <path d="M2.91634 9.04166L6.99967 4.95833L11.083 9.04166" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <ul class="space-y-3">
+      <ul>
         ${listItemsHtml}
       </ul>
     </div>`;

@@ -61,7 +61,7 @@ cardShop:
   tagSale:
     "bg-error text-white text-[11px] font-semibold font-poppins px-2 py-1 rounded",
   tagBest:
-    "bg-sky-500 text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
+    "bg-best-tag text-white text-[11px] font-semibold font-poppins px-1.5 py-0.5 rounded",
 
   actions: 
   "absolute top-2 right-2 md:top-5 md:right-5 z-20 flex flex-col gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",

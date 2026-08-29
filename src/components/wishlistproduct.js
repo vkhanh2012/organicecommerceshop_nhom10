@@ -12,12 +12,12 @@ export function renderWistlistRow(item) {
     : "bg-neutral-100 text-neutral-400 cursor-not-allowed"
 
   return /*html*/ `
-    <tr class="hover:bg-neutral-50/50 transition-colors">
+    <tr class="h-[124px] hover:bg-neutral-50/50 transition-colors">
       <!-- Cột 1 -->
-      <td class="py-4 px-4 md:px-6">
+      <td class="align-middle px-5 py-3 md:px-6">
         <div class="flex items-center gap-3 md:gap-4">
-          <div class="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-neutral-100 p-1 flex items-center justify-center bg-white">
-            <img src="${item.image}" alt="${item.name}" class="image-contain" />
+          <div class="flex h-[100px] w-[100px] shrink-0 items-center justify-center overflow-hidden bg-white p-1">
+            <img src="${item.image}" alt="${item.name}" class="block h-full w-full object-contain" />
           </div>
           <span class="font-normal text-neutral-900 text-sm md:text-base line-clamp-2">
             ${item.name}
@@ -26,31 +26,31 @@ export function renderWistlistRow(item) {
       </td>
 
       <!-- Cột 2: giá -->
-      <td class="py-4 px-4 md:px-6 whitespace-nowrap">
+      <td class="align-middle px-5 py-3 md:px-6 whitespace-nowrap">
         <div class="flex items-center gap-2">
           <span class="font-medium text-neutral-900 text-sm md:text-base">
-            $${item.price.toFixed(2)}
+            $${Number(item.price || 0).toFixed(2)}
           </span>
           ${
             item.originalPrice
-              ? `<span class="text-neutral-400 line-through text-sm md:text-[16px]">$${item.originalPrice.toFixed(2)}</span>`
+              ? `<span class="text-neutral-400 line-through text-sm md:text-[16px]">$${Number(item.originalPrice).toFixed(2)}</span>`
               : ""
           }
         </div>
       </td>
 
       <!-- Cột 3: trạng thái -->
-      <td class="py-4 px-4 md:px-6 whitespace-nowrap">
+      <td class="align-middle px-5 py-3 md:px-6 whitespace-nowrap">
         <span class="inline-block px-2.5 py-1 rounded text-xs font-medium ${stockBadgeClass}">
           ${item.stockStatusText}
         </span>
       </td>
 
       <!-- Cột 4: nút bấm -->
-      <td class="py-4 px-4 md:px-6 text-right whitespace-nowrap">
-        <div class="flex items-center justify-end gap-3 md:gap-4">
+      <td class="align-middle px-4 py-3 text-right whitespace-nowrap">
+        <div class="flex items-center justify-end gap-3">
           <button type="button" ${!item.inStock ? "disabled" : ""}
-            class="px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-colors duration-200 ${buttonClass}"
+            class="min-w-[156px] px-6 py-3 rounded-full text-xs md:text-sm font-semibold transition-colors duration-200 ${buttonClass}"
             data-add-cart
             data-cart-id="${item.id}"
             data-cart-name="${item.name}"
@@ -60,7 +60,7 @@ export function renderWistlistRow(item) {
           </button>
           
           <button type="button"
-            class="w-8 h-8 rounded-full flex items-center justify-center text-neutral-400 hover:text-neutral-900 hover:border-neutral-400 transition-colors cursor-pointer shrink-0"
+            class="w-8 h-8 rounded-full flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer shrink-0"
             title="Remove item"
             data-remove-wishlist="${item.id}">
             ${closeIcon}

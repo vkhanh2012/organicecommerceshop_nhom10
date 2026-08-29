@@ -64,7 +64,7 @@ function renderPromoDetail(banner) {
           class="rounded-[5px] bg-neutral-900
                  px-3 py-[5px]
                  text-[18x] font-semibold
-                 leading-[30px] text-[#FCC900]"
+                 leading-[30px] text-promo-yellow"
         >
           ${banner.detailValue}
         </strong>

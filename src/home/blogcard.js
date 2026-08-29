@@ -49,7 +49,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
     .map(
       (items) => /*html*/ `
         <article
-          class="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-100 bg-white transition-shadow hover:shadow-md lg:h-[494px] lg:w-[424px]"
+          class="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-100 bg-white transition-shadow hover:shadow-md lg:h-[494px] min-[1400px]:w-[424px]"
         >
 
           <!-- IMAGE -->
@@ -202,7 +202,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
 
   return /*html*/ `
     <div
-      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-[repeat(3,424px)] lg:gap-6"
+      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 min-[1400px]:grid-cols-[repeat(3,424px)]"
     >
       ${cardsHtml}
     </div>

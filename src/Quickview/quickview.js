@@ -11,6 +11,7 @@ import {
 } from "./QuickViewInfo.js";
 
 import { getCart, saveCart, addProductToCart } from "../shopping_cart/cartData.js";
+import { toggleWishlist } from "../wishlist/wishlistData.js";
 
 // =====================================================
 // DEFAULT PRODUCT FALLBACK
@@ -50,7 +51,9 @@ function normalizeProduct(product) {
 
   const currentPrice = Number(product.currentPrice ?? product.price ?? defaultProductData.currentPrice ?? 0);
   const originalPrice = product.originalPrice ?? product.oldPrice ?? defaultProductData.originalPrice ?? null;
-  const image = product.mainImage || product.image || defaultProductData.mainImage || "";
+  // `image` is the product card/catalog image. Prefer it over a stale
+  // `mainImage` that may have been inherited from the fallback product.
+  const image = product.image || product.mainImage || defaultProductData.mainImage || "";
   const thumbnails = Array.isArray(product.thumbnails) && product.thumbnails.length > 0
     ? product.thumbnails
     : [image, image, image, image];
@@ -84,27 +87,29 @@ export function renderQuickViewModal(product) {
   return /*html*/ `
     <div
       id="quick-view-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 sm:p-6"
+      class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 pt-12 sm:p-6 sm:pt-12 lg:items-center lg:pt-6"
     >
       <div
-        class="container-custom bg-white rounded-2xl shadow-2xl p-6 sm:p-10 overflow-y-auto max-h-[90vh] relative"
+        class="relative w-full max-w-[1320px] max-h-[calc(100vh-48px)] overflow-visible rounded-lg bg-white p-5 shadow-2xl sm:p-8 lg:px-10 lg:pb-10 lg:pt-8"
       >
         <!-- CLOSE BUTTON FIGMA -->
         <button
           id="close-quick-view"
           type="button"
-          class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 flex items-center justify-center transition-all cursor-pointer z-50 font-bold text-lg"
+          class="absolute right-2 top-2 z-50 flex h-8 w-8 cursor-pointer items-center justify-center text-xl font-normal text-neutral-500 transition-colors hover:text-primary sm:-right-1 sm:-top-10 sm:text-white"
           aria-label="Close modal"
         >
-          ✕
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </button>
 
         <!-- CONTENT GRID FIGMA -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div class="lg:col-span-6 w-full flex justify-center">
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-6 min-[1400px]:grid-cols-[648px_minmax(0,568px)]">
+          <div class="w-full flex justify-center">
             ${renderQuickViewImage(safeProduct)}
           </div>
-          <div class="lg:col-span-6 w-full">
+          <div class="w-full pt-2">
             ${renderQuickViewInfo(safeProduct)}
           </div>
         </div>
@@ -161,6 +166,12 @@ export function openQuickView(productDataOrId) {
 
     closeModal();
     showToast(`${product.name} added to cart (${quantity}).`);
+  }, () => {
+    const { added } = toggleWishlist(product);
+    showToast(
+      `${product.name} ${added ? "added to" : "removed from"} wishlist.`,
+    );
+    return added;
   });
 }
 
@@ -174,7 +185,7 @@ function showToast(message) {
   const toast = document.createElement("div");
   toast.id = "quick-view-toast";
   toast.className = `
-    fixed bottom-6 right-6 z-[99999] bg-[#1A1A1A] text-white
+    fixed bottom-6 right-6 z-[99999] bg-neutral-900 text-white
     text-sm font-medium px-5 py-3 rounded-lg shadow-xl transition-all
   `;
   toast.textContent = message;

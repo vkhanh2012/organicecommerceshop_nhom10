@@ -51,7 +51,7 @@ export function renderBlogCardComponent(blogcardData = LATEST_NEWS_DATA) {
       (items) => /*html*/ `
             <div class="flex flex-col w-full h-auto mx-auto drop-shadow-sm bg-white rounded-lg hover:shadow-md transition-all">
                 <div class="relative w-full h-auto rounded-t-lg aspect-16/10 sm:aspect-4/3 md:aspect-16/10 lg:aspect-424/324 overflow-hidden">
-                  <img src=${items.image} alt=${items.title} class="image-cover" loading="lazy"/>
+                  <img src=${items.image} alt=${items.title} class="h-full w-full object-cover" loading="lazy"/>
                 </div>
                 <!-- Nội dung card -->
                 <div class="flex flex-col w-full h-auto p-4 sm:p-5 md:p-6 gap-3 sm:gap-4 lg:gap-5 bg-white rounded-b-lg">

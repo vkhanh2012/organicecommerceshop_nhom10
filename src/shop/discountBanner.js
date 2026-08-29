@@ -10,26 +10,22 @@ const BANNER_DATA = {
 
 export function renderDiscountBanner(data = BANNER_DATA) {
   return /*html*/ `
-    <div class="relative overflow-hidden pb-6 pt-10 gap-3 rounded-[10px] bg-neutral-50 text-center">
-        <!-- Badge discount -->
-        <div class="mb-1 pb-5 gap-0.5 text-3xl font-semibold text-neutral-900">
-            <span class="text-text-discount font-bold">${data.discountPercentage}%</span> Discount
+    <div class="relative flex flex-col items-center gap-3 overflow-hidden rounded-[10px] bg-neutral-50 pb-0 text-center">
+        <div class="flex flex-col items-center justify-center gap-0.5 px-4 pt-5">
+            <div class="w-full text-center text-2xl font-normal leading-9 text-neutral-900">
+                <span class="text-3xl font-semibold leading-10 text-text-discount">${data.discountPercentage}%</span> Discount
+            </div>
+            <p class="w-full text-center text-base font-normal leading-6 text-neutral-600">${data.description}</p>
         </div>
-        <p class="text-sm text-neutral-700 mb-4">${data.description}</p>
-        <!-- Nút Shop now -->
         <a href="${data.link || "./shop.html"}"
-            class="inline-flex items-center justify-center gap-3 text-primary hover:text-primary-dark text-sm mb-4 group">
+            class="group inline-flex items-center justify-center gap-3 rounded-[43px] text-base font-semibold leading-5 text-primary hover:text-primary-dark">
             <span>${data.buttonText || "Shop Now"}</span>
-            <!-- [&_path]:stroke-current dùng để đổi màu icon trong trang này -->
-           <span class="[&_path]:stroke-current transition-transform group-hover:translate-x-1">
+            <span class="transition-transform group-hover:translate-x-1 [&_path]:stroke-current">
                 ${nextArrow}
             </span>
         </a>
-        <!-- Hình ảnh banner -->
-        <div class="flex mt-2 gap-3 justify-center">
-            <img src="${data.imageUrl}" alt="${data.title || "Discount Banner"}"
-                class="w-full max-w-78 object-cover h-auto">
-        </div>
+        <img src="${data.imageUrl}" alt="${data.title || "Discount Banner"}"
+            class="block h-[164px] w-full object-cover object-center">
     </div>
     `;
 }

@@ -23,7 +23,7 @@ export function renderTestimonialComponent(variant = "default") {
           <h2
             class="text-[24px] font-semibold
                    leading-[29px]
-                   text-gray-900
+                   text-neutral-900
                    sm:text-[28px] sm:leading-[34px]
                    lg:text-[32px] lg:leading-[38px]"
           >
@@ -41,7 +41,7 @@ export function renderTestimonialComponent(variant = "default") {
                      items-center justify-center
                      rounded-full
                      bg-white
-                     text-gray-900
+                     text-neutral-900
                      transition-colors
                      hover:bg-gray-200
                      sm:h-[42px] sm:w-[42px]
